@@ -1,0 +1,39 @@
+
+import { Block } from 'payload';
+
+const ImageGalleryBlock: Block = {
+  slug: 'imageGallery',
+  labels: {
+    singular: 'Image Gallery',
+    plural: 'Image Galleries',
+  },
+  fields: [
+    {
+      name: 'title',
+      type: 'text',
+      label: 'Gallery Title',
+    },
+    {
+      name: 'images',
+      type: 'array',
+      label: 'Images',
+      minRows: 1,
+      fields: [
+        {
+          name: 'image',
+          type: 'upload',
+          relationTo: 'media',
+          required: true,
+        },
+        {
+          name: 'alt',
+          type: 'text',
+          label: 'Alt Text',
+          required: true,
+        },
+      ],
+    },
+  ],
+};
+
+export default ImageGalleryBlock;

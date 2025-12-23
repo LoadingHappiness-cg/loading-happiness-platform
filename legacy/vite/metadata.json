@@ -1,0 +1,8 @@
+{
+  "name": "Loading Happiness Platform",
+  "description": "A self-hosted, containerized platform featuring Next.js, Payload CMS, PostgreSQL, MinIO, and Umami Analytics.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
