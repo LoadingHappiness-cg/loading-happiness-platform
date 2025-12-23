@@ -1,5 +1,5 @@
 
-import { Block } from 'payload';
+import type { Block } from 'payload/types';
 
 const ImpactTeaserBlock: Block = {
   slug: 'impactTeaser',

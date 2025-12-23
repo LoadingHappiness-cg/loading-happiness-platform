@@ -1,5 +1,5 @@
 
-import { CollectionConfig } from 'payload';
+import type { CollectionConfig } from 'payload/types';
 
 const Authors: CollectionConfig = {
   slug: 'authors',

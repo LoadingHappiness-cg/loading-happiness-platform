@@ -1,8 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
   color-scheme: light;
+  /* Brand palette */
+  --brand-ocean: 35 109 156;
+  --brand-midnight: 51 37 112;
+  --brand-sky: 105 143 254;
+  --brand-teal: 26 179 202;
+  --brand-indigo: 55 75 144;
+  --brand-mint: 58 218 154;
+  --brand-white: 255 255 255;
 }
 
 body {
   margin: 0;
-  font-family: system-ui, -apple-system, sans-serif;
 }

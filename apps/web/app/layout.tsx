@@ -1,4 +1,6 @@
 import type { ReactNode } from 'react';
+import SiteFooter from './components/SiteFooter';
+import SiteNav from './components/SiteNav';
 import './globals.css';
 
 export const metadata = {
@@ -13,7 +15,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body className="min-h-screen bg-white text-gray-900 antialiased">
+        <div className="min-h-screen flex flex-col">
+          <SiteNav />
+          <main className="flex-1">{children}</main>
+          <SiteFooter />
+        </div>
+      </body>
     </html>
   );
 }

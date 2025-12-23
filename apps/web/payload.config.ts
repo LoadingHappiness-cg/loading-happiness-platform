@@ -2,12 +2,12 @@
 import { buildConfig } from 'payload';
 import { postgresAdapter } from '@payloadcms/db-postgres';
 import path from 'path';
-import Pages from './src/payload/collections/Pages';
-import ContactSubmissions from './src/payload/collections/ContactSubmissions';
-import Content from './src/payload/collections/Content';
-import Authors from './src/payload/collections/Authors';
-import Categories from './src/payload/collections/Categories';
-import Tags from './src/payload/collections/Tags';
+import Pages from './src/payload/collections/Pages.ts';
+import ContactSubmissions from './src/payload/collections/ContactSubmissions.ts';
+import Content from './src/payload/collections/Content.ts';
+import Authors from './src/payload/collections/Authors.ts';
+import Categories from './src/payload/collections/Categories.ts';
+import Tags from './src/payload/collections/Tags.ts';
 
 const databaseUri = process.env.DATABASE_URI;
 const payloadSecret = process.env.PAYLOAD_SECRET;
@@ -24,7 +24,9 @@ export default buildConfig({
   serverURL: process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3000',
   secret: payloadSecret,
   db: postgresAdapter({
-    connectionString: databaseUri,
+    pool: {
+      connectionString: databaseUri,
+    },
   }),
   admin: {
     user: 'users',

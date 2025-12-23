@@ -1,16 +1,16 @@
 
-import { CollectionConfig } from 'payload';
-import HeroBlock from '../blocks/Hero';
-import TrustPartnersBlock from '../blocks/TrustPartners';
-import PillarsBlock from '../blocks/Pillars';
-import ServicesGridBlock from '../blocks/ServicesGrid';
-import ProcessBlock from '../blocks/Process';
-import ImpactTeaserBlock from '../blocks/ImpactTeaser';
-import FinalCTABlock from '../blocks/FinalCTA';
-import VideoEmbedBlock from '../blocks/VideoEmbed';
-import ImageGalleryBlock from '../blocks/ImageGallery';
-import SplitContentBlock from '../blocks/SplitContent';
-import FeatureGridBlock from '../blocks/FeatureGrid';
+import type { CollectionConfig } from 'payload/types';
+import HeroBlock from '../blocks/Hero.ts';
+import TrustPartnersBlock from '../blocks/TrustPartners.ts';
+import PillarsBlock from '../blocks/Pillars.ts';
+import ServicesGridBlock from '../blocks/ServicesGrid.ts';
+import ProcessBlock from '../blocks/Process.ts';
+import ImpactTeaserBlock from '../blocks/ImpactTeaser.ts';
+import FinalCTABlock from '../blocks/FinalCTA.ts';
+import VideoEmbedBlock from '../blocks/VideoEmbed.ts';
+import ImageGalleryBlock from '../blocks/ImageGallery.ts';
+import SplitContentBlock from '../blocks/SplitContent.ts';
+import FeatureGridBlock from '../blocks/FeatureGrid.ts';
 
 const Pages: CollectionConfig = {
   slug: 'pages',

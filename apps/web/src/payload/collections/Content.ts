@@ -1,9 +1,9 @@
 
-import { CollectionConfig } from 'payload';
-import PullQuoteBlock from '../blocks/PullQuote';
-import CalloutBlock from '../blocks/Callout';
-import ChecklistBlock from '../blocks/Checklist';
-import FAQBlock from '../blocks/FAQ';
+import type { CollectionConfig } from 'payload/types';
+import PullQuoteBlock from '../blocks/PullQuote.ts';
+import CalloutBlock from '../blocks/Callout.ts';
+import ChecklistBlock from '../blocks/Checklist.ts';
+import FAQBlock from '../blocks/FAQ.ts';
 
 const Content: CollectionConfig = {
   slug: 'content',
