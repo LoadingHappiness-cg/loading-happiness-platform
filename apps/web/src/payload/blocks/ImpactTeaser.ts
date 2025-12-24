@@ -12,17 +12,19 @@ const ImpactTeaserBlock: Block = {
       name: 'title',
       type: 'text',
       required: true,
+      localized: true,
     },
     {
       name: 'content',
       type: 'textarea',
       required: true,
+      localized: true,
     },
     {
       name: 'cta',
       type: 'group',
       fields: [
-        { name: 'label', type: 'text', required: true },
+        { name: 'label', type: 'text', required: true, localized: true },
         { name: 'link', type: 'text', required: true },
       ],
     },

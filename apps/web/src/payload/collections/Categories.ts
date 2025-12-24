@@ -14,16 +14,27 @@ const Categories: CollectionConfig = {
       name: 'name',
       type: 'text',
       required: true,
+      localized: true,
     },
     {
       name: 'slug',
       type: 'text',
       required: true,
       unique: true,
+      localized: true,
     },
     {
       name: 'description',
       type: 'textarea',
+      localized: true,
+    },
+    {
+      name: 'seo',
+      type: 'group',
+      fields: [
+        { name: 'title', type: 'text', localized: true },
+        { name: 'description', type: 'textarea', localized: true },
+      ],
     },
   ],
 };

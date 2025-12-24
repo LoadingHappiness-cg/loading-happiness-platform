@@ -12,14 +12,15 @@ const ProcessBlock: Block = {
       name: 'title',
       type: 'text',
       required: true,
+      localized: true,
     },
     {
       name: 'steps',
       type: 'array',
       minRows: 1,
       fields: [
-        { name: 'title', type: 'text', required: true },
-        { name: 'content', type: 'textarea', required: true },
+        { name: 'title', type: 'text', required: true, localized: true },
+        { name: 'content', type: 'textarea', required: true, localized: true },
       ],
     },
     {

@@ -12,6 +12,7 @@ const ImageGalleryBlock: Block = {
       name: 'title',
       type: 'text',
       label: 'Gallery Title',
+      localized: true,
     },
     {
       name: 'images',
@@ -30,6 +31,7 @@ const ImageGalleryBlock: Block = {
           type: 'text',
           label: 'Alt Text',
           required: true,
+          localized: true,
         },
       ],
     },

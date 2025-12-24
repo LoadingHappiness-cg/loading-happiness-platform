@@ -26,7 +26,7 @@ export default function AboutPage() {
               We build stable, secure IT environments and support teams with clarity, accountability, and respect.
             </p>
             <div className="flex gap-4">
-              <Link href="/contact" className="px-8 py-3 bg-blue-600 text-white rounded-xl font-bold hover:bg-blue-700 transition-all">
+              <Link href="/contact" className="px-8 py-3 bg-primary text-white rounded-xl font-bold hover:bg-primaryDark transition-all">
                 Book a call
               </Link>
               <Link href="/services" className="px-8 py-3 bg-white border border-gray-300 text-gray-700 rounded-xl font-bold hover:bg-gray-50 transition-all">
@@ -65,7 +65,7 @@ export default function AboutPage() {
           </div>
           <div className="lg:col-span-5">
             <div className="bg-gray-900 text-white p-10 rounded-[2.5rem] shadow-2xl border border-white/5">
-              <h4 className="text-[10px] font-black uppercase tracking-[0.2em] text-blue-400 mb-8">Stability Index</h4>
+              <h4 className="text-[10px] font-black uppercase tracking-[0.2em] text-accent mb-8">Stability Index</h4>
               <div className="space-y-8">
                 <div className="border-b border-white/10 pb-6">
                   <p className="text-gray-400 text-xs font-bold uppercase tracking-widest mb-2">Based In</p>

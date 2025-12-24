@@ -33,7 +33,7 @@ export default function PageBlocks({ blocks }: { blocks: any[] }) {
                       {block.primaryCTA && (
                         <Link
                           href={block.primaryCTA.link}
-                          className="px-8 py-3 bg-blue-600 text-white rounded-xl font-bold hover:bg-blue-700 transition-all"
+                          className="px-8 py-3 bg-primary text-white rounded-xl font-bold hover:bg-primaryDark transition-all"
                         >
                           {block.primaryCTA.label}
                         </Link>
@@ -52,7 +52,7 @@ export default function PageBlocks({ blocks }: { blocks: any[] }) {
                         {block.badges.map((badge: any, badgeIndex: number) => (
                           <span
                             key={badgeIndex}
-                            className="px-3 py-1 bg-blue-50 text-blue-600 rounded-full text-xs font-bold"
+                            className="px-3 py-1 bg-highlight/20 text-highlight rounded-full text-xs font-bold"
                           >
                             {badge.text}
                           </span>
@@ -119,7 +119,7 @@ export default function PageBlocks({ blocks }: { blocks: any[] }) {
                   <div className="flex items-center justify-between mb-10">
                     <h2 className="text-3xl lg:text-5xl font-extrabold text-gray-900 tracking-tighter">{block.title}</h2>
                     {block.cta?.link && (
-                      <Link href={block.cta.link} className="text-sm font-bold text-blue-600 hover:text-blue-700">
+                      <Link href={block.cta.link} className="text-sm font-bold text-accent hover:text-primaryDark">
                         {block.cta.label || 'Explore'} →
                       </Link>
                     )}
@@ -173,7 +173,7 @@ export default function PageBlocks({ blocks }: { blocks: any[] }) {
                     </h2>
                     <p className="text-xl text-gray-600 leading-relaxed mb-8">{block.content}</p>
                     {block.cta?.link && (
-                      <Link href={block.cta.link} className="px-8 py-3 bg-blue-600 text-white rounded-xl font-bold hover:bg-blue-700 transition-all">
+                      <Link href={block.cta.link} className="px-8 py-3 bg-primary text-white rounded-xl font-bold hover:bg-primaryDark transition-all">
                         {block.cta.label}
                       </Link>
                     )}
@@ -190,7 +190,7 @@ export default function PageBlocks({ blocks }: { blocks: any[] }) {
             );
           case 'finalCTA':
             return (
-              <section key={index} className="py-20 bg-gray-900 text-white">
+              <section key={index} className="py-20 bg-ink text-white">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-10">
                   <div>
                     <h2 className="text-3xl lg:text-5xl font-extrabold mb-4 tracking-tighter">{block.title}</h2>
@@ -198,12 +198,12 @@ export default function PageBlocks({ blocks }: { blocks: any[] }) {
                   </div>
                   <div className="flex flex-col sm:flex-row gap-4">
                     {block.primaryCTA?.link && (
-                      <Link href={block.primaryCTA.link} className="px-8 py-3 bg-blue-600 text-white rounded-xl font-bold hover:bg-blue-700 transition-all">
+                      <Link href={block.primaryCTA.link} className="px-8 py-3 bg-primary text-white rounded-xl font-bold hover:bg-primaryDark transition-all">
                         {block.primaryCTA.label}
                       </Link>
                     )}
                     {block.secondaryCTA?.link && (
-                      <Link href={block.secondaryCTA.link} className="px-8 py-3 bg-white/10 text-white rounded-xl font-bold hover:bg-white/20 transition-all">
+                      <Link href={block.secondaryCTA.link} className="px-8 py-3 bg-primaryDark/30 text-white rounded-xl font-bold hover:bg-primaryDark/50 transition-all">
                         {block.secondaryCTA.label}
                       </Link>
                     )}
@@ -265,14 +265,14 @@ export default function PageBlocks({ blocks }: { blocks: any[] }) {
                       <ul className="space-y-4">
                         {block.items.map((item: any, itemIndex: number) => (
                           <li key={itemIndex} className="flex items-center gap-3 text-gray-700 font-medium">
-                            <span className="text-blue-600">✓</span>
+                            <span className="text-highlight">✓</span>
                             {item.item || item}
                           </li>
                         ))}
                       </ul>
                     )}
                     {block.cta?.link && (
-                      <Link href={block.cta.link} className="inline-block mt-8 px-8 py-3 bg-blue-600 text-white rounded-xl font-bold hover:bg-blue-700 transition-all">
+                      <Link href={block.cta.link} className="inline-block mt-8 px-8 py-3 bg-primary text-white rounded-xl font-bold hover:bg-primaryDark transition-all">
                         {block.cta.label}
                       </Link>
                     )}

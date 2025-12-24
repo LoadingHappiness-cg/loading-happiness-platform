@@ -73,7 +73,7 @@ export default async function NewsPage({ searchParams }: PageProps) {
               name="q"
               defaultValue={q}
               placeholder="Search articles..."
-              className="w-full px-5 py-3 rounded-xl border-gray-200 bg-gray-50 text-sm focus:ring-2 focus:ring-blue-100 outline-none"
+              className="w-full px-5 py-3 rounded-xl border-gray-200 bg-gray-50 text-sm focus:ring-2 focus:ring-primary/20 outline-none"
             />
           </form>
           
@@ -82,7 +82,7 @@ export default async function NewsPage({ searchParams }: PageProps) {
               <Link
                 key={t}
                 href={`/news?type=${t}${q ? `&q=${q}` : ''}${tagSlugs ? `&tags=${tagSlugs}` : ''}`}
-                className={`px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-widest border transition-all ${type === t ? 'bg-blue-600 text-white border-blue-600' : 'bg-white text-gray-500 border-gray-100 hover:border-gray-200'}`}
+                className={`px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-widest border transition-all ${type === t ? 'bg-primary text-white border-primary' : 'bg-white text-gray-500 border-gray-100 hover:border-gray-200'}`}
               >
                 {t}
               </Link>
@@ -107,7 +107,7 @@ export default async function NewsPage({ searchParams }: PageProps) {
             )}
             <div className="p-8 flex-1 flex flex-col">
               <div className="flex items-center gap-3 mb-4">
-                <span className="text-[10px] font-extrabold uppercase tracking-widest text-blue-600 bg-blue-50 px-2 py-1 rounded">
+                <span className="text-[10px] font-extrabold uppercase tracking-widest text-accent bg-accent/15 px-2 py-1 rounded">
                   {post.contentType}
                 </span>
                 <span className="text-gray-300 text-xs">•</span>
@@ -115,7 +115,7 @@ export default async function NewsPage({ searchParams }: PageProps) {
                   {new Date(post.publishedAt).toLocaleDateString()}
                 </span>
               </div>
-              <h2 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-blue-600 transition-colors leading-tight">
+              <h2 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-primaryDark transition-colors leading-tight">
                 <Link href={`/news/${post.slug}`}>{post.title}</Link>
               </h2>
               <p className="text-gray-600 leading-relaxed mb-6 line-clamp-2">
@@ -127,7 +127,7 @@ export default async function NewsPage({ searchParams }: PageProps) {
                   <Link
                     key={tag.id}
                     href={`/news/tags/${tag.slug}`}
-                    className="text-[10px] font-bold text-gray-500 hover:text-blue-600 transition-colors px-2 py-1 bg-gray-50 rounded"
+                    className="text-[10px] font-bold text-gray-500 hover:text-primaryDark transition-colors px-2 py-1 bg-gray-50 rounded"
                     style={tag.color ? { borderLeft: `3px solid ${tag.color}` } : {}}
                   >
                     #{tag.name}

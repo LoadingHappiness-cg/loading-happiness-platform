@@ -12,6 +12,7 @@ const VideoEmbedBlock: Block = {
       name: 'title',
       type: 'text',
       label: 'Section Title',
+      localized: true,
     },
     {
       name: 'videoUrl',
@@ -26,6 +27,7 @@ const VideoEmbedBlock: Block = {
       name: 'caption',
       type: 'textarea',
       label: 'Caption',
+      localized: true,
     },
   ],
 };

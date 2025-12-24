@@ -12,17 +12,19 @@ const FinalCTABlock: Block = {
       name: 'title',
       type: 'text',
       required: true,
+      localized: true,
     },
     {
       name: 'content',
       type: 'textarea',
       required: true,
+      localized: true,
     },
     {
       name: 'primaryCTA',
       type: 'group',
       fields: [
-        { name: 'label', type: 'text', required: true },
+        { name: 'label', type: 'text', required: true, localized: true },
         { name: 'link', type: 'text', required: true },
       ],
     },
@@ -30,7 +32,7 @@ const FinalCTABlock: Block = {
       name: 'secondaryCTA',
       type: 'group',
       fields: [
-        { name: 'label', type: 'text', required: true },
+        { name: 'label', type: 'text', required: true, localized: true },
         { name: 'link', type: 'text', required: true },
       ],
     },

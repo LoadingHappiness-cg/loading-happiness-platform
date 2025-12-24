@@ -11,6 +11,7 @@ const FeatureGridBlock: Block = {
     {
       name: 'title',
       type: 'text',
+      localized: true,
     },
     {
       name: 'columns',
@@ -24,8 +25,8 @@ const FeatureGridBlock: Block = {
       type: 'array',
       required: true,
       fields: [
-        { name: 'title', type: 'text', required: true },
-        { name: 'content', type: 'textarea', required: true },
+        { name: 'title', type: 'text', required: true, localized: true },
+        { name: 'content', type: 'textarea', required: true, localized: true },
         { name: 'icon', type: 'text', required: true },
       ],
     },

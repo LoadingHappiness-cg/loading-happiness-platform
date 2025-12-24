@@ -15,15 +15,18 @@ const Authors: CollectionConfig = {
       name: 'name',
       type: 'text',
       required: true,
+      localized: true,
     },
     {
       name: 'role',
       type: 'text',
       required: true,
+      localized: true,
     },
     {
       name: 'bio',
       type: 'textarea',
+      localized: true,
     },
     {
       name: 'photo',
@@ -36,6 +39,14 @@ const Authors: CollectionConfig = {
       fields: [
         { name: 'platform', type: 'text' },
         { name: 'url', type: 'text' },
+      ],
+    },
+    {
+      name: 'seo',
+      type: 'group',
+      fields: [
+        { name: 'title', type: 'text', localized: true },
+        { name: 'description', type: 'textarea', localized: true },
       ],
     },
   ],

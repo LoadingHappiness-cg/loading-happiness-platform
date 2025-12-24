@@ -12,17 +12,19 @@ const HeroBlock: Block = {
       name: 'heading',
       type: 'text',
       required: true,
+      localized: true,
     },
     {
       name: 'subheading',
       type: 'textarea',
       required: true,
+      localized: true,
     },
     {
       name: 'primaryCTA',
       type: 'group',
       fields: [
-        { name: 'label', type: 'text', required: true },
+        { name: 'label', type: 'text', required: true, localized: true },
         { name: 'link', type: 'text', required: true },
       ],
     },
@@ -30,7 +32,7 @@ const HeroBlock: Block = {
       name: 'secondaryCTA',
       type: 'group',
       fields: [
-        { name: 'label', type: 'text', required: true },
+        { name: 'label', type: 'text', required: true, localized: true },
         { name: 'link', type: 'text', required: true },
       ],
     },
@@ -44,7 +46,7 @@ const HeroBlock: Block = {
       name: 'badges',
       type: 'array',
       fields: [
-        { name: 'text', type: 'text', required: true }
+        { name: 'text', type: 'text', required: true, localized: true }
       ],
     },
   ],

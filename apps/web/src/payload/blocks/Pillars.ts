@@ -12,6 +12,7 @@ const PillarsBlock: Block = {
       name: 'title',
       type: 'text',
       required: true,
+      localized: true,
     },
     {
       name: 'items',
@@ -19,8 +20,8 @@ const PillarsBlock: Block = {
       minRows: 3,
       maxRows: 3,
       fields: [
-        { name: 'title', type: 'text', required: true },
-        { name: 'content', type: 'textarea', required: true },
+        { name: 'title', type: 'text', required: true, localized: true },
+        { name: 'content', type: 'textarea', required: true, localized: true },
         { name: 'icon', type: 'text', label: 'Icon (Emoji or Line Icon Name)', required: true },
       ],
     },

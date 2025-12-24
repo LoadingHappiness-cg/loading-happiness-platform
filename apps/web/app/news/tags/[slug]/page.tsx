@@ -47,7 +47,7 @@ export default async function TagHubPage({ params, searchParams }: TagPageProps)
   return (
     <div className="max-w-7xl mx-auto px-4 py-12">
       <header className="mb-16 border-b border-gray-100 pb-12">
-        <Link href="/news" className="text-blue-600 font-bold text-xs uppercase tracking-widest mb-6 inline-block hover:opacity-70">
+        <Link href="/news" className="text-accent font-bold text-xs uppercase tracking-widest mb-6 inline-block hover:opacity-70">
           ← Back to News
         </Link>
         <div className="flex items-center gap-4 mb-4">
@@ -76,14 +76,14 @@ export default async function TagHubPage({ params, searchParams }: TagPageProps)
             <article key={post.id} className="group flex flex-col bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all border border-gray-100">
               <div className="p-8">
                 <div className="flex items-center gap-3 mb-4">
-                  <span className="text-[10px] font-extrabold uppercase tracking-widest text-blue-600 bg-blue-50 px-2 py-1 rounded">
+                  <span className="text-[10px] font-extrabold uppercase tracking-widest text-accent bg-accent/15 px-2 py-1 rounded">
                     {post.contentType}
                   </span>
                   <span className="text-gray-400 text-xs font-medium">
                     {new Date(post.publishedAt).toLocaleDateString()}
                   </span>
                 </div>
-                <h2 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-blue-600 transition-colors leading-tight">
+                <h2 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-primaryDark transition-colors leading-tight">
                   <Link href={`/news/${post.slug}`}>{post.title}</Link>
                 </h2>
                 <p className="text-gray-600 leading-relaxed line-clamp-3">

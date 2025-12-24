@@ -13,6 +13,7 @@ const TrustPartnersBlock: Block = {
       type: 'text',
       label: 'Section Text',
       defaultValue: 'Trusted by teams that value stability and clarity',
+      localized: true,
     },
     {
       name: 'logos',
@@ -28,6 +29,7 @@ const TrustPartnersBlock: Block = {
         {
           name: 'alt',
           type: 'text',
+          localized: true,
         },
       ],
     },

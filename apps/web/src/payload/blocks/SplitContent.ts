@@ -12,23 +12,25 @@ const SplitContentBlock: Block = {
       name: 'title',
       type: 'text',
       required: true,
+      localized: true,
     },
     {
       name: 'content',
       type: 'textarea',
+      localized: true,
     },
     {
       name: 'items',
       type: 'array',
       fields: [
-        { name: 'item', type: 'text' }
+        { name: 'item', type: 'text', localized: true }
       ]
     },
     {
       name: 'cta',
       type: 'group',
       fields: [
-        { name: 'label', type: 'text' },
+        { name: 'label', type: 'text', localized: true },
         { name: 'link', type: 'text' },
       ],
     },

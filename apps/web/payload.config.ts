@@ -28,6 +28,11 @@ export default buildConfig({
       connectionString: databaseUri,
     },
   }),
+  localization: {
+    locales: ['pt', 'en'],
+    defaultLocale: 'pt',
+    fallback: true,
+  },
   admin: {
     user: 'users',
   },

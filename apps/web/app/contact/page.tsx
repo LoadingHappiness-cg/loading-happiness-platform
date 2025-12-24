@@ -15,24 +15,24 @@ export default function ContactPage() {
             <form className="space-y-6">
               <input
                 required
-                className="w-full px-6 py-4 rounded-2xl border border-gray-200 outline-none focus:ring-4 focus:ring-blue-100 font-medium"
+                className="w-full px-6 py-4 rounded-2xl border border-gray-200 outline-none focus:ring-4 focus:ring-primary/20 font-medium"
                 placeholder="Full Name"
               />
               <input
                 required
                 type="email"
-                className="w-full px-6 py-4 rounded-2xl border border-gray-200 outline-none focus:ring-4 focus:ring-blue-100 font-medium"
+                className="w-full px-6 py-4 rounded-2xl border border-gray-200 outline-none focus:ring-4 focus:ring-primary/20 font-medium"
                 placeholder="Work Email"
               />
               <textarea
                 required
                 rows={5}
-                className="w-full px-6 py-4 rounded-2xl border border-gray-200 outline-none focus:ring-4 focus:ring-blue-100 font-medium"
+                className="w-full px-6 py-4 rounded-2xl border border-gray-200 outline-none focus:ring-4 focus:ring-primary/20 font-medium"
                 placeholder="Describe your challenge..."
               />
               <button
                 type="submit"
-                className="w-full py-4 bg-blue-600 text-white rounded-2xl font-extrabold text-lg hover:bg-blue-700 transition-all shadow-xl shadow-blue-600/20"
+                className="w-full py-4 bg-primary text-white rounded-2xl font-extrabold text-lg hover:bg-primaryDark transition-all shadow-xl shadow-primary/30"
               >
                 Send Message
               </button>

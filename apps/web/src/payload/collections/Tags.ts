@@ -16,6 +16,7 @@ const Tags: CollectionConfig = {
       type: 'text',
       required: true,
       unique: true,
+      localized: true,
     },
     {
       name: 'slug',
@@ -23,6 +24,7 @@ const Tags: CollectionConfig = {
       required: true,
       unique: true,
       index: true,
+      localized: true,
       admin: { position: 'sidebar' },
       hooks: {
         beforeValidate: [
@@ -44,6 +46,7 @@ const Tags: CollectionConfig = {
       name: 'description',
       type: 'textarea',
       maxLength: 220,
+      localized: true,
     },
     {
       name: 'color',
@@ -57,8 +60,16 @@ const Tags: CollectionConfig = {
       name: 'synonyms',
       type: 'array',
       required: false,
-      fields: [{ name: 'value', type: 'text' }],
+      fields: [{ name: 'value', type: 'text', localized: true }],
       admin: { description: 'Optional: helps search/consistency (e.g., MFA, 2FA).' },
+    },
+    {
+      name: 'seo',
+      type: 'group',
+      fields: [
+        { name: 'title', type: 'text', localized: true },
+        { name: 'description', type: 'textarea', localized: true },
+      ],
     },
   ],
 };

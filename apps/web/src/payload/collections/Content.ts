@@ -19,12 +19,14 @@ const Content: CollectionConfig = {
       name: 'title',
       type: 'text',
       required: true,
+      localized: true,
     },
     {
       name: 'slug',
       type: 'text',
       required: true,
       unique: true,
+      localized: true,
       admin: {
         position: 'sidebar',
       }
@@ -66,6 +68,7 @@ const Content: CollectionConfig = {
       type: 'textarea',
       required: true,
       maxLength: 240,
+      localized: true,
     },
     {
       name: 'featuredImage',
@@ -90,7 +93,7 @@ const Content: CollectionConfig = {
       blocks: [
         {
           slug: 'richText',
-          fields: [{ name: 'content', type: 'textarea', required: true }],
+          fields: [{ name: 'content', type: 'textarea', required: true, localized: true }],
         },
         PullQuoteBlock,
         CalloutBlock,
@@ -100,7 +103,7 @@ const Content: CollectionConfig = {
           slug: 'media',
           fields: [
             { name: 'file', type: 'upload', relationTo: 'media', required: true },
-            { name: 'caption', type: 'text' },
+            { name: 'caption', type: 'text', localized: true },
           ],
         },
       ],
@@ -122,7 +125,7 @@ const Content: CollectionConfig = {
         },
         { name: 'url', type: 'text' },
         { name: 'duration', type: 'text' },
-        { name: 'transcript', type: 'textarea' },
+        { name: 'transcript', type: 'textarea', localized: true },
       ],
     },
     {
@@ -155,8 +158,8 @@ const Content: CollectionConfig = {
       name: 'seo',
       type: 'group',
       fields: [
-        { name: 'title', type: 'text' },
-        { name: 'description', type: 'textarea' },
+        { name: 'title', type: 'text', localized: true },
+        { name: 'description', type: 'textarea', localized: true },
       ],
     },
   ],

@@ -4,8 +4,8 @@ import type { Block } from 'payload/types';
 const CalloutBlock: Block = {
   slug: 'callout',
   fields: [
-    { name: 'title', type: 'text' },
-    { name: 'content', type: 'textarea', required: true },
+    { name: 'title', type: 'text', localized: true },
+    { name: 'content', type: 'textarea', required: true, localized: true },
     {
       name: 'type',
       type: 'select',

@@ -10,6 +10,26 @@ exports.id = "vendor-chunks/next";
 exports.ids = ["vendor-chunks/next"];
 exports.modules = {
 
+/***/ "(rsc)/./node_modules/next/font/google/target.css?{\"path\":\"app/layout.tsx\",\"import\":\"Manrope\",\"arguments\":[{\"subsets\":[\"latin\"],\"variable\":\"--font-body\",\"display\":\"swap\"}],\"variableName\":\"bodyFont\"}":
+/*!*******************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/next/font/google/target.css?{"path":"app/layout.tsx","import":"Manrope","arguments":[{"subsets":["latin"],"variable":"--font-body","display":"swap"}],"variableName":"bodyFont"} ***!
+  \*******************************************************************************************************************************************************************************************************/
+/***/ ((module) => {
+
+eval("// Exports\nmodule.exports = {\n\t\"style\": {\"fontFamily\":\"'__Manrope_73ee6c', '__Manrope_Fallback_73ee6c'\",\"fontStyle\":\"normal\"},\n\t\"className\": \"__className_73ee6c\",\n\t\"variable\": \"__variable_73ee6c\"\n};\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiKHJzYykvLi9ub2RlX21vZHVsZXMvbmV4dC9mb250L2dvb2dsZS90YXJnZXQuY3NzP3tcInBhdGhcIjpcImFwcC9sYXlvdXQudHN4XCIsXCJpbXBvcnRcIjpcIk1hbnJvcGVcIixcImFyZ3VtZW50c1wiOlt7XCJzdWJzZXRzXCI6W1wibGF0aW5cIl0sXCJ2YXJpYWJsZVwiOlwiLS1mb250LWJvZHlcIixcImRpc3BsYXlcIjpcInN3YXBcIn1dLFwidmFyaWFibGVOYW1lXCI6XCJib2R5Rm9udFwifSIsIm1hcHBpbmdzIjoiQUFBQTtBQUNBO0FBQ0EsV0FBVyxvRkFBb0Y7QUFDL0Y7QUFDQTtBQUNBIiwic291cmNlcyI6WyJ3ZWJwYWNrOi8vbG9hZGluZ2hhcHBpbmVzcy13ZWIvLi9ub2RlX21vZHVsZXMvbmV4dC9mb250L2dvb2dsZS90YXJnZXQuY3NzP2U5ZGQiXSwic291cmNlc0NvbnRlbnQiOlsiLy8gRXhwb3J0c1xubW9kdWxlLmV4cG9ydHMgPSB7XG5cdFwic3R5bGVcIjoge1wiZm9udEZhbWlseVwiOlwiJ19fTWFucm9wZV83M2VlNmMnLCAnX19NYW5yb3BlX0ZhbGxiYWNrXzczZWU2YydcIixcImZvbnRTdHlsZVwiOlwibm9ybWFsXCJ9LFxuXHRcImNsYXNzTmFtZVwiOiBcIl9fY2xhc3NOYW1lXzczZWU2Y1wiLFxuXHRcInZhcmlhYmxlXCI6IFwiX192YXJpYWJsZV83M2VlNmNcIlxufTtcbiJdLCJuYW1lcyI6W10sInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///(rsc)/./node_modules/next/font/google/target.css?{\"path\":\"app/layout.tsx\",\"import\":\"Manrope\",\"arguments\":[{\"subsets\":[\"latin\"],\"variable\":\"--font-body\",\"display\":\"swap\"}],\"variableName\":\"bodyFont\"}\n");
+
+/***/ }),
+
+/***/ "(rsc)/./node_modules/next/font/google/target.css?{\"path\":\"app/layout.tsx\",\"import\":\"Space_Grotesk\",\"arguments\":[{\"subsets\":[\"latin\"],\"variable\":\"--font-display\",\"display\":\"swap\"}],\"variableName\":\"displayFont\"}":
+/*!*******************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/next/font/google/target.css?{"path":"app/layout.tsx","import":"Space_Grotesk","arguments":[{"subsets":["latin"],"variable":"--font-display","display":"swap"}],"variableName":"displayFont"} ***!
+  \*******************************************************************************************************************************************************************************************************************/
+/***/ ((module) => {
+
+eval("// Exports\nmodule.exports = {\n\t\"style\": {\"fontFamily\":\"'__Space_Grotesk_dd5b2f', '__Space_Grotesk_Fallback_dd5b2f'\",\"fontStyle\":\"normal\"},\n\t\"className\": \"__className_dd5b2f\",\n\t\"variable\": \"__variable_dd5b2f\"\n};\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiKHJzYykvLi9ub2RlX21vZHVsZXMvbmV4dC9mb250L2dvb2dsZS90YXJnZXQuY3NzP3tcInBhdGhcIjpcImFwcC9sYXlvdXQudHN4XCIsXCJpbXBvcnRcIjpcIlNwYWNlX0dyb3Rlc2tcIixcImFyZ3VtZW50c1wiOlt7XCJzdWJzZXRzXCI6W1wibGF0aW5cIl0sXCJ2YXJpYWJsZVwiOlwiLS1mb250LWRpc3BsYXlcIixcImRpc3BsYXlcIjpcInN3YXBcIn1dLFwidmFyaWFibGVOYW1lXCI6XCJkaXNwbGF5Rm9udFwifSIsIm1hcHBpbmdzIjoiQUFBQTtBQUNBO0FBQ0EsV0FBVyxnR0FBZ0c7QUFDM0c7QUFDQTtBQUNBIiwic291cmNlcyI6WyJ3ZWJwYWNrOi8vbG9hZGluZ2hhcHBpbmVzcy13ZWIvLi9ub2RlX21vZHVsZXMvbmV4dC9mb250L2dvb2dsZS90YXJnZXQuY3NzP2Y5NDkiXSwic291cmNlc0NvbnRlbnQiOlsiLy8gRXhwb3J0c1xubW9kdWxlLmV4cG9ydHMgPSB7XG5cdFwic3R5bGVcIjoge1wiZm9udEZhbWlseVwiOlwiJ19fU3BhY2VfR3JvdGVza19kZDViMmYnLCAnX19TcGFjZV9Hcm90ZXNrX0ZhbGxiYWNrX2RkNWIyZidcIixcImZvbnRTdHlsZVwiOlwibm9ybWFsXCJ9LFxuXHRcImNsYXNzTmFtZVwiOiBcIl9fY2xhc3NOYW1lX2RkNWIyZlwiLFxuXHRcInZhcmlhYmxlXCI6IFwiX192YXJpYWJsZV9kZDViMmZcIlxufTtcbiJdLCJuYW1lcyI6W10sInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///(rsc)/./node_modules/next/font/google/target.css?{\"path\":\"app/layout.tsx\",\"import\":\"Space_Grotesk\",\"arguments\":[{\"subsets\":[\"latin\"],\"variable\":\"--font-display\",\"display\":\"swap\"}],\"variableName\":\"displayFont\"}\n");
+
+/***/ }),
+
 /***/ "(ssr)/./node_modules/next/dist/client/add-base-path.js":
 /*!********************************************************!*\
   !*** ./node_modules/next/dist/client/add-base-path.js ***!

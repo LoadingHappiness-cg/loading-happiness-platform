@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "payload": "payload",
-    "payload:generate": "payload generate:types"
+    "payload:generate": "payload generate:types",
+    "seed:home": "node --import tsx scripts/seed-home.ts"
   },
   "dependencies": {
     "@payloadcms/db-postgres": "^3.0.0",

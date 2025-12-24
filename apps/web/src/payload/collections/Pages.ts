@@ -26,12 +26,14 @@ const Pages: CollectionConfig = {
       name: 'title',
       type: 'text',
       required: true,
+      localized: true,
     },
     {
       name: 'slug',
       type: 'text',
       required: true,
       unique: true,
+      localized: true,
       admin: {
         position: 'sidebar',
       },
@@ -69,8 +71,8 @@ const Pages: CollectionConfig = {
       name: 'seo',
       type: 'group',
       fields: [
-        { name: 'title', type: 'text' },
-        { name: 'description', type: 'textarea' },
+        { name: 'title', type: 'text', localized: true },
+        { name: 'description', type: 'textarea', localized: true },
         { name: 'image', type: 'upload', relationTo: 'media' },
       ],
     },

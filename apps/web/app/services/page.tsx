@@ -52,7 +52,7 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      <section className="py-20 bg-gray-900 text-white">
+      <section className="py-20 bg-ink text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-10">
           <div>
             <h2 className="text-3xl lg:text-5xl font-extrabold mb-4 tracking-tighter">Let’s build clarity.</h2>
@@ -60,7 +60,7 @@ export default function ServicesPage() {
               Tell us where your operations feel fragile and we’ll propose a focused plan.
             </p>
           </div>
-          <Link href="/contact" className="px-8 py-3 bg-blue-600 text-white rounded-xl font-bold hover:bg-blue-700 transition-all">
+          <Link href="/contact" className="px-8 py-3 bg-primary text-white rounded-xl font-bold hover:bg-primaryDark transition-all">
             Talk to an expert
           </Link>
         </div>

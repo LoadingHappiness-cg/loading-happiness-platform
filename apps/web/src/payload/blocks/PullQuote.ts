@@ -4,8 +4,8 @@ import type { Block } from 'payload/types';
 const PullQuoteBlock: Block = {
   slug: 'pullQuote',
   fields: [
-    { name: 'quote', type: 'text', required: true },
-    { name: 'author', type: 'text' },
+    { name: 'quote', type: 'text', required: true, localized: true },
+    { name: 'author', type: 'text', localized: true },
   ],
 };
 

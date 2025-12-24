@@ -12,13 +12,14 @@ const ServicesGridBlock: Block = {
       name: 'title',
       type: 'text',
       required: true,
+      localized: true,
     },
     {
       name: 'services',
       type: 'array',
       fields: [
-        { name: 'title', type: 'text', required: true },
-        { name: 'description', type: 'textarea', required: true },
+        { name: 'title', type: 'text', required: true, localized: true },
+        { name: 'description', type: 'textarea', required: true, localized: true },
         { name: 'icon', type: 'text', required: true },
       ],
     },
@@ -26,7 +27,7 @@ const ServicesGridBlock: Block = {
       name: 'cta',
       type: 'group',
       fields: [
-        { name: 'label', type: 'text' },
+        { name: 'label', type: 'text', localized: true },
         { name: 'link', type: 'text' },
       ],
     },
