@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import PageBlocks from './components/PageBlocks';
 import { getPayloadClient } from '@/lib/payload';
+import { getLocale, getLocalePrefix, withLocale } from '@/lib/locale';
 
 const fallbackSections = (
   <div className="bg-white">
@@ -15,10 +16,10 @@ const fallbackSections = (
               Reliable IT, clear security, and support that feels human—so your business can focus on what matters.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <Link href="/contact" className="px-10 py-4 bg-primary text-white rounded-xl font-bold hover:bg-primaryDark shadow-xl shadow-primary/30 transition-all text-center">
+              <Link href={withLocale('/contact')} className="px-10 py-4 bg-primary text-white rounded-xl font-bold hover:bg-primaryDark shadow-xl shadow-primary/30 transition-all text-center">
                 Book a call
               </Link>
-              <Link href="/services" className="px-10 py-4 bg-white border border-gray-300 text-gray-700 rounded-xl font-bold hover:bg-gray-50 transition-all text-center">
+              <Link href={withLocale('/services')} className="px-10 py-4 bg-white border border-gray-300 text-gray-700 rounded-xl font-bold hover:bg-gray-50 transition-all text-center">
                 Explore services
               </Link>
             </div>
@@ -40,7 +41,7 @@ const fallbackSections = (
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between mb-10">
           <h2 className="text-3xl lg:text-5xl font-extrabold text-gray-900 tracking-tighter">Foundations for stability</h2>
-          <Link href="/services" className="text-sm font-bold text-accent hover:text-primaryDark">All services →</Link>
+          <Link href={withLocale('/services')} className="text-sm font-bold text-accent hover:text-primaryDark">All services →</Link>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {[
@@ -79,10 +80,10 @@ const fallbackSections = (
           </p>
         </div>
         <div className="flex flex-col sm:flex-row gap-4">
-          <Link href="/contact" className="px-8 py-3 bg-primary text-white rounded-xl font-bold hover:bg-primaryDark transition-all">
+          <Link href={withLocale('/contact')} className="px-8 py-3 bg-primary text-white rounded-xl font-bold hover:bg-primaryDark transition-all">
             Book a call
           </Link>
-          <Link href="/contact" className="px-8 py-3 bg-primaryDark/30 text-white rounded-xl font-bold hover:bg-primaryDark/50 transition-all">
+          <Link href={withLocale('/contact')} className="px-8 py-3 bg-primaryDark/30 text-white rounded-xl font-bold hover:bg-primaryDark/50 transition-all">
             Send a message
           </Link>
         </div>
@@ -93,6 +94,8 @@ const fallbackSections = (
 
 export default async function HomePage() {
   const payload = await getPayloadClient();
+  const locale = getLocale();
+  const localePrefix = getLocalePrefix();
   const pageResult = await payload.find({
     collection: 'pages',
     where: {
@@ -102,6 +105,7 @@ export default async function HomePage() {
       ],
     },
     limit: 1,
+    locale,
   });
 
   const page = pageResult.docs[0];
@@ -109,5 +113,5 @@ export default async function HomePage() {
     return fallbackSections;
   }
 
-  return <PageBlocks blocks={page.layout} />;
+  return <PageBlocks blocks={page.layout} localePrefix={localePrefix} />;
 }

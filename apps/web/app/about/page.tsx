@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { withLocale } from '@/lib/locale';
 
 const values = [
   { title: 'Integrity', content: 'We tell the truth, even when it’s uncomfortable.', icon: '⚖️' },
@@ -26,10 +27,10 @@ export default function AboutPage() {
               We build stable, secure IT environments and support teams with clarity, accountability, and respect.
             </p>
             <div className="flex gap-4">
-              <Link href="/contact" className="px-8 py-3 bg-primary text-white rounded-xl font-bold hover:bg-primaryDark transition-all">
+              <Link href={withLocale('/contact')} className="px-8 py-3 bg-primary text-white rounded-xl font-bold hover:bg-primaryDark transition-all">
                 Book a call
               </Link>
-              <Link href="/services" className="px-8 py-3 bg-white border border-gray-300 text-gray-700 rounded-xl font-bold hover:bg-gray-50 transition-all">
+              <Link href={withLocale('/services')} className="px-8 py-3 bg-white border border-gray-300 text-gray-700 rounded-xl font-bold hover:bg-gray-50 transition-all">
                 Explore services
               </Link>
             </div>

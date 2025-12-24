@@ -4,16 +4,18 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "npm run payload:generate && next build",
+    "build": "npm run payload:generate && npm run payload:importmap && next build",
     "start": "next start",
     "lint": "next lint",
     "payload": "payload",
     "payload:generate": "payload generate:types",
+    "payload:importmap": "payload generate:importmap",
     "seed:home": "node --import tsx scripts/seed-home.ts"
   },
   "dependencies": {
     "@payloadcms/db-postgres": "^3.0.0",
-    "next": "14.0.0",
+    "@payloadcms/next": "^3.69.0",
+    "next": "15.4.10",
     "payload": "^3.69.0",
     "react": "18.2.0",
     "react-dom": "18.2.0"

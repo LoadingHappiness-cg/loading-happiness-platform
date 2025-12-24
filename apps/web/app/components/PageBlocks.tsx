@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { withLocale } from '@/lib/locale';
 
 const gridCols: Record<number, string> = {
   1: 'grid-cols-1',
@@ -13,8 +14,10 @@ const getMediaUrl = (media: any) => {
   return media.url || media?.sizes?.thumbnail?.url;
 };
 
-export default function PageBlocks({ blocks }: { blocks: any[] }) {
+export default function PageBlocks({ blocks, localePrefix }: { blocks: any[]; localePrefix?: string }) {
   if (!blocks?.length) return null;
+
+  const localizeHref = (href: string) => withLocale(href, localePrefix);
 
   return (
     <div>
@@ -32,7 +35,7 @@ export default function PageBlocks({ blocks }: { blocks: any[] }) {
                     <div className="flex flex-col sm:flex-row gap-4">
                       {block.primaryCTA && (
                         <Link
-                          href={block.primaryCTA.link}
+                          href={localizeHref(block.primaryCTA.link)}
                           className="px-8 py-3 bg-primary text-white rounded-xl font-bold hover:bg-primaryDark transition-all"
                         >
                           {block.primaryCTA.label}
@@ -40,7 +43,7 @@ export default function PageBlocks({ blocks }: { blocks: any[] }) {
                       )}
                       {block.secondaryCTA && (
                         <Link
-                          href={block.secondaryCTA.link}
+                          href={localizeHref(block.secondaryCTA.link)}
                           className="px-8 py-3 bg-white border border-gray-300 text-gray-700 rounded-xl font-bold hover:bg-gray-50 transition-all"
                         >
                           {block.secondaryCTA.label}
@@ -119,7 +122,7 @@ export default function PageBlocks({ blocks }: { blocks: any[] }) {
                   <div className="flex items-center justify-between mb-10">
                     <h2 className="text-3xl lg:text-5xl font-extrabold text-gray-900 tracking-tighter">{block.title}</h2>
                     {block.cta?.link && (
-                      <Link href={block.cta.link} className="text-sm font-bold text-accent hover:text-primaryDark">
+                      <Link href={localizeHref(block.cta.link)} className="text-sm font-bold text-accent hover:text-primaryDark">
                         {block.cta.label || 'Explore'} →
                       </Link>
                     )}
@@ -173,7 +176,7 @@ export default function PageBlocks({ blocks }: { blocks: any[] }) {
                     </h2>
                     <p className="text-xl text-gray-600 leading-relaxed mb-8">{block.content}</p>
                     {block.cta?.link && (
-                      <Link href={block.cta.link} className="px-8 py-3 bg-primary text-white rounded-xl font-bold hover:bg-primaryDark transition-all">
+                      <Link href={localizeHref(block.cta.link)} className="px-8 py-3 bg-primary text-white rounded-xl font-bold hover:bg-primaryDark transition-all">
                         {block.cta.label}
                       </Link>
                     )}
@@ -198,12 +201,12 @@ export default function PageBlocks({ blocks }: { blocks: any[] }) {
                   </div>
                   <div className="flex flex-col sm:flex-row gap-4">
                     {block.primaryCTA?.link && (
-                      <Link href={block.primaryCTA.link} className="px-8 py-3 bg-primary text-white rounded-xl font-bold hover:bg-primaryDark transition-all">
+                      <Link href={localizeHref(block.primaryCTA.link)} className="px-8 py-3 bg-primary text-white rounded-xl font-bold hover:bg-primaryDark transition-all">
                         {block.primaryCTA.label}
                       </Link>
                     )}
                     {block.secondaryCTA?.link && (
-                      <Link href={block.secondaryCTA.link} className="px-8 py-3 bg-primaryDark/30 text-white rounded-xl font-bold hover:bg-primaryDark/50 transition-all">
+                      <Link href={localizeHref(block.secondaryCTA.link)} className="px-8 py-3 bg-primaryDark/30 text-white rounded-xl font-bold hover:bg-primaryDark/50 transition-all">
                         {block.secondaryCTA.label}
                       </Link>
                     )}
@@ -272,7 +275,7 @@ export default function PageBlocks({ blocks }: { blocks: any[] }) {
                       </ul>
                     )}
                     {block.cta?.link && (
-                      <Link href={block.cta.link} className="inline-block mt-8 px-8 py-3 bg-primary text-white rounded-xl font-bold hover:bg-primaryDark transition-all">
+                      <Link href={localizeHref(block.cta.link)} className="inline-block mt-8 px-8 py-3 bg-primary text-white rounded-xl font-bold hover:bg-primaryDark transition-all">
                         {block.cta.label}
                       </Link>
                     )}

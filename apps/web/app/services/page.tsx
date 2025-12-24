@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { withLocale } from '@/lib/locale';
 
 const services = [
   {
@@ -60,7 +61,7 @@ export default function ServicesPage() {
               Tell us where your operations feel fragile and we’ll propose a focused plan.
             </p>
           </div>
-          <Link href="/contact" className="px-8 py-3 bg-primary text-white rounded-xl font-bold hover:bg-primaryDark transition-all">
+          <Link href={withLocale('/contact')} className="px-8 py-3 bg-primary text-white rounded-xl font-bold hover:bg-primaryDark transition-all">
             Talk to an expert
           </Link>
         </div>

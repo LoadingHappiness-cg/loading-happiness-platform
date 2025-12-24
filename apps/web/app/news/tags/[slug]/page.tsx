@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getPayloadClient } from '@/lib/payload';
 import { Content as ContentType } from '@/payload-types';
+import { getLocale, getLocalePrefix, withLocale } from '@/lib/locale';
 
 interface TagPageProps {
   params: { slug: string };
@@ -16,12 +17,15 @@ export default async function TagHubPage({ params, searchParams }: TagPageProps)
   const payload = await getPayloadClient();
   const currentPage = parseInt(page || '1');
   const limit = 12;
+  const locale = getLocale();
+  const localePrefix = getLocalePrefix();
 
   // 1. Fetch Tag Metadata
   const tagResult = await payload.find({
     collection: 'tags',
     where: { slug: { equals: slug } },
     limit: 1,
+    locale,
   });
 
   if (tagResult.docs.length === 0) {
@@ -42,12 +46,13 @@ export default async function TagHubPage({ params, searchParams }: TagPageProps)
     sort: '-publishedAt',
     limit,
     page: currentPage,
+    locale,
   });
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-12">
       <header className="mb-16 border-b border-gray-100 pb-12">
-        <Link href="/news" className="text-accent font-bold text-xs uppercase tracking-widest mb-6 inline-block hover:opacity-70">
+        <Link href={withLocale('/news', localePrefix)} className="text-accent font-bold text-xs uppercase tracking-widest mb-6 inline-block hover:opacity-70">
           ← Back to News
         </Link>
         <div className="flex items-center gap-4 mb-4">
@@ -84,7 +89,7 @@ export default async function TagHubPage({ params, searchParams }: TagPageProps)
                   </span>
                 </div>
                 <h2 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-primaryDark transition-colors leading-tight">
-                  <Link href={`/news/${post.slug}`}>{post.title}</Link>
+                  <Link href={withLocale(`/news/${post.slug}`, localePrefix)}>{post.title}</Link>
                 </h2>
                 <p className="text-gray-600 leading-relaxed line-clamp-3">
                   {post.excerpt}

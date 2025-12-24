@@ -1,6 +1,8 @@
 import Link from 'next/link';
+import { getLocalePrefix, withLocale } from '@/lib/locale';
 
 export default function SiteFooter() {
+  const localePrefix = getLocalePrefix();
   return (
     <footer className="bg-ink text-white py-16 mt-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-12">
@@ -20,16 +22,16 @@ export default function SiteFooter() {
         <div>
           <h4 className="font-bold text-lg mb-6">Explore</h4>
           <ul className="space-y-4 text-sm text-gray-400">
-            <li><Link href="/services" className="hover:text-white transition-colors">Services</Link></li>
-            <li><Link href="/news" className="hover:text-white transition-colors">News</Link></li>
-            <li><Link href="/impact" className="hover:text-white transition-colors">Impact</Link></li>
+            <li><Link href={withLocale('/services', localePrefix)} className="hover:text-white transition-colors">Services</Link></li>
+            <li><Link href={withLocale('/news', localePrefix)} className="hover:text-white transition-colors">News</Link></li>
+            <li><Link href={withLocale('/impact', localePrefix)} className="hover:text-white transition-colors">Impact</Link></li>
           </ul>
         </div>
         <div>
           <h4 className="font-bold text-lg mb-6">Company</h4>
           <ul className="space-y-4 text-sm text-gray-400">
-            <li><Link href="/about" className="hover:text-white transition-colors">About Us</Link></li>
-            <li><Link href="/contact" className="hover:text-white transition-colors">Contact</Link></li>
+            <li><Link href={withLocale('/about', localePrefix)} className="hover:text-white transition-colors">About Us</Link></li>
+            <li><Link href={withLocale('/contact', localePrefix)} className="hover:text-white transition-colors">Contact</Link></li>
           </ul>
         </div>
       </div>

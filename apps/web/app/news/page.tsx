@@ -3,6 +3,7 @@ import React from 'react';
 import Link from 'next/link';
 import { getPayloadClient } from '@/lib/payload';
 import { Content as ContentType } from '@/payload-types';
+import { getLocale, getLocalePrefix, withLocale } from '@/lib/locale';
 
 interface PageProps {
   searchParams: {
@@ -18,6 +19,8 @@ export default async function NewsPage({ searchParams }: PageProps) {
   const payload = await getPayloadClient();
   const currentPage = parseInt(page || '1');
   const limit = 12;
+  const locale = getLocale();
+  const localePrefix = getLocalePrefix();
 
   // 1. Resolve Tag Slugs to IDs
   let tagIds: string[] = [];
@@ -28,6 +31,7 @@ export default async function NewsPage({ searchParams }: PageProps) {
       where: {
         slug: { in: slugs },
       },
+      locale,
     });
     tagIds = resolvedTags.docs.map((t) => t.id);
   }
@@ -59,6 +63,7 @@ export default async function NewsPage({ searchParams }: PageProps) {
     sort: '-publishedAt',
     limit,
     page: currentPage,
+    locale,
   });
 
   return (
@@ -68,7 +73,7 @@ export default async function NewsPage({ searchParams }: PageProps) {
         
         {/* Filters */}
         <div className="flex flex-wrap gap-4 items-center bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
-          <form className="flex-1 min-w-[300px]" action="/news">
+          <form className="flex-1 min-w-[300px]" action={withLocale('/news', localePrefix)}>
             <input 
               name="q"
               defaultValue={q}
@@ -81,13 +86,13 @@ export default async function NewsPage({ searchParams }: PageProps) {
             {['Article', 'Opinion', 'Video', 'Guide'].map((t) => (
               <Link
                 key={t}
-                href={`/news?type=${t}${q ? `&q=${q}` : ''}${tagSlugs ? `&tags=${tagSlugs}` : ''}`}
+                href={withLocale(`/news?type=${t}${q ? `&q=${q}` : ''}${tagSlugs ? `&tags=${tagSlugs}` : ''}`, localePrefix)}
                 className={`px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-widest border transition-all ${type === t ? 'bg-primary text-white border-primary' : 'bg-white text-gray-500 border-gray-100 hover:border-gray-200'}`}
               >
                 {t}
               </Link>
             ))}
-            {type && <Link href="/news" className="px-4 py-2 text-xs font-bold text-gray-400">Clear</Link>}
+            {type && <Link href={withLocale('/news', localePrefix)} className="px-4 py-2 text-xs font-bold text-gray-400">Clear</Link>}
           </div>
         </div>
       </header>
@@ -116,7 +121,7 @@ export default async function NewsPage({ searchParams }: PageProps) {
                 </span>
               </div>
               <h2 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-primaryDark transition-colors leading-tight">
-                <Link href={`/news/${post.slug}`}>{post.title}</Link>
+                <Link href={withLocale(`/news/${post.slug}`, localePrefix)}>{post.title}</Link>
               </h2>
               <p className="text-gray-600 leading-relaxed mb-6 line-clamp-2">
                 {post.excerpt}
@@ -126,7 +131,7 @@ export default async function NewsPage({ searchParams }: PageProps) {
                 {post.tags?.map((tag: any) => (
                   <Link
                     key={tag.id}
-                    href={`/news/tags/${tag.slug}`}
+                    href={withLocale(`/news/tags/${tag.slug}`, localePrefix)}
                     className="text-[10px] font-bold text-gray-500 hover:text-primaryDark transition-colors px-2 py-1 bg-gray-50 rounded"
                     style={tag.color ? { borderLeft: `3px solid ${tag.color}` } : {}}
                   >
@@ -143,7 +148,7 @@ export default async function NewsPage({ searchParams }: PageProps) {
       {posts.totalPages > 1 && (
         <div className="mt-16 flex justify-center items-center gap-4">
           <Link
-            href={`/news?page=${currentPage - 1}${q ? `&q=${q}` : ''}${type ? `&type=${type}` : ''}${tagSlugs ? `&tags=${tagSlugs}` : ''}`}
+            href={withLocale(`/news?page=${currentPage - 1}${q ? `&q=${q}` : ''}${type ? `&type=${type}` : ''}${tagSlugs ? `&tags=${tagSlugs}` : ''}`, localePrefix)}
             className={`px-6 py-3 rounded-xl font-bold text-sm ${currentPage <= 1 ? 'pointer-events-none opacity-40 bg-gray-100' : 'bg-white border border-gray-200 text-gray-700 hover:bg-gray-50'}`}
           >
             Previous
@@ -152,7 +157,7 @@ export default async function NewsPage({ searchParams }: PageProps) {
             Page {currentPage} of {posts.totalPages}
           </span>
           <Link
-            href={`/news?page=${currentPage + 1}${q ? `&q=${q}` : ''}${type ? `&type=${type}` : ''}${tagSlugs ? `&tags=${tagSlugs}` : ''}`}
+            href={withLocale(`/news?page=${currentPage + 1}${q ? `&q=${q}` : ''}${type ? `&type=${type}` : ''}${tagSlugs ? `&tags=${tagSlugs}` : ''}`, localePrefix)}
             className={`px-6 py-3 rounded-xl font-bold text-sm ${currentPage >= posts.totalPages ? 'pointer-events-none opacity-40 bg-gray-100' : 'bg-white border border-gray-200 text-gray-700 hover:bg-gray-50'}`}
           >
             Next

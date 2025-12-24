@@ -35,6 +35,13 @@ export default buildConfig({
   },
   admin: {
     user: 'users',
+    importMap: {
+      baseDir: path.resolve(process.cwd()),
+    },
+  },
+  routes: {
+    admin: '/admin',
+    api: '/api',
   },
   collections: [
     Pages,
