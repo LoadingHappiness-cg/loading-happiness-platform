@@ -3,19 +3,22 @@ import { importMap } from '../importMap.js';
 import config from '@/payload.config';
 
 type NotFoundProps = {
-  params: {
+  params: Promise<{
     segments?: string[];
-  };
-  searchParams: {
+  }>;
+  searchParams: Promise<{
     [key: string]: string | string[] | undefined;
-  };
+  }>;
 };
 
 export default async function AdminNotFound({ params, searchParams }: NotFoundProps) {
+  const resolvedParams = await params;
+  const resolvedSearchParams = await searchParams;
+  const segments = resolvedParams?.segments ?? [];
   return NotFoundPage({
     config,
     importMap,
-    params: Promise.resolve({ segments: params.segments ?? [] }),
-    searchParams: Promise.resolve(searchParams ?? {}),
+    params: Promise.resolve({ segments }),
+    searchParams: Promise.resolve(resolvedSearchParams ?? {}),
   });
 }

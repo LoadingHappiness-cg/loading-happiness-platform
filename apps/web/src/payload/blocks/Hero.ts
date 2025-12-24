@@ -9,6 +9,13 @@ const HeroBlock: Block = {
   },
   fields: [
     {
+      name: 'sectionId',
+      type: 'text',
+      admin: {
+        description: 'Optional anchor ID for in-page links (e.g., "hero").',
+      },
+    },
+    {
       name: 'heading',
       type: 'text',
       required: true,

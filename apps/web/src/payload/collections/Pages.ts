@@ -11,6 +11,12 @@ import VideoEmbedBlock from '../blocks/VideoEmbed.ts';
 import ImageGalleryBlock from '../blocks/ImageGallery.ts';
 import SplitContentBlock from '../blocks/SplitContent.ts';
 import FeatureGridBlock from '../blocks/FeatureGrid.ts';
+import FAQBlock from '../blocks/FAQ.ts';
+import RichTextBlock from '../blocks/RichText.ts';
+import StatsBlock from '../blocks/Stats.ts';
+import TestimonialsBlock from '../blocks/Testimonials.ts';
+import CaseStudyTeaserBlock from '../blocks/CaseStudyTeaser.ts';
+import ContactFormBlock from '../blocks/ContactForm.ts';
 
 const Pages: CollectionConfig = {
   slug: 'pages',
@@ -65,6 +71,12 @@ const Pages: CollectionConfig = {
         ImageGalleryBlock,
         SplitContentBlock,
         FeatureGridBlock,
+        FAQBlock,
+        RichTextBlock,
+        StatsBlock,
+        TestimonialsBlock,
+        CaseStudyTeaserBlock,
+        ContactFormBlock,
       ],
     },
     {

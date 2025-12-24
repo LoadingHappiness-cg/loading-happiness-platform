@@ -16,11 +16,17 @@
 
 body {
   margin: 0;
+}
+
+.site-root {
   font-family: var(--font-body), system-ui, -apple-system, sans-serif;
   background: rgb(var(--brand-white));
   color: #111827;
 }
 
-h1, h2, h3, h4 {
+.site-root h1,
+.site-root h2,
+.site-root h3,
+.site-root h4 {
   font-family: var(--font-display), var(--font-body), system-ui, -apple-system, sans-serif;
 }

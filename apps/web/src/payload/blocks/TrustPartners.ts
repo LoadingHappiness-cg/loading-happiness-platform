@@ -9,6 +9,13 @@ const TrustPartnersBlock: Block = {
   },
   fields: [
     {
+      name: 'sectionId',
+      type: 'text',
+      admin: {
+        description: 'Optional anchor ID for in-page links (e.g., "partners").',
+      },
+    },
+    {
       name: 'text',
       type: 'text',
       label: 'Section Text',

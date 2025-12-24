@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { withLocale } from '@/lib/locale';
+import ContactForm from './ContactForm';
 
 const gridCols: Record<number, string> = {
   1: 'grid-cols-1',
@@ -18,6 +19,7 @@ export default function PageBlocks({ blocks, localePrefix }: { blocks: any[]; lo
   if (!blocks?.length) return null;
 
   const localizeHref = (href: string) => withLocale(href, localePrefix);
+  const sectionProps = (block: any) => (block?.sectionId ? { id: block.sectionId } : {});
 
   return (
     <div>
@@ -25,7 +27,7 @@ export default function PageBlocks({ blocks, localePrefix }: { blocks: any[]; lo
         switch (block.blockType) {
           case 'hero':
             return (
-              <section key={index} className="py-20 lg:py-28 border-b border-gray-50">
+              <section key={index} {...sectionProps(block)} className="py-20 lg:py-28 border-b border-gray-50">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
                   <div className="lg:col-span-7">
                     <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 tracking-tighter mb-6">
@@ -75,7 +77,7 @@ export default function PageBlocks({ blocks, localePrefix }: { blocks: any[]; lo
             );
           case 'trustPartners':
             return (
-              <section key={index} className="py-16 bg-gray-50">
+              <section key={index} {...sectionProps(block)} className="py-16 bg-gray-50">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                   <p className="text-xs font-extrabold uppercase tracking-[0.2em] text-gray-400 mb-8">
                     {block.text}
@@ -98,7 +100,7 @@ export default function PageBlocks({ blocks, localePrefix }: { blocks: any[]; lo
             );
           case 'pillars':
             return (
-              <section key={index} className="py-20">
+              <section key={index} {...sectionProps(block)} className="py-20">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                   <h2 className="text-3xl lg:text-5xl font-extrabold text-gray-900 mb-10 tracking-tighter">
                     {block.title}
@@ -117,7 +119,7 @@ export default function PageBlocks({ blocks, localePrefix }: { blocks: any[]; lo
             );
           case 'servicesGrid':
             return (
-              <section key={index} className="py-20">
+              <section key={index} {...sectionProps(block)} className="py-20">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                   <div className="flex items-center justify-between mb-10">
                     <h2 className="text-3xl lg:text-5xl font-extrabold text-gray-900 tracking-tighter">{block.title}</h2>
@@ -141,7 +143,7 @@ export default function PageBlocks({ blocks, localePrefix }: { blocks: any[]; lo
             );
           case 'process':
             return (
-              <section key={index} className="py-20 bg-gray-50">
+              <section key={index} {...sectionProps(block)} className="py-20 bg-gray-50">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
                   <div className="lg:col-span-7">
                     <h2 className="text-3xl lg:text-5xl font-extrabold text-gray-900 mb-6 tracking-tighter">
@@ -168,7 +170,7 @@ export default function PageBlocks({ blocks, localePrefix }: { blocks: any[]; lo
             );
           case 'impactTeaser':
             return (
-              <section key={index} className="py-20">
+              <section key={index} {...sectionProps(block)} className="py-20">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
                   <div className="lg:col-span-6">
                     <h2 className="text-3xl lg:text-5xl font-extrabold text-gray-900 mb-6 tracking-tighter">
@@ -193,7 +195,7 @@ export default function PageBlocks({ blocks, localePrefix }: { blocks: any[]; lo
             );
           case 'finalCTA':
             return (
-              <section key={index} className="py-20 bg-ink text-white">
+              <section key={index} {...sectionProps(block)} className="py-20 bg-ink text-white">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-10">
                   <div>
                     <h2 className="text-3xl lg:text-5xl font-extrabold mb-4 tracking-tighter">{block.title}</h2>
@@ -216,7 +218,7 @@ export default function PageBlocks({ blocks, localePrefix }: { blocks: any[]; lo
             );
           case 'videoEmbed':
             return (
-              <section key={index} className="py-20">
+              <section key={index} {...sectionProps(block)} className="py-20">
                 <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
                   {block.title && (
                     <h2 className="text-3xl lg:text-5xl font-extrabold text-gray-900 mb-8 tracking-tighter">
@@ -238,7 +240,7 @@ export default function PageBlocks({ blocks, localePrefix }: { blocks: any[]; lo
             );
           case 'imageGallery':
             return (
-              <section key={index} className="py-20">
+              <section key={index} {...sectionProps(block)} className="py-20">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                   {block.title && (
                     <h2 className="text-3xl lg:text-5xl font-extrabold text-gray-900 mb-10 tracking-tighter">
@@ -259,7 +261,7 @@ export default function PageBlocks({ blocks, localePrefix }: { blocks: any[]; lo
             );
           case 'splitContent':
             return (
-              <section key={index} className="py-20 border-b border-gray-50">
+              <section key={index} {...sectionProps(block)} className="py-20 border-b border-gray-50">
                 <div className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row gap-12 items-center ${block.reverse ? 'lg:flex-row-reverse' : ''}`}>
                   <div className="lg:w-1/2">
                     <h2 className="text-3xl lg:text-5xl font-extrabold text-gray-900 mb-6 tracking-tighter">{block.title}</h2>
@@ -292,7 +294,7 @@ export default function PageBlocks({ blocks, localePrefix }: { blocks: any[]; lo
             );
           case 'featureGrid':
             return (
-              <section key={index} className="py-20 bg-gray-50">
+              <section key={index} {...sectionProps(block)} className="py-20 bg-gray-50">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                   {block.title && (
                     <h2 className="text-3xl lg:text-5xl font-extrabold text-gray-900 mb-10 tracking-tighter">
@@ -308,6 +310,138 @@ export default function PageBlocks({ blocks, localePrefix }: { blocks: any[]; lo
                       </div>
                     ))}
                   </div>
+                </div>
+              </section>
+            );
+          case 'richText':
+            return (
+              <section key={index} {...sectionProps(block)} className="py-16">
+                <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                  <div className="text-lg leading-relaxed text-gray-700 whitespace-pre-line">
+                    {block.content}
+                  </div>
+                </div>
+              </section>
+            );
+          case 'stats':
+            return (
+              <section key={index} {...sectionProps(block)} className="py-20">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                  {block.title && (
+                    <h2 className="text-3xl lg:text-5xl font-extrabold text-gray-900 mb-6 tracking-tighter">
+                      {block.title}
+                    </h2>
+                  )}
+                  {block.intro && <p className="text-xl text-gray-600 mb-10 max-w-3xl">{block.intro}</p>}
+                  <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+                    {block.items?.map((item: any, itemIndex: number) => (
+                      <div key={itemIndex} className="p-8 rounded-[2rem] border border-gray-100 bg-gray-50/40">
+                        <p className="text-gray-400 text-xs font-bold uppercase tracking-widest mb-2">{item.label}</p>
+                        <p className="text-3xl font-extrabold text-gray-900">{item.value}</p>
+                        {item.note && <p className="text-sm text-gray-500 mt-3">{item.note}</p>}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </section>
+            );
+          case 'testimonials':
+            return (
+              <section key={index} {...sectionProps(block)} className="py-20 bg-gray-50">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                  {block.title && (
+                    <h2 className="text-3xl lg:text-5xl font-extrabold text-gray-900 mb-6 tracking-tighter">
+                      {block.title}
+                    </h2>
+                  )}
+                  {block.intro && <p className="text-xl text-gray-600 mb-12 max-w-3xl">{block.intro}</p>}
+                  <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+                    {block.items?.map((item: any, itemIndex: number) => (
+                      <div key={itemIndex} className="p-8 rounded-[2rem] bg-white border border-gray-100 shadow-sm flex flex-col gap-6">
+                        <p className="text-gray-700 text-lg leading-relaxed">“{item.quote}”</p>
+                        <div className="flex items-center gap-4">
+                          {getMediaUrl(item.logo) && (
+                            <img src={getMediaUrl(item.logo)} alt="" className="h-8 object-contain" />
+                          )}
+                          <div>
+                            <p className="font-bold text-gray-900">{item.name}</p>
+                            {(item.role || item.company) && (
+                              <p className="text-sm text-gray-500">
+                                {[item.role, item.company].filter(Boolean).join(' · ')}
+                              </p>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </section>
+            );
+          case 'faq':
+            return (
+              <section key={index} {...sectionProps(block)} className="py-20">
+                <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+                  <h2 className="text-3xl lg:text-5xl font-extrabold text-gray-900 mb-10 tracking-tighter">
+                    {block.title || 'FAQ'}
+                  </h2>
+                  <div className="space-y-4">
+                    {block.items?.map((item: any, itemIndex: number) => (
+                      <div key={itemIndex} className="p-6 rounded-2xl border border-gray-100 bg-gray-50/30">
+                        <h3 className="text-lg font-bold text-gray-900 mb-2">{item.question}</h3>
+                        <p className="text-gray-600">{item.answer}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </section>
+            );
+          case 'caseStudyTeaser':
+            return (
+              <section key={index} {...sectionProps(block)} className="py-20">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                  {block.title && (
+                    <h2 className="text-3xl lg:text-5xl font-extrabold text-gray-900 mb-6 tracking-tighter">
+                      {block.title}
+                    </h2>
+                  )}
+                  {block.intro && <p className="text-xl text-gray-600 mb-10 max-w-3xl">{block.intro}</p>}
+                  <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+                    {block.items?.map((item: any, itemIndex: number) => (
+                      <div key={itemIndex} className="p-8 rounded-[2rem] border border-gray-100 bg-white shadow-sm flex flex-col gap-4">
+                        <div>
+                          <p className="text-xs font-bold uppercase tracking-widest text-gray-400">{item.industry}</p>
+                          <h3 className="text-xl font-bold text-gray-900 mt-2">{item.title}</h3>
+                        </div>
+                        {item.challenge && <p className="text-gray-600">{item.challenge}</p>}
+                        {item.result && (
+                          <p className="text-sm font-semibold text-ink">Result: {item.result}</p>
+                        )}
+                        {item.link && (
+                          <Link href={localizeHref(item.link)} className="text-sm font-bold text-accent hover:text-primaryDark">
+                            Read case study →
+                          </Link>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </section>
+            );
+          case 'contactForm':
+            return (
+              <section key={index} {...sectionProps(block)} className="py-20 bg-gray-50">
+                <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-16 items-center">
+                  <div>
+                    <h2 className="text-3xl lg:text-5xl font-extrabold text-gray-900 mb-6 tracking-tighter">
+                      {block.title || 'Let’s talk.'}
+                    </h2>
+                    {block.intro && <p className="text-xl text-gray-600">{block.intro}</p>}
+                  </div>
+                  <ContactForm
+                    submitLabel={block.submitLabel}
+                    topics={block.topics?.map((topic: any) => topic.label).filter(Boolean)}
+                  />
                 </div>
               </section>
             );

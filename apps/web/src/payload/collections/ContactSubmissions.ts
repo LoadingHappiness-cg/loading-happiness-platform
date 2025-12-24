@@ -20,9 +20,32 @@ const ContactSubmissions: CollectionConfig = {
       required: true,
     },
     {
+      name: 'company',
+      type: 'text',
+    },
+    {
       name: 'email',
       type: 'email',
       required: true,
+    },
+    {
+      name: 'topic',
+      type: 'select',
+      options: [
+        { label: 'Managed IT', value: 'managed-it' },
+        { label: 'Cybersecurity', value: 'cybersecurity' },
+        { label: 'Cloud & M365', value: 'cloud' },
+        { label: 'Projects', value: 'projects' },
+        { label: 'General', value: 'general' },
+      ],
+    },
+    {
+      name: 'urgency',
+      type: 'select',
+      options: [
+        { label: 'Normal', value: 'normal' },
+        { label: 'Urgent', value: 'urgent' },
+      ],
     },
     {
       name: 'message',

@@ -1,16 +1,4 @@
 {
-  "node_modules/@payloadcms/next/node_modules/@payloadcms/ui/dist/exports/client/index.js -> ./CodeEditor-QOURTFMT.js": {
-    "id": "node_modules/@payloadcms/next/node_modules/@payloadcms/ui/dist/exports/client/index.js -> ./CodeEditor-QOURTFMT.js",
-    "files": [
-      "static/chunks/_app-pages-browser_node_modules_payloadcms_next_node_modules_payloadcms_ui_dist_exports_clien-976ca8.js"
-    ]
-  },
-  "node_modules/@payloadcms/next/node_modules/@payloadcms/ui/dist/exports/client/index.js -> ./DatePicker-VMLA35FO.js": {
-    "id": "node_modules/@payloadcms/next/node_modules/@payloadcms/ui/dist/exports/client/index.js -> ./DatePicker-VMLA35FO.js",
-    "files": [
-      "static/chunks/_app-pages-browser_node_modules_payloadcms_next_node_modules_payloadcms_ui_dist_exports_clien-b2557c.js"
-    ]
-  },
   "node_modules/@payloadcms/translations/dist/importDateFNSLocale.js -> date-fns/locale/ar": {
     "id": "node_modules/@payloadcms/translations/dist/importDateFNSLocale.js -> date-fns/locale/ar",
     "files": [
@@ -253,6 +241,18 @@
     "id": "node_modules/@payloadcms/translations/dist/importDateFNSLocale.js -> date-fns/locale/zh-TW",
     "files": [
       "static/chunks/_app-pages-browser_node_modules_date-fns_locale_zh-TW_js.js"
+    ]
+  },
+  "node_modules/@payloadcms/ui/dist/exports/client/index.js -> ./CodeEditor-QOURTFMT.js": {
+    "id": "node_modules/@payloadcms/ui/dist/exports/client/index.js -> ./CodeEditor-QOURTFMT.js",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_payloadcms_ui_dist_exports_client_CodeEditor-QOURTFMT_js.js"
+    ]
+  },
+  "node_modules/@payloadcms/ui/dist/exports/client/index.js -> ./DatePicker-VMLA35FO.js": {
+    "id": "node_modules/@payloadcms/ui/dist/exports/client/index.js -> ./DatePicker-VMLA35FO.js",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_payloadcms_ui_dist_exports_client_DatePicker-VMLA35FO_js.js"
     ]
   }
 }

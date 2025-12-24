@@ -37,6 +37,7 @@ export default buildConfig({
     user: 'users',
     importMap: {
       baseDir: path.resolve(process.cwd()),
+      autoGenerate: false,
     },
   },
   routes: {
@@ -72,6 +73,7 @@ export default buildConfig({
   ],
   typescript: {
     outputFile: path.resolve(process.cwd(), 'src/payload-types.ts'),
+    autoGenerate: false,
   },
   graphQL: {
     schemaOutputFile: path.resolve(process.cwd(), 'src/generated-schema.graphql'),

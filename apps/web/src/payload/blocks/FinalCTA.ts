@@ -9,6 +9,13 @@ const FinalCTABlock: Block = {
   },
   fields: [
     {
+      name: 'sectionId',
+      type: 'text',
+      admin: {
+        description: 'Optional anchor ID for in-page links (e.g., "cta").',
+      },
+    },
+    {
       name: 'title',
       type: 'text',
       required: true,

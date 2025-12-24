@@ -5,6 +5,18 @@ const FAQBlock: Block = {
   slug: 'faq',
   fields: [
     {
+      name: 'sectionId',
+      type: 'text',
+      admin: {
+        description: 'Optional anchor ID for in-page links (e.g., "faq").',
+      },
+    },
+    {
+      name: 'title',
+      type: 'text',
+      localized: true,
+    },
+    {
       name: 'items',
       type: 'array',
       required: true,

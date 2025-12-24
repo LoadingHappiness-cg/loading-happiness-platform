@@ -9,8 +9,8 @@ const links = [
   { href: '/contact', label: 'Contact' },
 ];
 
-export default function SiteNav() {
-  const localePrefix = getLocalePrefix();
+export default async function SiteNav() {
+  const localePrefix = await getLocalePrefix();
   return (
     <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

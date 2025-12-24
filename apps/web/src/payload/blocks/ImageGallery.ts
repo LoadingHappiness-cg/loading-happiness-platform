@@ -9,6 +9,13 @@ const ImageGalleryBlock: Block = {
   },
   fields: [
     {
+      name: 'sectionId',
+      type: 'text',
+      admin: {
+        description: 'Optional anchor ID for in-page links (e.g., "gallery").',
+      },
+    },
+    {
       name: 'title',
       type: 'text',
       label: 'Gallery Title',
