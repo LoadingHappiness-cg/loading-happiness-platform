@@ -1,5 +1,10 @@
 {
   "pages": {
+    "/(payload)/api/[[...slug]]/route": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/(payload)/api/[[...slug]]/route.js"
+    ],
     "/layout": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
@@ -12,20 +17,15 @@
       "static/css/app/(site)/layout.css",
       "static/chunks/app/(site)/layout.js"
     ],
-    "/(site)/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/(site)/page.js"
-    ],
-    "/(payload)/api/[[...slug]]/route": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/(payload)/api/[[...slug]]/route.js"
-    ],
     "/(site)/[slug]/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/(site)/[slug]/page.js"
+    ],
+    "/(site)/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/(site)/page.js"
     ],
     "/(payload)/admin/[[...segments]]/not-found": [
       "static/chunks/webpack.js",

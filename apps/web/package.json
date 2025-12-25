@@ -14,7 +14,8 @@
     "seed:admin:replace": "node --import tsx scripts/replace-admin.ts",
     "seed:home": "node --import tsx scripts/seed-home.ts",
     "seed:site": "node --import tsx scripts/seed-site.ts",
-    "seed:site-settings": "node --import tsx scripts/seed-site-settings.ts"
+    "seed:site-settings": "node --import tsx scripts/seed-site-settings.ts",
+    "seed:site-settings-pt": "node --import tsx scripts/seed-site-settings-pt.ts"
   },
   "dependencies": {
     "@payloadcms/db-postgres": "^3.0.0",

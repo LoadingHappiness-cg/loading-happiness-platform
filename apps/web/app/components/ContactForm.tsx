@@ -1,23 +1,25 @@
 'use client';
 
 import { useState } from 'react';
+import { t, type Locale } from '@/lib/translations';
 
 type ContactFormProps = {
   submitLabel?: string;
   topics?: string[];
+  locale?: Locale;
 };
 
-const defaultTopics = [
-  { label: 'Managed IT', value: 'managed-it' },
-  { label: 'Cybersecurity', value: 'cybersecurity' },
-  { label: 'Cloud & M365', value: 'cloud' },
-  { label: 'Projects', value: 'projects' },
-  { label: 'General', value: 'general' },
-];
-
-export default function ContactForm({ submitLabel, topics }: ContactFormProps) {
+export default function ContactForm({ submitLabel, topics, locale = 'pt' }: ContactFormProps) {
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [error, setError] = useState<string | null>(null);
+
+  const defaultTopics = [
+    { label: t('contact.topics.managedIt', locale), value: 'managed-it' },
+    { label: t('contact.topics.cybersecurity', locale), value: 'cybersecurity' },
+    { label: t('contact.topics.cloud', locale), value: 'cloud' },
+    { label: t('contact.topics.projects', locale), value: 'projects' },
+    { label: t('contact.topics.general', locale), value: 'general' },
+  ];
 
   const topicOptions = topics?.length
     ? topics.map((label) => ({ label, value: label.toLowerCase().replace(/\s+/g, '-') }))
@@ -53,7 +55,7 @@ export default function ContactForm({ submitLabel, topics }: ContactFormProps) {
       setStatus('success');
     } catch (submitError) {
       console.error(submitError);
-      setError('There was an issue sending your message. Please try again.');
+      setError(t('contact.form.error', locale));
       setStatus('error');
     }
   };
@@ -67,23 +69,24 @@ export default function ContactForm({ submitLabel, topics }: ContactFormProps) {
         required
         name="name"
         className="w-full px-6 py-4 rounded-2xl border border-gray-200 outline-none focus:ring-4 focus:ring-primary/20 font-medium"
-        placeholder="Full Name"
+        placeholder={t('contact.form.name', locale)}
       />
       <input
         name="company"
         className="w-full px-6 py-4 rounded-2xl border border-gray-200 outline-none focus:ring-4 focus:ring-primary/20 font-medium"
-        placeholder="Company (optional)"
+        placeholder={t('contact.form.companyOptional', locale)}
       />
       <input
         required
         name="email"
         type="email"
         className="w-full px-6 py-4 rounded-2xl border border-gray-200 outline-none focus:ring-4 focus:ring-primary/20 font-medium"
-        placeholder="Work Email"
+        placeholder={t('contact.form.workEmail', locale)}
       />
       {topicOptions.length > 0 && (
         <select
           name="topic"
+          aria-label={t('contact.form.topic', locale)}
           className="w-full px-6 py-4 rounded-2xl border border-gray-200 outline-none focus:ring-4 focus:ring-primary/20 font-medium bg-white"
         >
           {topicOptions.map((topic) => (
@@ -96,17 +99,18 @@ export default function ContactForm({ submitLabel, topics }: ContactFormProps) {
       <select
         name="urgency"
         defaultValue="normal"
+        aria-label={t('contact.form.urgency', locale)}
         className="w-full px-6 py-4 rounded-2xl border border-gray-200 outline-none focus:ring-4 focus:ring-primary/20 font-medium bg-white"
       >
-        <option value="normal">Normal urgency</option>
-        <option value="urgent">Urgent</option>
+        <option value="normal">{t('contact.form.urgencyNormal', locale)}</option>
+        <option value="urgent">{t('contact.form.urgencyUrgent', locale)}</option>
       </select>
       <textarea
         required
         name="message"
         rows={5}
         className="w-full px-6 py-4 rounded-2xl border border-gray-200 outline-none focus:ring-4 focus:ring-primary/20 font-medium"
-        placeholder="Describe your challenge..."
+        placeholder={t('contact.form.messagePlaceholder', locale)}
       />
       <button
         type="submit"
@@ -114,10 +118,10 @@ export default function ContactForm({ submitLabel, topics }: ContactFormProps) {
         data-umami-event="contact-submit"
         className="w-full py-4 bg-primary text-white rounded-2xl font-extrabold text-lg hover:bg-primaryDark transition-all shadow-xl shadow-primary/30 disabled:opacity-60"
       >
-        {status === 'loading' ? 'Sending...' : submitLabel || 'Send Message'}
+        {status === 'loading' ? t('contact.form.sending', locale) : submitLabel || t('contact.form.submit', locale)}
       </button>
       {status === 'success' && (
-        <p className="text-sm font-semibold text-highlight">Thanks! We’ll reply shortly.</p>
+        <p className="text-sm font-semibold text-highlight">{t('contact.form.success', locale)}</p>
       )}
       {status === 'error' && <p className="text-sm font-semibold text-red-600">{error}</p>}
     </form>

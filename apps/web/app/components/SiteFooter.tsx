@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { getLocale, getLocalePrefix, withLocale } from '@/lib/locale';
+import { getLocale, getLocalePrefix, withLocale, t } from '@/lib/locale';
 import { getPayloadClient } from '@/lib/payload';
 
 export default async function SiteFooter() {
@@ -25,28 +25,30 @@ export default async function SiteFooter() {
   const legalLinks = footer.legalLinks?.length
     ? footer.legalLinks
     : [
-        { label: 'Privacy', href: '/privacy' },
-        { label: 'Terms', href: '/terms' },
-        { label: 'Cookies', href: '/cookies' },
-      ];
-  const tagline = footer.tagline || 'Technology with a human heart.';
+      { label: await t('footer.legal.privacy'), href: '/privacy' },
+      { label: await t('footer.legal.terms'), href: '/terms' },
+      { label: await t('footer.legal.cookies'), href: '/cookies' },
+    ];
+  const tagline = footer.tagline || await t('footer.tagline');
   const aboutText =
     footer.aboutText ||
     footer.description ||
-    'Reliable IT, clear security, and calm support for teams that value stability.';
-  const contactLocation = contact.location || 'Portugal';
+    await t('footer.about');
+  const contactLocation = contact.location || await t('footer.location');
   const contactEmail = contact.email || footer.email;
   const contactPhone = contact.phone || footer.phone;
-  const contactHours = contact.hours || 'Mon–Fri, 9–18';
+  const contactHours = contact.hours || await t('footer.hours');
   const contactNote =
-    contact.note || "We're based in Portugal, proudly supporting teams across Europe.";
-  const newsletterTitle = newsletter.title || 'Newsletter';
+    contact.note || await t('footer.note');
+  const newsletterTitle = newsletter.title || await t('footer.newsletter');
   const newsletterText =
-    newsletter.text || 'Short, practical insights on security, stability, and calm operations.';
-  const newsletterPlaceholder = newsletter.placeholder || 'Your email address';
-  const newsletterButtonText = newsletter.buttonText || 'Sign up';
+    newsletter.text || await t('footer.newsletterText');
+  const newsletterPlaceholder = newsletter.placeholder || await t('footer.newsletterPlaceholder');
+  const newsletterButtonText = newsletter.buttonText || await t('footer.newsletterButton');
   const newsletterAction = newsletter.formAction || '/api/newsletter';
-  const awardsTitle = footer.awardsTitle || 'Awards';
+  const awardsTitle = footer.awardsTitle || await t('footer.awards');
+  const contactUsHeading = await t('footer.contactUs');
+  const copyrightText = footer.bottomText || await t('footer.copyright', { year: new Date().getFullYear() });
   return (
     <footer className="mt-20">
       <div className="bg-[#332570] text-white">
@@ -112,7 +114,7 @@ export default async function SiteFooter() {
             </div>
 
             <div className="md:border-l md:border-white/10 md:pl-8">
-              <h3 className="text-3xl font-semibold">contact us</h3>
+              <h3 className="text-3xl font-semibold">{contactUsHeading}</h3>
               <div className="mt-2 h-1 w-10 bg-[#3ADA9A] rounded" />
 
               <ul className="mt-6 space-y-3 text-white/85">
@@ -257,8 +259,7 @@ export default async function SiteFooter() {
             </span>
           ))}
           <span className="text-white/60">
-            {footer.bottomText ||
-              `© ${new Date().getFullYear()} Loading Happiness. Engineered for Stability.`}
+            {copyrightText}
           </span>
         </div>
         {footer.customHtml && (
