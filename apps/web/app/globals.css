@@ -59,6 +59,34 @@ body {
   }
 }
 
+/* Button shadows for better depth */
+button,
+a[class*="bg-primary"],
+a[class*="bg-white"][class*="border"],
+a[class*="rounded-xl"],
+a[class*="rounded-2xl"],
+a[class*="rounded-lg"] {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.06);
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+button:hover,
+a[class*="bg-primary"]:hover,
+a[class*="bg-white"][class*="border"]:hover,
+a[class*="rounded-xl"]:hover,
+a[class*="rounded-2xl"]:hover,
+a[class*="rounded-lg"]:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.08);
+  transform: translateY(-1px);
+}
+
+button:active,
+a[class*="bg-primary"]:active,
+a[class*="bg-white"][class*="border"]:active {
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  transform: translateY(0);
+}
+
 /* Admin-only theming (Payload sets data-theme on <html>) */
 html[data-theme='light'] {
   --font-body: 'Avenir Next', 'Segoe UI Variable Text', 'Gill Sans', 'Helvetica Neue', sans-serif;
