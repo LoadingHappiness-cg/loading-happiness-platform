@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import PageBlocks from '../components/PageBlocks';
 import { getPayloadClient } from '@/lib/payload';
+import { Content as ContentType } from '@/payload-types';
 import { getLocale, withLocale } from '@/lib/locale';
 
 const fallbackSections = (localePrefix: string) => (
@@ -113,5 +114,64 @@ export default async function HomePage() {
     return fallbackSections(localePrefix);
   }
 
-  return <PageBlocks blocks={page.layout} localePrefix={localePrefix} />;
+  const latest = await payload.find({
+    collection: 'content',
+    where: { status: { equals: 'published' } },
+    sort: '-publishedAt',
+    limit: 3,
+    locale,
+  });
+
+  return (
+    <>
+      <PageBlocks blocks={page.layout} localePrefix={localePrefix} />
+      {latest.docs.length > 0 && (
+        <section className="py-20 bg-white border-t border-gray-50">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex items-center justify-between mb-10">
+              <h2 className="text-3xl lg:text-5xl font-extrabold text-gray-900 tracking-tighter">Latest insights</h2>
+              <Link href={withLocale('/news', localePrefix)} className="text-sm font-bold text-accent hover:text-primaryDark">
+                View all →
+              </Link>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {latest.docs.map((post: ContentType) => (
+                <article key={post.id} className="group rounded-3xl border border-gray-100 bg-white overflow-hidden shadow-sm hover:shadow-xl transition-all">
+                  {post.featuredImage && typeof post.featuredImage !== 'string' && (
+                    <div className="aspect-[16/9] overflow-hidden bg-gray-100">
+                      <img
+                        src={(post.featuredImage as any).url}
+                        alt={post.title}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      />
+                    </div>
+                  )}
+                  <div className="p-8">
+                    <span className="text-[10px] font-extrabold uppercase tracking-widest text-accent bg-accent/15 px-2 py-1 rounded">
+                      {post.contentType}
+                    </span>
+                    <h3 className="text-xl font-bold text-gray-900 mt-4 mb-3 group-hover:text-primaryDark transition-colors">
+                      <Link href={withLocale(`/news/${post.slug}`, localePrefix)}>{post.title}</Link>
+                    </h3>
+                    <p className="text-gray-600 leading-relaxed line-clamp-2">{post.excerpt}</p>
+                    <div className="mt-6 flex flex-wrap gap-2">
+                      {post.tags?.map((tag: any) => (
+                        <span
+                          key={tag.id}
+                          className="text-[10px] font-bold text-gray-500 px-2 py-1 rounded bg-gray-50"
+                          style={tag.color ? { borderLeft: `3px solid ${tag.color}` } : {}}
+                        >
+                          #{tag.name}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+    </>
+  );
 }

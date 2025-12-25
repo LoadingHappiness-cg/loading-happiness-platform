@@ -88,6 +88,8 @@ const main = async () => {
   const layout = [
     {
       blockType: 'hero',
+      variant: 'A',
+      theme: 'brandGradient',
       heading: 'Technology with a human heart.',
       subheading: 'Reliable IT, clear security, and support that feels human—so your business can focus on what matters.',
       primaryCTA: { label: 'Book a call', link: '/contact' },

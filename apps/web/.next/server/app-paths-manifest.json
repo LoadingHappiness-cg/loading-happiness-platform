@@ -3,5 +3,6 @@
   "/(payload)/admin/[[...segments]]/page": "app/(payload)/admin/[[...segments]]/page.js",
   "/(site)/page": "app/(site)/page.js",
   "/(site)/news/page": "app/(site)/news/page.js",
-  "/(site)/[slug]/page": "app/(site)/[slug]/page.js"
+  "/(site)/[slug]/page": "app/(site)/[slug]/page.js",
+  "/(site)/services/[slug]/page": "app/(site)/services/[slug]/page.js"
 }

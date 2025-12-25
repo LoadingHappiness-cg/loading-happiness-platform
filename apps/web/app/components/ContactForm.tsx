@@ -111,6 +111,7 @@ export default function ContactForm({ submitLabel, topics }: ContactFormProps) {
       <button
         type="submit"
         disabled={status === 'loading'}
+        data-umami-event="contact-submit"
         className="w-full py-4 bg-primary text-white rounded-2xl font-extrabold text-lg hover:bg-primaryDark transition-all shadow-xl shadow-primary/30 disabled:opacity-60"
       >
         {status === 'loading' ? 'Sending...' : submitLabel || 'Send Message'}

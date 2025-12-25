@@ -22,12 +22,19 @@ const ServicesGridBlock: Block = {
       localized: true,
     },
     {
+      name: 'intro',
+      type: 'textarea',
+      localized: true,
+    },
+    {
       name: 'services',
       type: 'array',
       fields: [
         { name: 'title', type: 'text', required: true, localized: true },
         { name: 'description', type: 'textarea', required: true, localized: true },
         { name: 'icon', type: 'text', required: true },
+        { name: 'link', type: 'text' },
+        { name: 'tag', type: 'text', localized: true },
       ],
     },
     {

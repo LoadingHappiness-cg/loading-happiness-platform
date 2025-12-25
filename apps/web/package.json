@@ -12,7 +12,8 @@
     "payload:importmap": "payload generate:importmap",
     "seed:admin": "node --import tsx scripts/create-admin.ts",
     "seed:home": "node --import tsx scripts/seed-home.ts",
-    "seed:site": "node --import tsx scripts/seed-site.ts"
+    "seed:site": "node --import tsx scripts/seed-site.ts",
+    "seed:site-settings": "node --import tsx scripts/seed-site-settings.ts"
   },
   "dependencies": {
     "@payloadcms/db-postgres": "^3.0.0",

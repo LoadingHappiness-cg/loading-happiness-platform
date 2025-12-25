@@ -30,3 +30,31 @@ body {
 .site-root h4 {
   font-family: var(--font-display), var(--font-body), system-ui, -apple-system, sans-serif;
 }
+
+.hero-card {
+  animation: heroFloat 7s ease-in-out infinite;
+}
+
+.hero-card-2 {
+  animation-delay: 0.6s;
+}
+
+.hero-card-3 {
+  animation-delay: 1.2s;
+}
+
+@keyframes heroFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-card {
+    animation: none;
+  }
+}

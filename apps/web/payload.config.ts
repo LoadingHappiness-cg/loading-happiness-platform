@@ -8,6 +8,7 @@ import Content from './src/payload/collections/Content.ts';
 import Authors from './src/payload/collections/Authors.ts';
 import Categories from './src/payload/collections/Categories.ts';
 import Tags from './src/payload/collections/Tags.ts';
+import SiteSettings from './src/payload/globals/SiteSettings.ts';
 
 const databaseUri = process.env.DATABASE_URI;
 const payloadSecret = process.env.PAYLOAD_SECRET;
@@ -71,6 +72,7 @@ export default buildConfig({
       fields: [{ name: 'alt', type: 'text' }],
     },
   ],
+  globals: [SiteSettings],
   typescript: {
     outputFile: path.resolve(process.cwd(), 'src/payload-types.ts'),
     autoGenerate: false,

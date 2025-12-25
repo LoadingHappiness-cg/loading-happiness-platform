@@ -31,6 +31,11 @@ const ProcessBlock: Block = {
       ],
     },
     {
+      name: 'note',
+      type: 'text',
+      localized: true,
+    },
+    {
       name: 'image',
       type: 'upload',
       relationTo: 'media',
