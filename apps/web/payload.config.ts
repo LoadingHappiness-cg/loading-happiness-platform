@@ -4,11 +4,13 @@ import { postgresAdapter } from '@payloadcms/db-postgres';
 import path from 'path';
 import Pages from './src/payload/collections/Pages.ts';
 import ContactSubmissions from './src/payload/collections/ContactSubmissions.ts';
+import NewsletterSignups from './src/payload/collections/NewsletterSignups.ts';
 import Content from './src/payload/collections/Content.ts';
 import Authors from './src/payload/collections/Authors.ts';
 import Categories from './src/payload/collections/Categories.ts';
 import Tags from './src/payload/collections/Tags.ts';
 import SiteSettings from './src/payload/globals/SiteSettings.ts';
+import { s3Storage } from '@payloadcms/storage-s3';
 
 const databaseUri = process.env.DATABASE_URI;
 const payloadSecret = process.env.PAYLOAD_SECRET;
@@ -52,6 +54,7 @@ export default buildConfig({
     Categories,
     Tags,
     ContactSubmissions,
+    NewsletterSignups,
     {
       slug: 'users',
       auth: true,
@@ -60,9 +63,15 @@ export default buildConfig({
     },
     {
       slug: 'media',
+      access: {
+        create: ({ req: { user } }) => !!user,
+        read: ({ req: { user } }) => !!user,
+        update: ({ req: { user } }) => !!user,
+        delete: ({ req: { user } }) => !!user,
+      },
       upload: {
-        staticURL: '/media',
-        staticDir: 'media',
+        staticURL: process.env.MEDIA_PUBLIC_URL || 'https://media.loadinghappiness.com',
+        disableLocalStorage: true,
         imageSizes: [
           { name: 'thumbnail', width: 400, height: 300, position: 'centre' },
         ],
@@ -73,6 +82,23 @@ export default buildConfig({
     },
   ],
   globals: [SiteSettings],
+  plugins: [
+    s3Storage({
+      collections: {
+        media: true,
+      },
+      bucket: process.env.S3_BUCKET || 'public-media',
+      config: {
+        region: process.env.S3_REGION || 'us-east-1',
+        credentials: {
+          accessKeyId: process.env.S3_ACCESS_KEY || '',
+          secretAccessKey: process.env.S3_SECRET_KEY || '',
+        },
+        endpoint: process.env.S3_ENDPOINT || 'http://localhost:9000',
+        forcePathStyle: true,
+      },
+    }),
+  ],
   typescript: {
     outputFile: path.resolve(process.cwd(), 'src/payload-types.ts'),
     autoGenerate: false,

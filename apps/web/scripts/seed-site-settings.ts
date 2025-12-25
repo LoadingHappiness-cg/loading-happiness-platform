@@ -177,6 +177,15 @@ const main = async () => {
       ],
     },
   ];
+  const footerSocials = [
+    { platform: 'linkedin', url: 'https://www.linkedin.com/' },
+    { platform: 'instagram', url: 'https://www.instagram.com/' },
+  ];
+  const footerLegalLinks = [
+    { label: 'Privacy', href: '/privacy' },
+    { label: 'Terms', href: '/terms' },
+    { label: 'Cookies', href: '/cookies' },
+  ];
 
   await payload.updateGlobal({
     slug: 'site-settings',
@@ -200,9 +209,30 @@ const main = async () => {
         logoAlt: 'Loading Happiness',
         description:
           'Technology with a human heart. Reliable IT, clear security, and calm support for teams that value stability.',
+        tagline: 'Technology with a human heart.',
+        aboutText:
+          'We help teams stabilize IT, strengthen security, and modernize infrastructure with clear communication and predictable execution.',
+        socials: footerSocials,
+        contact: {
+          location: 'Portugal · Serving teams across Europe',
+          email: 'hello@loadinghappiness.com',
+          phone: '+351 000 000 000',
+          hours: 'Mon–Fri, 9–18',
+          note: "We're based in Portugal, proudly supporting teams across Europe.",
+        },
         email: 'hello@loadinghappiness.com',
         phone: '+351 000 000 000',
+        newsletter: {
+          title: 'Newsletter',
+          text: 'Practical notes on IT stability, security, and calm operations.',
+          placeholder: 'Your email address',
+          buttonText: 'Sign up',
+          formAction: '/api/newsletter',
+        },
+        awardsTitle: 'Awards',
+        awards: [],
         columns: footerColumns,
+        legalLinks: footerLegalLinks,
         bottomText: '© ' + new Date().getFullYear() + ' Loading Happiness. Engineered for Stability.',
       },
     },
@@ -230,9 +260,30 @@ const main = async () => {
         logoAlt: 'Loading Happiness',
         description:
           'Tecnologia com coração humano. IT fiável, segurança clara e suporte calmo para equipas que valorizam estabilidade.',
+        tagline: 'Tecnologia com coração humano.',
+        aboutText:
+          'Ajudamos equipas a estabilizar o IT, reforçar a segurança e modernizar infraestrutura com comunicação clara e execução previsível.',
+        socials: footerSocials,
+        contact: {
+          location: 'Portugal · A apoiar equipas na Europa',
+          email: 'hello@loadinghappiness.com',
+          phone: '+351 000 000 000',
+          hours: 'Seg–Sex, 9–18',
+          note: 'Estamos em Portugal e apoiamos equipas em toda a Europa.',
+        },
         email: 'hello@loadinghappiness.com',
         phone: '+351 000 000 000',
+        newsletter: {
+          title: 'Newsletter',
+          text: 'Notas práticas sobre estabilidade de IT, segurança e operações calmas.',
+          placeholder: 'O teu email',
+          buttonText: 'Subscrever',
+          formAction: '/api/newsletter',
+        },
+        awardsTitle: 'Prémios',
+        awards: [],
         columns: footerColumns,
+        legalLinks: footerLegalLinks,
         bottomText: '© ' + new Date().getFullYear() + ' Loading Happiness. Engineered for Stability.',
       },
     },

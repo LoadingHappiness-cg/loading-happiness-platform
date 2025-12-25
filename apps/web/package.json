@@ -11,6 +11,7 @@
     "payload:generate": "payload generate:types",
     "payload:importmap": "payload generate:importmap",
     "seed:admin": "node --import tsx scripts/create-admin.ts",
+    "seed:admin:replace": "node --import tsx scripts/replace-admin.ts",
     "seed:home": "node --import tsx scripts/seed-home.ts",
     "seed:site": "node --import tsx scripts/seed-site.ts",
     "seed:site-settings": "node --import tsx scripts/seed-site-settings.ts"
@@ -18,6 +19,7 @@
   "dependencies": {
     "@payloadcms/db-postgres": "^3.0.0",
     "@payloadcms/next": "^3.69.0",
+    "@payloadcms/storage-s3": "^3.69.0",
     "@payloadcms/ui": "^3.69.0",
     "next": "15.4.10",
     "payload": "^3.69.0",

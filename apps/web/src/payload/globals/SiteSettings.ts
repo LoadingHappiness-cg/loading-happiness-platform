@@ -88,12 +88,83 @@ const SiteSettings: GlobalConfig = {
           localized: true,
         },
         {
+          name: 'tagline',
+          type: 'text',
+          localized: true,
+        },
+        {
+          name: 'aboutText',
+          type: 'textarea',
+          localized: true,
+        },
+        {
+          name: 'socials',
+          type: 'array',
+          fields: [
+            {
+              name: 'platform',
+              type: 'select',
+              options: [
+                { label: 'LinkedIn', value: 'linkedin' },
+                { label: 'Facebook', value: 'facebook' },
+                { label: 'Instagram', value: 'instagram' },
+                { label: 'X (Twitter)', value: 'x' },
+                { label: 'YouTube', value: 'youtube' },
+                { label: 'GitHub', value: 'github' },
+                { label: 'Email', value: 'email' },
+                { label: 'Website', value: 'website' },
+              ],
+            },
+            { name: 'url', type: 'text' },
+          ],
+        },
+        {
+          name: 'contact',
+          type: 'group',
+          fields: [
+            { name: 'location', type: 'text', localized: true },
+            { name: 'email', type: 'text' },
+            { name: 'phone', type: 'text' },
+            { name: 'hours', type: 'text', localized: true },
+            { name: 'note', type: 'textarea', localized: true },
+          ],
+        },
+        {
           name: 'email',
           type: 'text',
         },
         {
           name: 'phone',
           type: 'text',
+        },
+        {
+          name: 'newsletter',
+          type: 'group',
+          fields: [
+            { name: 'title', type: 'text', localized: true },
+            { name: 'text', type: 'textarea', localized: true },
+            { name: 'placeholder', type: 'text', localized: true },
+            { name: 'buttonText', type: 'text', localized: true },
+            { name: 'formAction', type: 'text' },
+          ],
+        },
+        {
+          name: 'awardsTitle',
+          type: 'text',
+          localized: true,
+        },
+        {
+          name: 'awards',
+          type: 'array',
+          fields: [
+            {
+              name: 'image',
+              type: 'upload',
+              relationTo: 'media',
+            },
+            { name: 'alt', type: 'text', localized: true },
+            { name: 'href', type: 'text' },
+          ],
         },
         {
           name: 'columns',
@@ -108,6 +179,14 @@ const SiteSettings: GlobalConfig = {
                 { name: 'href', type: 'text' },
               ],
             },
+          ],
+        },
+        {
+          name: 'legalLinks',
+          type: 'array',
+          fields: [
+            { name: 'label', type: 'text', localized: true },
+            { name: 'href', type: 'text' },
           ],
         },
         {
