@@ -19,6 +19,14 @@ const SiteSettings: GlobalConfig = {
           localized: true,
         },
         {
+          name: 'favicon',
+          type: 'upload',
+          relationTo: 'media',
+          admin: {
+            description: 'Square icon used for browser tabs (e.g., 32x32 or 48x48).',
+          },
+        },
+        {
           name: 'links',
           type: 'array',
           fields: [

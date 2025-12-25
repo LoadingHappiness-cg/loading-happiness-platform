@@ -2,9 +2,13 @@ import type { Block } from 'payload/types';
 
 const BulletsBlock: Block = {
   slug: 'bullets',
+  interfaceName: 'BulletsBlock',
   labels: {
     singular: 'Bullets',
     plural: 'Bullets',
+  },
+  admin: {
+    useAsTitle: 'title',
   },
   fields: [
     {
@@ -27,6 +31,13 @@ const BulletsBlock: Block = {
     {
       name: 'items',
       type: 'array',
+      labels: {
+        singular: 'Item',
+        plural: 'Items',
+      },
+      admin: {
+        useAsTitle: 'text',
+      },
       minRows: 1,
       fields: [{ name: 'text', type: 'text', required: true, localized: true }],
     },

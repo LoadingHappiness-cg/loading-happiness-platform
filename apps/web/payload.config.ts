@@ -40,6 +40,7 @@ export default buildConfig({
   admin: {
     user: 'users',
     components: {
+      beforeDashboard: ['/app/(payload)/admin/components/CustomDashboard#default'],
       beforeLogin: ['/app/(payload)/admin/components/EntraLogin#EntraLogin'],
       logout: {
         Button: '/app/(payload)/admin/components/LogoutButton#LogoutButton',

@@ -6,6 +6,7 @@ import SiteNav from '../components/SiteNav';
 import MediaModal from '../components/MediaModal';
 import AnalyticsScripts from '../components/AnalyticsScripts';
 import { getLocalePrefix, withLocale } from '@/lib/locale';
+import { getPayloadClient } from '@/lib/payload';
 
 const bodyFont = Manrope({
   subsets: ['latin'],
@@ -27,6 +28,30 @@ export const metadata = {
 type LayoutProps = {
   children: ReactNode;
 };
+
+export async function generateMetadata() {
+  try {
+    const payload = await getPayloadClient();
+    const settings = await payload.findGlobal({ slug: 'site-settings', depth: 1 });
+    const favicon = settings?.header?.favicon;
+    if (favicon && typeof favicon !== 'string' && favicon.url) {
+      return {
+        title: 'Loading Happiness',
+        description: 'Loading Happiness Platform',
+        icons: {
+          icon: favicon.url,
+        },
+      };
+    }
+  } catch {
+    // Fallback to default metadata.
+  }
+
+  return {
+    title: 'Loading Happiness',
+    description: 'Loading Happiness Platform',
+  };
+}
 
 export default async function SiteLayout({ children }: LayoutProps) {
   const localePrefix = await getLocalePrefix();

@@ -156,6 +156,13 @@ const Pages: CollectionConfig = {
             {
               name: 'badges',
               type: 'array',
+              labels: {
+                singular: 'Badge',
+                plural: 'Badges',
+              },
+              admin: {
+                useAsTitle: 'text',
+              },
               fields: [{ name: 'text', type: 'text', localized: true }],
             },
             {
@@ -174,6 +181,13 @@ const Pages: CollectionConfig = {
             {
               name: 'items',
               type: 'array',
+              labels: {
+                singular: 'Item',
+                plural: 'Items',
+              },
+              admin: {
+                useAsTitle: 'text',
+              },
               fields: [{ name: 'text', type: 'text', localized: true }],
             },
           ],
@@ -187,6 +201,13 @@ const Pages: CollectionConfig = {
             {
               name: 'items',
               type: 'array',
+              labels: {
+                singular: 'Item',
+                plural: 'Items',
+              },
+              admin: {
+                useAsTitle: 'title',
+              },
               fields: [
                 { name: 'title', type: 'text', localized: true },
                 { name: 'text', type: 'textarea', localized: true },
@@ -203,6 +224,13 @@ const Pages: CollectionConfig = {
             {
               name: 'items',
               type: 'array',
+              labels: {
+                singular: 'Outcome',
+                plural: 'Outcomes',
+              },
+              admin: {
+                useAsTitle: 'title',
+              },
               fields: [
                 { name: 'title', type: 'text', localized: true },
                 { name: 'text', type: 'text', localized: true },
@@ -219,6 +247,13 @@ const Pages: CollectionConfig = {
             {
               name: 'items',
               type: 'array',
+              labels: {
+                singular: 'Step',
+                plural: 'Steps',
+              },
+              admin: {
+                useAsTitle: 'title',
+              },
               fields: [
                 { name: 'title', type: 'text', localized: true },
                 { name: 'text', type: 'text', localized: true },
@@ -234,6 +269,13 @@ const Pages: CollectionConfig = {
             {
               name: 'items',
               type: 'array',
+              labels: {
+                singular: 'Checklist Item',
+                plural: 'Checklist Items',
+              },
+              admin: {
+                useAsTitle: 'item',
+              },
               fields: [{ name: 'item', type: 'text', localized: true }],
             },
           ],
@@ -247,6 +289,13 @@ const Pages: CollectionConfig = {
             {
               name: 'items',
               type: 'array',
+              labels: {
+                singular: 'Stat',
+                plural: 'Stats',
+              },
+              admin: {
+                useAsTitle: 'label',
+              },
               fields: [
                 { name: 'label', type: 'text', localized: true },
                 { name: 'value', type: 'text', localized: true },
@@ -258,12 +307,16 @@ const Pages: CollectionConfig = {
         {
           name: 'cta',
           type: 'group',
+          admin: {
+            hideGutter: true,
+          },
           fields: [
             { name: 'title', type: 'text', localized: true },
             { name: 'content', type: 'textarea', localized: true },
             {
               name: 'primaryCTA',
               type: 'group',
+              admin: { hideGutter: true },
               fields: [
                 { name: 'label', type: 'text', localized: true },
                 { name: 'link', type: 'text' },
@@ -272,6 +325,7 @@ const Pages: CollectionConfig = {
             {
               name: 'secondaryCTA',
               type: 'group',
+              admin: { hideGutter: true },
               fields: [
                 { name: 'label', type: 'text', localized: true },
                 { name: 'link', type: 'text' },
