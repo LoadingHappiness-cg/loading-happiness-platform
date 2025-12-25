@@ -65,7 +65,7 @@ export default buildConfig({
       slug: 'media',
       access: {
         create: ({ req: { user } }) => !!user,
-        read: ({ req: { user } }) => !!user,
+        read: () => true,
         update: ({ req: { user } }) => !!user,
         delete: ({ req: { user } }) => !!user,
       },
