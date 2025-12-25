@@ -20,10 +20,7 @@ const displayFont = Space_Grotesk({
   display: 'swap',
 });
 
-export const metadata = {
-  title: 'Loading Happiness',
-  description: 'Loading Happiness Platform',
-};
+
 
 type LayoutProps = {
   children: ReactNode;
@@ -31,8 +28,11 @@ type LayoutProps = {
 
 export async function generateMetadata() {
   try {
-    const payload = await getPayloadClient();
-    const settings = await payload.findGlobal({ slug: 'site-settings', depth: 1 });
+    const payload = (await getPayloadClient()) as any;
+    const settings = await payload.findGlobal({
+      slug: 'site-settings',
+      depth: 1,
+    });
     const favicon = settings?.header?.favicon;
     if (favicon && typeof favicon !== 'string' && favicon.url) {
       return {

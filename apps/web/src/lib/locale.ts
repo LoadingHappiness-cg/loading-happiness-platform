@@ -1,13 +1,18 @@
-import { headers } from 'next/headers';
+import { cookies, headers } from 'next/headers';
 import { t as translateFn, createTranslator, type Locale, type TranslationKey } from './translations';
 
 const SUPPORTED = new Set(['pt', 'en']);
+const LOCALE_COOKIE = 'lh_locale';
 
 export const getLocale = async (): Promise<Locale> => {
   const headerList = await headers();
   const headerLocale = headerList.get('x-locale');
   if (headerLocale && SUPPORTED.has(headerLocale)) {
     return headerLocale as Locale;
+  }
+  const cookieLocale = cookies().get(LOCALE_COOKIE)?.value;
+  if (cookieLocale && SUPPORTED.has(cookieLocale)) {
+    return cookieLocale as Locale;
   }
   return 'pt';
 };
@@ -19,7 +24,8 @@ export const withLocale = (href: string, prefix = '/pt') => {
     return href;
   }
   if (href.startsWith('/pt') || href.startsWith('/en')) {
-    return href;
+    const normalized = href.replace(/^\/(pt|en)(?=\/|$)/, '');
+    return `${prefix}${normalized || ''}`;
   }
   return `${prefix}${href}`;
 };
