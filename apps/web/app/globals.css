@@ -58,3 +58,43 @@ body {
     animation: none;
   }
 }
+
+/* Admin-only theming (Payload sets data-theme on <html>) */
+html[data-theme='light'] {
+  --font-body: 'Avenir Next', 'Segoe UI Variable Text', 'Gill Sans', 'Helvetica Neue', sans-serif;
+  --font-mono: 'IBM Plex Mono', 'Menlo', monospace;
+  --style-radius-s: 8px;
+  --style-radius-m: 12px;
+  --style-radius-l: 18px;
+  --style-radius-xl: 24px;
+  --theme-bg: #f7f3ed;
+  --theme-text: #2a2018;
+  --theme-input-bg: #fffdf9;
+  --theme-elevation-0: #fffdf9;
+  --theme-elevation-50: #f8f3ed;
+  --theme-elevation-100: #efe7de;
+  --theme-elevation-150: #e7dccf;
+  --theme-elevation-200: #dccbb9;
+  --theme-elevation-300: #c3ae98;
+  --theme-elevation-400: #a28a74;
+  --theme-elevation-500: #846a55;
+  --theme-elevation-600: #6a5546;
+  --theme-elevation-700: #504034;
+  --theme-elevation-800: #0f5a4a;
+  --theme-elevation-900: #0a4639;
+  --theme-elevation-950: #07362c;
+  --theme-elevation-1000: #0b1c19;
+  --accessibility-outline: 2px solid #0f5a4a;
+}
+
+html[data-theme='light'] body {
+  background: radial-gradient(1200px 640px at 12% -10%, #ffffff 0%, #f7f1ea 45%, #f2eadf 100%);
+  color: var(--theme-text);
+}
+
+html[data-theme='light'] .table,
+html[data-theme='light'] .collection-list__wrap > *,
+html[data-theme='light'] .dashboard__wrap,
+html[data-theme='light'] .payload__modal {
+  border-radius: var(--style-radius-l);
+}
