@@ -10,6 +10,7 @@ import Authors from './src/payload/collections/Authors.ts';
 import Categories from './src/payload/collections/Categories.ts';
 import Tags from './src/payload/collections/Tags.ts';
 import SiteSettings from './src/payload/globals/SiteSettings.ts';
+import AuthSettings from './src/payload/globals/AuthSettings.ts';
 import { s3Storage } from '@payloadcms/storage-s3';
 
 const databaseUri = process.env.DATABASE_URI;
@@ -38,6 +39,12 @@ export default buildConfig({
   },
   admin: {
     user: 'users',
+    components: {
+      beforeLogin: ['/app/(payload)/admin/components/EntraLogin#EntraLogin'],
+      logout: {
+        Button: '/app/(payload)/admin/components/LogoutButton#LogoutButton',
+      },
+    },
     importMap: {
       baseDir: path.resolve(process.cwd()),
       autoGenerate: false,
@@ -59,7 +66,14 @@ export default buildConfig({
       slug: 'users',
       auth: true,
       admin: { useAsTitle: 'email' },
-      fields: [],
+      fields: [
+        {
+          name: 'entraId',
+          type: 'text',
+          unique: true,
+          admin: { position: 'sidebar' },
+        },
+      ],
     },
     {
       slug: 'media',
@@ -81,7 +95,7 @@ export default buildConfig({
       fields: [{ name: 'alt', type: 'text' }],
     },
   ],
-  globals: [SiteSettings],
+  globals: [SiteSettings, AuthSettings],
   plugins: [
     s3Storage({
       collections: {
