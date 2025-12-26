@@ -9,6 +9,11 @@ const ImageGalleryBlock: Block = {
   },
   fields: [
     {
+      name: 'enabled',
+      type: 'checkbox',
+      defaultValue: true,
+    },
+    {
       name: 'sectionId',
       type: 'text',
       admin: {
@@ -16,9 +21,21 @@ const ImageGalleryBlock: Block = {
       },
     },
     {
+      name: 'anchorId',
+      type: 'text',
+      admin: {
+        description: 'Optional anchor ID for in-page links (briefing alias).',
+      },
+    },
+    {
       name: 'title',
       type: 'text',
       label: 'Gallery Title',
+      localized: true,
+    },
+    {
+      name: 'sectionTitle',
+      type: 'text',
       localized: true,
     },
     {
@@ -40,7 +57,17 @@ const ImageGalleryBlock: Block = {
           required: true,
           localized: true,
         },
+        {
+          name: 'caption',
+          type: 'text',
+          localized: true,
+        },
       ],
+    },
+    {
+      name: 'galleryNote',
+      type: 'text',
+      localized: true,
     },
   ],
 };

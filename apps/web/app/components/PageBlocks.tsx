@@ -81,11 +81,16 @@ export default function PageBlocks({ blocks, localePrefix }: { blocks: any[]; lo
   if (!blocks?.length) return null;
 
   const localizeHref = (href: string) => withLocale(href, localePrefix);
-  const sectionProps = (block: any) => (block?.sectionId ? { id: block.sectionId } : {});
+  const sectionProps = (block: any) => {
+    if (block?.anchorId) return { id: block.anchorId };
+    if (block?.sectionId) return { id: block.sectionId };
+    return {};
+  };
 
   return (
     <div>
       {blocks.map((block, index) => {
+        if (block?.enabled === false) return null;
         switch (block.blockType) {
           case 'hero': {
             const variant = block.variant || 'A';
@@ -95,19 +100,19 @@ export default function PageBlocks({ blocks, localePrefix }: { blocks: any[]; lo
               heroTheme === 'brandGradient'
                 ? 'bg-gradient-to-br from-brand-midnight/10 via-white to-brand-sky/15'
                 : heroTheme === 'dark'
-                ? 'bg-ink text-white'
-                : 'bg-white';
-            const media = getMediaMeta(block.image);
+                  ? 'bg-ink text-white'
+                  : 'bg-white';
+            const media = getMediaMeta(block.heroImage || block.image);
             const hideMedia = block.mediaType === 'none';
             const prefersMedia = block.mediaType === 'videoThumbnail';
             const heroVariantClass =
               variant === 'B'
                 ? 'py-24 lg:py-32'
                 : variant === 'D'
-                ? 'py-16 lg:py-24'
-                : variant === 'E'
-                ? 'py-20 lg:py-28'
-                : 'py-20 lg:py-28';
+                  ? 'py-16 lg:py-24'
+                  : variant === 'E'
+                    ? 'py-20 lg:py-28'
+                    : 'py-20 lg:py-28';
 
             return (
               <section
@@ -123,17 +128,16 @@ export default function PageBlocks({ blocks, localePrefix }: { blocks: any[]; lo
                   </>
                 )}
                 <div
-                  className={`relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ${
-                    variant === 'B'
-                      ? 'text-center'
-                      : variant === 'D'
+                  className={`relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ${variant === 'B'
+                    ? 'text-center'
+                    : variant === 'D'
                       ? 'grid grid-cols-1 lg:grid-cols-12 gap-12 items-center'
                       : 'grid grid-cols-1 lg:grid-cols-12 gap-12 items-center'
-                  }`}
+                    }`}
                 >
                   <div className={variant === 'B' ? 'max-w-3xl mx-auto' : variant === 'D' ? 'lg:col-span-6' : 'lg:col-span-7'}>
                     <p className="text-xs uppercase tracking-[0.3em] text-brand-ocean font-bold mb-4">
-                      Loading Happiness
+                      {block.eyebrow || 'Loading Happiness'}
                     </p>
                     {block.template && templateStyles[block.template] && (
                       <span
@@ -143,26 +147,29 @@ export default function PageBlocks({ blocks, localePrefix }: { blocks: any[]; lo
                       </span>
                     )}
                     <h1
-                      className={`${
-                        variant === 'D' ? 'text-4xl md:text-5xl lg:text-6xl' : 'text-4xl md:text-5xl lg:text-6xl'
-                      } font-extrabold tracking-tighter mb-6 ${
-                        heroTheme === 'dark' ? 'text-white' : 'text-gray-900'
-                      }`}
+                      className={`${variant === 'D' ? 'text-4xl md:text-5xl lg:text-6xl' : 'text-4xl md:text-5xl lg:text-6xl'
+                        } font-extrabold tracking-tighter mb-6 ${heroTheme === 'dark' ? 'text-white' : 'text-gray-900'
+                        }`}
                     >
-                      {block.heading}
+                      {block.h1Title || block.heading}
                     </h1>
                     <p
-                      className={`text-xl leading-relaxed mb-8 ${
-                        heroTheme === 'dark' ? 'text-white/80' : 'text-gray-700'
-                      } ${variant === 'B' ? '' : 'max-w-2xl'}`}
+                      className={`text-xl leading-relaxed mb-8 ${heroTheme === 'dark' ? 'text-white/80' : 'text-gray-700'
+                        } ${variant === 'B' ? '' : 'max-w-2xl'}`}
                     >
-                      {block.subheading}
+                      {block.subheadline || block.subheading}
                     </p>
+                    {block.trustLine && (
+                      <p className={`text-sm font-semibold mb-6 ${heroTheme === 'dark' ? 'text-white/70' : 'text-gray-500'}`}>
+                        {block.trustLine}
+                      </p>
+                    )}
                     <div className={`flex flex-col sm:flex-row gap-4 ${isCentered ? 'justify-center' : ''}`}>
                       {block.primaryCTA && (
                         <Link
                           href={localizeHref(block.primaryCTA.link)}
                           className="px-8 py-3 bg-primary text-white rounded-xl font-bold hover:bg-primaryDark transition-all shadow-xl shadow-primary/30"
+                          data-umami-event={block.primaryCTA.trackingId || undefined}
                         >
                           {block.primaryCTA.label}
                         </Link>
@@ -170,11 +177,10 @@ export default function PageBlocks({ blocks, localePrefix }: { blocks: any[]; lo
                       {block.secondaryCTA && (
                         <Link
                           href={localizeHref(block.secondaryCTA.link)}
-                          className={`px-8 py-3 rounded-xl font-bold transition-all ${
-                            heroTheme === 'dark'
-                              ? 'border border-white/60 text-white hover:bg-white/10'
-                              : 'border border-ink text-ink hover:bg-white/60'
-                          }`}
+                          className={`px-8 py-3 rounded-xl font-bold transition-all ${heroTheme === 'dark'
+                            ? 'border border-white/60 text-white hover:bg-white/10'
+                            : 'border border-ink text-ink hover:bg-white/60'
+                            }`}
                         >
                           {block.secondaryCTA.label}
                         </Link>
@@ -185,16 +191,23 @@ export default function PageBlocks({ blocks, localePrefix }: { blocks: any[]; lo
                         {block.badges.map((badge: any, badgeIndex: number) => (
                           <span
                             key={badgeIndex}
-                            className={`px-3 py-1 rounded-full text-xs font-bold ${
-                              block.template && templateStyles[block.template]
-                                ? `${templateStyles[block.template].accentBg} ${templateStyles[block.template].accentText}`
-                                : 'bg-brand-mint/20 text-brand-ocean'
-                            }`}
+                            className={`px-3 py-1 rounded-full text-xs font-bold ${block.template && templateStyles[block.template]
+                              ? `${templateStyles[block.template].accentBg} ${templateStyles[block.template].accentText}`
+                              : 'bg-brand-mint/20 text-brand-ocean'
+                              }`}
                           >
-                            {badge.text}
+                            <span className="inline-flex items-center gap-2">
+                              {badge.icon && <span className="text-xs">{badge.icon}</span>}
+                              {badge.label || badge.text}
+                            </span>
                           </span>
                         ))}
                       </div>
+                    )}
+                    {block.keywordsInline && (
+                      <p className={`mt-6 text-xs uppercase tracking-[0.25em] ${heroTheme === 'dark' ? 'text-white/60' : 'text-gray-400'}`}>
+                        {block.keywordsInline}
+                      </p>
                     )}
                     {variant === 'C' && block.featureList?.length > 0 && (
                       <div className="mt-8 grid gap-3">
@@ -248,9 +261,8 @@ export default function PageBlocks({ blocks, localePrefix }: { blocks: any[]; lo
                               ].map((card, cardIndex) => (
                                 <div
                                   key={card.title}
-                                  className={`hero-card hero-card-${cardIndex + 1} rounded-2xl border border-white/80 bg-white/90 shadow-lg p-4 ${
-                                    cardIndex === 0 ? 'ml-10' : cardIndex === 1 ? 'ml-4' : ''
-                                  }`}
+                                  className={`hero-card hero-card-${cardIndex + 1} rounded-2xl border border-white/80 bg-white/90 shadow-lg p-4 ${cardIndex === 0 ? 'ml-10' : cardIndex === 1 ? 'ml-4' : ''
+                                    }`}
                                 >
                                   <p className="text-[10px] uppercase tracking-[0.2em] text-brand-ocean font-bold">
                                     {card.title}
@@ -272,19 +284,31 @@ export default function PageBlocks({ blocks, localePrefix }: { blocks: any[]; lo
             return (
               <section key={index} {...sectionProps(block)} className="py-16 bg-gray-50">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                  <p className="text-xs font-extrabold uppercase tracking-[0.2em] text-gray-400 mb-8">
-                    {block.text}
-                  </p>
+                  {(block.sectionTitle || block.text) && (
+                    <h2 className="text-2xl lg:text-3xl font-extrabold text-gray-900 mb-2 tracking-tighter">
+                      {block.sectionTitle || block.text}
+                    </h2>
+                  )}
+                  {block.trustCopy && <p className="text-sm text-gray-500 mb-6">{block.trustCopy}</p>}
+                  {block.complianceNotes && <p className="text-xs text-gray-400 mb-6">{block.complianceNotes}</p>}
                   <div className="grid grid-cols-2 md:grid-cols-5 gap-6 items-center">
                     {block.logos?.map((logo: any, logoIndex: number) => (
                       <div key={logoIndex} className="flex justify-center">
-                        {getMediaMeta(logo.logo).url && (
+                        {getMediaMeta(logo.logo).url && (logo.url ? (
+                          <a href={logo.url} className="inline-flex">
+                            <img
+                              src={getMediaMeta(logo.logo).url}
+                              alt={logo.alt || logo.name || ''}
+                              className="h-8 object-contain"
+                            />
+                          </a>
+                        ) : (
                           <img
                             src={getMediaMeta(logo.logo).url}
-                            alt={logo.alt || ''}
+                            alt={logo.alt || logo.name || ''}
                             className="h-8 object-contain"
                           />
-                        )}
+                        ))}
                       </div>
                     ))}
                   </div>
@@ -296,14 +320,15 @@ export default function PageBlocks({ blocks, localePrefix }: { blocks: any[]; lo
               <section key={index} {...sectionProps(block)} className="py-20">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                   <h2 className="text-3xl lg:text-5xl font-extrabold text-gray-900 mb-10 tracking-tighter">
-                    {block.title}
+                    {block.sectionTitle || block.title}
                   </h2>
-                  <div className="grid md:grid-cols-3 gap-8">
+                  <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
                     {block.items?.map((item: any, itemIndex: number) => (
                       <div key={itemIndex} className="p-8 rounded-[2rem] border border-gray-100 bg-gray-50/40">
-                        <div className="text-2xl mb-4">{item.icon}</div>
+                        {item.icon && <div className="text-2xl mb-4">{item.icon}</div>}
                         <h3 className="text-xl font-bold text-gray-900 mb-3">{item.title}</h3>
-                        <p className="text-gray-600">{item.content}</p>
+                        <p className="text-gray-600">{item.description || item.content}</p>
+                        {item.proofPoint && <p className="text-sm text-gray-500 mt-4">{item.proofPoint}</p>}
                       </div>
                     ))}
                   </div>
@@ -315,50 +340,65 @@ export default function PageBlocks({ blocks, localePrefix }: { blocks: any[]; lo
               <section key={index} {...sectionProps(block)} className="py-20">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                   <div className="flex items-center justify-between mb-10">
-                    <h2 className="text-3xl lg:text-5xl font-extrabold text-gray-900 tracking-tighter">{block.title}</h2>
-                    {block.cta?.link && (
-                      <Link href={localizeHref(block.cta.link)} className="text-sm font-bold text-accent hover:text-primaryDark">
-                        {block.cta.label || 'Explore'} →
+                    <h2 className="text-3xl lg:text-5xl font-extrabold text-gray-900 tracking-tighter">
+                      {block.sectionTitle || block.title}
+                    </h2>
+                    {(block.ctaHref || block.cta?.link) && (
+                      <Link
+                        href={localizeHref(block.ctaHref || block.cta.link)}
+                        className="text-sm font-bold text-accent hover:text-primaryDark"
+                      >
+                        {block.ctaLabel || block.cta?.label || 'Explore'} →
                       </Link>
                     )}
                   </div>
-                  {block.intro && <p className="text-lg text-gray-600 mb-8 max-w-3xl">{block.intro}</p>}
+                  {(block.sectionIntro || block.intro) && (
+                    <p className="text-lg text-gray-600 mb-8 max-w-3xl">{block.sectionIntro || block.intro}</p>
+                  )}
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                     {block.services?.map((service: any, serviceIndex: number) => {
                       const serviceTemplate = templateFromLink(service.link);
                       const serviceStyle = serviceTemplate ? templateStyles[serviceTemplate] : undefined;
                       return (
-                      <div
-                        key={serviceIndex}
-                        className="p-8 rounded-[2rem] border border-gray-100 bg-white shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all"
-                      >
                         <div
-                          className={`w-12 h-12 rounded-2xl grid place-items-center text-2xl mb-6 ${
-                            serviceStyle ? `${serviceStyle.accentBg} ${serviceStyle.accentText}` : 'bg-brand-sky/15 text-brand-ocean'
-                          }`}
+                          key={serviceIndex}
+                          className="p-8 rounded-[2rem] border border-gray-100 bg-white shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all"
                         >
-                          {service.icon}
+                          <div
+                            className={`w-12 h-12 rounded-2xl grid place-items-center text-2xl mb-6 ${serviceStyle ? `${serviceStyle.accentBg} ${serviceStyle.accentText}` : 'bg-brand-sky/15 text-brand-ocean'
+                              }`}
+                          >
+                            {service.icon}
+                          </div>
+                          {(service.tag || serviceStyle) && (
+                            <p
+                              className={`text-[10px] font-extrabold uppercase tracking-[0.2em] mb-3 ${serviceStyle ? serviceStyle.accentText : 'text-brand-sky'
+                                }`}
+                            >
+                              {service.tag || serviceStyle?.label}
+                            </p>
+                          )}
+                          <h3 className="text-xl font-bold text-gray-900 mb-3">{service.title}</h3>
+                          <p className="text-gray-600">{service.description}</p>
+                          {service.bulletPoints?.length > 0 && (
+                            <ul className="mt-4 space-y-2 text-sm text-gray-600">
+                              {service.bulletPoints.map((point: any, pointIndex: number) => (
+                                <li key={pointIndex} className="flex gap-2">
+                                  <span className="text-brand-ocean">•</span>
+                                  {point.text || point}
+                                </li>
+                              ))}
+                            </ul>
+                          )}
+                          {(service.ctaHref || service.link) && (
+                            <Link
+                              href={localizeHref(service.ctaHref || service.link)}
+                              className="mt-6 inline-flex text-sm font-bold text-accent hover:text-primaryDark"
+                            >
+                              {service.ctaLabel || 'Learn more'} →
+                            </Link>
+                          )}
                         </div>
-                        {(service.tag || serviceStyle) && (
-                          <p
-                            className={`text-[10px] font-extrabold uppercase tracking-[0.2em] mb-3 ${
-                              serviceStyle ? serviceStyle.accentText : 'text-brand-sky'
-                            }`}
-                          >
-                            {service.tag || serviceStyle?.label}
-                          </p>
-                        )}
-                        <h3 className="text-xl font-bold text-gray-900 mb-3">{service.title}</h3>
-                        <p className="text-gray-600">{service.description}</p>
-                        {service.link && (
-                          <Link
-                            href={localizeHref(service.link)}
-                            className="mt-6 inline-flex text-sm font-bold text-accent hover:text-primaryDark"
-                          >
-                            Learn more →
-                          </Link>
-                        )}
-                      </div>
                       );
                     })}
                   </div>
@@ -371,31 +411,45 @@ export default function PageBlocks({ blocks, localePrefix }: { blocks: any[]; lo
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
                   <div className="lg:col-span-7">
                     <h2 className="text-3xl lg:text-5xl font-extrabold text-gray-900 mb-6 tracking-tighter">
-                      {block.title}
+                      {block.sectionTitle || block.title}
                     </h2>
                     <div className="space-y-6 relative">
                       <div className="absolute left-4 top-2 bottom-2 w-px bg-gradient-to-b from-brand-ocean/40 via-brand-sky/30 to-brand-teal/30" />
                       {block.steps?.map((step: any, stepIndex: number) => (
                         <div key={stepIndex} className="relative pl-12">
                           <span className="absolute left-0 top-3 h-8 w-8 rounded-full bg-white border border-brand-ocean text-brand-ocean font-bold grid place-items-center text-xs">
-                            {stepIndex + 1}
+                            {step.stepNumber || stepIndex + 1}
                           </span>
                           <div className="p-6 rounded-2xl bg-white border border-gray-100 shadow-sm">
                             <h3 className="text-lg font-bold text-gray-900 mb-2">{step.title}</h3>
-                            <p className="text-gray-600">{step.content}</p>
-                            <p className="text-xs font-bold uppercase tracking-[0.2em] text-brand-ocean mt-4">
-                              Deliverable
-                            </p>
-                            <p className="text-sm text-gray-500">
-                              {stepIndex === 0 && 'Risk map'}
-                              {stepIndex === 1 && 'Quick wins plan'}
-                              {stepIndex === 2 && '12-month roadmap'}
-                            </p>
+                            <p className="text-gray-600">{step.description || step.content}</p>
+                            {step.deliverables?.length > 0 && (
+                              <>
+                                <p className="text-xs font-bold uppercase tracking-[0.2em] text-brand-ocean mt-4">
+                                  Deliverables
+                                </p>
+                                <ul className="text-sm text-gray-500 mt-2 space-y-1">
+                                  {step.deliverables.map((deliverable: any, deliverableIndex: number) => (
+                                    <li key={deliverableIndex}>
+                                      {deliverable.text || deliverable}
+                                    </li>
+                                  ))}
+                                </ul>
+                              </>
+                            )}
                           </div>
                         </div>
                       ))}
                     </div>
                     {block.note && <p className="mt-8 text-sm text-gray-500">{block.note}</p>}
+                    {block.ctaLabel && block.ctaHref && (
+                      <Link
+                        href={localizeHref(block.ctaHref)}
+                        className="mt-8 inline-flex px-6 py-3 rounded-xl bg-primary text-white font-bold hover:bg-primaryDark transition-colors"
+                      >
+                        {block.ctaLabel}
+                      </Link>
+                    )}
                   </div>
                   <div className="lg:col-span-5">
                     <div className="rounded-[2.5rem] overflow-hidden shadow-2xl border-[12px] border-gray-50/50 bg-gray-100 aspect-[4/5]">
@@ -424,12 +478,31 @@ export default function PageBlocks({ blocks, localePrefix }: { blocks: any[]; lo
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
                   <div className="lg:col-span-6">
                     <h2 className="text-3xl lg:text-5xl font-extrabold text-gray-900 mb-6 tracking-tighter">
-                      {block.title}
+                      {block.sectionTitle || block.title}
                     </h2>
-                    <p className="text-xl text-gray-600 leading-relaxed mb-8">{block.content}</p>
-                    {block.cta?.link && (
-                      <Link href={localizeHref(block.cta.link)} className="px-8 py-3 bg-primary text-white rounded-xl font-bold hover:bg-primaryDark transition-all">
-                        {block.cta.label}
+                    {block.content && <p className="text-xl text-gray-600 leading-relaxed mb-8">{block.content}</p>}
+                    {block.metrics?.length > 0 && (
+                      <div className="grid gap-4 mb-8 sm:grid-cols-2">
+                        {block.metrics.map((metric: any, metricIndex: number) => (
+                          <div key={metricIndex} className="p-5 rounded-2xl border border-gray-100 bg-gray-50/60">
+                            <p className="text-xs font-bold uppercase tracking-[0.2em] text-gray-400 mb-2">
+                              {metric.label}
+                            </p>
+                            <p className="text-lg font-extrabold text-gray-900">{metric.value}</p>
+                            {metric.note && <p className="text-xs text-gray-500 mt-2">{metric.note}</p>}
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                    {block.miniCase && (
+                      <p className="text-sm text-gray-500 mb-8">{block.miniCase}</p>
+                    )}
+                    {(block.ctaHref || block.cta?.link) && (
+                      <Link
+                        href={localizeHref(block.ctaHref || block.cta.link)}
+                        className="px-8 py-3 bg-primary text-white rounded-xl font-bold hover:bg-primaryDark transition-all"
+                      >
+                        {block.ctaLabel || block.cta?.label}
                       </Link>
                     )}
                   </div>
@@ -460,7 +533,17 @@ export default function PageBlocks({ blocks, localePrefix }: { blocks: any[]; lo
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-10">
                   <div>
                     <h2 className="text-3xl lg:text-5xl font-extrabold mb-4 tracking-tighter">{block.title}</h2>
-                    <p className="text-gray-300 text-lg max-w-2xl">{block.content}</p>
+                    <p className="text-gray-300 text-lg max-w-2xl">{block.subtitle || block.content}</p>
+                    {block.microcopy && <p className="text-xs text-gray-400 mt-3">{block.microcopy}</p>}
+                    {block.contactOptions?.length > 0 && (
+                      <div className="mt-6 flex flex-wrap gap-4 text-sm text-gray-300">
+                        {block.contactOptions.map((option: any, optionIndex: number) => (
+                          <span key={optionIndex}>
+                            {option.label}: {option.value}
+                          </span>
+                        ))}
+                      </div>
+                    )}
                   </div>
                   <div className="flex flex-col sm:flex-row gap-4">
                     {block.primaryCTA?.link && (
@@ -482,12 +565,22 @@ export default function PageBlocks({ blocks, localePrefix }: { blocks: any[]; lo
               <section key={index} {...sectionProps(block)} className="py-20">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
                   <div className="lg:col-span-5">
-                    {block.title && (
+                    {(block.sectionTitle || block.title) && (
                       <h2 className="text-3xl lg:text-5xl font-extrabold text-gray-900 mb-6 tracking-tighter">
-                        {block.title}
+                        {block.sectionTitle || block.title}
                       </h2>
                     )}
-                    {block.caption && <p className="text-xl text-gray-600 leading-relaxed">{block.caption}</p>}
+                    {(block.intro || block.caption) && (
+                      <p className="text-xl text-gray-600 leading-relaxed">{block.intro || block.caption}</p>
+                    )}
+                    {block.ctaLabel && block.ctaHref && (
+                      <Link
+                        href={localizeHref(block.ctaHref)}
+                        className="mt-6 inline-flex text-sm font-bold text-accent hover:text-primaryDark"
+                      >
+                        {block.ctaLabel} →
+                      </Link>
+                    )}
                   </div>
                   <div className="lg:col-span-7">
                     <div className="aspect-video rounded-3xl overflow-hidden shadow-2xl bg-black border border-white/10">
@@ -496,9 +589,14 @@ export default function PageBlocks({ blocks, localePrefix }: { blocks: any[]; lo
                         className="w-full h-full"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowFullScreen
-                        title={block.title || 'Video'}
+                        title={block.videoTitle || block.sectionTitle || block.title || 'Video'}
                       ></iframe>
                     </div>
+                    {block.transcript && (
+                      <div className="mt-6 rounded-2xl border border-gray-100 bg-gray-50 p-6 text-sm text-gray-600 whitespace-pre-line">
+                        {block.transcript}
+                      </div>
+                    )}
                   </div>
                 </div>
               </section>
@@ -507,9 +605,9 @@ export default function PageBlocks({ blocks, localePrefix }: { blocks: any[]; lo
             return (
               <section key={index} {...sectionProps(block)} className="py-20">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                  {block.title && (
+                  {(block.sectionTitle || block.title) && (
                     <h2 className="text-3xl lg:text-5xl font-extrabold text-gray-900 mb-10 tracking-tighter">
-                      {block.title}
+                      {block.sectionTitle || block.title}
                     </h2>
                   )}
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -526,19 +624,33 @@ export default function PageBlocks({ blocks, localePrefix }: { blocks: any[]; lo
                             </div>
                           );
                         })()}
+                        {(image.caption || image.alt) && (
+                          <div className="p-4 bg-white">
+                            {image.caption && <p className="text-sm text-gray-600">{image.caption}</p>}
+                            {!image.caption && image.alt && <p className="text-xs text-gray-400">{image.alt}</p>}
+                          </div>
+                        )}
                       </div>
                     ))}
                   </div>
+                  {block.galleryNote && <p className="mt-6 text-sm text-gray-500">{block.galleryNote}</p>}
                 </div>
               </section>
             );
           case 'splitContent':
+            const isSplitReversed = block.layout === 'imageLeft' || block.reverse;
             return (
               <section key={index} {...sectionProps(block)} className="py-20 border-b border-gray-50">
-                <div className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row gap-12 items-center ${block.reverse ? 'lg:flex-row-reverse' : ''}`}>
+                <div className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row gap-12 items-center ${isSplitReversed ? 'lg:flex-row-reverse' : ''}`}>
                   <div className="lg:w-1/2">
-                    <h2 className="text-3xl lg:text-5xl font-extrabold text-gray-900 mb-6 tracking-tighter">{block.title}</h2>
-                    {block.content && <p className="text-xl text-gray-600 leading-relaxed mb-8">{block.content}</p>}
+                    <h2 className="text-3xl lg:text-5xl font-extrabold text-gray-900 mb-6 tracking-tighter">
+                      {block.sectionTitle || block.title}
+                    </h2>
+                    {(block.bodyRichText || block.content) && (
+                      <div className="text-xl text-gray-600 leading-relaxed mb-8 whitespace-pre-line">
+                        {block.bodyRichText || block.content}
+                      </div>
+                    )}
                     {block.items?.length > 0 && (
                       <ul className="space-y-4">
                         {block.items.map((item: any, itemIndex: number) => (
@@ -549,9 +661,20 @@ export default function PageBlocks({ blocks, localePrefix }: { blocks: any[]; lo
                         ))}
                       </ul>
                     )}
-                    {block.cta?.link && (
-                      <Link href={localizeHref(block.cta.link)} className="inline-block mt-8 px-8 py-3 bg-primary text-white rounded-xl font-bold hover:bg-primaryDark transition-all">
-                        {block.cta.label}
+                    {(block.ctaHref || block.cta?.link) && (
+                      <Link
+                        href={localizeHref(block.ctaHref || block.cta.link)}
+                        className="inline-block mt-8 px-8 py-3 bg-primary text-white rounded-xl font-bold hover:bg-primaryDark transition-all"
+                      >
+                        {block.ctaLabel || block.cta?.label}
+                      </Link>
+                    )}
+                    {block.secondaryLinkHref && block.secondaryLinkLabel && (
+                      <Link
+                        href={localizeHref(block.secondaryLinkHref)}
+                        className="mt-4 inline-flex text-sm font-bold text-accent hover:text-primaryDark"
+                      >
+                        {block.secondaryLinkLabel} →
                       </Link>
                     )}
                   </div>
@@ -577,9 +700,9 @@ export default function PageBlocks({ blocks, localePrefix }: { blocks: any[]; lo
             return (
               <section key={index} {...sectionProps(block)} className="py-20 bg-gray-50">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                  {block.title && (
+                  {(block.sectionTitle || block.title) && (
                     <h2 className="text-3xl lg:text-5xl font-extrabold text-gray-900 mb-10 tracking-tighter">
-                      {block.title}
+                      {block.sectionTitle || block.title}
                     </h2>
                   )}
                   <div className={`grid gap-8 ${gridCols[block.columns || 3]}`}>
@@ -588,6 +711,14 @@ export default function PageBlocks({ blocks, localePrefix }: { blocks: any[]; lo
                         <div className="text-2xl mb-4">{item.icon}</div>
                         <h3 className="text-xl font-bold text-gray-900 mb-3">{item.title}</h3>
                         <p className="text-gray-600">{item.content}</p>
+                        {(item.linkHref || item.link) && (
+                          <Link
+                            href={localizeHref(item.linkHref || item.link)}
+                            className="mt-4 inline-flex text-sm font-bold text-accent hover:text-primaryDark"
+                          >
+                            {item.linkLabel || 'Learn more'} →
+                          </Link>
+                        )}
                       </div>
                     ))}
                   </div>
@@ -798,9 +929,8 @@ export default function PageBlocks({ blocks, localePrefix }: { blocks: any[]; lo
                     {block.items?.map((item: any, itemIndex: number) => (
                       <div
                         key={itemIndex}
-                        className={`flex gap-3 rounded-2xl bg-white p-6 border border-gray-100 ${
-                          bulletsStyle ? `border-l-4 ${bulletsStyle.accentText.replace('text-', 'border-')}` : ''
-                        }`}
+                        className={`flex gap-3 rounded-2xl bg-white p-6 border border-gray-100 ${bulletsStyle ? `border-l-4 ${bulletsStyle.accentText.replace('text-', 'border-')}` : ''
+                          }`}
                       >
                         <span className="text-highlight font-bold">✓</span>
                         <p className="text-gray-700">{item.text}</p>
@@ -825,9 +955,8 @@ export default function PageBlocks({ blocks, localePrefix }: { blocks: any[]; lo
                     {block.items?.map((item: any, itemIndex: number) => (
                       <div
                         key={itemIndex}
-                        className={`rounded-2xl border border-gray-100 bg-white p-6 shadow-sm ${
-                          deliverStyle ? `border-t-4 ${deliverStyle.accentText.replace('text-', 'border-')}` : ''
-                        }`}
+                        className={`rounded-2xl border border-gray-100 bg-white p-6 shadow-sm ${deliverStyle ? `border-t-4 ${deliverStyle.accentText.replace('text-', 'border-')}` : ''
+                          }`}
                       >
                         <h3 className="text-lg font-bold text-gray-900 mb-2">{item.title}</h3>
                         {item.text && <p className="text-gray-600">{item.text}</p>}
@@ -852,9 +981,8 @@ export default function PageBlocks({ blocks, localePrefix }: { blocks: any[]; lo
                     {block.cards?.map((card: any, cardIndex: number) => (
                       <div
                         key={cardIndex}
-                        className={`rounded-[2rem] border border-gray-100 bg-white p-8 shadow-sm ${
-                          outcomesStyle ? `border-t-4 ${outcomesStyle.accentText.replace('text-', 'border-')}` : ''
-                        }`}
+                        className={`rounded-[2rem] border border-gray-100 bg-white p-8 shadow-sm ${outcomesStyle ? `border-t-4 ${outcomesStyle.accentText.replace('text-', 'border-')}` : ''
+                          }`}
                       >
                         <h3 className="text-xl font-bold text-gray-900 mb-3">{card.title}</h3>
                         {card.text && <p className="text-gray-600">{card.text}</p>}
@@ -879,9 +1007,8 @@ export default function PageBlocks({ blocks, localePrefix }: { blocks: any[]; lo
                     {block.steps?.map((step: any, stepIndex: number) => (
                       <div
                         key={stepIndex}
-                        className={`rounded-2xl border border-gray-100 bg-white p-6 shadow-sm ${
-                          stepsStyle ? `border-t-4 ${stepsStyle.accentText.replace('text-', 'border-')}` : ''
-                        }`}
+                        className={`rounded-2xl border border-gray-100 bg-white p-6 shadow-sm ${stepsStyle ? `border-t-4 ${stepsStyle.accentText.replace('text-', 'border-')}` : ''
+                          }`}
                       >
                         <p className="text-xs font-bold uppercase tracking-[0.2em] text-brand-ocean mb-2">
                           Step {stepIndex + 1}
@@ -1005,6 +1132,119 @@ export default function PageBlocks({ blocks, localePrefix }: { blocks: any[]; lo
                         )}
                       </div>
                     ))}
+                  </div>
+                </div>
+              </section>
+            );
+          case 'mission-vision-values':
+            return (
+              <section key={index} {...sectionProps(block)} className="py-20 bg-white">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                  <h2 className="text-3xl lg:text-5xl font-extrabold text-gray-900 mb-12 tracking-tighter text-center">
+                    {block.sectionTitle || 'Missão, Visão e Valores'}
+                  </h2>
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
+                    <div className="p-10 rounded-[2.5rem] bg-brand-ocean/5 border border-brand-ocean/10">
+                      <h3 className="text-lg font-bold uppercase tracking-widest text-brand-ocean mb-4">A Nossa Missão</h3>
+                      <p className="text-2xl font-bold text-gray-900 leading-tight">{block.mission}</p>
+                    </div>
+                    <div className="p-10 rounded-[2.5rem] bg-brand-mint/10 border border-brand-mint/20">
+                      <h3 className="text-lg font-bold uppercase tracking-widest text-brand-mint mb-4">A Nossa Visão</h3>
+                      <p className="text-2xl font-bold text-gray-900 leading-tight">{block.vision}</p>
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    {block.values?.map((val: any, valIdx: number) => (
+                      <div key={valIdx} className="p-8 rounded-3xl border border-gray-100 bg-white shadow-sm hover:shadow-md transition-all">
+                        <h4 className="text-xl font-bold text-gray-900 mb-3">{val.title}</h4>
+                        <p className="text-gray-600 mb-4 text-sm leading-relaxed">{val.description}</p>
+                        {val.proofBehavior && (
+                          <div className="pt-4 border-t border-gray-50">
+                            <p className="text-[10px] font-extrabold uppercase tracking-widest text-brand-ocean mb-1">Prova de comportamento</p>
+                            <p className="text-xs font-semibold text-gray-500 italic">"{val.proofBehavior}"</p>
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </section>
+            );
+          case 'timeline':
+            return (
+              <section key={index} {...sectionProps(block)} className="py-20 bg-gray-50">
+                <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+                  <div className="text-center mb-16">
+                    <h2 className="text-3xl lg:text-5xl font-extrabold text-gray-900 mb-6 tracking-tighter text-center">
+                      {block.sectionTitle || 'A Nossa História'}
+                    </h2>
+                    {block.intro && <p className="text-xl text-gray-600 max-w-2xl mx-auto">{block.intro}</p>}
+                  </div>
+                  <div className="relative space-y-12">
+                    <div className="absolute left-0 lg:left-1/2 top-4 bottom-4 w-px bg-gray-200 lg:-translate-x-1/2" />
+                    {block.items?.map((item: any, itemIdx: number) => (
+                      <div key={itemIdx} className={`relative flex flex-col lg:flex-row gap-8 ${itemIdx % 2 !== 0 ? 'lg:flex-row-reverse' : ''}`}>
+                        <div className="absolute left-0 lg:left-1/2 top-4 w-4 h-4 rounded-full bg-brand-ocean border-4 border-white shadow-sm lg:-translate-x-1/2 z-10" />
+                        <div className="lg:w-1/2 pl-12 lg:pl-0">
+                          <div className={`p-8 rounded-[2rem] bg-white border border-gray-100 shadow-sm ${itemIdx % 2 === 0 ? 'lg:text-right lg:pr-12' : 'lg:pl-12'}`}>
+                            <span className="text-xs font-black text-brand-ocean bg-brand-ocean/10 px-3 py-1 rounded-full mb-4 inline-block uppercase tracking-wider">
+                              {item.yearOrPeriod}
+                            </span>
+                            <h3 className="text-2xl font-bold text-gray-900 mb-3">{item.title}</h3>
+                            <p className="text-gray-600 leading-relaxed">{item.description}</p>
+                            {item.highlightQuote && (
+                              <blockquote className={`mt-6 pt-6 border-t border-gray-50 text-brand-mint font-bold italic ${itemIdx % 2 === 0 ? 'lg:text-right' : ''}`}>
+                                “{item.highlightQuote}”
+                              </blockquote>
+                            )}
+                          </div>
+                        </div>
+                        <div className="lg:w-1/2 hidden lg:block" />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </section>
+            );
+          case 'social-responsibility':
+            return (
+              <section key={index} {...sectionProps(block)} className="py-20 bg-white">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-end mb-16">
+                    <div className="lg:col-span-8">
+                      <h2 className="text-3xl lg:text-5xl font-extrabold text-gray-900 mb-6 tracking-tighter">
+                        {block.sectionTitle || 'Responsabilidade Social'}
+                      </h2>
+                      {block.intro && <p className="text-xl text-gray-600 max-w-3xl">{block.intro}</p>}
+                    </div>
+                    {block.cta?.link && (
+                      <div className="lg:col-span-4 lg:text-right">
+                        <Link href={localizeHref(block.cta.link)} className="px-8 py-3 bg-brand-sky text-white rounded-xl font-bold hover:bg-brand-ocean transition-all shadow-lg shadow-brand-sky/20">
+                          {block.cta.label || 'Saber mais'}
+                        </Link>
+                      </div>
+                    )}
+                  </div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    {block.initiatives?.map((init: any, initIdx: number) => {
+                      const statusColors: any = {
+                        active: 'bg-brand-mint/10 text-brand-mint',
+                        planned: 'bg-brand-sky/10 text-brand-sky',
+                        completed: 'bg-gray-100 text-gray-500',
+                      };
+                      return (
+                        <div key={initIdx} className="p-8 rounded-[2rem] border border-gray-100 bg-gray-50/40 hover:bg-white hover:shadow-xl transition-all h-full flex flex-col">
+                          <div className="flex justify-between items-start mb-6">
+                            <span className={`text-[10px] font-black uppercase tracking-widest px-2 py-1 rounded ${statusColors[init.status] || 'bg-gray-100'}`}>
+                              {init.status}
+                            </span>
+                            {init.link && <a href={init.link} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-brand-ocean">↗</a>}
+                          </div>
+                          <h3 className="text-xl font-bold text-gray-900 mb-3">{init.title}</h3>
+                          <p className="text-gray-600 text-sm leading-relaxed mb-6">{init.description}</p>
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
               </section>

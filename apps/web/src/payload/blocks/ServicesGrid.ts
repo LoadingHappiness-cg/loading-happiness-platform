@@ -9,10 +9,22 @@ const ServicesGridBlock: Block = {
   },
   fields: [
     {
+      name: 'enabled',
+      type: 'checkbox',
+      defaultValue: true,
+    },
+    {
       name: 'sectionId',
       type: 'text',
       admin: {
         description: 'Optional anchor ID for in-page links (e.g., "services").',
+      },
+    },
+    {
+      name: 'anchorId',
+      type: 'text',
+      admin: {
+        description: 'Optional anchor ID for in-page links (briefing alias).',
       },
     },
     {
@@ -22,7 +34,17 @@ const ServicesGridBlock: Block = {
       localized: true,
     },
     {
+      name: 'sectionTitle',
+      type: 'text',
+      localized: true,
+    },
+    {
       name: 'intro',
+      type: 'textarea',
+      localized: true,
+    },
+    {
+      name: 'sectionIntro',
       type: 'textarea',
       localized: true,
     },
@@ -35,6 +57,15 @@ const ServicesGridBlock: Block = {
         { name: 'icon', type: 'text', required: true },
         { name: 'link', type: 'text' },
         { name: 'tag', type: 'text', localized: true },
+        {
+          name: 'bulletPoints',
+          type: 'array',
+          fields: [{ name: 'text', type: 'text', localized: true }],
+        },
+        { name: 'ctaLabel', type: 'text', localized: true },
+        { name: 'ctaHref', type: 'text' },
+        { name: 'serviceCategory', type: 'text', localized: true },
+        { name: 'relatedCaseStudyLink', type: 'text' },
       ],
     },
     {
@@ -45,6 +76,8 @@ const ServicesGridBlock: Block = {
         { name: 'link', type: 'text' },
       ],
     },
+    { name: 'legacyCtaLabel', type: 'text', localized: true },
+    { name: 'legacyCtaHref', type: 'text' },
   ],
 };
 

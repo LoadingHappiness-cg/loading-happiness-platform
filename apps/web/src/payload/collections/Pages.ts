@@ -1,5 +1,5 @@
 
-import type { CollectionConfig } from 'payload/types';
+import type { CollectionConfig } from 'payload';
 import HeroBlock from '../blocks/Hero.ts';
 import TrustPartnersBlock from '../blocks/TrustPartners.ts';
 import PillarsBlock from '../blocks/Pillars.ts';
@@ -27,6 +27,9 @@ import TwoColumnListBlock from '../blocks/TwoColumnList.ts';
 import BulletsWithProofBlock from '../blocks/BulletsWithProof.ts';
 import LogoCloudBlock from '../blocks/LogoCloud.ts';
 import TeamIntroBlock from '../blocks/TeamIntro.ts';
+import MissionVisionValuesBlock from '../blocks/MissionVisionValues.ts';
+import TimelineBlock from '../blocks/Timeline.ts';
+import SocialResponsibilityBlock from '../blocks/SocialResponsibility.ts';
 import { serviceTemplatePresets } from '../serviceTemplates.ts';
 
 const Pages: CollectionConfig = {
@@ -106,6 +109,9 @@ const Pages: CollectionConfig = {
         BulletsWithProofBlock,
         LogoCloudBlock,
         TeamIntroBlock,
+        MissionVisionValuesBlock,
+        TimelineBlock,
+        SocialResponsibilityBlock,
       ],
     },
     {
@@ -128,7 +134,7 @@ const Pages: CollectionConfig = {
       name: 'serviceTemplateData',
       type: 'group',
       admin: {
-        condition: (data) => Boolean(data?.serviceTemplate),
+        condition: (data: any) => Boolean(data?.serviceTemplate),
       },
       fields: [
         {
@@ -338,20 +344,74 @@ const Pages: CollectionConfig = {
     {
       name: 'seo',
       type: 'group',
+      label: 'SEO & Metadata',
       fields: [
-        { name: 'title', type: 'text', localized: true },
-        { name: 'description', type: 'textarea', localized: true },
-        { name: 'image', type: 'upload', relationTo: 'media' },
+        {
+          name: 'title',
+          type: 'text',
+          localized: true,
+          admin: { description: 'Meta title (idealmente <= 60 caracteres)' },
+        },
+        {
+          name: 'description',
+          type: 'textarea',
+          localized: true,
+          admin: { description: 'Meta description (140-160 caracteres)' },
+        },
+        {
+          name: 'canonicalUrl',
+          type: 'text',
+          admin: { description: 'URL canónico se for diferente do slug' },
+        },
+        {
+          name: 'indexable',
+          type: 'checkbox',
+          defaultValue: true,
+          admin: { description: 'Permitir que motores de busca indexem esta página' },
+        },
+        {
+          name: 'openGraph',
+          type: 'group',
+          fields: [
+            { name: 'ogTitle', type: 'text', localized: true },
+            { name: 'ogDescription', type: 'textarea', localized: true },
+            { name: 'ogImage', type: 'upload', relationTo: 'media' },
+          ],
+        },
+        {
+          name: 'schemaOrg',
+          type: 'code',
+          admin: {
+            language: 'json',
+            description: 'Custom JSON-LD Schema (AboutPage, Organization, etc.)',
+          },
+        },
+        {
+          name: 'featuredImage',
+          type: 'upload',
+          relationTo: 'media',
+        },
+        {
+          name: 'lastReviewed',
+          type: 'date',
+          admin: { position: 'sidebar' },
+        },
+        {
+          name: 'author',
+          type: 'text',
+          defaultValue: 'Loading Happiness',
+          admin: { position: 'sidebar' },
+        },
       ],
     },
   ],
   hooks: {
     beforeValidate: [
-      ({ data, originalDoc, operation }) => {
+      ({ data, originalDoc, operation }: any) => {
         if (!data?.serviceTemplate) {
           return data;
         }
-        const preset = serviceTemplatePresets?.[data.serviceTemplate];
+        const preset = (serviceTemplatePresets as any)?.[data.serviceTemplate];
         if (!preset) {
           return data;
         }

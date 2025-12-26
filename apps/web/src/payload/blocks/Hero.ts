@@ -13,11 +13,28 @@ const HeroBlock: Block = {
   },
   fields: [
     {
+      name: 'enabled',
+      type: 'checkbox',
+      defaultValue: true,
+    },
+    {
       name: 'sectionId',
       type: 'text',
       admin: {
         description: 'Optional anchor ID for in-page links (e.g., "hero").',
       },
+    },
+    {
+      name: 'anchorId',
+      type: 'text',
+      admin: {
+        description: 'Optional anchor ID for in-page links (briefing alias).',
+      },
+    },
+    {
+      name: 'eyebrow',
+      type: 'text',
+      localized: true,
     },
     {
       name: 'variant',
@@ -33,9 +50,19 @@ const HeroBlock: Block = {
       ],
     },
     {
+      name: 'h1Title',
+      type: 'text',
+      localized: true,
+    },
+    {
       name: 'heading',
       type: 'text',
       required: true,
+      localized: true,
+    },
+    {
+      name: 'subheadline',
+      type: 'textarea',
       localized: true,
     },
     {
@@ -50,6 +77,7 @@ const HeroBlock: Block = {
       fields: [
         { name: 'label', type: 'text', required: true, localized: true },
         { name: 'link', type: 'text', required: true },
+        { name: 'trackingId', type: 'text' },
       ],
     },
     {
@@ -78,6 +106,12 @@ const HeroBlock: Block = {
     },
     {
       name: 'image',
+      type: 'upload',
+      relationTo: 'media',
+      required: false,
+    },
+    {
+      name: 'heroImage',
       type: 'upload',
       relationTo: 'media',
       required: false,
@@ -112,8 +146,35 @@ const HeroBlock: Block = {
         useAsTitle: 'text',
       },
       fields: [
-        { name: 'text', type: 'text', required: true, localized: true }
+        { name: 'text', type: 'text', localized: true },
+        { name: 'label', type: 'text', localized: true },
+        { name: 'icon', type: 'text' },
       ],
+    },
+    {
+      name: 'quickFacts',
+      type: 'array',
+      labels: {
+        singular: 'Fact',
+        plural: 'Facts',
+      },
+      admin: {
+        useAsTitle: 'label',
+      },
+      fields: [
+        { name: 'label', type: 'text', required: true, localized: true },
+        { name: 'value', type: 'text', required: true, localized: true },
+      ],
+    },
+    {
+      name: 'trustLine',
+      type: 'text',
+      localized: true,
+    },
+    {
+      name: 'keywordsInline',
+      type: 'text',
+      localized: true,
     },
     {
       name: 'alignment',

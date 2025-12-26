@@ -8,6 +8,7 @@ interface PageProps {
 }
 
 export default async function PayloadPage({ params }: PageProps) {
+  const { slug } = await params;
   const payload = await getPayloadClient();
   const locale = await getLocale();
   const localePrefix = `/${locale}`;
@@ -15,7 +16,7 @@ export default async function PayloadPage({ params }: PageProps) {
     collection: 'pages',
     where: {
       and: [
-        { slug: { equals: params.slug } },
+        { slug: { equals: slug } },
         { status: { equals: 'published' } },
       ],
     },

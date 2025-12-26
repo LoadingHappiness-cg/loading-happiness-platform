@@ -18,6 +18,11 @@
       "static/css/app/(payload)/admin/[[...segments]]/page.css",
       "static/chunks/app/(payload)/admin/[[...segments]]/page.js"
     ],
+    "/(payload)/auth/entra/status/route": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/(payload)/auth/entra/status/route.js"
+    ],
     "/(payload)/api/[[...slug]]/route": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
@@ -34,15 +39,10 @@
       "static/chunks/main-app.js",
       "static/chunks/app/(site)/page.js"
     ],
-    "/(site)/[slug]/page": [
+    "/_not-found/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/(site)/[slug]/page.js"
-    ],
-    "/(site)/news/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/(site)/news/page.js"
+      "static/chunks/app/_not-found/page.js"
     ]
   }
 }

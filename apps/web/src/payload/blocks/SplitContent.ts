@@ -9,6 +9,11 @@ const SplitContentBlock: Block = {
   },
   fields: [
     {
+      name: 'enabled',
+      type: 'checkbox',
+      defaultValue: true,
+    },
+    {
       name: 'sectionId',
       type: 'text',
       admin: {
@@ -16,9 +21,26 @@ const SplitContentBlock: Block = {
       },
     },
     {
+      name: 'anchorId',
+      type: 'text',
+      admin: {
+        description: 'Optional anchor ID for in-page links (briefing alias).',
+      },
+    },
+    {
       name: 'title',
       type: 'text',
       required: true,
+      localized: true,
+    },
+    {
+      name: 'sectionTitle',
+      type: 'text',
+      localized: true,
+    },
+    {
+      name: 'bodyRichText',
+      type: 'textarea',
       localized: true,
     },
     {
@@ -41,11 +63,24 @@ const SplitContentBlock: Block = {
         { name: 'link', type: 'text' },
       ],
     },
+    { name: 'legacyCtaLabel', type: 'text', localized: true },
+    { name: 'legacyCtaHref', type: 'text' },
+    { name: 'secondaryLinkLabel', type: 'text', localized: true },
+    { name: 'secondaryLinkHref', type: 'text' },
     {
       name: 'image',
       type: 'upload',
       relationTo: 'media',
       required: true,
+    },
+    {
+      name: 'layout',
+      type: 'select',
+      defaultValue: 'imageRight',
+      options: [
+        { label: 'Image Right', value: 'imageRight' },
+        { label: 'Image Left', value: 'imageLeft' },
+      ],
     },
     {
       name: 'reverse',

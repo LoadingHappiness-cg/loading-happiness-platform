@@ -9,10 +9,22 @@ const ImpactTeaserBlock: Block = {
   },
   fields: [
     {
+      name: 'enabled',
+      type: 'checkbox',
+      defaultValue: true,
+    },
+    {
       name: 'sectionId',
       type: 'text',
       admin: {
         description: 'Optional anchor ID for in-page links (e.g., "impact").',
+      },
+    },
+    {
+      name: 'anchorId',
+      type: 'text',
+      admin: {
+        description: 'Optional anchor ID for in-page links (briefing alias).',
       },
     },
     {
@@ -22,9 +34,28 @@ const ImpactTeaserBlock: Block = {
       localized: true,
     },
     {
+      name: 'sectionTitle',
+      type: 'text',
+      localized: true,
+    },
+    {
       name: 'content',
       type: 'textarea',
       required: true,
+      localized: true,
+    },
+    {
+      name: 'metrics',
+      type: 'array',
+      fields: [
+        { name: 'value', type: 'text', required: true, localized: true },
+        { name: 'label', type: 'text', required: true, localized: true },
+        { name: 'note', type: 'text', localized: true },
+      ],
+    },
+    {
+      name: 'miniCase',
+      type: 'textarea',
       localized: true,
     },
     {
@@ -35,6 +66,8 @@ const ImpactTeaserBlock: Block = {
         { name: 'link', type: 'text', required: true },
       ],
     },
+    { name: 'legacyCtaLabel', type: 'text', localized: true },
+    { name: 'legacyCtaHref', type: 'text' },
     {
       name: 'image',
       type: 'upload',

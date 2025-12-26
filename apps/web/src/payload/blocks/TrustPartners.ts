@@ -9,6 +9,11 @@ const TrustPartnersBlock: Block = {
   },
   fields: [
     {
+      name: 'enabled',
+      type: 'checkbox',
+      defaultValue: true,
+    },
+    {
       name: 'sectionId',
       type: 'text',
       admin: {
@@ -16,10 +21,32 @@ const TrustPartnersBlock: Block = {
       },
     },
     {
+      name: 'anchorId',
+      type: 'text',
+      admin: {
+        description: 'Optional anchor ID for in-page links (briefing alias).',
+      },
+    },
+    {
+      name: 'sectionTitle',
+      type: 'text',
+      localized: true,
+    },
+    {
       name: 'text',
       type: 'text',
       label: 'Section Text',
       defaultValue: 'Trusted by teams that value stability and clarity',
+      localized: true,
+    },
+    {
+      name: 'trustCopy',
+      type: 'text',
+      localized: true,
+    },
+    {
+      name: 'complianceNotes',
+      type: 'text',
       localized: true,
     },
     {
@@ -34,9 +61,18 @@ const TrustPartnersBlock: Block = {
           required: true,
         },
         {
+          name: 'name',
+          type: 'text',
+          localized: true,
+        },
+        {
           name: 'alt',
           type: 'text',
           localized: true,
+        },
+        {
+          name: 'url',
+          type: 'text',
         },
       ],
     },

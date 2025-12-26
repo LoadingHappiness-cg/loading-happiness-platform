@@ -9,6 +9,11 @@ const FeatureGridBlock: Block = {
   },
   fields: [
     {
+      name: 'enabled',
+      type: 'checkbox',
+      defaultValue: true,
+    },
+    {
       name: 'sectionId',
       type: 'text',
       admin: {
@@ -16,7 +21,19 @@ const FeatureGridBlock: Block = {
       },
     },
     {
+      name: 'anchorId',
+      type: 'text',
+      admin: {
+        description: 'Optional anchor ID for in-page links (briefing alias).',
+      },
+    },
+    {
       name: 'title',
+      type: 'text',
+      localized: true,
+    },
+    {
+      name: 'sectionTitle',
       type: 'text',
       localized: true,
     },
@@ -35,6 +52,8 @@ const FeatureGridBlock: Block = {
         { name: 'title', type: 'text', required: true, localized: true },
         { name: 'content', type: 'textarea', required: true, localized: true },
         { name: 'icon', type: 'text', required: true },
+        { name: 'linkLabel', type: 'text', localized: true },
+        { name: 'linkHref', type: 'text' },
       ],
     },
   ],

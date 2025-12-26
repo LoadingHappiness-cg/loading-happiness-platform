@@ -10,6 +10,7 @@
     "build": "npm --prefix apps/web run build",
     "start": "npm --prefix apps/web run start",
     "lint": "npm --prefix apps/web run lint",
-    "payload": "npm --prefix apps/web run payload"
+    "payload": "npm --prefix apps/web run payload",
+    "seed:about": "npm --prefix apps/web run seed:about"
   }
 }
