@@ -4,10 +4,11 @@ import PageBlocks from '../../../components/PageBlocks';
 import { getLocale } from '@/lib/locale';
 
 interface PageProps {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
 export default async function ServiceDetailPage({ params }: PageProps) {
+  const { slug } = await params;
   const payload = await getPayloadClient();
   const locale = await getLocale();
   const localePrefix = `/${locale}`;
@@ -15,7 +16,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
     collection: 'pages',
     where: {
       and: [
-        { slug: { equals: `services/${params.slug}` } },
+        { slug: { equals: `services/${slug}` } },
         { status: { equals: 'published' } },
       ],
     },

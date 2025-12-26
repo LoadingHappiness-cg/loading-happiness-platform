@@ -4,7 +4,7 @@ import PageBlocks from '../../components/PageBlocks';
 import { getLocale } from '@/lib/locale';
 
 interface PageProps {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
 export default async function PayloadPage({ params }: PageProps) {

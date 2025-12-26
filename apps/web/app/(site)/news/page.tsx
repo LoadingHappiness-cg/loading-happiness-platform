@@ -6,16 +6,16 @@ import { Content as ContentType } from '@/payload-types';
 import { getLocale, withLocale } from '@/lib/locale';
 
 interface PageProps {
-  searchParams: {
+  searchParams: Promise<{
     q?: string;
     type?: string;
     tags?: string;
     page?: string;
-  };
+  }>;
 }
 
 export default async function NewsPage({ searchParams }: PageProps) {
-  const { q, type, tags: tagSlugs, page } = searchParams;
+  const { q, type, tags: tagSlugs, page } = await searchParams;
   const payload = await getPayloadClient();
   const currentPage = parseInt(page || '1');
   const limit = 12;
@@ -70,18 +70,18 @@ export default async function NewsPage({ searchParams }: PageProps) {
     <div className="max-w-7xl mx-auto px-4 py-12">
       <header className="mb-12">
         <h1 className="text-5xl font-extrabold text-gray-900 mb-6 tracking-tight">News & Insights</h1>
-        
+
         {/* Filters */}
         <div className="flex flex-wrap gap-4 items-center bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
           <form className="flex-1 min-w-[300px]" action={withLocale('/news', localePrefix)}>
-            <input 
+            <input
               name="q"
               defaultValue={q}
               placeholder="Search articles..."
               className="w-full px-5 py-3 rounded-xl border-gray-200 bg-gray-50 text-sm focus:ring-2 focus:ring-primary/20 outline-none"
             />
           </form>
-          
+
           <div className="flex gap-2">
             {['Article', 'Opinion', 'Video', 'Guide'].map((t) => (
               <Link
@@ -103,8 +103,8 @@ export default async function NewsPage({ searchParams }: PageProps) {
           <article key={post.id} className="group flex flex-col bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all border border-gray-100">
             {post.featuredImage && typeof post.featuredImage !== 'string' && (
               <div className="aspect-[16/9] overflow-hidden bg-gray-100">
-                <img 
-                  src={(post.featuredImage as any).url} 
+                <img
+                  src={(post.featuredImage as any).url}
                   alt={post.title}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
@@ -126,7 +126,7 @@ export default async function NewsPage({ searchParams }: PageProps) {
               <p className="text-gray-600 leading-relaxed mb-6 line-clamp-2">
                 {post.excerpt}
               </p>
-              
+
               <div className="mt-auto flex flex-wrap gap-2 pt-6 border-t border-gray-50">
                 {post.tags?.map((tag: any) => (
                   <Link

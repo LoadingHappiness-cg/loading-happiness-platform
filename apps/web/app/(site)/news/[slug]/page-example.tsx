@@ -14,11 +14,12 @@ import BlogPost from '@/app/components/BlogPost';
 import PageBlocks from '@/app/components/PageBlocks';
 
 type Props = {
-    params: { slug: string };
+    params: Promise<{ slug: string }>;
 };
 
 // Generate metadata for SEO
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
+    const { slug } = await params;
     const payload = await getPayloadClient();
     const locale = await getLocale();
 
@@ -26,7 +27,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         collection: 'content',
         where: {
             and: [
-                { slug: { equals: params.slug } },
+                { slug: { equals: slug } },
                 { status: { equals: 'published' } },
             ],
         },
@@ -45,6 +46,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function BlogPostPage({ params }: Props) {
+    const { slug } = await params;
     const payload = await getPayloadClient();
     const locale = await getLocale();
     const localePrefix = `/${locale}`;
@@ -54,7 +56,7 @@ export default async function BlogPostPage({ params }: Props) {
         collection: 'content',
         where: {
             and: [
-                { slug: { equals: params.slug } },
+                { slug: { equals: slug } },
                 { status: { equals: 'published' } },
             ],
         },

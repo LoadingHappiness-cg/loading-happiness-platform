@@ -10,7 +10,8 @@ export const getLocale = async (): Promise<Locale> => {
   if (headerLocale && SUPPORTED.has(headerLocale)) {
     return headerLocale as Locale;
   }
-  const cookieLocale = cookies().get(LOCALE_COOKIE)?.value;
+  const cookieStore = await cookies();
+  const cookieLocale = cookieStore.get(LOCALE_COOKIE)?.value;
   if (cookieLocale && SUPPORTED.has(cookieLocale)) {
     return cookieLocale as Locale;
   }

@@ -7,13 +7,13 @@ import { Content as ContentType } from '@/payload-types';
 import { getLocale, withLocale } from '@/lib/locale';
 
 interface TagPageProps {
-  params: { slug: string };
-  searchParams: { page?: string };
+  params: Promise<{ slug: string }>;
+  searchParams: Promise<{ page?: string }>;
 }
 
 export default async function TagHubPage({ params, searchParams }: TagPageProps) {
-  const { slug } = params;
-  const { page } = searchParams;
+  const { slug } = await params;
+  const { page } = await searchParams;
   const payload = await getPayloadClient();
   const currentPage = parseInt(page || '1');
   const limit = 12;
@@ -56,8 +56,8 @@ export default async function TagHubPage({ params, searchParams }: TagPageProps)
           ← Back to News
         </Link>
         <div className="flex items-center gap-4 mb-4">
-          <div 
-            className="w-4 h-4 rounded-full" 
+          <div
+            className="w-4 h-4 rounded-full"
             style={{ backgroundColor: tag.color || '#3b82f6' }}
           ></div>
           <h1 className="text-6xl font-black text-gray-900 tracking-tighter capitalize">
@@ -103,7 +103,7 @@ export default async function TagHubPage({ params, searchParams }: TagPageProps)
       {/* Pagination */}
       {posts.totalPages > 1 && (
         <div className="mt-16 flex justify-center gap-4">
-           {/* Pagination logic as implemented in /news */}
+          {/* Pagination logic as implemented in /news */}
         </div>
       )}
     </div>
