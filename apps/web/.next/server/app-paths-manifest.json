@@ -1,7 +1,8 @@
 {
   "/(payload)/api/[[...slug]]/route": "app/(payload)/api/[[...slug]]/route.js",
-  "/_not-found/page": "app/_not-found/page.js",
+  "/(payload)/auth/entra/status/route": "app/(payload)/auth/entra/status/route.js",
   "/(payload)/admin/[[...segments]]/page": "app/(payload)/admin/[[...segments]]/page.js",
+  "/(site)/news/page": "app/(site)/news/page.js",
   "/(site)/[slug]/page": "app/(site)/[slug]/page.js",
   "/(site)/page": "app/(site)/page.js"
 }

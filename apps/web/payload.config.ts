@@ -1,6 +1,7 @@
 
 import { buildConfig } from 'payload';
 import { postgresAdapter } from '@payloadcms/db-postgres';
+import sharp from 'sharp';
 import path from 'path';
 import Pages from './src/payload/collections/Pages.ts';
 import ContactSubmissions from './src/payload/collections/ContactSubmissions.ts';
@@ -32,6 +33,7 @@ export default buildConfig({
       connectionString: databaseUri,
     },
   }),
+  sharp,
   localization: {
     locales: ['pt', 'en'],
     defaultLocale: 'pt',

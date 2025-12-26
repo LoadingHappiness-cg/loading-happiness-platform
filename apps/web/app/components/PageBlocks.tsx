@@ -380,16 +380,16 @@ export default function PageBlocks({ blocks, localePrefix }: { blocks: any[]; lo
                           )}
                           <h3 className="text-xl font-bold text-gray-900 mb-3">{service.title}</h3>
                           <p className="text-gray-600">{service.description}</p>
-                          {service.bulletPoints?.length > 0 && (
-                            <ul className="mt-4 space-y-2 text-sm text-gray-600">
-                              {service.bulletPoints.map((point: any, pointIndex: number) => (
-                                <li key={pointIndex} className="flex gap-2">
-                                  <span className="text-brand-ocean">•</span>
-                                  {point.text || point}
-                                </li>
-                              ))}
-                            </ul>
-                          )}
+                        {service.bulletPoints?.length > 0 && (
+                          <ul className="mt-4 space-y-2 text-sm text-gray-600">
+                            {service.bulletPoints.map((point: any, pointIndex: number) => (
+                              <li key={pointIndex} className="flex gap-2">
+                                <span className="text-brand-ocean">•</span>
+                                {typeof point?.text === 'string' ? point.text : typeof point === 'string' ? point : null}
+                              </li>
+                            ))}
+                          </ul>
+                        )}
                           {(service.ctaHref || service.link) && (
                             <Link
                               href={localizeHref(service.ctaHref || service.link)}
@@ -431,7 +431,11 @@ export default function PageBlocks({ blocks, localePrefix }: { blocks: any[]; lo
                                 <ul className="text-sm text-gray-500 mt-2 space-y-1">
                                   {step.deliverables.map((deliverable: any, deliverableIndex: number) => (
                                     <li key={deliverableIndex}>
-                                      {deliverable.text || deliverable}
+                                      {typeof deliverable?.text === 'string'
+                                        ? deliverable.text
+                                        : typeof deliverable === 'string'
+                                          ? deliverable
+                                          : null}
                                     </li>
                                   ))}
                                 </ul>
@@ -656,7 +660,7 @@ export default function PageBlocks({ blocks, localePrefix }: { blocks: any[]; lo
                         {block.items.map((item: any, itemIndex: number) => (
                           <li key={itemIndex} className="flex items-center gap-3 text-gray-700 font-medium">
                             <span className="text-highlight">✓</span>
-                            {item.item || item}
+                            {typeof item?.item === 'string' ? item.item : typeof item === 'string' ? item : null}
                           </li>
                         ))}
                       </ul>
