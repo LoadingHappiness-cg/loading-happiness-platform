@@ -180,8 +180,8 @@ export default async function HomePage() {
                       {post.tags?.map((tag: any) => (
                         <span
                           key={tag.id}
-                          className="text-[10px] font-bold text-gray-500 px-2 py-1 rounded bg-gray-50"
-                          style={tag.color ? { borderLeft: `3px solid ${tag.color}` } : {}}
+                          className="text-[10px] font-bold text-gray-500 px-2 py-1 rounded bg-gray-50 tag-color-border"
+                          style={{ '--tag-color': tag.color } as React.CSSProperties}
                         >
                           #{tag.name}
                         </span>

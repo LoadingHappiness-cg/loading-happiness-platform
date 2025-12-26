@@ -132,8 +132,8 @@ export default async function NewsPage({ searchParams }: PageProps) {
                   <Link
                     key={tag.id}
                     href={withLocale(`/news/tags/${tag.slug}`, localePrefix)}
-                    className="text-[10px] font-bold text-gray-500 hover:text-primaryDark transition-colors px-2 py-1 bg-gray-50 rounded"
-                    style={tag.color ? { borderLeft: `3px solid ${tag.color}` } : {}}
+                    className="text-[10px] font-bold text-gray-500 hover:text-primaryDark transition-colors px-2 py-1 bg-gray-50 rounded tag-color-border"
+                    style={tag.color ? { '--tag-color': tag.color } as React.CSSProperties : {}}
                   >
                     #{tag.name}
                   </Link>

@@ -12,6 +12,17 @@
   --brand-indigo: 55 75 144;
   --brand-mint: 58 218 154;
   --brand-white: 255 255 255;
+  --tag-color: #3b82f6;
+}
+
+.tag-color-bg {
+  background-color: var(--tag-color);
+}
+
+.tag-color-border {
+  border-left-width: 3px;
+  border-left-color: var(--tag-color);
+  border-left-style: solid;
 }
 
 body {

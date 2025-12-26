@@ -1478,8 +1478,20 @@ video {
 .pb-6 {
   padding-bottom: 1.5rem;
 }
+.pl-0 {
+  padding-left: 0px;
+}
 .pl-12 {
   padding-left: 3rem;
+}
+.pl-16 {
+  padding-left: 4rem;
+}
+.pl-4 {
+  padding-left: 1rem;
+}
+.pl-8 {
+  padding-left: 2rem;
 }
 .pt-4 {
   padding-top: 1rem;
@@ -1842,6 +1854,17 @@ video {
   --brand-indigo: 55 75 144;
   --brand-mint: 58 218 154;
   --brand-white: 255 255 255;
+  --tag-color: #3b82f6;
+}
+
+.tag-color-bg {
+  background-color: var(--tag-color);
+}
+
+.tag-color-border {
+  border-left-width: 3px;
+  border-left-color: var(--tag-color);
+  border-left-style: solid;
 }
 
 body {
@@ -2877,7 +2900,6 @@ html[data-theme='light'] .skip-to-content:focus {
     line-height: 1;
   }
 }
-
 /*!**********************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[10].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[10].use[3]!./node_modules/react-image-crop/dist/ReactCrop.css ***!
   \**********************************************************************************************************************************************************************************************************************************************************************************************/

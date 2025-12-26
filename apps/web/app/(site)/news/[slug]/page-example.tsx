@@ -228,16 +228,24 @@ export default async function BlogPostPage({ params }: Props) {
                             </h2>
                             <nav>
                                 <ul className="space-y-2">
-                                    {post.tableOfContents.map((item: any, index: number) => (
-                                        <li key={index} style={{ paddingLeft: `${(item.level - 2) * 1}rem` }}>
-                                            <a
-                                                href={`#${item.id}`}
-                                                className="text-gray-700 hover:text-primary transition-colors"
-                                            >
-                                                {item.title}
-                                            </a>
-                                        </li>
-                                    ))}
+                                    {post.tableOfContents.map((item: any, index: number) => {
+                                        const depth = Math.max(0, item.level - 2);
+                                        const paddingClasses = [
+                                            'pl-0', 'pl-4', 'pl-8', 'pl-12', 'pl-16'
+                                        ];
+                                        const paddingClass = paddingClasses[depth] || 'pl-16';
+
+                                        return (
+                                            <li key={index} className={paddingClass}>
+                                                <a
+                                                    href={`#${item.id}`}
+                                                    className="text-gray-700 hover:text-primary transition-colors"
+                                                >
+                                                    {item.title}
+                                                </a>
+                                            </li>
+                                        );
+                                    })}
                                 </ul>
                             </nav>
                         </div>
