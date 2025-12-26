@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { getLocale, getLocalePrefix, withLocale } from '@/lib/locale';
 import { getPayloadClient } from '@/lib/payload';
 import TopBar from './TopBar';
+import { HeaderBg } from './HeaderBg';
 
 const fallbackHeaderLinks = [
   {
@@ -41,7 +42,7 @@ export default async function SiteNav() {
   const payload = await getPayloadClient();
   let settings: any = null;
   try {
-    settings = await payload.findGlobal({
+    settings = await (payload as any).findGlobal({
       slug: 'site-settings',
       locale,
       depth: 1,
@@ -53,7 +54,8 @@ export default async function SiteNav() {
   const headerLinks = header.links?.length ? header.links : fallbackHeaderLinks;
   const headerCta = header.cta || { label: 'Book a Call', href: '/contact' };
   return (
-    <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-200">
+    <nav className="sticky top-0 z-50 border-b border-gray-200/50 bg-white/5 backdrop-blur-2xl shadow-sm">
+      <HeaderBg />
       <TopBar
         localePrefix={localePrefix}
         enabled={header.topBar?.enabled}
@@ -63,7 +65,7 @@ export default async function SiteNav() {
         linkHref={header.topBar?.linkHref}
       />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-between h-20">
           <Link href={localePrefix} className="flex items-center gap-2 text-ink">
             {header.logo && typeof header.logo !== 'string' ? (
               <img src={header.logo.url} alt={header.logoAlt || 'Loading Happiness'} className="h-8 w-auto" />

@@ -12,7 +12,9 @@
     "payload:importmap": "payload generate:importmap",
     "seed:admin": "node --import tsx scripts/create-admin.ts",
     "seed:admin:replace": "node --import tsx scripts/replace-admin.ts",
+    "seed:about-service": "node --import tsx scripts/seed-about-service.ts",
     "seed:contact": "node --import tsx scripts/seed-contact-page.ts",
+    "seed:services": "node --import tsx scripts/seed-services-page.ts",
     "seed:home": "node --import tsx scripts/seed-home.ts",
     "seed:site": "node --import tsx scripts/seed-site.ts",
     "seed:site-settings": "node --import tsx scripts/seed-site-settings.ts",
@@ -27,6 +29,7 @@
     "@payloadcms/ui": "^3.69.0",
     "next": "15.4.10",
     "payload": "^3.69.0",
+    "prop-types": "^15.8.1",
     "react": "19.2.1",
     "react-dom": "19.2.1",
     "sharp": "^0.34.5"
@@ -36,6 +39,8 @@
     "@types/react": "^18.2.66",
     "@types/react-dom": "^18.2.22",
     "autoprefixer": "^10.4.23",
+    "eslint": "^9.39.2",
+    "eslint-config-next": "^16.1.1",
     "postcss": "^8.5.6",
     "tailwindcss": "^3.4.17",
     "typescript": "~5.8.2"

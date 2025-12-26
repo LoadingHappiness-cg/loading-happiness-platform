@@ -1,78 +1,58 @@
 {
   "node": {
-    "404d2790bd01dbf41869eb11fd5b737583537dfb1d": {
+    "40744ecd828a8bb1aea0c83a6d19f9c76376fdda92": {
       "workers": {
+        "app/_not-found/page": {
+          "moduleId": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2FUsers%2Fcarlosgavela%2FProjectos%2Floading-happiness-platform%2Fapps%2Fweb%2Fapp%2Flayout.tsx%22%2C%5B%7B%22id%22%3A%2240744ecd828a8bb1aea0c83a6d19f9c76376fdda92%22%2C%22exportedName%22%3A%22%24%24RSC_SERVER_ACTION_0%22%7D%5D%5D%2C%5B%22%2FUsers%2Fcarlosgavela%2FProjectos%2Floading-happiness-platform%2Fapps%2Fweb%2Fnode_modules%2F%40payloadcms%2Fnext%2Fdist%2Flayouts%2FRoot%2Findex.js%22%2C%5B%7B%22id%22%3A%226018b1fe167329137bcd07e2dd5d664c7fc11d04ab%22%2C%22exportedName%22%3A%22%24%24RSC_SERVER_ACTION_0%22%7D%5D%5D%5D&__client_imported__=!",
+          "async": true
+        },
         "app/(site)/page": {
-          "moduleId": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2FUsers%2Fcarlosgavela%2FProjectos%2Floading-happiness-platform%2Fapps%2Fweb%2Fapp%2Flayout.tsx%22%2C%5B%7B%22id%22%3A%22404d2790bd01dbf41869eb11fd5b737583537dfb1d%22%2C%22exportedName%22%3A%22%24%24RSC_SERVER_ACTION_0%22%7D%5D%5D%2C%5B%22%2FUsers%2Fcarlosgavela%2FProjectos%2Floading-happiness-platform%2Fapps%2Fweb%2Fnode_modules%2F%40payloadcms%2Fnext%2Fdist%2Flayouts%2FRoot%2Findex.js%22%2C%5B%7B%22id%22%3A%22600aeae310b1557eb71f0c147e1a705df13675a752%22%2C%22exportedName%22%3A%22%24%24RSC_SERVER_ACTION_0%22%7D%5D%5D%5D&__client_imported__=!",
+          "moduleId": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2FUsers%2Fcarlosgavela%2FProjectos%2Floading-happiness-platform%2Fapps%2Fweb%2Fapp%2Flayout.tsx%22%2C%5B%7B%22id%22%3A%2240744ecd828a8bb1aea0c83a6d19f9c76376fdda92%22%2C%22exportedName%22%3A%22%24%24RSC_SERVER_ACTION_0%22%7D%5D%5D%2C%5B%22%2FUsers%2Fcarlosgavela%2FProjectos%2Floading-happiness-platform%2Fapps%2Fweb%2Fnode_modules%2F%40payloadcms%2Fnext%2Fdist%2Flayouts%2FRoot%2Findex.js%22%2C%5B%7B%22id%22%3A%226018b1fe167329137bcd07e2dd5d664c7fc11d04ab%22%2C%22exportedName%22%3A%22%24%24RSC_SERVER_ACTION_0%22%7D%5D%5D%5D&__client_imported__=!",
           "async": true
         },
         "app/(site)/[slug]/page": {
-          "moduleId": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2FUsers%2Fcarlosgavela%2FProjectos%2Floading-happiness-platform%2Fapps%2Fweb%2Fapp%2Flayout.tsx%22%2C%5B%7B%22id%22%3A%22404d2790bd01dbf41869eb11fd5b737583537dfb1d%22%2C%22exportedName%22%3A%22%24%24RSC_SERVER_ACTION_0%22%7D%5D%5D%2C%5B%22%2FUsers%2Fcarlosgavela%2FProjectos%2Floading-happiness-platform%2Fapps%2Fweb%2Fnode_modules%2F%40payloadcms%2Fnext%2Fdist%2Flayouts%2FRoot%2Findex.js%22%2C%5B%7B%22id%22%3A%22600aeae310b1557eb71f0c147e1a705df13675a752%22%2C%22exportedName%22%3A%22%24%24RSC_SERVER_ACTION_0%22%7D%5D%5D%5D&__client_imported__=!",
-          "async": true
-        },
-        "app/(site)/services/[slug]/page": {
-          "moduleId": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2FUsers%2Fcarlosgavela%2FProjectos%2Floading-happiness-platform%2Fapps%2Fweb%2Fapp%2Flayout.tsx%22%2C%5B%7B%22id%22%3A%22404d2790bd01dbf41869eb11fd5b737583537dfb1d%22%2C%22exportedName%22%3A%22%24%24RSC_SERVER_ACTION_0%22%7D%5D%5D%2C%5B%22%2FUsers%2Fcarlosgavela%2FProjectos%2Floading-happiness-platform%2Fapps%2Fweb%2Fnode_modules%2F%40payloadcms%2Fnext%2Fdist%2Flayouts%2FRoot%2Findex.js%22%2C%5B%7B%22id%22%3A%22600aeae310b1557eb71f0c147e1a705df13675a752%22%2C%22exportedName%22%3A%22%24%24RSC_SERVER_ACTION_0%22%7D%5D%5D%5D&__client_imported__=!",
-          "async": true
-        },
-        "app/_not-found/page": {
-          "moduleId": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2FUsers%2Fcarlosgavela%2FProjectos%2Floading-happiness-platform%2Fapps%2Fweb%2Fapp%2Flayout.tsx%22%2C%5B%7B%22id%22%3A%22404d2790bd01dbf41869eb11fd5b737583537dfb1d%22%2C%22exportedName%22%3A%22%24%24RSC_SERVER_ACTION_0%22%7D%5D%5D%2C%5B%22%2FUsers%2Fcarlosgavela%2FProjectos%2Floading-happiness-platform%2Fapps%2Fweb%2Fnode_modules%2F%40payloadcms%2Fnext%2Fdist%2Flayouts%2FRoot%2Findex.js%22%2C%5B%7B%22id%22%3A%22600aeae310b1557eb71f0c147e1a705df13675a752%22%2C%22exportedName%22%3A%22%24%24RSC_SERVER_ACTION_0%22%7D%5D%5D%5D&__client_imported__=!",
+          "moduleId": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2FUsers%2Fcarlosgavela%2FProjectos%2Floading-happiness-platform%2Fapps%2Fweb%2Fapp%2Flayout.tsx%22%2C%5B%7B%22id%22%3A%2240744ecd828a8bb1aea0c83a6d19f9c76376fdda92%22%2C%22exportedName%22%3A%22%24%24RSC_SERVER_ACTION_0%22%7D%5D%5D%2C%5B%22%2FUsers%2Fcarlosgavela%2FProjectos%2Floading-happiness-platform%2Fapps%2Fweb%2Fnode_modules%2F%40payloadcms%2Fnext%2Fdist%2Flayouts%2FRoot%2Findex.js%22%2C%5B%7B%22id%22%3A%226018b1fe167329137bcd07e2dd5d664c7fc11d04ab%22%2C%22exportedName%22%3A%22%24%24RSC_SERVER_ACTION_0%22%7D%5D%5D%5D&__client_imported__=!",
           "async": true
         },
         "app/(site)/news/page": {
-          "moduleId": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2FUsers%2Fcarlosgavela%2FProjectos%2Floading-happiness-platform%2Fapps%2Fweb%2Fapp%2Flayout.tsx%22%2C%5B%7B%22id%22%3A%22404d2790bd01dbf41869eb11fd5b737583537dfb1d%22%2C%22exportedName%22%3A%22%24%24RSC_SERVER_ACTION_0%22%7D%5D%5D%2C%5B%22%2FUsers%2Fcarlosgavela%2FProjectos%2Floading-happiness-platform%2Fapps%2Fweb%2Fnode_modules%2F%40payloadcms%2Fnext%2Fdist%2Flayouts%2FRoot%2Findex.js%22%2C%5B%7B%22id%22%3A%22600aeae310b1557eb71f0c147e1a705df13675a752%22%2C%22exportedName%22%3A%22%24%24RSC_SERVER_ACTION_0%22%7D%5D%5D%5D&__client_imported__=!",
-          "async": true
-        },
-        "app/(payload)/admin/[[...segments]]/page": {
-          "moduleId": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2FUsers%2Fcarlosgavela%2FProjectos%2Floading-happiness-platform%2Fapps%2Fweb%2Fapp%2Flayout.tsx%22%2C%5B%7B%22id%22%3A%22404d2790bd01dbf41869eb11fd5b737583537dfb1d%22%2C%22exportedName%22%3A%22%24%24RSC_SERVER_ACTION_0%22%7D%5D%5D%2C%5B%22%2FUsers%2Fcarlosgavela%2FProjectos%2Floading-happiness-platform%2Fapps%2Fweb%2Fnode_modules%2F%40payloadcms%2Fnext%2Fdist%2Flayouts%2FRoot%2Findex.js%22%2C%5B%7B%22id%22%3A%22600aeae310b1557eb71f0c147e1a705df13675a752%22%2C%22exportedName%22%3A%22%24%24RSC_SERVER_ACTION_0%22%7D%5D%5D%5D&__client_imported__=!",
+          "moduleId": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2FUsers%2Fcarlosgavela%2FProjectos%2Floading-happiness-platform%2Fapps%2Fweb%2Fapp%2Flayout.tsx%22%2C%5B%7B%22id%22%3A%2240744ecd828a8bb1aea0c83a6d19f9c76376fdda92%22%2C%22exportedName%22%3A%22%24%24RSC_SERVER_ACTION_0%22%7D%5D%5D%2C%5B%22%2FUsers%2Fcarlosgavela%2FProjectos%2Floading-happiness-platform%2Fapps%2Fweb%2Fnode_modules%2F%40payloadcms%2Fnext%2Fdist%2Flayouts%2FRoot%2Findex.js%22%2C%5B%7B%22id%22%3A%226018b1fe167329137bcd07e2dd5d664c7fc11d04ab%22%2C%22exportedName%22%3A%22%24%24RSC_SERVER_ACTION_0%22%7D%5D%5D%5D&__client_imported__=!",
           "async": true
         }
       },
       "layer": {
+        "app/_not-found/page": "rsc",
         "app/(site)/page": "rsc",
         "app/(site)/[slug]/page": "rsc",
-        "app/(site)/services/[slug]/page": "rsc",
-        "app/_not-found/page": "rsc",
-        "app/(site)/news/page": "rsc",
-        "app/(payload)/admin/[[...segments]]/page": "rsc"
+        "app/(site)/news/page": "rsc"
       }
     },
-    "600aeae310b1557eb71f0c147e1a705df13675a752": {
+    "6018b1fe167329137bcd07e2dd5d664c7fc11d04ab": {
       "workers": {
+        "app/_not-found/page": {
+          "moduleId": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2FUsers%2Fcarlosgavela%2FProjectos%2Floading-happiness-platform%2Fapps%2Fweb%2Fapp%2Flayout.tsx%22%2C%5B%7B%22id%22%3A%2240744ecd828a8bb1aea0c83a6d19f9c76376fdda92%22%2C%22exportedName%22%3A%22%24%24RSC_SERVER_ACTION_0%22%7D%5D%5D%2C%5B%22%2FUsers%2Fcarlosgavela%2FProjectos%2Floading-happiness-platform%2Fapps%2Fweb%2Fnode_modules%2F%40payloadcms%2Fnext%2Fdist%2Flayouts%2FRoot%2Findex.js%22%2C%5B%7B%22id%22%3A%226018b1fe167329137bcd07e2dd5d664c7fc11d04ab%22%2C%22exportedName%22%3A%22%24%24RSC_SERVER_ACTION_0%22%7D%5D%5D%5D&__client_imported__=!",
+          "async": true
+        },
         "app/(site)/page": {
-          "moduleId": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2FUsers%2Fcarlosgavela%2FProjectos%2Floading-happiness-platform%2Fapps%2Fweb%2Fapp%2Flayout.tsx%22%2C%5B%7B%22id%22%3A%22404d2790bd01dbf41869eb11fd5b737583537dfb1d%22%2C%22exportedName%22%3A%22%24%24RSC_SERVER_ACTION_0%22%7D%5D%5D%2C%5B%22%2FUsers%2Fcarlosgavela%2FProjectos%2Floading-happiness-platform%2Fapps%2Fweb%2Fnode_modules%2F%40payloadcms%2Fnext%2Fdist%2Flayouts%2FRoot%2Findex.js%22%2C%5B%7B%22id%22%3A%22600aeae310b1557eb71f0c147e1a705df13675a752%22%2C%22exportedName%22%3A%22%24%24RSC_SERVER_ACTION_0%22%7D%5D%5D%5D&__client_imported__=!",
+          "moduleId": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2FUsers%2Fcarlosgavela%2FProjectos%2Floading-happiness-platform%2Fapps%2Fweb%2Fapp%2Flayout.tsx%22%2C%5B%7B%22id%22%3A%2240744ecd828a8bb1aea0c83a6d19f9c76376fdda92%22%2C%22exportedName%22%3A%22%24%24RSC_SERVER_ACTION_0%22%7D%5D%5D%2C%5B%22%2FUsers%2Fcarlosgavela%2FProjectos%2Floading-happiness-platform%2Fapps%2Fweb%2Fnode_modules%2F%40payloadcms%2Fnext%2Fdist%2Flayouts%2FRoot%2Findex.js%22%2C%5B%7B%22id%22%3A%226018b1fe167329137bcd07e2dd5d664c7fc11d04ab%22%2C%22exportedName%22%3A%22%24%24RSC_SERVER_ACTION_0%22%7D%5D%5D%5D&__client_imported__=!",
           "async": true
         },
         "app/(site)/[slug]/page": {
-          "moduleId": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2FUsers%2Fcarlosgavela%2FProjectos%2Floading-happiness-platform%2Fapps%2Fweb%2Fapp%2Flayout.tsx%22%2C%5B%7B%22id%22%3A%22404d2790bd01dbf41869eb11fd5b737583537dfb1d%22%2C%22exportedName%22%3A%22%24%24RSC_SERVER_ACTION_0%22%7D%5D%5D%2C%5B%22%2FUsers%2Fcarlosgavela%2FProjectos%2Floading-happiness-platform%2Fapps%2Fweb%2Fnode_modules%2F%40payloadcms%2Fnext%2Fdist%2Flayouts%2FRoot%2Findex.js%22%2C%5B%7B%22id%22%3A%22600aeae310b1557eb71f0c147e1a705df13675a752%22%2C%22exportedName%22%3A%22%24%24RSC_SERVER_ACTION_0%22%7D%5D%5D%5D&__client_imported__=!",
-          "async": true
-        },
-        "app/(site)/services/[slug]/page": {
-          "moduleId": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2FUsers%2Fcarlosgavela%2FProjectos%2Floading-happiness-platform%2Fapps%2Fweb%2Fapp%2Flayout.tsx%22%2C%5B%7B%22id%22%3A%22404d2790bd01dbf41869eb11fd5b737583537dfb1d%22%2C%22exportedName%22%3A%22%24%24RSC_SERVER_ACTION_0%22%7D%5D%5D%2C%5B%22%2FUsers%2Fcarlosgavela%2FProjectos%2Floading-happiness-platform%2Fapps%2Fweb%2Fnode_modules%2F%40payloadcms%2Fnext%2Fdist%2Flayouts%2FRoot%2Findex.js%22%2C%5B%7B%22id%22%3A%22600aeae310b1557eb71f0c147e1a705df13675a752%22%2C%22exportedName%22%3A%22%24%24RSC_SERVER_ACTION_0%22%7D%5D%5D%5D&__client_imported__=!",
-          "async": true
-        },
-        "app/_not-found/page": {
-          "moduleId": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2FUsers%2Fcarlosgavela%2FProjectos%2Floading-happiness-platform%2Fapps%2Fweb%2Fapp%2Flayout.tsx%22%2C%5B%7B%22id%22%3A%22404d2790bd01dbf41869eb11fd5b737583537dfb1d%22%2C%22exportedName%22%3A%22%24%24RSC_SERVER_ACTION_0%22%7D%5D%5D%2C%5B%22%2FUsers%2Fcarlosgavela%2FProjectos%2Floading-happiness-platform%2Fapps%2Fweb%2Fnode_modules%2F%40payloadcms%2Fnext%2Fdist%2Flayouts%2FRoot%2Findex.js%22%2C%5B%7B%22id%22%3A%22600aeae310b1557eb71f0c147e1a705df13675a752%22%2C%22exportedName%22%3A%22%24%24RSC_SERVER_ACTION_0%22%7D%5D%5D%5D&__client_imported__=!",
+          "moduleId": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2FUsers%2Fcarlosgavela%2FProjectos%2Floading-happiness-platform%2Fapps%2Fweb%2Fapp%2Flayout.tsx%22%2C%5B%7B%22id%22%3A%2240744ecd828a8bb1aea0c83a6d19f9c76376fdda92%22%2C%22exportedName%22%3A%22%24%24RSC_SERVER_ACTION_0%22%7D%5D%5D%2C%5B%22%2FUsers%2Fcarlosgavela%2FProjectos%2Floading-happiness-platform%2Fapps%2Fweb%2Fnode_modules%2F%40payloadcms%2Fnext%2Fdist%2Flayouts%2FRoot%2Findex.js%22%2C%5B%7B%22id%22%3A%226018b1fe167329137bcd07e2dd5d664c7fc11d04ab%22%2C%22exportedName%22%3A%22%24%24RSC_SERVER_ACTION_0%22%7D%5D%5D%5D&__client_imported__=!",
           "async": true
         },
         "app/(site)/news/page": {
-          "moduleId": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2FUsers%2Fcarlosgavela%2FProjectos%2Floading-happiness-platform%2Fapps%2Fweb%2Fapp%2Flayout.tsx%22%2C%5B%7B%22id%22%3A%22404d2790bd01dbf41869eb11fd5b737583537dfb1d%22%2C%22exportedName%22%3A%22%24%24RSC_SERVER_ACTION_0%22%7D%5D%5D%2C%5B%22%2FUsers%2Fcarlosgavela%2FProjectos%2Floading-happiness-platform%2Fapps%2Fweb%2Fnode_modules%2F%40payloadcms%2Fnext%2Fdist%2Flayouts%2FRoot%2Findex.js%22%2C%5B%7B%22id%22%3A%22600aeae310b1557eb71f0c147e1a705df13675a752%22%2C%22exportedName%22%3A%22%24%24RSC_SERVER_ACTION_0%22%7D%5D%5D%5D&__client_imported__=!",
-          "async": true
-        },
-        "app/(payload)/admin/[[...segments]]/page": {
-          "moduleId": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2FUsers%2Fcarlosgavela%2FProjectos%2Floading-happiness-platform%2Fapps%2Fweb%2Fapp%2Flayout.tsx%22%2C%5B%7B%22id%22%3A%22404d2790bd01dbf41869eb11fd5b737583537dfb1d%22%2C%22exportedName%22%3A%22%24%24RSC_SERVER_ACTION_0%22%7D%5D%5D%2C%5B%22%2FUsers%2Fcarlosgavela%2FProjectos%2Floading-happiness-platform%2Fapps%2Fweb%2Fnode_modules%2F%40payloadcms%2Fnext%2Fdist%2Flayouts%2FRoot%2Findex.js%22%2C%5B%7B%22id%22%3A%22600aeae310b1557eb71f0c147e1a705df13675a752%22%2C%22exportedName%22%3A%22%24%24RSC_SERVER_ACTION_0%22%7D%5D%5D%5D&__client_imported__=!",
+          "moduleId": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2FUsers%2Fcarlosgavela%2FProjectos%2Floading-happiness-platform%2Fapps%2Fweb%2Fapp%2Flayout.tsx%22%2C%5B%7B%22id%22%3A%2240744ecd828a8bb1aea0c83a6d19f9c76376fdda92%22%2C%22exportedName%22%3A%22%24%24RSC_SERVER_ACTION_0%22%7D%5D%5D%2C%5B%22%2FUsers%2Fcarlosgavela%2FProjectos%2Floading-happiness-platform%2Fapps%2Fweb%2Fnode_modules%2F%40payloadcms%2Fnext%2Fdist%2Flayouts%2FRoot%2Findex.js%22%2C%5B%7B%22id%22%3A%226018b1fe167329137bcd07e2dd5d664c7fc11d04ab%22%2C%22exportedName%22%3A%22%24%24RSC_SERVER_ACTION_0%22%7D%5D%5D%5D&__client_imported__=!",
           "async": true
         }
       },
       "layer": {
+        "app/_not-found/page": "rsc",
         "app/(site)/page": "rsc",
         "app/(site)/[slug]/page": "rsc",
-        "app/(site)/services/[slug]/page": "rsc",
-        "app/_not-found/page": "rsc",
-        "app/(site)/news/page": "rsc",
-        "app/(payload)/admin/[[...segments]]/page": "rsc"
+        "app/(site)/news/page": "rsc"
       }
     }
   },
   "edge": {},
-  "encryptionKey": "Ox560tO8+VLZ28QPouGRPaIIPK32oKO3RQ6/I5RUp6I="
+  "encryptionKey": "e9pCz5mbj53HT8LR63GiPzB3Kqhs4U0qpd/UoDAHwwg="
 }

@@ -23,6 +23,14 @@ export default function CustomDashboard() {
     const [loading, setLoading] = useState(true);
     const [aiGenerating, setAiGenerating] = useState(false);
 
+    // AI Image Lab State
+    const [imageTopic, setImageTopic] = useState('');
+    const [generatedPrompt, setGeneratedPrompt] = useState('');
+    const [isSuggestingPrompt, setIsSuggestingPrompt] = useState(false);
+    const [isGeneratingImage, setIsGeneratingImage] = useState(false);
+    const [generatedImageUrl, setGeneratedImageUrl] = useState('');
+    const [generationError, setGenerationError] = useState('');
+
     useEffect(() => {
         fetchDashboardStats();
     }, []);
@@ -117,7 +125,7 @@ export default function CustomDashboard() {
                     icon="🖼️"
                     color="orange"
                     trend={`de ${stats?.totalImages || 0} total`}
-                    alert={stats && stats.imagesWithoutAlt > 0}
+                    alert={!!(stats && stats.imagesWithoutAlt > 0)}
                 />
             </div>
 
@@ -254,6 +262,140 @@ export default function CustomDashboard() {
                         description="WCAG 2.1 AA compliance"
                         status="active"
                     />
+                    <AIFeature
+                        title="Geração de Imagens"
+                        description="Criação visual com Imagen 3 (Beta)"
+                        status="active"
+                    />
+                </div>
+            </div>
+
+            {/* AI Image Lab - NEW */}
+            <div className="bg-white rounded-2xl p-8 border border-gray-200 shadow-sm">
+                <div className="flex items-center gap-3 mb-6">
+                    <span className="text-3xl">🖼️</span>
+                    <div>
+                        <h2 className="text-2xl font-bold text-gray-900">AI Image Lab</h2>
+                        <p className="text-gray-500">Gere imagens profissionais para seus blocos e posts</p>
+                    </div>
+                </div>
+
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                    <div className="space-y-6">
+                        <div>
+                            <label htmlFor="image-topic" className="block text-sm font-semibold text-gray-700 mb-2">Sobre o que é a imagem?</label>
+                            <input
+                                id="image-topic"
+                                type="text"
+                                value={imageTopic}
+                                onChange={(e) => setImageTopic(e.target.value)}
+                                placeholder="Ex: Escritório moderno com tecnologia em Lisboa"
+                                title="Descreva o tema da imagem"
+                                className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-primary/20 outline-none"
+                            />
+                        </div>
+
+                        <div className="flex gap-3">
+                            <button
+                                onClick={async () => {
+                                    if (!imageTopic) return;
+                                    setIsSuggestingPrompt(true);
+                                    setGenerationError('');
+                                    try {
+                                        const res = await fetch('/api/ai/suggest-image-prompt', {
+                                            method: 'POST',
+                                            body: JSON.stringify({ topic: imageTopic })
+                                        });
+                                        const data = await res.json();
+                                        if (data.prompt) setGeneratedPrompt(data.prompt);
+                                        else throw new Error(data.error);
+                                    } catch (e: any) {
+                                        setGenerationError(e.message);
+                                    } finally {
+                                        setIsSuggestingPrompt(false);
+                                    }
+                                }}
+                                disabled={isSuggestingPrompt || !imageTopic}
+                                className="flex-1 px-4 py-3 bg-accent/10 text-accent font-bold rounded-xl hover:bg-accent/20 transition-all disabled:opacity-50"
+                            >
+                                {isSuggestingPrompt ? 'Sugerindo...' : '✨ Sugerir Prompt'}
+                            </button>
+                        </div>
+
+                        {generatedPrompt && (
+                            <div className="space-y-4">
+                                <div>
+                                    <label htmlFor="final-prompt" className="block text-sm font-semibold text-gray-700 mb-2">Prompt Final (pode editar)</label>
+                                    <textarea
+                                        id="final-prompt"
+                                        value={generatedPrompt}
+                                        onChange={(e) => setGeneratedPrompt(e.target.value)}
+                                        rows={4}
+                                        placeholder="Edite o prompt gerado aqui..."
+                                        title="Edite o prompt gerado pela IA"
+                                        className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:ring-2 focus:ring-primary/20 outline-none"
+                                    />
+                                </div>
+                                <button
+                                    onClick={async () => {
+                                        setIsGeneratingImage(true);
+                                        setGenerationError('');
+                                        try {
+                                            const res = await fetch('/api/ai/generate-image', {
+                                                method: 'POST',
+                                                body: JSON.stringify({ prompt: generatedPrompt })
+                                            });
+                                            const data = await res.json();
+                                            if (data.mediaUrl) {
+                                                setGeneratedImageUrl(data.mediaUrl);
+                                            } else {
+                                                throw new Error(data.error || 'Falha na geração');
+                                            }
+                                        } catch (e: any) {
+                                            setGenerationError(e.message);
+                                        } finally {
+                                            setIsGeneratingImage(false);
+                                        }
+                                    }}
+                                    disabled={isGeneratingImage || !generatedPrompt}
+                                    className="w-full px-6 py-4 bg-primary text-white font-bold rounded-xl hover:bg-primaryDark transition-all shadow-lg disabled:opacity-50"
+                                >
+                                    {isGeneratingImage ? 'Gerando Imagem (isto pode demorar)...' : '🚀 Gerar Imagem Agora'}
+                                </button>
+                                {generationError && (
+                                    <div className="p-4 bg-red-50 text-red-600 rounded-xl text-sm border border-red-100 italic">
+                                        Note: {generationError}
+                                    </div>
+                                )}
+                            </div>
+                        )}
+                    </div>
+
+                    <div className="flex flex-col items-center justify-center border-2 border-dashed border-gray-100 rounded-[2.5rem] bg-gray-50/50 min-h-[400px]">
+                        {isGeneratingImage ? (
+                            <div className="text-center space-y-4">
+                                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
+                                <p className="text-gray-500 font-medium">A IA está a pintar a sua imagem...</p>
+                            </div>
+                        ) : generatedImageUrl ? (
+                            <div className="w-full p-4 space-y-4">
+                                <img src={generatedImageUrl} alt="Generated" className="w-full h-auto rounded-3xl shadow-2xl border-4 border-white" />
+                                <div className="text-center">
+                                    <p className="text-green-600 font-bold flex items-center justify-center gap-2 mb-2">
+                                        <span>✅</span> Imagem guardada na Media Library!
+                                    </p>
+                                    <a href="/admin/collections/media" className="text-primary font-semibold hover:underline">
+                                        Ver na Galeria →
+                                    </a>
+                                </div>
+                            </div>
+                        ) : (
+                            <div className="text-center text-gray-400 p-8">
+                                <span className="text-6xl mb-4 block">🎨</span>
+                                <p>Sua imagem gerada aparecerá aqui.</p>
+                            </div>
+                        )}
+                    </div>
                 </div>
             </div>
         </div>
@@ -262,7 +404,14 @@ export default function CustomDashboard() {
 
 // Helper Components
 
-function StatCard({ title, value, icon, color, trend, alert }: any) {
+function StatCard({ title, value, icon, color, trend, alert }: {
+    title: string;
+    value: string | number;
+    icon: string;
+    color: 'blue' | 'green' | 'purple' | 'orange';
+    trend?: string;
+    alert?: boolean;
+}) {
     const colors = {
         blue: 'from-blue-500 to-blue-600',
         green: 'from-green-500 to-green-600',
@@ -300,7 +449,7 @@ function QuickAction({ title, description, icon, href }: any) {
     );
 }
 
-function RecentItem({ title, status, date }: any) {
+function RecentItem({ title, status, date }: { title: string; status: 'published' | 'draft'; date: string }) {
     const statusColors = {
         published: 'bg-green-100 text-green-800',
         draft: 'bg-yellow-100 text-yellow-800',
@@ -319,7 +468,12 @@ function RecentItem({ title, status, date }: any) {
     );
 }
 
-function TipCard({ title, description, action, type }: any) {
+function TipCard({ title, description, action, type }: {
+    title: string;
+    description: string;
+    action: string;
+    type: 'warning' | 'error' | 'info';
+}) {
     const typeColors = {
         warning: 'border-yellow-200 bg-yellow-50',
         error: 'border-red-200 bg-red-50',

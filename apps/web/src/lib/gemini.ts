@@ -353,6 +353,67 @@ Return ONLY a JSON array of post IDs in order of relevance: ["id1", "id2", "id3"
     return JSON.parse(jsonMatch[0]);
 }
 
+/**
+ * Suggest a professional image prompt based on topic
+ */
+export async function suggestImagePrompt(params: {
+    topic: string;
+    style?: 'photorealistic' | 'minimalist' | '3d-render' | 'illustration';
+    aspectRatio?: '16:9' | '4:3' | '1:1';
+    language?: 'pt' | 'en';
+}): Promise<string> {
+    if (!genAI) {
+        throw new Error('Gemini API not configured');
+    }
+
+    const { topic, style = 'photorealistic', aspectRatio = '16:9', language = 'pt' } = params;
+    const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash-exp' });
+
+    const prompt = `
+Generate a highly detailed and professional image generation prompt for Imagen 3.
+The image is for "Loading Happiness", an IT consultancy company.
+
+Topic/Context: ${topic}
+Style: ${style}
+Aspect Ratio: ${aspectRatio}
+
+The prompt should:
+- Be in English (better for generation models)
+- Include specific details about lighting, composition, and mood (premium, clean, high-tech, human-centric)
+- Avoid text in the image
+- Be optimized for high resolution
+- Reflect the brand colors of Loading Happiness (Ocean Blue, Midnight Purple, Mint Green) if applicable
+
+Return ONLY the prompt text, nothing else.
+`;
+
+    const result = await model.generateContent(prompt);
+    return result.response.text().trim();
+}
+
+/**
+ * Generate an image using Google's Imagen (Placeholder logic as it requires Vertex AI)
+ * Note: This function currently return a base64 or URL depending on implementation
+ */
+export async function generateImage(params: {
+    prompt: string;
+    aspectRatio?: '1:1' | '16:9' | '4:3';
+}): Promise<{ url: string; base64?: string }> {
+    // In a real implementation, this would call the Vertex AI Imagen API.
+    // For now, we will log the prompt and return a simulated success.
+    console.log('Generating image with prompt:', params.prompt);
+
+    // Check for a secondary API key or service account if needed
+    if (!process.env.GOOGLE_CLOUD_PROJECT) {
+        throw new Error('Google Cloud Project not configured for image generation');
+    }
+
+    // This is a placeholder for the actual API call to Vertex AI Imagen 3
+    // Once the user provides the Vertex AI access token/credentials, we can swap this.
+
+    throw new Error('Image generation (Imagen 3) requires Vertex AI configuration. Please ensure GOOGLE_APPLICATION_CREDENTIALS is set.');
+}
+
 export default {
     generateBlogContent,
     generateMetaDescription,
@@ -362,4 +423,6 @@ export default {
     generateTableOfContents,
     calculateReadingTime,
     suggestRelatedPosts,
+    suggestImagePrompt,
+    generateImage,
 };

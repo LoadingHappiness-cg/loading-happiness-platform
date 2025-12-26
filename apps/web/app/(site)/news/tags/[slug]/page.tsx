@@ -56,10 +56,9 @@ export default async function TagHubPage({ params, searchParams }: TagPageProps)
           ← Back to News
         </Link>
         <div className="flex items-center gap-4 mb-4">
-          <div
-            className="w-4 h-4 rounded-full tag-color-bg"
-            style={{ '--tag-color': tag.color || '#3b82f6' } as React.CSSProperties}
-          ></div>
+          <div className={`w-4 h-4 rounded-full tag-color-bg tag-val-${tag.id}`}>
+            <style>{`.tag-val-${tag.id} { --tag-color: ${tag.color || '#3b82f6'}; }`}</style>
+          </div>
           <h1 className="text-6xl font-black text-gray-900 tracking-tighter capitalize">
             {tag.name}
           </h1>

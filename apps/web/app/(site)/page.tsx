@@ -180,9 +180,9 @@ export default async function HomePage() {
                       {post.tags?.map((tag: any) => (
                         <span
                           key={tag.id}
-                          className="text-[10px] font-bold text-gray-500 px-2 py-1 rounded bg-gray-50 tag-color-border"
-                          style={{ '--tag-color': tag.color } as React.CSSProperties}
+                          className={`text-[10px] font-bold text-gray-500 px-2 py-1 rounded bg-gray-50 tag-color-border tag-val-${tag.id}`}
                         >
+                          <style>{`.tag-val-${tag.id} { --tag-color: ${tag.color || '#cbd5e1'}; }`}</style>
                           #{tag.name}
                         </span>
                       ))}

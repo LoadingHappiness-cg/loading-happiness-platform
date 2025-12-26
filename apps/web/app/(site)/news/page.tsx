@@ -33,7 +33,7 @@ export default async function NewsPage({ searchParams }: PageProps) {
       },
       locale,
     });
-    tagIds = resolvedTags.docs.map((t) => t.id);
+    tagIds = resolvedTags.docs.map((t) => String(t.id));
   }
 
   // 2. Build Content Query
@@ -132,9 +132,9 @@ export default async function NewsPage({ searchParams }: PageProps) {
                   <Link
                     key={tag.id}
                     href={withLocale(`/news/tags/${tag.slug}`, localePrefix)}
-                    className="text-[10px] font-bold text-gray-500 hover:text-primaryDark transition-colors px-2 py-1 bg-gray-50 rounded tag-color-border"
-                    style={tag.color ? { '--tag-color': tag.color } as React.CSSProperties : {}}
+                    className={`text-[10px] font-bold text-gray-500 hover:text-primaryDark transition-colors px-2 py-1 bg-gray-50 rounded tag-color-border tag-val-${tag.id}`}
                   >
+                    <style>{`.tag-val-${tag.id} { --tag-color: ${tag.color || '#cbd5e1'}; }`}</style>
                     #{tag.name}
                   </Link>
                 ))}
