@@ -1,8 +1,8 @@
 import { NextResponse } from 'next/server';
 import crypto from 'crypto';
 import { getPayload, getFieldsToSign, jwtSign, createPayloadRequest } from 'payload';
-import { generatePayloadCookie } from 'payload/dist/auth/cookies.js';
-import { addSessionToUser } from 'payload/dist/auth/sessions.js';
+import { addSessionToUser, generatePayloadCookie } from 'payload/shared';
+import type { Config } from '@/payload-types';
 
 const decodeJwtPayload = (token: string) => {
   const [, payload] = token.split('.');
@@ -95,7 +95,8 @@ export const GET = async (request: Request) => {
     }
   }
 
-  const usersCollection = payload.collections[payload.config.admin.user];
+  const userCollectionSlug = payload.config.admin.user as 'users';
+  const usersCollection = payload.collections[userCollectionSlug];
   const existing = await payload.find({
     collection: usersCollection.config.slug,
     where: { email: { equals: email } },
@@ -117,18 +118,23 @@ export const GET = async (request: Request) => {
     });
   }
 
+  const userWithCollection = {
+    ...user,
+    collection: userCollectionSlug,
+  } as Config['user'];
+
   const { sid } = await addSessionToUser({
     collectionConfig: usersCollection.config,
     payload,
     req,
-    user,
+    user: userWithCollection,
   });
 
   const fieldsToSign = getFieldsToSign({
     collectionConfig: usersCollection.config,
     email,
     sid,
-    user,
+    user: userWithCollection,
   });
 
   const { token } = await jwtSign({

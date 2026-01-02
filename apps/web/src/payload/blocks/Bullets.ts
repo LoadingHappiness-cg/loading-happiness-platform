@@ -1,4 +1,4 @@
-import type { Block } from 'payload/types';
+import type { Block } from 'payload';
 
 const BulletsBlock: Block = {
   slug: 'bullets',
@@ -6,9 +6,6 @@ const BulletsBlock: Block = {
   labels: {
     singular: 'Bullets',
     plural: 'Bullets',
-  },
-  admin: {
-    useAsTitle: 'title',
   },
   fields: [
     {
@@ -34,9 +31,6 @@ const BulletsBlock: Block = {
       labels: {
         singular: 'Item',
         plural: 'Items',
-      },
-      admin: {
-        useAsTitle: 'text',
       },
       minRows: 1,
       fields: [{ name: 'text', type: 'text', required: true, localized: true }],

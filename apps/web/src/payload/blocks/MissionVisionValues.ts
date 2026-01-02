@@ -1,4 +1,4 @@
-import type { Block } from 'payload/types';
+import type { Block } from 'payload';
 
 const MissionVisionValuesBlock: Block = {
     slug: 'mission-vision-values',
@@ -35,16 +35,13 @@ const MissionVisionValuesBlock: Block = {
             name: 'values',
             type: 'array',
             required: true,
-            labels: {
-                singular: 'Value',
-                plural: 'Values',
-            },
-            admin: {
-                useAsTitle: 'title',
-            },
-            fields: [
-                { name: 'title', type: 'text', required: true, localized: true },
-                { name: 'description', type: 'textarea', required: true, localized: true },
+        labels: {
+            singular: 'Value',
+            plural: 'Values',
+        },
+        fields: [
+            { name: 'title', type: 'text', required: true, localized: true },
+            { name: 'description', type: 'textarea', required: true, localized: true },
                 { name: 'proofBehavior', type: 'text', localized: true },
             ],
         },

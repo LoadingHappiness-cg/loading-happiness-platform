@@ -15,15 +15,21 @@ type GenerateSEOParams = {
 export function generateBlogPostSEO({ post, locale, baseUrl = 'https://loadinghappiness.com' }: GenerateSEOParams): Metadata {
     const seoTitle = post.seo?.title || post.title;
     const seoDescription = post.seo?.description || post.excerpt;
-    const ogImage = post.seo?.ogImage && typeof post.seo.ogImage !== 'string'
+    const ogImage = typeof post.seo?.ogImage === 'object' && post.seo.ogImage !== null
         ? post.seo.ogImage.url
-        : (post.featuredImage && typeof post.featuredImage !== 'string' ? post.featuredImage.url : null);
+        : (typeof post.featuredImage === 'object' && post.featuredImage !== null ? post.featuredImage.url : null);
 
     const url = `${baseUrl}/${locale}/news/${post.slug}`;
     const publishedTime = post.publishedAt ? new Date(post.publishedAt).toISOString() : undefined;
 
     const authors = Array.isArray(post.authors)
-        ? post.authors.map((author) => typeof author !== 'string' ? author.name : author)
+        ? post.authors
+            .map((author) => {
+                if (typeof author === 'string') return author;
+                if (typeof author === 'object' && author !== null) return author.name;
+                return null;
+            })
+            .filter((author): author is string => typeof author === 'string')
         : [];
 
     const keywords = post.seo?.keywords
@@ -80,19 +86,21 @@ export function generateBlogPostSchema(params: GenerateSEOParams) {
     const { post, locale, baseUrl = 'https://loadinghappiness.com' } = params;
 
     const url = `${baseUrl}/${locale}/news/${post.slug}`;
-    const imageUrl = post.featuredImage && typeof post.featuredImage !== 'string'
+    const imageUrl = typeof post.featuredImage === 'object' && post.featuredImage !== null
         ? post.featuredImage.url
         : null;
 
     const authors = Array.isArray(post.authors)
-        ? post.authors.map((author) => {
-            if (typeof author === 'string') return null;
-            return {
-                '@type': 'Person',
-                name: author.name,
-                ...(author.bio && { description: author.bio }),
-            };
-        }).filter(Boolean)
+        ? post.authors
+            .map((author) => {
+                if (typeof author !== 'object' || author === null) return null;
+                return {
+                    '@type': 'Person',
+                    name: author.name,
+                    ...(author.bio && { description: author.bio }),
+                };
+            })
+            .filter(Boolean)
         : [];
 
     const schema = {

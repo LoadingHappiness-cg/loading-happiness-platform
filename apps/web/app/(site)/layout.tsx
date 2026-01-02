@@ -20,13 +20,20 @@ const displayFont = Space_Grotesk({
   display: 'swap',
 });
 
-
+export const dynamic = 'force-dynamic';
 
 type LayoutProps = {
   children: ReactNode;
 };
 
 export async function generateMetadata() {
+  if (process.env.NEXT_PHASE === 'phase-production-build') {
+    return {
+      title: 'Loading Happiness',
+      description: 'Loading Happiness Platform',
+    };
+  }
+
   try {
     const payload = (await getPayloadClient()) as any;
     const settings = await payload.findGlobal({

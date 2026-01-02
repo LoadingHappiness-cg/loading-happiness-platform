@@ -44,6 +44,8 @@ services:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_DB: payload
+    ports:
+      - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     networks:
@@ -81,6 +83,9 @@ services:
     build:
       context: ../apps/web
       dockerfile: Dockerfile
+      args:
+        DATABASE_URI: postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/payload
+        PAYLOAD_SECRET: ${PAYLOAD_SECRET}
     container_name: loadinghappiness_web
     restart: always
     environment:
@@ -99,6 +104,8 @@ services:
     networks:
       - edge
       - internal
+    ports:
+      - "3000:3000"
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.web.rule=Host(`${DOMAIN}`) || Host(`www.${DOMAIN}`)"

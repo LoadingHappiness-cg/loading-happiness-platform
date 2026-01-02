@@ -81,13 +81,20 @@ export default buildConfig({
     {
       slug: 'media',
       access: {
-        create: ({ req: { user } }) => !!user,
+        create: ({ req }) => {
+          const { user } = req;
+          if (!user) {
+            console.warn('Access Denied: req.user is', user);
+          } else {
+            console.log('Access Granted: User is', user.email || user.id);
+          }
+          return !!user;
+        },
         read: () => true,
         update: ({ req: { user } }) => !!user,
         delete: ({ req: { user } }) => !!user,
       },
       upload: {
-        staticURL: process.env.MEDIA_PUBLIC_URL || 'https://media.loadinghappiness.com',
         disableLocalStorage: true,
         imageSizes: [
           { name: 'thumbnail', width: 400, height: 300, position: 'centre' },

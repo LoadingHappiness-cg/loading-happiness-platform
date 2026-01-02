@@ -12,6 +12,7 @@ import { generateBlogPostSEO, generateBlogPostSchema, generateBreadcrumbSchema }
 import SocialShare from '@/app/components/SocialShare';
 import BlogPost from '@/app/components/BlogPost';
 import PageBlocks from '@/app/components/PageBlocks';
+import type { Author } from '@/payload-types';
 
 type Props = {
     params: Promise<{ slug: string }>;
@@ -92,10 +93,15 @@ export default async function BlogPostPage({ params }: Props) {
 
     // Get author info
     const author = Array.isArray(post.authors) && post.authors.length > 0
-        ? (typeof post.authors[0] !== 'string' ? post.authors[0] : null)
+        ? (typeof post.authors[0] === 'object' && post.authors[0] !== null
+            ? (post.authors[0] as Author)
+            : null)
         : null;
+    const authorPhoto = author?.photo;
 
-    const featuredImage = typeof post.featuredImage !== 'string' ? post.featuredImage : null;
+    const featuredImage = typeof post.featuredImage === 'object' && post.featuredImage !== null
+        ? post.featuredImage
+        : null;
     const currentUrl = `https://loadinghappiness.com${localePrefix}/news/${post.slug}`;
 
     // Translations
@@ -168,9 +174,9 @@ export default async function BlogPostPage({ params }: Props) {
                         <div className="flex items-center gap-4">
                             {author && (
                                 <div className="flex items-center gap-3">
-                                    {author.avatar && typeof author.avatar !== 'string' && (
+                                    {authorPhoto && typeof authorPhoto !== 'number' && (
                                         <img
-                                            src={author.avatar.url || ''}
+                                            src={authorPhoto.url || ''}
                                             alt={author.name}
                                             className="w-12 h-12 rounded-full"
                                         />

@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import Link from 'next/link';
 
 type Status = {
   enabled: boolean;
@@ -33,9 +34,9 @@ export const EntraLogin = () => {
       <div className="text-xs uppercase tracking-widest text-[color:var(--theme-elevation-500)]">
         Single Sign-On
       </div>
-      <a href="/auth/entra" className="btn btn--style-primary btn--size-medium">
+      <Link href="/auth/entra" className="btn btn--style-primary btn--size-medium">
         Login com Entra ID
-      </a>
+      </Link>
     </div>
   );
 };

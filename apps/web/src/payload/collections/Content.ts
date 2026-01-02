@@ -1,5 +1,5 @@
 
-import type { CollectionConfig } from 'payload/types';
+import type { CollectionConfig } from 'payload';
 import PullQuoteBlock from '../blocks/PullQuote.ts';
 import CalloutBlock from '../blocks/Callout.ts';
 import ChecklistBlock from '../blocks/Checklist.ts';
@@ -13,6 +13,9 @@ const Content: CollectionConfig = {
   },
   access: {
     read: () => true,
+    create: ({ req: { user } }) => !!user,
+    update: ({ req: { user } }) => !!user,
+    delete: ({ req: { user } }) => !!user,
   },
   fields: [
     {

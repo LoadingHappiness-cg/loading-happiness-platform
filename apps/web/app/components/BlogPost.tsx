@@ -3,6 +3,7 @@
  */
 
 import Link from 'next/link';
+import type { Author } from '@/payload-types';
 import { Content as ContentType } from '@/payload-types';
 import { withLocale } from '@/lib/locale';
 
@@ -23,10 +24,15 @@ export default function BlogPost({
     showAuthor = true,
     variant = 'card',
 }: BlogPostProps) {
-    const featuredImage = typeof post.featuredImage !== 'string' ? post.featuredImage : null;
-    const author = Array.isArray(post.authors) && post.authors.length > 0
-        ? (typeof post.authors[0] !== 'string' ? post.authors[0] : null)
+    const featuredImage = typeof post.featuredImage === 'object' && post.featuredImage !== null
+        ? post.featuredImage
         : null;
+    const author = Array.isArray(post.authors) && post.authors.length > 0
+        ? (typeof post.authors[0] === 'object' && post.authors[0] !== null
+            ? (post.authors[0] as Author)
+            : null)
+        : null;
+    const authorPhoto = author?.photo;
 
     if (variant === 'featured') {
         return (
@@ -73,9 +79,9 @@ export default function BlogPost({
                             )}
                             {showAuthor && author && (
                                 <span className="flex items-center gap-2">
-                                    {author.avatar && typeof author.avatar !== 'string' && (
+                                    {authorPhoto && typeof authorPhoto !== 'number' && (
                                         <img
-                                            src={author.avatar.url || ''}
+                                            src={authorPhoto.url || ''}
                                             alt={author.name}
                                             className="w-6 h-6 rounded-full"
                                         />
@@ -180,9 +186,9 @@ export default function BlogPost({
                     <div className="flex items-center gap-3 text-sm text-gray-500">
                         {showAuthor && author && (
                             <div className="flex items-center gap-2">
-                                {author.avatar && typeof author.avatar !== 'string' && (
+                                {authorPhoto && typeof authorPhoto !== 'number' && (
                                     <img
-                                        src={author.avatar.url || ''}
+                                        src={authorPhoto.url || ''}
                                         alt={author.name}
                                         className="w-6 h-6 rounded-full"
                                     />

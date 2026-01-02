@@ -10,8 +10,13 @@ type LayoutProps = {
   children: ReactNode;
 };
 
+type ServerFunctionClientArgs = {
+  name: string;
+  args: Record<string, unknown>;
+};
+
 export default async function AppLayout({ children }: LayoutProps) {
-  async function serverFunction(args: Parameters<typeof handleServerFunctions>[0]) {
+  async function serverFunction(args: ServerFunctionClientArgs) {
     'use server';
     return handleServerFunctions({
       ...args,

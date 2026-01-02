@@ -1,5 +1,8 @@
+"use client";
+
 import Link from 'next/link';
-import { withLocale } from '@/lib/locale';
+import { useEffect, useRef } from 'react';
+import { withLocale } from '@/lib/locale-utils';
 import ContactForm from './ContactForm';
 
 const gridCols: Record<number, string> = {
@@ -77,20 +80,54 @@ const isPlaceholderMedia = (alt?: string) => {
   ].some((token) => value.includes(token));
 };
 
+// Animation mapping
+const animationClasses: Record<string, string> = {
+  fadeRise: 'lh-fade-rise',
+  slide: 'lh-slide-in',
+  reveal: 'lh-reveal',
+  scale: 'lh-scale-up',
+  stagger: 'animate-stagger', // We can handle this specially
+};
+
 export default function PageBlocks({ blocks, localePrefix }: { blocks: any[]; localePrefix?: string }) {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+          }
+        });
+      },
+      { threshold: 0.1 },
+    );
+
+    const sections = containerRef.current?.querySelectorAll('section');
+    sections?.forEach((section) => observer.observe(section));
+
+    return () => observer.disconnect();
+  }, [blocks]);
+
   if (!blocks?.length) return null;
 
   const localizeHref = (href: string) => withLocale(href, localePrefix);
   const sectionProps = (block: any) => {
-    if (block?.anchorId) return { id: block.anchorId };
-    if (block?.sectionId) return { id: block.sectionId };
-    return {};
+    const props: any = {};
+    if (block?.anchorId) props.id = block.anchorId;
+    if (block?.sectionId) props.id = block.sectionId;
+    return props;
   };
 
   return (
-    <div>
+    <div ref={containerRef}>
       {blocks.map((block, index) => {
         if (block?.enabled === false) return null;
+
+        const animationPreset = block.animationPreset || 'fadeRise';
+        const animationClass = animationClasses[animationPreset] || '';
+
         switch (block.blockType) {
           case 'hero': {
             const variant = block.variant || 'A';
@@ -118,8 +155,9 @@ export default function PageBlocks({ blocks, localePrefix }: { blocks: any[]; lo
               <section
                 key={index}
                 {...sectionProps(block)}
-                className={`hero-${variant} relative overflow-hidden border-b border-gray-50 ${heroVariantClass} ${themeClass}`}
+                className={`hero-${variant} relative overflow-hidden border-b border-gray-50 ${heroVariantClass} ${themeClass} ${animationClass}`}
               >
+
                 {heroTheme === 'brandGradient' && (
                   <>
                     <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(26,179,202,0.18),transparent_55%),radial-gradient(circle_at_top_right,rgba(105,143,254,0.2),transparent_45%),linear-gradient(120deg,rgba(51,37,112,0.1),rgba(35,109,156,0.16))]" />
@@ -227,7 +265,10 @@ export default function PageBlocks({ blocks, localePrefix }: { blocks: any[]; lo
                   </div>
                   {variant !== 'B' && (
                     <div className={variant === 'D' ? 'lg:col-span-6' : 'lg:col-span-5'}>
-                      <div className={`relative rounded-[2.5rem] overflow-hidden shadow-2xl border-[12px] border-white/70 bg-white/70 backdrop-blur ${variant === 'D' ? 'aspect-[4/5]' : 'aspect-[4/5]'}`}>
+                      <div
+                        className={`relative rounded-[2.5rem] overflow-hidden shadow-2xl border-[12px] border-white/70 bg-white/70 backdrop-blur lh-scale-up ${variant === 'D' ? 'aspect-[4/5]' : 'aspect-[4/5]'}`}
+                        style={{ transitionDelay: '120ms' }}
+                      >
                         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(105,143,254,0.22),transparent_55%),radial-gradient(circle_at_bottom,rgba(26,179,202,0.18),transparent_55%)]" />
                         {(() => {
                           if (!hideMedia && media.url && !isPlaceholderMedia(media.alt)) {
@@ -282,8 +323,11 @@ export default function PageBlocks({ blocks, localePrefix }: { blocks: any[]; lo
           }
           case 'trustPartners':
             return (
-              <section key={index} {...sectionProps(block)} className="py-16 bg-gray-50">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <section key={index} {...sectionProps(block)} className={`relative overflow-hidden py-16 bg-gray-50 ${animationClass}`}>
+                <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-slate-300/80 to-transparent z-0" />
+                <div className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-slate-400/80 to-transparent z-0" />
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-white via-slate-100 to-slate-50 z-0" />
+                <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                   {(block.sectionTitle || block.text) && (
                     <h2 className="text-2xl lg:text-3xl font-extrabold text-gray-900 mb-2 tracking-tighter">
                       {block.sectionTitle || block.text}
@@ -317,7 +361,7 @@ export default function PageBlocks({ blocks, localePrefix }: { blocks: any[]; lo
             );
           case 'pillars':
             return (
-              <section key={index} {...sectionProps(block)} className="py-20">
+              <section key={index} {...sectionProps(block)} className={`py-20 ${animationClass}`}>
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                   <h2 className="text-3xl lg:text-5xl font-extrabold text-gray-900 mb-10 tracking-tighter">
                     {block.sectionTitle || block.title}
@@ -337,7 +381,7 @@ export default function PageBlocks({ blocks, localePrefix }: { blocks: any[]; lo
             );
           case 'servicesGrid':
             return (
-              <section key={index} {...sectionProps(block)} className="py-20">
+              <section key={index} {...sectionProps(block)} className={`py-20 ${animationClass}`}>
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                   <div className="flex items-center justify-between mb-10">
                     <h2 className="text-3xl lg:text-5xl font-extrabold text-gray-900 tracking-tighter">
@@ -380,16 +424,16 @@ export default function PageBlocks({ blocks, localePrefix }: { blocks: any[]; lo
                           )}
                           <h3 className="text-xl font-bold text-gray-900 mb-3">{service.title}</h3>
                           <p className="text-gray-600">{service.description}</p>
-                        {service.bulletPoints?.length > 0 && (
-                          <ul className="mt-4 space-y-2 text-sm text-gray-600">
-                            {service.bulletPoints.map((point: any, pointIndex: number) => (
-                              <li key={pointIndex} className="flex gap-2">
-                                <span className="text-brand-ocean">•</span>
-                                {typeof point?.text === 'string' ? point.text : typeof point === 'string' ? point : null}
-                              </li>
-                            ))}
-                          </ul>
-                        )}
+                          {service.bulletPoints?.length > 0 && (
+                            <ul className="mt-4 space-y-2 text-sm text-gray-600">
+                              {service.bulletPoints.map((point: any, pointIndex: number) => (
+                                <li key={pointIndex} className="flex gap-2">
+                                  <span className="text-brand-ocean">•</span>
+                                  {typeof point?.text === 'string' ? point.text : typeof point === 'string' ? point : null}
+                                </li>
+                              ))}
+                            </ul>
+                          )}
                           {(service.ctaHref || service.link) && (
                             <Link
                               href={localizeHref(service.ctaHref || service.link)}
@@ -407,7 +451,7 @@ export default function PageBlocks({ blocks, localePrefix }: { blocks: any[]; lo
             );
           case 'process':
             return (
-              <section key={index} {...sectionProps(block)} className="py-20 bg-gray-50">
+              <section key={index} {...sectionProps(block)} className={`py-20 bg-gray-50 ${animationClass}`}>
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
                   <div className="lg:col-span-7">
                     <h2 className="text-3xl lg:text-5xl font-extrabold text-gray-900 mb-6 tracking-tighter">
@@ -478,7 +522,7 @@ export default function PageBlocks({ blocks, localePrefix }: { blocks: any[]; lo
             );
           case 'impactTeaser':
             return (
-              <section key={index} {...sectionProps(block)} className="py-20">
+              <section key={index} {...sectionProps(block)} className={`py-20 ${animationClass}`}>
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
                   <div className="lg:col-span-6">
                     <h2 className="text-3xl lg:text-5xl font-extrabold text-gray-900 mb-6 tracking-tighter">
@@ -533,7 +577,7 @@ export default function PageBlocks({ blocks, localePrefix }: { blocks: any[]; lo
             );
           case 'finalCTA':
             return (
-              <section key={index} {...sectionProps(block)} className="py-20 bg-ink text-white">
+              <section key={index} {...sectionProps(block)} className={`py-20 bg-ink text-white ${animationClass}`}>
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-10">
                   <div>
                     <h2 className="text-3xl lg:text-5xl font-extrabold mb-4 tracking-tighter">{block.title}</h2>
@@ -566,7 +610,7 @@ export default function PageBlocks({ blocks, localePrefix }: { blocks: any[]; lo
             );
           case 'videoEmbed':
             return (
-              <section key={index} {...sectionProps(block)} className="py-20">
+              <section key={index} {...sectionProps(block)} className={`py-20 ${animationClass}`}>
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
                   <div className="lg:col-span-5">
                     {(block.sectionTitle || block.title) && (
@@ -607,7 +651,7 @@ export default function PageBlocks({ blocks, localePrefix }: { blocks: any[]; lo
             );
           case 'imageGallery':
             return (
-              <section key={index} {...sectionProps(block)} className="py-20">
+              <section key={index} {...sectionProps(block)} className={`py-20 ${animationClass}`}>
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                   {(block.sectionTitle || block.title) && (
                     <h2 className="text-3xl lg:text-5xl font-extrabold text-gray-900 mb-10 tracking-tighter">
@@ -644,7 +688,7 @@ export default function PageBlocks({ blocks, localePrefix }: { blocks: any[]; lo
           case 'splitContent':
             const isSplitReversed = block.layout === 'imageLeft' || block.reverse;
             return (
-              <section key={index} {...sectionProps(block)} className="py-20 border-b border-gray-50">
+              <section key={index} {...sectionProps(block)} className={`py-20 border-b border-gray-50 ${animationClass}`}>
                 <div className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row gap-12 items-center ${isSplitReversed ? 'lg:flex-row-reverse' : ''}`}>
                   <div className="lg:w-1/2">
                     <h2 className="text-3xl lg:text-5xl font-extrabold text-gray-900 mb-6 tracking-tighter">
@@ -665,21 +709,25 @@ export default function PageBlocks({ blocks, localePrefix }: { blocks: any[]; lo
                         ))}
                       </ul>
                     )}
-                    {(block.ctaHref || block.cta?.link) && (
-                      <Link
-                        href={localizeHref(block.ctaHref || block.cta.link)}
-                        className="inline-block mt-8 px-8 py-3 bg-primary text-white rounded-xl font-bold hover:bg-primaryDark transition-all"
-                      >
-                        {block.ctaLabel || block.cta?.label}
-                      </Link>
-                    )}
-                    {block.secondaryLinkHref && block.secondaryLinkLabel && (
-                      <Link
-                        href={localizeHref(block.secondaryLinkHref)}
-                        className="mt-4 inline-flex text-sm font-bold text-accent hover:text-primaryDark"
-                      >
-                        {block.secondaryLinkLabel} →
-                      </Link>
+                    {(block.ctaHref || block.cta?.link || (block.secondaryLinkHref && block.secondaryLinkLabel)) && (
+                      <div className="mt-10 flex flex-wrap items-center gap-4">
+                        {(block.ctaHref || block.cta?.link) && (
+                          <Link
+                            href={localizeHref(block.ctaHref || block.cta.link)}
+                            className="inline-flex items-center px-8 py-3 bg-primary text-white rounded-xl font-bold shadow-[0_14px_32px_rgba(35,109,156,0.28)] hover:bg-primaryDark hover:shadow-[0_18px_40px_rgba(35,109,156,0.32)] transition-all"
+                          >
+                            {block.ctaLabel || block.cta?.label}
+                          </Link>
+                        )}
+                        {block.secondaryLinkHref && block.secondaryLinkLabel && (
+                          <Link
+                            href={localizeHref(block.secondaryLinkHref)}
+                            className="inline-flex items-center text-sm font-bold text-accent hover:text-primaryDark"
+                          >
+                            {block.secondaryLinkLabel} →
+                          </Link>
+                        )}
+                      </div>
                     )}
                   </div>
                   <div className="lg:w-1/2">
@@ -702,7 +750,7 @@ export default function PageBlocks({ blocks, localePrefix }: { blocks: any[]; lo
             );
           case 'featureGrid':
             return (
-              <section key={index} {...sectionProps(block)} className="py-20 bg-gray-50">
+              <section key={index} {...sectionProps(block)} className={`py-20 bg-gray-50 ${animationClass}`}>
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                   {(block.sectionTitle || block.title) && (
                     <h2 className="text-3xl lg:text-5xl font-extrabold text-gray-900 mb-10 tracking-tighter">
@@ -731,7 +779,7 @@ export default function PageBlocks({ blocks, localePrefix }: { blocks: any[]; lo
             );
           case 'valueCards':
             return (
-              <section key={index} {...sectionProps(block)} className="py-20">
+              <section key={index} {...sectionProps(block)} className={`py-20 ${animationClass}`}>
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                   {block.title && (
                     <h2 className="text-3xl lg:text-5xl font-extrabold text-gray-900 mb-6 tracking-tighter">
@@ -753,7 +801,7 @@ export default function PageBlocks({ blocks, localePrefix }: { blocks: any[]; lo
             );
           case 'splitOverview':
             return (
-              <section key={index} {...sectionProps(block)} className="py-20">
+              <section key={index} {...sectionProps(block)} className={`py-20 ${animationClass}`}>
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-12 gap-12">
                   <div className="lg:col-span-8">
                     <h2 className="text-3xl lg:text-5xl font-extrabold text-gray-900 mb-6 tracking-tighter">
@@ -782,7 +830,7 @@ export default function PageBlocks({ blocks, localePrefix }: { blocks: any[]; lo
             );
           case 'twoColumnList':
             return (
-              <section key={index} {...sectionProps(block)} className="py-20 bg-gray-50">
+              <section key={index} {...sectionProps(block)} className={`py-20 bg-gray-50 ${animationClass}`}>
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                   <h2 className="text-3xl lg:text-5xl font-extrabold text-gray-900 mb-6 tracking-tighter">
                     {block.title}
@@ -817,7 +865,7 @@ export default function PageBlocks({ blocks, localePrefix }: { blocks: any[]; lo
             );
           case 'bulletsWithProof':
             return (
-              <section key={index} {...sectionProps(block)} className="py-20">
+              <section key={index} {...sectionProps(block)} className={`py-20 ${animationClass}`}>
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-12 gap-12">
                   <div className="lg:col-span-7">
                     <h2 className="text-3xl lg:text-5xl font-extrabold text-gray-900 mb-6 tracking-tighter">
@@ -848,7 +896,7 @@ export default function PageBlocks({ blocks, localePrefix }: { blocks: any[]; lo
             );
           case 'logoCloud':
             return (
-              <section key={index} {...sectionProps(block)} className="py-20 bg-gray-50">
+              <section key={index} {...sectionProps(block)} className={`py-20 bg-gray-50 ${animationClass}`}>
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                   <div className="grid gap-10 lg:grid-cols-12 items-start">
                     <div className="lg:col-span-8">
@@ -872,7 +920,7 @@ export default function PageBlocks({ blocks, localePrefix }: { blocks: any[]; lo
             );
           case 'teamIntro':
             return (
-              <section key={index} {...sectionProps(block)} className="py-20">
+              <section key={index} {...sectionProps(block)} className={`py-20 ${animationClass}`}>
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid gap-12 lg:grid-cols-12">
                   <div className="lg:col-span-6">
                     <h2 className="text-3xl lg:text-5xl font-extrabold text-gray-900 mb-6 tracking-tighter">
@@ -921,7 +969,7 @@ export default function PageBlocks({ blocks, localePrefix }: { blocks: any[]; lo
           case 'bullets':
             const bulletsStyle = block.template ? templateStyles[block.template] : undefined;
             return (
-              <section key={index} {...sectionProps(block)} className="py-20 bg-gray-50">
+              <section key={index} {...sectionProps(block)} className={`py-20 bg-gray-50 ${animationClass}`}>
                 <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                   {block.title && (
                     <h2 className="text-3xl lg:text-5xl font-extrabold text-gray-900 mb-6 tracking-tighter">
@@ -947,7 +995,7 @@ export default function PageBlocks({ blocks, localePrefix }: { blocks: any[]; lo
           case 'deliverables':
             const deliverStyle = block.template ? templateStyles[block.template] : undefined;
             return (
-              <section key={index} {...sectionProps(block)} className="py-20">
+              <section key={index} {...sectionProps(block)} className={`py-20 ${animationClass}`}>
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                   {block.title && (
                     <h2 className="text-3xl lg:text-5xl font-extrabold text-gray-900 mb-6 tracking-tighter">
@@ -973,7 +1021,7 @@ export default function PageBlocks({ blocks, localePrefix }: { blocks: any[]; lo
           case 'outcomesCards':
             const outcomesStyle = block.template ? templateStyles[block.template] : undefined;
             return (
-              <section key={index} {...sectionProps(block)} className="py-20">
+              <section key={index} {...sectionProps(block)} className={`py-20 ${animationClass}`}>
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                   {block.title && (
                     <h2 className="text-3xl lg:text-5xl font-extrabold text-gray-900 mb-6 tracking-tighter">
@@ -999,7 +1047,7 @@ export default function PageBlocks({ blocks, localePrefix }: { blocks: any[]; lo
           case 'steps':
             const stepsStyle = block.template ? templateStyles[block.template] : undefined;
             return (
-              <section key={index} {...sectionProps(block)} className="py-20 bg-gray-50">
+              <section key={index} {...sectionProps(block)} className={`py-20 bg-gray-50 ${animationClass}`}>
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                   {block.title && (
                     <h2 className="text-3xl lg:text-5xl font-extrabold text-gray-900 mb-6 tracking-tighter">
@@ -1027,7 +1075,7 @@ export default function PageBlocks({ blocks, localePrefix }: { blocks: any[]; lo
             );
           case 'richText':
             return (
-              <section key={index} {...sectionProps(block)} className="py-16">
+              <section key={index} {...sectionProps(block)} className={`py-16 ${animationClass}`}>
                 <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
                   <div className="text-lg leading-relaxed text-gray-700 whitespace-pre-line">
                     {block.content}
@@ -1037,7 +1085,7 @@ export default function PageBlocks({ blocks, localePrefix }: { blocks: any[]; lo
             );
           case 'stats':
             return (
-              <section key={index} {...sectionProps(block)} className="py-20">
+              <section key={index} {...sectionProps(block)} className={`py-20 ${animationClass}`}>
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                   {block.title && (
                     <h2 className="text-3xl lg:text-5xl font-extrabold text-gray-900 mb-6 tracking-tighter">
@@ -1059,7 +1107,7 @@ export default function PageBlocks({ blocks, localePrefix }: { blocks: any[]; lo
             );
           case 'testimonials':
             return (
-              <section key={index} {...sectionProps(block)} className="py-20 bg-gray-50">
+              <section key={index} {...sectionProps(block)} className={`py-20 bg-gray-50 ${animationClass}`}>
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                   {block.title && (
                     <h2 className="text-3xl lg:text-5xl font-extrabold text-gray-900 mb-6 tracking-tighter">
@@ -1092,7 +1140,7 @@ export default function PageBlocks({ blocks, localePrefix }: { blocks: any[]; lo
             );
           case 'faq':
             return (
-              <section key={index} {...sectionProps(block)} className="py-20">
+              <section key={index} {...sectionProps(block)} className={`py-20 ${animationClass}`}>
                 <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
                   <h2 className="text-3xl lg:text-5xl font-extrabold text-gray-900 mb-10 tracking-tighter">
                     {block.title || 'FAQ'}
@@ -1110,7 +1158,7 @@ export default function PageBlocks({ blocks, localePrefix }: { blocks: any[]; lo
             );
           case 'caseStudyTeaser':
             return (
-              <section key={index} {...sectionProps(block)} className="py-20">
+              <section key={index} {...sectionProps(block)} className={`py-20 ${animationClass}`}>
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                   {block.title && (
                     <h2 className="text-3xl lg:text-5xl font-extrabold text-gray-900 mb-6 tracking-tighter">
@@ -1142,7 +1190,7 @@ export default function PageBlocks({ blocks, localePrefix }: { blocks: any[]; lo
             );
           case 'mission-vision-values':
             return (
-              <section key={index} {...sectionProps(block)} className="py-20 bg-white">
+              <section key={index} {...sectionProps(block)} className={`py-20 bg-white ${animationClass}`}>
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                   <h2 className="text-3xl lg:text-5xl font-extrabold text-gray-900 mb-12 tracking-tighter text-center">
                     {block.sectionTitle || 'Missão, Visão e Valores'}
@@ -1165,7 +1213,9 @@ export default function PageBlocks({ blocks, localePrefix }: { blocks: any[]; lo
                         {val.proofBehavior && (
                           <div className="pt-4 border-t border-gray-50">
                             <p className="text-[10px] font-extrabold uppercase tracking-widest text-brand-ocean mb-1">Prova de comportamento</p>
-                            <p className="text-xs font-semibold text-gray-500 italic">"{val.proofBehavior}"</p>
+                            <p className="text-xs font-semibold text-gray-500 italic">
+                              &ldquo;{val.proofBehavior}&rdquo;
+                            </p>
                           </div>
                         )}
                       </div>
@@ -1176,7 +1226,7 @@ export default function PageBlocks({ blocks, localePrefix }: { blocks: any[]; lo
             );
           case 'timeline':
             return (
-              <section key={index} {...sectionProps(block)} className="py-20 bg-gray-50">
+              <section key={index} {...sectionProps(block)} className={`py-20 bg-gray-50 ${animationClass}`}>
                 <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
                   <div className="text-center mb-16">
                     <h2 className="text-3xl lg:text-5xl font-extrabold text-gray-900 mb-6 tracking-tighter text-center">
@@ -1212,7 +1262,7 @@ export default function PageBlocks({ blocks, localePrefix }: { blocks: any[]; lo
             );
           case 'social-responsibility':
             return (
-              <section key={index} {...sectionProps(block)} className="py-20 bg-white">
+              <section key={index} {...sectionProps(block)} className={`py-20 bg-white ${animationClass}`}>
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                   <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-end mb-16">
                     <div className="lg:col-span-8">
@@ -1255,7 +1305,7 @@ export default function PageBlocks({ blocks, localePrefix }: { blocks: any[]; lo
             );
           case 'contactForm':
             return (
-              <section key={index} {...sectionProps(block)} className="py-20 bg-gray-50">
+              <section key={index} {...sectionProps(block)} className={`py-20 bg-gray-50 ${animationClass}`}>
                 <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-16 items-center">
                   <div>
                     <h2 className="text-3xl lg:text-5xl font-extrabold text-gray-900 mb-6 tracking-tighter">

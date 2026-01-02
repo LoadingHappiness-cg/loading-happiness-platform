@@ -126,6 +126,7 @@ export default async function HomePage() {
     },
     limit: 1,
     locale,
+    fallbackLocale: 'en',
   });
 
   const page = pageResult.docs[0];
@@ -139,6 +140,7 @@ export default async function HomePage() {
     sort: '-publishedAt',
     limit: 3,
     locale,
+    fallbackLocale: 'en',
   });
 
   const latestInsightsHeading = await t('home.latestInsights');

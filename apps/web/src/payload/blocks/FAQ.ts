@@ -1,5 +1,5 @@
 
-import type { Block } from 'payload/types';
+import type { Block } from 'payload';
 
 const FAQBlock: Block = {
   slug: 'faq',

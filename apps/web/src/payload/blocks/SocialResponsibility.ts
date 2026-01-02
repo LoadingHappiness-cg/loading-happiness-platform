@@ -1,4 +1,4 @@
-import type { Block } from 'payload/types';
+import type { Block } from 'payload';
 
 const SocialResponsibilityBlock: Block = {
     slug: 'social-responsibility',
@@ -30,9 +30,6 @@ const SocialResponsibilityBlock: Block = {
             labels: {
                 singular: 'Initiative',
                 plural: 'Initiatives',
-            },
-            admin: {
-                useAsTitle: 'title',
             },
             fields: [
                 { name: 'title', type: 'text', required: true, localized: true },

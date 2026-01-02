@@ -1,5 +1,5 @@
 
-import type { Block } from 'payload/types';
+import type { Block } from 'payload';
 
 const TrustPartnersBlock: Block = {
   slug: 'trustPartners',

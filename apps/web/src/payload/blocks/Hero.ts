@@ -1,5 +1,5 @@
 
-import type { Block } from 'payload/types';
+import type { Block } from 'payload';
 
 const HeroBlock: Block = {
   slug: 'hero',
@@ -7,9 +7,6 @@ const HeroBlock: Block = {
   labels: {
     singular: 'Hero',
     plural: 'Heroes',
-  },
-  admin: {
-    useAsTitle: 'heading',
   },
   fields: [
     {
@@ -142,9 +139,6 @@ const HeroBlock: Block = {
         singular: 'Badge',
         plural: 'Badges',
       },
-      admin: {
-        useAsTitle: 'text',
-      },
       fields: [
         { name: 'text', type: 'text', localized: true },
         { name: 'label', type: 'text', localized: true },
@@ -157,9 +151,6 @@ const HeroBlock: Block = {
       labels: {
         singular: 'Fact',
         plural: 'Facts',
-      },
-      admin: {
-        useAsTitle: 'label',
       },
       fields: [
         { name: 'label', type: 'text', required: true, localized: true },

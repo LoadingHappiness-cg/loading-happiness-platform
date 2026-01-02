@@ -6,6 +6,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
+import Link from 'next/link';
 
 type DashboardStats = {
     totalPosts: number;
@@ -88,12 +89,12 @@ export default function CustomDashboard() {
                         </svg>
                         {aiGenerating ? 'Gerando...' : 'Criar Post com IA'}
                     </button>
-                    <a
+                    <Link
                         href="/admin/collections/content"
                         className="px-6 py-3 bg-white border border-gray-300 text-gray-700 rounded-xl font-semibold hover:bg-gray-50 transition-all"
                     >
                         Ver Todos os Posts
-                    </a>
+                    </Link>
                 </div>
             </div>
 
@@ -193,12 +194,12 @@ export default function CustomDashboard() {
                             date="Há 3 dias"
                         />
                     </div>
-                    <a
+                    <Link
                         href="/admin/collections/content"
                         className="mt-4 inline-flex items-center text-sm font-semibold text-primary hover:text-primaryDark"
                     >
                         Ver todos →
-                    </a>
+                    </Link>
                 </div>
 
                 <div className="bg-white rounded-2xl p-6 border border-gray-200">
@@ -384,9 +385,9 @@ export default function CustomDashboard() {
                                     <p className="text-green-600 font-bold flex items-center justify-center gap-2 mb-2">
                                         <span>✅</span> Imagem guardada na Media Library!
                                     </p>
-                                    <a href="/admin/collections/media" className="text-primary font-semibold hover:underline">
+                                    <Link href="/admin/collections/media" className="text-primary font-semibold hover:underline">
                                         Ver na Galeria →
-                                    </a>
+                                    </Link>
                                 </div>
                             </div>
                         ) : (
@@ -434,7 +435,7 @@ function StatCard({ title, value, icon, color, trend, alert }: {
 
 function QuickAction({ title, description, icon, href }: any) {
     return (
-        <a
+        <Link
             href={href}
             className="flex items-start gap-3 p-4 rounded-xl border border-gray-200 hover:border-primary hover:bg-primary/5 transition-all group"
         >
@@ -445,7 +446,7 @@ function QuickAction({ title, description, icon, href }: any) {
                 </div>
                 <div className="text-sm text-gray-600">{description}</div>
             </div>
-        </a>
+        </Link>
     );
 }
 

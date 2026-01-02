@@ -1,4 +1,4 @@
-import type { Block } from 'payload/types';
+import type { Block } from 'payload';
 
 const TimelineBlock: Block = {
     slug: 'timeline',
@@ -30,9 +30,6 @@ const TimelineBlock: Block = {
             labels: {
                 singular: 'Event',
                 plural: 'Events',
-            },
-            admin: {
-                useAsTitle: 'title',
             },
             fields: [
                 { name: 'yearOrPeriod', type: 'text', required: true, localized: true },

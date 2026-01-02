@@ -4,9 +4,26 @@
  */
 
 import { NextResponse } from 'next/server';
+import { PHASE_PRODUCTION_BUILD } from 'next/constants';
 import { getPayloadClient } from '@/lib/payload';
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+export const fetchCache = 'force-no-store';
+
 export async function GET() {
+    if (process.env.NEXT_PHASE === PHASE_PRODUCTION_BUILD) {
+        return NextResponse.json({
+            totalPosts: 0,
+            publishedPosts: 0,
+            draftPosts: 0,
+            totalViews: 0,
+            postsThisMonth: 0,
+            avgReadingTime: 0,
+            totalImages: 0,
+            imagesWithoutAlt: 0,
+        });
+    }
     try {
         const payload = await getPayloadClient();
 

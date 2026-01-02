@@ -29,5 +29,5 @@ export default async function PayloadPage({ params }: PageProps) {
     notFound();
   }
 
-  return <PageBlocks blocks={page.layout} localePrefix={localePrefix} />;
+  return <PageBlocks blocks={page.layout ?? []} localePrefix={localePrefix} />;
 }

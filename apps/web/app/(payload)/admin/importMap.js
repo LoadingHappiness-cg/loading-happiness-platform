@@ -1,13 +1,13 @@
+import { LogoutButton as LogoutButton_a176b92c329799a7beb16b735a3c3c08 } from '../../../app/(payload)/admin/components/LogoutButton'
+import { default as default_68e154c40a6751bc87571f3d213d281a } from '../../../app/(payload)/admin/components/CustomDashboard'
+import { EntraLogin as EntraLogin_4514b0342f9cbc975a275f4d7a76f330 } from '../../../app/(payload)/admin/components/EntraLogin'
 import { S3ClientUploadHandler as S3ClientUploadHandler_f97aa6c64367fa259c5bc0567239ef24 } from '@payloadcms/storage-s3/client'
 import { CollectionCards as CollectionCards_ab83ff7e88da8d3530831f296ec4756a } from '@payloadcms/ui/rsc'
-import { LogoutButton as LogoutButton_1f7fb5ab2ae9a026b2e6b6a7f6b3c1ac } from './components/LogoutButton'
-import { EntraLogin as EntraLogin_67e6c3d322b6a2b4a41b61f2d1a76f12 } from './components/EntraLogin'
-import { default as CustomDashboard_8a5d7b7a1baf5bf0f87d9c5b81b2a6d1 } from './components/CustomDashboard'
 
 export const importMap = {
+  "/app/(payload)/admin/components/LogoutButton#LogoutButton": LogoutButton_a176b92c329799a7beb16b735a3c3c08,
+  "/app/(payload)/admin/components/CustomDashboard#default": default_68e154c40a6751bc87571f3d213d281a,
+  "/app/(payload)/admin/components/EntraLogin#EntraLogin": EntraLogin_4514b0342f9cbc975a275f4d7a76f330,
   "@payloadcms/storage-s3/client#S3ClientUploadHandler": S3ClientUploadHandler_f97aa6c64367fa259c5bc0567239ef24,
-  "@payloadcms/ui/rsc#CollectionCards": CollectionCards_ab83ff7e88da8d3530831f296ec4756a,
-  "/app/(payload)/admin/components/LogoutButton#LogoutButton": LogoutButton_1f7fb5ab2ae9a026b2e6b6a7f6b3c1ac,
-  "/app/(payload)/admin/components/EntraLogin#EntraLogin": EntraLogin_67e6c3d322b6a2b4a41b61f2d1a76f12,
-  "/app/(payload)/admin/components/CustomDashboard#default": CustomDashboard_8a5d7b7a1baf5bf0f87d9c5b81b2a6d1
+  "@payloadcms/ui/rsc#CollectionCards": CollectionCards_ab83ff7e88da8d3530831f296ec4756a
 }

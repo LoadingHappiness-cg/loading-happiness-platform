@@ -15,10 +15,13 @@ export default async function AdminNotFound({ params, searchParams }: NotFoundPr
   const resolvedParams = await params;
   const resolvedSearchParams = await searchParams;
   const segments = resolvedParams?.segments ?? [];
+  const cleanedSearchParams = Object.fromEntries(
+    Object.entries(resolvedSearchParams ?? {}).filter(([, value]) => value !== undefined),
+  ) as Record<string, string | string[]>;
   return NotFoundPage({
     config,
     importMap,
     params: Promise.resolve({ segments }),
-    searchParams: Promise.resolve(resolvedSearchParams ?? {}),
+    searchParams: Promise.resolve(cleanedSearchParams),
   });
 }

@@ -2,9 +2,12 @@ import fs from 'fs/promises';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { getPayload } from 'payload';
+import type { Page } from '@/payload-types';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+type PageLayout = NonNullable<Page['layout']>;
 
 const placeholderPng = Buffer.from(
   'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGMAAQAABQABDQottAAAAABJRU5ErkJggg==',
@@ -73,7 +76,7 @@ const main = async () => {
   const heroImage = await ensureMedia(payload, 'Hero Contact');
   const supportImage = await ensureMedia(payload, 'Contact Support');
 
-  const layoutPt = [
+  const layoutPt: PageLayout = [
     {
       blockType: 'hero',
       enabled: true,
@@ -112,8 +115,7 @@ const main = async () => {
         { item: 'Plano inicial com prioridades claras' },
         { item: 'Transparência total em custos e prazos' },
       ],
-      ctaLabel: 'Agendar chamada',
-      ctaHref: '/contact',
+      cta: { label: 'Agendar chamada', link: '/contact' },
       secondaryLinkLabel: 'Conhecer a equipa',
       secondaryLinkHref: '/about',
       image: supportImage,
@@ -154,7 +156,7 @@ const main = async () => {
     },
   ];
 
-  const layoutEn = [
+  const layoutEn: PageLayout = [
     {
       blockType: 'hero',
       enabled: true,
@@ -193,8 +195,7 @@ const main = async () => {
         { item: 'Initial plan with clear priorities' },
         { item: 'Full transparency on cost and timeline' },
       ],
-      ctaLabel: 'Schedule a call',
-      ctaHref: '/contact',
+      cta: { label: 'Schedule a call', link: '/contact' },
       secondaryLinkLabel: 'Meet the team',
       secondaryLinkHref: '/about',
       image: supportImage,

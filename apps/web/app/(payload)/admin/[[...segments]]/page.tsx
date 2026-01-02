@@ -13,19 +13,24 @@ type PageProps = {
 
 export async function generateMetadata({ params }: { params: PageProps['params'] }) {
   const resolvedParams = await params;
+  const cleanedSearchParams: Record<string, string | string[]> = {};
   return generatePageMetadata({
     config,
     params: Promise.resolve({ segments: resolvedParams?.segments ?? [] }),
+    searchParams: Promise.resolve(cleanedSearchParams),
   });
 }
 
 export default async function AdminPage({ params, searchParams }: PageProps) {
   const resolvedParams = await params;
   const resolvedSearchParams = await searchParams;
+  const cleanedSearchParams = Object.fromEntries(
+    Object.entries(resolvedSearchParams ?? {}).filter(([, value]) => value !== undefined),
+  ) as Record<string, string | string[]>;
   return RootPage({
     config,
     importMap,
     params: Promise.resolve({ segments: resolvedParams?.segments ?? [] }),
-    searchParams: Promise.resolve(resolvedSearchParams ?? {}),
+    searchParams: Promise.resolve(cleanedSearchParams),
   });
 }

@@ -30,8 +30,8 @@ export default async function ServiceDetailPage({ params }: PageProps) {
   }
 
   const blocks = page.serviceTemplate
-    ? buildTemplateBlocks(page, page.layout)
-    : page.layout;
+    ? buildTemplateBlocks(page, page.layout ?? [])
+    : page.layout ?? [];
 
   return <PageBlocks blocks={blocks} localePrefix={localePrefix} />;
 }

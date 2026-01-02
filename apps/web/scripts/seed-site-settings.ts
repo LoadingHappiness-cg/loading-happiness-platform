@@ -2,9 +2,13 @@ import fs from 'fs/promises';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { getPayload } from 'payload';
+import type { SiteSetting } from '@/payload-types';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+type HeaderLinks = NonNullable<NonNullable<SiteSetting['header']>['links']>;
+type FooterSocials = NonNullable<NonNullable<SiteSetting['footer']>['socials']>;
 
 const loadEnvFile = async () => {
   const envPath = path.resolve(__dirname, '../.env.local');
@@ -68,7 +72,7 @@ const main = async () => {
   const logoColorId = await ensureMedia(payload, 'Loading Happiness Logo', logoColorPath);
   const logoWhiteId = await ensureMedia(payload, 'Loading Happiness Logo (White)', logoWhitePath);
 
-  const headerLinks = [
+  const headerLinks: HeaderLinks = [
     {
       label: 'Services',
       href: '/services',
@@ -177,7 +181,7 @@ const main = async () => {
       ],
     },
   ];
-  const footerSocials = [
+  const footerSocials: FooterSocials = [
     { platform: 'linkedin', url: 'https://www.linkedin.com/' },
     { platform: 'instagram', url: 'https://www.instagram.com/' },
   ];

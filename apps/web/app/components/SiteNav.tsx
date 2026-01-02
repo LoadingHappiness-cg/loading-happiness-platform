@@ -66,12 +66,18 @@ export default async function SiteNav() {
       />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
-          <Link href={localePrefix} className="flex items-center gap-2 text-ink">
+          <Link href={localePrefix} className="site-logo flex items-center gap-2 text-ink">
             {header.logo && typeof header.logo !== 'string' ? (
-              <img src={header.logo.url} alt={header.logoAlt || 'Loading Happiness'} className="h-8 w-auto" />
+              <img
+                src={header.logo.url}
+                alt={header.logoAlt || 'Loading Happiness'}
+                className="site-logo-img h-10 w-auto"
+              />
             ) : (
               <>
-                <span className="w-8 h-8 rounded-lg bg-primaryDark text-surface font-bold grid place-items-center">L</span>
+                <span className="site-logo-mark w-10 h-10 rounded-lg bg-primaryDark text-surface font-bold grid place-items-center">
+                  L
+                </span>
                 <span className="text-lg font-bold tracking-tight">Loading Happiness</span>
               </>
             )}
@@ -88,7 +94,7 @@ export default async function SiteNav() {
                       {link.label}
                       <span className="text-xs text-gray-400">▾</span>
                     </Link>
-                    <div className="pointer-events-none opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto group-focus-within:opacity-100 group-focus-within:translate-y-0 group-focus-within:pointer-events-auto transition-all duration-200 absolute left-1/2 -translate-x-1/2 mt-3 w-[420px]">
+                    <div className="pointer-events-none opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto group-focus-within:opacity-100 group-focus-within:translate-y-0 group-focus-within:pointer-events-auto transition-all duration-200 absolute left-1/2 -translate-x-1/2 pt-3 w-[420px]">
                       <div className="rounded-2xl border border-gray-100 bg-white shadow-2xl shadow-gray-200/40 p-4">
                         <div className="grid gap-3">
                           {link.items.map((item: any, itemIndex: number) => (

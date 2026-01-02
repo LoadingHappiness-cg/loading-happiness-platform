@@ -1,5 +1,5 @@
 
-import type { CollectionConfig } from 'payload/types';
+import type { CollectionConfig } from 'payload';
 
 const ContactSubmissions: CollectionConfig = {
   slug: 'contact-submissions',

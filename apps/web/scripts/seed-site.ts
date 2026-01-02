@@ -2,9 +2,30 @@ import fs from 'fs/promises';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { getPayload } from 'payload';
+import type { Content, Page } from '@/payload-types';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+type PageLayout = NonNullable<Page['layout']>;
+type ServiceTemplateData = NonNullable<Page['serviceTemplateData']>;
+type ContentBody = Content['body'];
+type ContentSeedItem = {
+  slugPt: string;
+  slugEn: string;
+  contentType: Content['contentType'];
+  titlePt: string;
+  titleEn: string;
+  excerptPt: string;
+  excerptEn: string;
+  tags?: Content['tags'];
+  categories?: Content['categories'];
+  authors: Content['authors'];
+  bodyPt: ContentBody;
+  bodyEn: ContentBody;
+  videoDataPt?: Content['videoData'];
+  videoDataEn?: Content['videoData'];
+};
 
 const placeholderPng = Buffer.from(
   'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGMAAQAABQABDQottAAAAABJRU5ErkJggg==',
@@ -1007,7 +1028,7 @@ const main = async () => {
   ];
 
   for (const service of servicePages) {
-    const templateData = {
+    const templateData: ServiceTemplateData = {
       hero: {
         heading: service.title,
         subheading: service.hero,
@@ -1453,7 +1474,7 @@ const main = async () => {
     }
   );
 
-  const contentSeed = [
+  const contentSeed: ContentSeedItem[] = [
     {
       slugPt: 'checklist-seguranca-base',
       slugEn: 'security-basics-checklist',
@@ -1594,7 +1615,17 @@ const main = async () => {
     });
 
     let id = existing.docs?.[0]?.id;
-    const baseData = {
+    const baseData: Pick<
+      Content,
+      | 'contentType'
+      | 'status'
+      | 'publishedAt'
+      | 'featuredImage'
+      | 'authors'
+      | 'categories'
+      | 'tags'
+      | 'heroStyle'
+    > = {
       contentType: item.contentType,
       status: 'published',
       publishedAt: now,

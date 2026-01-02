@@ -20,16 +20,8 @@ export const getLocale = async (): Promise<Locale> => {
 
 export const getLocalePrefix = async () => `/${await getLocale()}`;
 
-export const withLocale = (href: string, prefix = '/pt') => {
-  if (!href.startsWith('/')) {
-    return href;
-  }
-  if (href.startsWith('/pt') || href.startsWith('/en')) {
-    const normalized = href.replace(/^\/(pt|en)(?=\/|$)/, '');
-    return `${prefix}${normalized || ''}`;
-  }
-  return `${prefix}${href}`;
-};
+export { withLocale } from './locale-utils';
+
 
 /**
  * Get a translation for the current locale (server-side)

@@ -6,6 +6,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
+import Link from 'next/link';
 
 type DashboardStats = {
     totalPosts: number;
@@ -80,12 +81,12 @@ export default function CustomDashboard() {
                         </svg>
                         {aiGenerating ? 'Gerando...' : 'Criar Post com IA'}
                     </button>
-                    <a
+                    <Link
                         href="/admin/collections/content"
                         className="px-6 py-3 bg-white border border-gray-300 text-gray-700 rounded-xl font-semibold hover:bg-gray-50 transition-all"
                     >
                         Ver Todos os Posts
-                    </a>
+                    </Link>
                 </div>
             </div>
 
@@ -185,12 +186,12 @@ export default function CustomDashboard() {
                             date="Há 3 dias"
                         />
                     </div>
-                    <a
+                    <Link
                         href="/admin/collections/content"
                         className="mt-4 inline-flex items-center text-sm font-semibold text-primary hover:text-primaryDark"
                     >
                         Ver todos →
-                    </a>
+                    </Link>
                 </div>
 
                 <div className="bg-white rounded-2xl p-6 border border-gray-200">
@@ -262,16 +263,54 @@ export default function CustomDashboard() {
 
 // Helper Components
 
-function StatCard({ title, value, icon, color, trend, alert }: any) {
-    const colors = {
-        blue: 'from-blue-500 to-blue-600',
-        green: 'from-green-500 to-green-600',
-        purple: 'from-purple-500 to-purple-600',
-        orange: 'from-orange-500 to-orange-600',
-    };
+type StatColor = 'blue' | 'green' | 'purple' | 'orange';
+type StatusColor = 'published' | 'draft';
+type TipType = 'warning' | 'error' | 'info';
+
+type StatCardProps = {
+    title: string;
+    value: string | number;
+    icon: string;
+    color: StatColor;
+    trend?: string;
+    alert?: boolean | null;
+};
+
+type RecentItemProps = {
+    title: string;
+    status: StatusColor;
+    date: string;
+};
+
+type TipCardProps = {
+    title: string;
+    description: string;
+    action: string;
+    type: TipType;
+};
+
+const STAT_COLORS: Record<StatColor, string> = {
+    blue: 'from-blue-500 to-blue-600',
+    green: 'from-green-500 to-green-600',
+    purple: 'from-purple-500 to-purple-600',
+    orange: 'from-orange-500 to-orange-600',
+};
+
+const STATUS_COLORS: Record<StatusColor, string> = {
+    published: 'bg-green-100 text-green-800',
+    draft: 'bg-yellow-100 text-yellow-800',
+};
+
+const TIP_COLORS: Record<TipType, string> = {
+    warning: 'border-yellow-200 bg-yellow-50',
+    error: 'border-red-200 bg-red-50',
+    info: 'border-blue-200 bg-blue-50',
+};
+
+function StatCard({ title, value, icon, color, trend, alert }: StatCardProps) {
 
     return (
-        <div className={`bg-gradient-to-br ${colors[color]} rounded-2xl p-6 text-white shadow-lg ${alert ? 'ring-2 ring-red-500' : ''}`}>
+        <div className={`bg-gradient-to-br ${STAT_COLORS[color]} rounded-2xl p-6 text-white shadow-lg ${alert ? 'ring-2 ring-red-500' : ''}`}>
             <div className="flex items-center justify-between mb-2">
                 <span className="text-3xl">{icon}</span>
                 {alert && <span className="text-xs bg-red-500 px-2 py-1 rounded-full">!</span>}
@@ -285,7 +324,7 @@ function StatCard({ title, value, icon, color, trend, alert }: any) {
 
 function QuickAction({ title, description, icon, href }: any) {
     return (
-        <a
+        <Link
             href={href}
             className="flex items-start gap-3 p-4 rounded-xl border border-gray-200 hover:border-primary hover:bg-primary/5 transition-all group"
         >
@@ -296,38 +335,27 @@ function QuickAction({ title, description, icon, href }: any) {
                 </div>
                 <div className="text-sm text-gray-600">{description}</div>
             </div>
-        </a>
+        </Link>
     );
 }
 
-function RecentItem({ title, status, date }: any) {
-    const statusColors = {
-        published: 'bg-green-100 text-green-800',
-        draft: 'bg-yellow-100 text-yellow-800',
-    };
-
+function RecentItem({ title, status, date }: RecentItemProps) {
     return (
         <div className="flex items-center justify-between py-2 border-b border-gray-100 last:border-0">
             <div>
                 <div className="font-medium text-gray-900">{title}</div>
                 <div className="text-sm text-gray-500">{date}</div>
             </div>
-            <span className={`px-3 py-1 rounded-full text-xs font-semibold ${statusColors[status]}`}>
+            <span className={`px-3 py-1 rounded-full text-xs font-semibold ${STATUS_COLORS[status]}`}>
                 {status === 'published' ? 'Publicado' : 'Rascunho'}
             </span>
         </div>
     );
 }
 
-function TipCard({ title, description, action, type }: any) {
-    const typeColors = {
-        warning: 'border-yellow-200 bg-yellow-50',
-        error: 'border-red-200 bg-red-50',
-        info: 'border-blue-200 bg-blue-50',
-    };
-
+function TipCard({ title, description, action, type }: TipCardProps) {
     return (
-        <div className={`p-4 rounded-xl border ${typeColors[type]}`}>
+        <div className={`p-4 rounded-xl border ${TIP_COLORS[type]}`}>
             <div className="font-semibold text-gray-900 mb-1">{title}</div>
             <div className="text-sm text-gray-600 mb-3">{description}</div>
             <button className="text-sm font-semibold text-primary hover:text-primaryDark">

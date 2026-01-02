@@ -51,7 +51,7 @@ export default async function SiteFooter() {
   const copyrightText = footer.bottomText || await t('footer.copyright', { year: new Date().getFullYear() });
   return (
     <footer className="mt-20">
-      <div className="bg-[#332570] text-white">
+      <div className="bg-gradient-to-b from-[#40506b] via-[#36455d] to-[#2b374c] text-white">
         <div className="mx-auto max-w-6xl px-4 py-12">
           <div className="grid gap-10 md:grid-cols-3">
             <div>
@@ -248,7 +248,7 @@ export default async function SiteFooter() {
         </div>
       </div>
 
-      <div className="bg-[#2b2b2b] text-white/90">
+      <div className="bg-[#273245] text-white/90">
         <div className="mx-auto max-w-6xl px-4 py-4 flex flex-wrap items-center gap-x-4 gap-y-2 justify-center text-sm">
           {legalLinks.map((link: any, index: number) => (
             <span key={`${link.href}-${index}`} className="flex items-center gap-4">

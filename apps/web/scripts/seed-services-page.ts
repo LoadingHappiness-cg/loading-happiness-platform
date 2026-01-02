@@ -2,9 +2,12 @@ import fs from 'fs/promises';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { getPayload } from 'payload';
+import type { Page } from '@/payload-types';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+type PageLayout = NonNullable<Page['layout']>;
 
 const placeholderPng = Buffer.from(
   'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGMAAQAABQABDQottAAAAABJRU5ErkJggg==',
@@ -73,7 +76,7 @@ const main = async () => {
   const heroImage = await ensureMedia(payload, 'Services Hero');
   const splitImage = await ensureMedia(payload, 'Services Split');
 
-  const layoutPt = [
+  const layoutPt: PageLayout = [
     {
       blockType: 'hero',
       enabled: true,
@@ -178,8 +181,7 @@ const main = async () => {
           ],
         },
       ],
-      ctaLabel: 'Ver todos os servicos',
-      ctaHref: '/services',
+      cta: { label: 'Ver todos os servicos', link: '/services' },
     },
     {
       blockType: 'twoColumnList',
@@ -343,7 +345,7 @@ const main = async () => {
     },
   ];
 
-  const layoutEn = [
+  const layoutEn: PageLayout = [
     {
       blockType: 'hero',
       enabled: true,
@@ -448,8 +450,7 @@ const main = async () => {
           ],
         },
       ],
-      ctaLabel: 'View all services',
-      ctaHref: '/services',
+      cta: { label: 'View all services', link: '/services' },
     },
     {
       blockType: 'twoColumnList',

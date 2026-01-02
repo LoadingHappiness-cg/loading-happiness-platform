@@ -40,6 +40,9 @@ const Pages: CollectionConfig = {
   },
   access: {
     read: () => true,
+    create: ({ req: { user } }) => !!user,
+    update: ({ req: { user } }) => !!user,
+    delete: ({ req: { user } }) => !!user,
   },
   fields: [
     {
@@ -166,9 +169,6 @@ const Pages: CollectionConfig = {
                 singular: 'Badge',
                 plural: 'Badges',
               },
-              admin: {
-                useAsTitle: 'text',
-              },
               fields: [{ name: 'text', type: 'text', localized: true }],
             },
             {
@@ -191,9 +191,6 @@ const Pages: CollectionConfig = {
                 singular: 'Item',
                 plural: 'Items',
               },
-              admin: {
-                useAsTitle: 'text',
-              },
               fields: [{ name: 'text', type: 'text', localized: true }],
             },
           ],
@@ -210,9 +207,6 @@ const Pages: CollectionConfig = {
               labels: {
                 singular: 'Item',
                 plural: 'Items',
-              },
-              admin: {
-                useAsTitle: 'title',
               },
               fields: [
                 { name: 'title', type: 'text', localized: true },
@@ -234,9 +228,6 @@ const Pages: CollectionConfig = {
                 singular: 'Outcome',
                 plural: 'Outcomes',
               },
-              admin: {
-                useAsTitle: 'title',
-              },
               fields: [
                 { name: 'title', type: 'text', localized: true },
                 { name: 'text', type: 'text', localized: true },
@@ -257,9 +248,6 @@ const Pages: CollectionConfig = {
                 singular: 'Step',
                 plural: 'Steps',
               },
-              admin: {
-                useAsTitle: 'title',
-              },
               fields: [
                 { name: 'title', type: 'text', localized: true },
                 { name: 'text', type: 'text', localized: true },
@@ -279,9 +267,6 @@ const Pages: CollectionConfig = {
                 singular: 'Checklist Item',
                 plural: 'Checklist Items',
               },
-              admin: {
-                useAsTitle: 'item',
-              },
               fields: [{ name: 'item', type: 'text', localized: true }],
             },
           ],
@@ -298,9 +283,6 @@ const Pages: CollectionConfig = {
               labels: {
                 singular: 'Stat',
                 plural: 'Stats',
-              },
-              admin: {
-                useAsTitle: 'label',
               },
               fields: [
                 { name: 'label', type: 'text', localized: true },

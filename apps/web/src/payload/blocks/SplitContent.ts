@@ -1,5 +1,5 @@
 
-import type { Block } from 'payload/types';
+import type { Block } from 'payload';
 
 const SplitContentBlock: Block = {
   slug: 'splitContent',
@@ -84,7 +84,7 @@ const SplitContentBlock: Block = {
     },
     {
       name: 'reverse',
-      type: 'boolean',
+      type: 'checkbox',
       label: 'Reverse Layout (Image Left)',
       defaultValue: false,
     },
