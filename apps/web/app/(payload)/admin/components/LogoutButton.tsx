@@ -9,11 +9,10 @@ export const LogoutButton = () => {
     try {
       if (typeof window !== 'undefined') {
         window.localStorage.setItem('payload-logout-signal', Date.now().toString());
+        ['payload-auth', 'payload-token'].forEach((cookie) => {
+          document.cookie = `${cookie}=; Max-Age=0; Path=/;`;
+        });
       }
-      await fetch('/api/logout', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-      });
       window.location.href = '/admin/logout';
     } catch (error) {
       console.error('Logout error:', error);

@@ -1,8 +1,8 @@
 import { RootPage, generatePageMetadata } from '@payloadcms/next/views';
 import { importMap } from '../importMap.js';
 import config from '@/payload.config';
+import { ForceDashboard } from '../components/ForceDashboard';
 import { LogoutRedirector } from '../components/LogoutRedirector';
-import { LoginPrompt } from '../components/LoginPrompt';
 
 type PageProps = {
   params: Promise<{
@@ -32,7 +32,7 @@ export default async function AdminPage({ params, searchParams }: PageProps) {
   return (
     <>
       <LogoutRedirector />
-      <LoginPrompt />
+      <ForceDashboard />
       {RootPage({
         config,
         importMap,
