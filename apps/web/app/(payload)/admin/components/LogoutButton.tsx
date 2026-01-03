@@ -7,12 +7,13 @@ export const LogoutButton = () => {
 
   const handleLogout = async () => {
     try {
-      // Clean up local cookies/storage just in case
       if (typeof window !== 'undefined') {
         window.localStorage.setItem('payload-logout-signal', Date.now().toString());
       }
-      await fetch('/api/users/logout', { method: 'POST' });
-      // Redirect to the standard logout route
+      await fetch('/api/logout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+      });
       window.location.href = '/admin/logout';
     } catch (error) {
       console.error('Logout error:', error);
@@ -30,4 +31,3 @@ export const LogoutButton = () => {
     </button>
   );
 };
-
