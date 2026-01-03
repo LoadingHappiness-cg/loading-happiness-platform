@@ -10,6 +10,8 @@ import Content from './src/payload/collections/Content.ts';
 import Authors from './src/payload/collections/Authors.ts';
 import Categories from './src/payload/collections/Categories.ts';
 import Tags from './src/payload/collections/Tags.ts';
+import TeamMembers from './src/payload/collections/TeamMembers.ts';
+import TrustedPartners from './src/payload/collections/TrustedPartners.ts';
 import SiteSettings from './src/payload/globals/SiteSettings.ts';
 import AuthSettings from './src/payload/globals/AuthSettings.ts';
 import { s3Storage } from '@payloadcms/storage-s3';
@@ -63,6 +65,8 @@ export default buildConfig({
     Authors,
     Categories,
     Tags,
+    TeamMembers,
+    TrustedPartners,
     ContactSubmissions,
     NewsletterSignups,
     {

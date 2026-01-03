@@ -1,6 +1,6 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
 
 :root {
   color-scheme: light;
@@ -90,6 +90,48 @@ body {
   transform: scale(1) !important;
 }
 
+.lh-delay-120 {
+  transition-delay: 120ms;
+}
+
+/* Staggered Animations */
+.animate-stagger>* {
+  opacity: 0;
+  animation: lh-fade-rise 0.8s ease-out forwards;
+}
+
+.animate-stagger>*:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.animate-stagger>*:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.animate-stagger>*:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.animate-stagger>*:nth-child(4) {
+  animation-delay: 0.4s;
+}
+
+/* Background Motion */
+@keyframes slow-zoom {
+  0% {
+    transform: scale(1);
+  }
+
+  100% {
+    transform: scale(1.1);
+  }
+}
+
+.animate-slow-zoom {
+  animation: slow-zoom 20s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite alternate;
+  will-change: transform;
+}
+
 /* 
    ADMIN IMPROVEMENTS - Minimalist & Safe 
 */
@@ -148,10 +190,12 @@ html[data-theme='light'] .template-login button[type="submit"] {
 }
 
 @keyframes logo-float {
+
   0%,
   100% {
     transform: translateY(0);
   }
+
   50% {
     transform: translateY(-2px);
   }
@@ -162,8 +206,29 @@ html[data-theme='light'] .template-login button[type="submit"] {
     opacity: 0;
     transform: translateY(6px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+/* Subtle noise texture */
+.bg-noise {
+  position: relative;
+}
+
+.bg-noise::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* Impact specific hero gradient */
+.bg-impact-gradient {
+  background: linear-gradient(135deg, #374B90 0%, #FFFFFF 100%);
 }

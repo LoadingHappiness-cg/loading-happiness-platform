@@ -1,10 +1,9 @@
 'use client';
 
-import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import LocalizedLink from './LocalizedLink';
 
 type TopBarProps = {
-  localePrefix: string;
   enabled?: boolean;
   businessHoursOnly?: boolean;
   text?: string | null;
@@ -20,7 +19,6 @@ const isBusinessHours = (now: Date) => {
 };
 
 export default function TopBar({
-  localePrefix,
   enabled = false,
   businessHoursOnly = true,
   text,
@@ -49,9 +47,9 @@ export default function TopBar({
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-8 flex items-center justify-between text-xs">
         <span className="text-gray-500">{text}</span>
         {linkLabel && linkHref && (
-          <Link href={linkHref.startsWith('/') ? `${localePrefix}${linkHref}` : linkHref} className="font-semibold text-accent hover:text-primaryDark">
+          <LocalizedLink href={linkHref} className="font-semibold text-accent hover:text-primaryDark">
             {linkLabel}
-          </Link>
+          </LocalizedLink>
         )}
       </div>
     </div>

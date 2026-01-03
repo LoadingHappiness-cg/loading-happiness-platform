@@ -430,128 +430,124 @@ const main = async () => {
           sectionId: 'intro',
           variant: 'A',
           theme: 'brandGradient',
-          heading: 'About Loading Happiness',
-          subheading: 'We build reliable, secure IT environments — with clarity, accountability, and a human approach.',
-          primaryCTA: { label: 'Book a call', link: '/contact' },
-          secondaryCTA: { label: 'Explore services', link: '/services' },
+          eyebrow: 'ABOUT LOADING HAPPINESS',
+          h1Title: 'Technology with a human heart. Built for real businesses.',
+          heading: 'Technology with a human heart. Built for real businesses.',
+          subheadline:
+            'We help organizations run smoother, safer, and smarter — with IT that feels clear, dependable, and genuinely supportive. We combine senior technical expertise with a very simple principle: people come first.',
+          subheading:
+            'We help organizations run smoother, safer, and smarter — with IT that feels clear, dependable, and genuinely supportive. We combine senior technical expertise with a very simple principle: people come first.',
+          trustLine: 'No jargon for show. No “IT theatre”. Just honest work, done properly.',
+          primaryCTA: { label: 'Talk to us →', link: '/contact' },
+          secondaryCTA: { label: 'Explore our Impact', link: '/impact' },
           image: heroImage,
-          badges: [
-            { text: 'Senior-led' },
-            { text: 'Security-first' },
-            { text: 'Documented decisions' },
-            { text: 'Built for SMEs' },
-          ],
+        },
+        {
+          blockType: 'splitContent',
+          sectionId: 'our-story',
+          title: 'From Sintra, with a practical mission',
+          sectionTitle: 'From Sintra, with a practical mission',
+          content:
+            'Loading Happiness was founded in October 2016, in Sintra, with a clear idea: give Portuguese small and mid-sized businesses the same quality of IT guidance and service usually reserved for big organizations.\n\nWe grew steadily by doing the basics exceptionally well: listening carefully, designing solutions that fit the real context, and staying close after delivery. That “stay close” part matters — because technology only works when people feel supported using it.',
         },
         {
           blockType: 'splitOverview',
-          sectionId: 'company-overview',
-          title: 'Company overview',
+          sectionId: 'why-loading-happiness',
+          title: 'A name that became a promise',
           content:
-            'Loading Happiness is an IT partner focused on stability, security, and long-term clarity. We help organizations reduce operational noise, strengthen their foundations, and modernize systems without disrupting day-to-day work.\n\nWe’re at our best when expectations are clear: what matters, what’s realistic, and what the next steps are.',
-          sideTitle: 'Quick facts',
+            '“Loading Happiness” started as a name on a list — and became the best summary of how we want clients to feel after working with us: lighter, more confident, and in control.\n\nHappiness here isn’t a slogan. It’s the result of systems that work, problems that don’t repeat, and relationships built on trust.',
+          sideTitle: 'How it should feel',
           sideItems: [
-            { text: 'Based in Portugal · Working with EU teams' },
-            { text: 'Focus: IT operations, cybersecurity, infrastructure, support' },
-            { text: 'Method: pragmatic delivery, documented decisions, measurable progress' },
+            { text: 'Lighter' },
+            { text: 'More confident' },
+            { text: 'In control' },
           ],
+        },
+        {
+          blockType: 'splitContent',
+          sectionId: 'philosophy',
+          title: 'Our philosophy',
+          sectionTitle: 'Our philosophy',
+          content:
+            'We believe the best IT is not just advanced — it’s human, clear, and responsible. Innovation matters, but not at the cost of confusion, stress, or unnecessary risk.\n\nOur approach is holistic: infrastructure, cloud, security, operations, and business systems should fit together like one coherent story — not a pile of tools.',
         },
         {
           blockType: 'valueCards',
-          sectionId: 'philosophy-values',
-          title: 'Philosophy and Values',
-          intro: 'We believe technology should serve people — not the other way around. Strong systems require both technical discipline and human clarity.',
-          cards: [
-            { title: 'Integrity', text: 'We say what’s true, even when it’s uncomfortable.', icon: '⚖️' },
-            { title: 'Empathy', text: 'Support is about people under pressure, not just tickets.', icon: '🤝' },
-            { title: 'Pragmatism', text: 'Secure and stable beats fancy and fragile.', icon: '🛠️' },
-            { title: 'Responsibility', text: 'Our work should leave a positive footprint.', icon: '🌍' },
-          ],
-        },
-        {
-          blockType: 'twoColumnList',
-          sectionId: 'partnership',
-          title: 'The Right Kind of Partnership',
-          intro: 'We’re not a “yes to everything” vendor. We work as a partner: we ask hard questions, document choices, and focus on outcomes. That’s how IT becomes predictable.',
-          leftTitle: 'What you get',
-          leftItems: [
-            { text: 'Clear priorities and scope' },
-            { text: 'Ownership and accountability' },
-            { text: 'Documentation that survives change' },
-            { text: 'Security improvements without drama' },
-          ],
-          rightTitle: 'What we need',
-          rightItems: [
-            { text: 'A point of contact and alignment on priorities' },
-            { text: 'Realistic timelines' },
-            { text: 'Willingness to fix root causes' },
-            { text: 'Respect for people and process' },
-          ],
-        },
-        {
-          blockType: 'process',
-          sectionId: 'our-approach',
-          title: 'Our approach',
-          steps: [
-            { title: 'Assess', content: 'We map risks, pain points, dependencies, and priorities.' },
-            { title: 'Stabilize', content: 'We fix what breaks daily flow and reduce incidents.' },
-            { title: 'Evolve', content: 'We improve, automate, and secure continuously.' },
-          ],
-          note: 'No surprises. Decisions are documented. Progress is measurable.',
-          image: processImage,
-        },
-        {
-          blockType: 'bulletsWithProof',
-          sectionId: 'why-choose-us',
-          title: 'Why choose us',
-          bullets: [
-            { text: 'Senior-level expertise with practical decisions' },
-            { text: 'Security as a foundation, not a sales pitch' },
-            { text: 'Vendor-neutral recommendations' },
-            { text: 'Clear communication and documented choices' },
-            { text: 'Systems built for continuity and recovery' },
-          ],
-          proofTitle: 'Mini-proof',
-          proofText:
-            'If you want calm operations, you need more than tools — you need discipline, clarity, and follow-through.',
-        },
-        {
-          blockType: 'logoCloud',
-          sectionId: 'partners',
-          title: 'Partners',
-          text:
-            'Partnerships are a tool — not a cage. We partner with vendors and specialists when it improves outcomes, support paths, and delivery speed. Our priority is always the right solution for your context.',
-          logos: [
-            { logo: testimonialLogo, alt: 'Partner logo' },
-            { logo: testimonialLogo, alt: 'Partner logo' },
-            { logo: testimonialLogo, alt: 'Partner logo' },
-            { logo: testimonialLogo, alt: 'Partner logo' },
-          ],
-        },
-        {
-          blockType: 'teamIntro',
-          sectionId: 'our-team',
-          title: 'Our team',
-          text:
-            'Loading Happiness is led by senior IT professionals with decades of experience in operations, infrastructure, and security. For specialized needs, we work with a trusted network — so you get the right expertise without unnecessary overhead.',
+          sectionId: 'values',
+          title: 'Values that show up in the work',
           cards: [
             {
-              title: 'Leadership & Delivery',
-              text: 'Operations, security, infrastructure.',
-              tags: [{ text: 'Operations' }, { text: 'Security' }, { text: 'Infrastructure' }],
+              title: 'Excellence, without arrogance',
+              text: 'We deliver enterprise-grade thinking, adapted to real constraints. No overengineering. No shortcuts.',
             },
             {
-              title: 'Trusted network',
-              text: 'Cloud, development, specialized security, and vendor escalation paths.',
-              tags: [{ text: 'Cloud' }, { text: 'Security' }, { text: 'Vendor' }],
+              title: 'Proximity and accountability',
+              text: 'We stay close, speak plainly, and take ownership. Solutions aren’t finished when they go live — they’re finished when they work in real life.',
+            },
+            {
+              title: 'Responsibility and care',
+              text: 'We treat clients, partners, and colleagues with respect — and we take social responsibility seriously, inside the company and beyond it.',
+            },
+            {
+              title: 'Courage to improve',
+              text: 'We face hard realities (risk culture, limited training, uncertainty) with patience and practical education — not blame.',
             },
           ],
-          ctaLabel: 'Book a call',
-          ctaLink: '/contact',
+        },
+        {
+          blockType: 'richText',
+          content: 'We don’t sell complexity. We build confidence.',
+        },
+        {
+          blockType: 'bullets',
+          sectionId: 'what-to-expect',
+          title: 'What you can expect from us',
+          items: [
+            { text: 'Clarity: you’ll understand what’s happening and why.' },
+            { text: 'Pragmatism: solutions designed for your reality, not a brochure.' },
+            { text: 'Security by default: safety is not an extra — it’s the baseline.' },
+            { text: 'Long-term thinking: we aim for stability, not constant firefighting.' },
+          ],
+        },
+        {
+          blockType: 'splitContent',
+          sectionId: 'social-responsibility',
+          title: 'A business should be a positive force',
+          sectionTitle: 'A business should be a positive force',
+          content:
+            'For us, social responsibility isn’t a side project — it’s part of how we define success. We invest in people, promote healthy growth inside the company, and contribute to community and environmental initiatives when we can create real value.',
+          secondaryLinkLabel: 'Want the concrete actions and measurable outcomes? See Impact',
+          secondaryLinkHref: '/impact',
+        },
+        {
+          blockType: 'splitContent',
+          sectionId: 'team',
+          title: 'The people behind the work',
+          sectionTitle: 'The people behind the work',
+          content:
+            'We’re a small team by choice — senior, hands-on, and close to the ground. That’s how we stay fast, honest, and accountable.',
+        },
+        {
+          blockType: 'splitContent',
+          sectionId: 'looking-ahead',
+          title: 'A more human future for technology',
+          sectionTitle: 'A more human future for technology',
+          content:
+            'We’re focused on practical innovation: cloud, automation, cybersecurity, AI, and modern business systems — always applied with care, and always tied to outcomes.\n\nWe want to grow sustainably, without losing what makes the work good: quality, closeness, and responsibility.',
+        },
+        {
+          blockType: 'finalCTA',
+          sectionId: 'cta',
+          title: 'Ready to build calmer, safer IT?',
+          content:
+            'Tell us where you are today — and where you want to be. We’ll give you a clear next step, without pressure and without fluff.',
+          primaryCTA: { label: 'Talk to us →', link: '/contact' },
+          secondaryCTA: { label: 'Explore our services', link: '/services' },
         },
       ],
       seo: {
         title: 'About Loading Happiness',
-        description: 'Reliable, secure IT environments with clarity and accountability.',
+        description: 'Technology with a human heart for calmer, safer IT.',
       },
     }
   );

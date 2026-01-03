@@ -1,8 +1,9 @@
-import Link from 'next/link';
-import { getLocale, getLocalePrefix, withLocale } from '@/lib/locale';
+import { getLocale } from '@/lib/locale';
 import { getPayloadClient } from '@/lib/payload';
 import TopBar from './TopBar';
 import { HeaderBg } from './HeaderBg';
+import LocaleSwitcher from './LocaleSwitcher';
+import LocalizedLink from './LocalizedLink';
 
 const fallbackHeaderLinks = [
   {
@@ -25,19 +26,18 @@ const fallbackHeaderLinks = [
     label: 'About',
     type: 'dropdown',
     items: [
-      { href: '/about#company-overview', label: 'Company overview', description: 'Stability, security, long-term clarity.' },
-      { href: '/about#philosophy-values', label: 'Philosophy & values', description: 'Human clarity + technical discipline.' },
-      { href: '/about#partnership', label: 'Partnership', description: 'What you get and what we need.' },
-      { href: '/about#our-approach', label: 'Our approach', description: 'Assess → stabilize → evolve.' },
-      { href: '/about#why-choose-us', label: 'Why choose us', description: 'Senior decisions, vendor-neutral.' },
-      { href: '/about#our-team', label: 'Our team', description: 'Senior core + trusted network.' },
+      { href: '/about#our-story', label: 'Our story', description: 'Founded in Sintra, built for real businesses.' },
+      { href: '/about#why-loading-happiness', label: 'Why Loading Happiness', description: 'A name that became a promise.' },
+      { href: '/about#philosophy', label: 'Our philosophy', description: 'Human, clear, responsible.' },
+      { href: '/about#values', label: 'Values', description: 'How we show up in the work.' },
+      { href: '/about#what-to-expect', label: 'What to expect', description: 'Clarity, pragmatism, security by default.' },
+      { href: '/about#team', label: 'Our team', description: 'Senior, hands-on, close to the ground.' },
     ],
   },
   { href: '/contact', label: 'Contact' },
 ];
 
 export default async function SiteNav() {
-  const localePrefix = await getLocalePrefix();
   const locale = await getLocale();
   const payload = await getPayloadClient();
   let settings: any = null;
@@ -57,7 +57,6 @@ export default async function SiteNav() {
     <nav className="sticky top-0 z-50 border-b border-gray-200/50 bg-white/5 backdrop-blur-2xl shadow-sm">
       <HeaderBg />
       <TopBar
-        localePrefix={localePrefix}
         enabled={header.topBar?.enabled}
         businessHoursOnly={header.topBar?.businessHoursOnly}
         text={header.topBar?.text}
@@ -66,7 +65,7 @@ export default async function SiteNav() {
       />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
-          <Link href={localePrefix} className="site-logo flex items-center gap-2 text-ink">
+          <LocalizedLink href="/" className="site-logo flex items-center gap-2 text-ink">
             {header.logo && typeof header.logo !== 'string' ? (
               <img
                 src={header.logo.url}
@@ -81,31 +80,31 @@ export default async function SiteNav() {
                 <span className="text-lg font-bold tracking-tight">Loading Happiness</span>
               </>
             )}
-          </Link>
+          </LocalizedLink>
           <div className="hidden md:flex items-center gap-6 text-sm font-medium text-gray-600">
             {headerLinks.map((link: any, linkIndex: number) => {
               if (link.type === 'dropdown' && link.items?.length) {
                 return (
                   <div key={`${link.label}-${linkIndex}`} className="relative group">
-                    <Link
-                      href={withLocale(link.href, localePrefix)}
+                    <LocalizedLink
+                      href={link.href}
                       className="inline-flex items-center gap-2 hover:text-accent transition-colors"
                     >
                       {link.label}
                       <span className="text-xs text-gray-400">▾</span>
-                    </Link>
+                    </LocalizedLink>
                     <div className="pointer-events-none opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto group-focus-within:opacity-100 group-focus-within:translate-y-0 group-focus-within:pointer-events-auto transition-all duration-200 absolute left-1/2 -translate-x-1/2 pt-3 w-[420px]">
                       <div className="rounded-2xl border border-gray-100 bg-white shadow-2xl shadow-gray-200/40 p-4">
                         <div className="grid gap-3">
                           {link.items.map((item: any, itemIndex: number) => (
-                            <Link
+                            <LocalizedLink
                               key={`${item.href}-${itemIndex}`}
-                              href={withLocale(item.href, localePrefix)}
+                              href={item.href}
                               className="rounded-xl p-3 hover:bg-gray-50 transition-colors"
                             >
                               <p className="text-sm font-semibold text-gray-900">{item.label}</p>
                               {item.description && <p className="text-xs text-gray-500">{item.description}</p>}
-                            </Link>
+                            </LocalizedLink>
                           ))}
                         </div>
                       </div>
@@ -114,25 +113,21 @@ export default async function SiteNav() {
                 );
               }
               return (
-                <Link key={`${link.href}-${linkIndex}`} href={withLocale(link.href, localePrefix)} className="hover:text-accent transition-colors">
+                <LocalizedLink key={`${link.href}-${linkIndex}`} href={link.href} className="hover:text-accent transition-colors">
                   {link.label}
-                </Link>
+                </LocalizedLink>
               );
             })}
             {headerCta?.href && headerCta?.label && (
-              <Link
-                href={withLocale(headerCta.href, localePrefix)}
+              <LocalizedLink
+                href={headerCta.href}
                 className="px-4 py-2 rounded-lg bg-primary text-white hover:bg-primaryDark transition-colors"
                 data-umami-event="cta-book-call"
               >
                 {headerCta.label}
-              </Link>
+              </LocalizedLink>
             )}
-            <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest">
-              <Link href="/pt" className="text-gray-400 hover:text-ink">PT</Link>
-              <span className="text-gray-300">/</span>
-              <Link href="/en" className="text-gray-400 hover:text-ink">EN</Link>
-            </div>
+            <LocaleSwitcher />
           </div>
         </div>
       </div>

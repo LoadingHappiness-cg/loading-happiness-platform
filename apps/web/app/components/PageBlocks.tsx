@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useEffect, useRef } from 'react';
 import { withLocale } from '@/lib/locale-utils';
+import { SectionWrapper } from './SectionWrapper';
 import ContactForm from './ContactForm';
 
 const gridCols: Record<number, string> = {
@@ -138,18 +139,22 @@ export default function PageBlocks({ blocks, localePrefix }: { blocks: any[]; lo
                 ? 'bg-gradient-to-br from-brand-midnight/10 via-white to-brand-sky/15'
                 : heroTheme === 'dark'
                   ? 'bg-ink text-white'
-                  : 'bg-white';
+                  : heroTheme === 'impact'
+                    ? 'bg-impact-gradient bg-noise'
+                    : 'bg-white';
             const media = getMediaMeta(block.heroImage || block.image);
             const hideMedia = block.mediaType === 'none';
             const prefersMedia = block.mediaType === 'videoThumbnail';
             const heroVariantClass =
               variant === 'B'
                 ? 'py-24 lg:py-32'
-                : variant === 'D'
-                  ? 'py-16 lg:py-24'
-                  : variant === 'E'
-                    ? 'py-20 lg:py-28'
-                    : 'py-20 lg:py-28';
+                : heroTheme === 'impact'
+                  ? 'min-h-[70vh] flex items-center py-20 lg:py-32'
+                  : variant === 'D'
+                    ? 'py-16 lg:py-24'
+                    : variant === 'E'
+                      ? 'py-20 lg:py-28'
+                      : 'py-20 lg:py-28';
 
             return (
               <section
@@ -266,8 +271,7 @@ export default function PageBlocks({ blocks, localePrefix }: { blocks: any[]; lo
                   {variant !== 'B' && (
                     <div className={variant === 'D' ? 'lg:col-span-6' : 'lg:col-span-5'}>
                       <div
-                        className={`relative rounded-[2.5rem] overflow-hidden shadow-2xl border-[12px] border-white/70 bg-white/70 backdrop-blur lh-scale-up ${variant === 'D' ? 'aspect-[4/5]' : 'aspect-[4/5]'}`}
-                        style={{ transitionDelay: '120ms' }}
+                        className={`relative rounded-[2.5rem] overflow-hidden shadow-2xl border-[12px] border-white/70 bg-white/70 backdrop-blur lh-scale-up lh-delay-120 ${variant === 'D' ? 'aspect-[4/5]' : 'aspect-[4/5]'}`}
                       >
                         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(105,143,254,0.22),transparent_55%),radial-gradient(circle_at_bottom,rgba(26,179,202,0.18),transparent_55%)]" />
                         {(() => {
@@ -293,24 +297,41 @@ export default function PageBlocks({ blocks, localePrefix }: { blocks: any[]; lo
                               </div>
                             );
                           }
+                          const displayFacts = block.quickFacts?.length > 0
+                            ? block.quickFacts
+                            : [
+                              { label: 'Response time', value: '< 15 min' },
+                              { label: 'Security baseline', value: '90 days' },
+                              { label: 'Ops roadmap', value: '12 months' },
+                            ];
+
                           return (
-                            <div className="relative w-full h-full p-6 flex flex-col justify-end gap-4">
-                              {[
-                                { title: 'Response time', value: '< 15 min' },
-                                { title: 'Security baseline', value: '90 days' },
-                                { title: 'Ops roadmap', value: '12 months' },
-                              ].map((card, cardIndex) => (
-                                <div
-                                  key={card.title}
-                                  className={`hero-card hero-card-${cardIndex + 1} rounded-2xl border border-white/80 bg-white/90 shadow-lg p-4 ${cardIndex === 0 ? 'ml-10' : cardIndex === 1 ? 'ml-4' : ''
-                                    }`}
-                                >
-                                  <p className="text-[10px] uppercase tracking-[0.2em] text-brand-ocean font-bold">
-                                    {card.title}
-                                  </p>
-                                  <p className="text-2xl font-extrabold text-ink">{card.value}</p>
-                                </div>
-                              ))}
+                            <div className="relative w-full h-full p-8 flex flex-col justify-end gap-5">
+                              <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(105,143,254,0.22),transparent_55%),radial-gradient(circle_at_bottom,rgba(26,179,202,0.18),transparent_55%)]" />
+                              {block.factsTitle && (
+                                <p className="relative z-10 text-sm font-bold text-brand-ocean tracking-wider uppercase mb-1">
+                                  {block.factsTitle}
+                                </p>
+                              )}
+                              <div className="relative z-10 space-y-4">
+                                {displayFacts.map((card: any, cardIndex: number) => (
+                                  <div
+                                    key={cardIndex}
+                                    className={`hero-card hero-card-${cardIndex + 1} rounded-3xl border border-white/80 bg-white/95 shadow-xl p-5 ${cardIndex === 0 ? 'ml-12' : cardIndex === 1 ? 'ml-6' : ''
+                                      } transition-transform hover:scale-[1.02]`}
+                                  >
+                                    <p className="text-[10px] uppercase tracking-[0.25em] text-brand-ocean font-bold mb-1">
+                                      {card.label || card.title}
+                                    </p>
+                                    <p className="text-2xl font-black text-ink tracking-tight">{card.value}</p>
+                                  </div>
+                                ))}
+                              </div>
+                              {block.factDisclaimer && (
+                                <p className="relative z-10 text-[11px] text-gray-400 mt-2 font-medium leading-tight">
+                                  {block.factDisclaimer}
+                                </p>
+                              )}
                             </div>
                           );
                         })()}
@@ -748,6 +769,36 @@ export default function PageBlocks({ blocks, localePrefix }: { blocks: any[]; lo
                 </div>
               </section>
             );
+          case 'keyFacts':
+            return (
+              <section key={index} {...sectionProps(block)} className={`py-12 border-b border-gray-100 ${animationClass}`}>
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                  <div className="bg-ink rounded-[2.5rem] p-8 lg:p-12 shadow-2xl overflow-hidden relative">
+                    {/* Decorative background */}
+                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(105,143,254,0.15),transparent_50%)]" />
+                    <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-10">
+                      <div className="lg:w-1/3">
+                        <h2 className="text-3xl font-extrabold text-white tracking-tighter leading-tight">
+                          {block.title || 'Key facts'}
+                        </h2>
+                      </div>
+                      <div className="lg:w-2/3 grid grid-cols-2 md:grid-cols-3 gap-8">
+                        {block.facts?.map((fact: any, factIndex: number) => (
+                          <div key={factIndex} className="flex flex-col gap-1">
+                            <span className="text-[10px] font-black uppercase tracking-[0.2em] text-brand-sky/80">
+                              {fact.label}
+                            </span>
+                            <span className="text-lg font-bold text-white tracking-tight">
+                              {fact.value}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            );
           case 'featureGrid':
             return (
               <section key={index} {...sectionProps(block)} className={`py-20 bg-gray-50 ${animationClass}`}>
@@ -930,21 +981,36 @@ export default function PageBlocks({ blocks, localePrefix }: { blocks: any[]; lo
                   </div>
                   <div className="lg:col-span-6 grid gap-6">
                     {block.cards?.map((card: any, cardIndex: number) => (
-                      <div key={cardIndex} className="rounded-[2rem] border border-gray-100 bg-white p-8 shadow-sm">
-                        <h3 className="text-xl font-bold text-gray-900 mb-3">{card.title}</h3>
-                        <p className="text-gray-600">{card.text}</p>
-                        {card.tags?.length > 0 && (
-                          <div className="mt-6 flex flex-wrap gap-2">
-                            {card.tags.map((tag: any, tagIndex: number) => (
-                              <span
-                                key={tagIndex}
-                                className="text-[10px] font-bold uppercase tracking-widest text-brand-sky bg-brand-sky/10 px-2 py-1 rounded"
-                              >
-                                {tag.text}
-                              </span>
-                            ))}
+                      <div key={cardIndex} className="rounded-[2.5rem] border border-gray-100 bg-white p-8 shadow-sm hover:shadow-md transition-shadow flex flex-col md:flex-row gap-8 items-start">
+                        {getMediaMeta(card.image).url && (
+                          <div className="w-24 h-24 rounded-2xl overflow-hidden flex-shrink-0 shadow-lg border-4 border-gray-50">
+                            <img src={getMediaMeta(card.image).url} alt={card.title || ''} className="w-full h-full object-cover" />
                           </div>
                         )}
+                        <div className="flex-1">
+                          <h3 className="text-xl font-bold text-gray-900 mb-1">{card.title}</h3>
+                          {card.role && <p className="text-sm font-bold text-brand-ocean uppercase tracking-wider mb-4">{card.role}</p>}
+                          <p className="text-gray-600 leading-relaxed mb-6">{card.text}</p>
+                          {card.tags?.length > 0 && (
+                            <div className="flex flex-wrap gap-2">
+                              {card.tags.map((tag: any, tagIndex: number) => (
+                                <span
+                                  key={tagIndex}
+                                  className="text-[10px] font-bold uppercase tracking-widest text-brand-sky bg-brand-sky/10 px-2 py-1 rounded"
+                                >
+                                  {tag.text}
+                                </span>
+                              ))}
+                            </div>
+                          )}
+                          {card.socialLink && (
+                            <div className="mt-4 pt-4 border-t border-gray-50">
+                              <a href={card.socialLink} target="_blank" rel="noopener noreferrer" className="text-xs font-bold text-brand-ocean hover:underline flex items-center gap-1">
+                                LinkedIn Profile ↗
+                              </a>
+                            </div>
+                          )}
+                        </div>
                       </div>
                     ))}
                   </div>
@@ -1095,7 +1161,7 @@ export default function PageBlocks({ blocks, localePrefix }: { blocks: any[]; lo
                   {block.intro && <p className="text-xl text-gray-600 mb-10 max-w-3xl">{block.intro}</p>}
                   <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
                     {block.items?.map((item: any, itemIndex: number) => (
-                      <div key={itemIndex} className="p-8 rounded-[2rem] border border-gray-100 bg-gray-50/40">
+                      <div key={itemIndex} className="p-8 rounded-[2rem] border border-gray-100 bg-white shadow-sm hover:shadow-md transition-shadow">
                         <p className="text-gray-400 text-xs font-bold uppercase tracking-widest mb-2">{item.label}</p>
                         <p className="text-3xl font-extrabold text-gray-900">{item.value}</p>
                         {item.note && <p className="text-sm text-gray-500 mt-3">{item.note}</p>}
@@ -1260,6 +1326,144 @@ export default function PageBlocks({ blocks, localePrefix }: { blocks: any[]; lo
                 </div>
               </section>
             );
+          case 'coreTeam':
+            return (
+              <SectionWrapper key={index} block={block} className={`py-20 ${animationClass}`}>
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                  <div className="mb-12">
+                    <h2 className="text-3xl lg:text-5xl font-extrabold text-gray-900 mb-6 tracking-tighter">
+                      {block.title || 'Core Team'}
+                    </h2>
+                    {block.intro && <p className="text-xl text-gray-600 max-w-3xl">{block.intro}</p>}
+                  </div>
+                  <div className="grid gap-8">
+                    {block.members?.map((memberRef: any, memberIndex: number) => {
+                      const member = typeof memberRef === 'object' ? memberRef : null;
+                      if (!member) return null;
+                      const photo = getMediaMeta(member.photo);
+                      return (
+                        <div key={memberIndex} className="rounded-[2.5rem] border border-gray-100 bg-gray-50/30 p-8 lg:p-12 hover:shadow-xl hover:bg-white transition-all flex flex-col lg:flex-row gap-10 items-start">
+                          {/* Avatar */}
+                          <div className="flex-shrink-0">
+                            <div className={`w-24 h-24 lg:w-32 lg:h-32 rounded-[2rem] overflow-hidden shadow-2xl border-4 border-white ${member.avatarType === 'gradient' ? 'bg-gradient-to-br from-brand-ocean to-brand-teal' : 'bg-gray-100'}`}>
+                              {photo.url ? (
+                                <img src={photo.url} alt={photo.alt || member.name} className="w-full h-full object-cover" />
+                              ) : (
+                                <div className="w-full h-full flex items-center justify-center text-brand-ocean/30">
+                                  <span className="text-4xl text-brand-ocean opacity-20">👤</span>
+                                </div>
+                              )}
+                            </div>
+                          </div>
+                          {/* Content */}
+                          <div className="flex-1">
+                            <div className="mb-6">
+                              <h3 className="text-3xl font-black text-gray-900 mb-1">{member.name}</h3>
+                              <p className="text-sm font-bold text-gray-400 uppercase tracking-widest">{member.roleTitle}</p>
+                            </div>
+                            <p className="text-lg font-bold text-brand-ocean mb-4 leading-tight">&ldquo;{member.oneLiner}&rdquo;</p>
+                            <p className="text-gray-600 text-lg leading-relaxed mb-8 max-w-2xl">{member.bio}</p>
+
+                            {/* Tags */}
+                            {member.tags?.length > 0 && (
+                              <div className="flex flex-wrap gap-2 mb-8">
+                                {member.tags.map((tag: any, tagIdx: number) => (
+                                  <span key={tagIdx} className="px-3 py-1 bg-brand-sky/10 text-brand-ocean text-xs font-bold uppercase tracking-widest rounded-full">
+                                    {tag.text}
+                                  </span>
+                                ))}
+                              </div>
+                            )}
+
+                            {/* Social Buttons */}
+                            <div className="flex flex-wrap gap-4 pt-6 border-t border-gray-100">
+                              {member.links?.linkedinUrl && (
+                                <a href={member.links.linkedinUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm font-bold text-gray-500 hover:text-brand-ocean transition-colors">
+                                  <span>LinkedIn</span>
+                                  <span className="text-xs">↗</span>
+                                </a>
+                              )}
+                              {member.links?.email && (
+                                <a href={`mailto:${member.links.email}`} className="flex items-center gap-2 text-sm font-bold text-gray-500 hover:text-brand-ocean transition-colors">
+                                  <span>Email</span>
+                                  <span className="text-xs">✉</span>
+                                </a>
+                              )}
+                              {member.links?.githubUrl && (
+                                <a href={member.links.githubUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm font-bold text-gray-500 hover:text-brand-ocean transition-colors">
+                                  <span>GitHub</span>
+                                  <span className="text-xs">↗</span>
+                                </a>
+                              )}
+                              {member.links?.websiteUrl && (
+                                <a href={member.links.websiteUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm font-bold text-gray-500 hover:text-brand-ocean transition-colors">
+                                  <span>Website</span>
+                                  <span className="text-xs">↗</span>
+                                </a>
+                              )}
+                            </div>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              </SectionWrapper>
+            );
+          case 'partnersGroup':
+            return (
+              <SectionWrapper key={index} block={block} className={`py-20 ${animationClass}`}>
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                  <div className="mb-12">
+                    <h2 className="text-3xl lg:text-5xl font-extrabold text-gray-900 mb-6 tracking-tighter">
+                      {block.title || 'Trusted Partners'}
+                    </h2>
+                    {block.intro && <p className="text-xl text-gray-600 max-w-3xl">{block.intro}</p>}
+                  </div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    {block.partners?.map((partnerRef: any, partnerIdx: number) => {
+                      const partner = typeof partnerRef === 'object' ? partnerRef : null;
+                      if (!partner) return null;
+                      const logo = getMediaMeta(partner.logo);
+                      return (
+                        <div key={partnerIdx} className="p-8 lg:p-10 rounded-[2.5rem] bg-white border border-gray-100 shadow-sm hover:shadow-xl transition-all flex flex-col gap-6">
+                          <div className="flex justify-between items-start">
+                            <p className="text-xs font-black uppercase tracking-[0.2em] text-brand-sky">{partner.category}</p>
+                            {partner.trustedSince && <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Partner since {partner.trustedSince}</p>}
+                          </div>
+                          <div className="flex items-center gap-6">
+                            {logo.url && (
+                              <div className="w-16 h-16 rounded-2xl overflow-hidden bg-gray-50 p-2 flex items-center justify-center border border-gray-100">
+                                <img src={logo.url} alt={logo.alt || partner.companyName} className="max-w-full max-h-full object-contain" />
+                              </div>
+                            )}
+                            <h3 className="text-2xl font-black text-gray-900">{partner.companyName}</h3>
+                          </div>
+                          <p className="text-gray-600 text-lg leading-relaxed flex-1">{partner.specialtyLine}</p>
+                          <div className="flex flex-wrap gap-4 pt-6 border-t border-gray-50">
+                            {partner.links?.websiteUrl && (
+                              <a href={partner.links.websiteUrl} target="_blank" rel="noopener noreferrer" className="text-sm font-bold text-brand-ocean hover:underline">
+                                Website ↗
+                              </a>
+                            )}
+                            {partner.links?.linkedinUrl && (
+                              <a href={partner.links.linkedinUrl} target="_blank" rel="noopener noreferrer" className="text-sm font-bold text-gray-500 hover:text-brand-ocean">
+                                LinkedIn ↗
+                              </a>
+                            )}
+                            {partner.links?.email && (
+                              <a href={`mailto:${partner.links.email}`} className="text-sm font-bold text-gray-500 hover:text-brand-ocean">
+                                Email ✉
+                              </a>
+                            )}
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              </SectionWrapper>
+            );
           case 'social-responsibility':
             return (
               <section key={index} {...sectionProps(block)} className={`py-20 bg-white ${animationClass}`}>
@@ -1295,7 +1499,7 @@ export default function PageBlocks({ blocks, localePrefix }: { blocks: any[]; lo
                             {init.link && <a href={init.link} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-brand-ocean">↗</a>}
                           </div>
                           <h3 className="text-xl font-bold text-gray-900 mb-3">{init.title}</h3>
-                          <p className="text-gray-600 text-sm leading-relaxed mb-6">{init.description}</p>
+                          <p className="text-gray-600 text-sm leading-relaxed mb-6 whitespace-pre-line">{init.description}</p>
                         </div>
                       );
                     })}

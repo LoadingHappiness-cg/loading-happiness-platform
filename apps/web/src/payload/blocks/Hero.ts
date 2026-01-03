@@ -158,6 +158,22 @@ const HeroBlock: Block = {
       ],
     },
     {
+      name: 'factsTitle',
+      type: 'text',
+      localized: true,
+      admin: {
+        description: 'Title for the facts side-card (e.g., "What you get").',
+      },
+    },
+    {
+      name: 'factDisclaimer',
+      type: 'text',
+      localized: true,
+      admin: {
+        description: 'Small disclaimer shown below the hero facts.',
+      },
+    },
+    {
       name: 'trustLine',
       type: 'text',
       localized: true,
@@ -196,6 +212,7 @@ const HeroBlock: Block = {
         { label: 'Light', value: 'light' },
         { label: 'Dark', value: 'dark' },
         { label: 'Brand Gradient', value: 'brandGradient' },
+        { label: 'Impact', value: 'impact' },
       ],
     },
   ],

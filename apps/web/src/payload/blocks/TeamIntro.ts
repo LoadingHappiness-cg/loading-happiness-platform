@@ -29,7 +29,17 @@ const TeamIntroBlock: Block = {
       type: 'array',
       fields: [
         { name: 'title', type: 'text', localized: true },
+        { name: 'role', type: 'text', localized: true },
         { name: 'text', type: 'textarea', localized: true },
+        {
+          name: 'image',
+          type: 'upload',
+          relationTo: 'media',
+        },
+        {
+          name: 'socialLink',
+          type: 'text',
+        },
         {
           name: 'tags',
           type: 'array',

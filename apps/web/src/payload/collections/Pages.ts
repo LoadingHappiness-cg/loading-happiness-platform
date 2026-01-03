@@ -30,6 +30,9 @@ import TeamIntroBlock from '../blocks/TeamIntro.ts';
 import MissionVisionValuesBlock from '../blocks/MissionVisionValues.ts';
 import TimelineBlock from '../blocks/Timeline.ts';
 import SocialResponsibilityBlock from '../blocks/SocialResponsibility.ts';
+import KeyFactsBlock from '../blocks/KeyFacts.ts';
+import CoreTeamBlock from '../blocks/CoreTeam.ts';
+import PartnersGroupBlock from '../blocks/PartnersGroup.ts';
 import { serviceTemplatePresets } from '../serviceTemplates.ts';
 
 const Pages: CollectionConfig = {
@@ -84,6 +87,7 @@ const Pages: CollectionConfig = {
     {
       name: 'layout',
       type: 'blocks',
+      localized: true,
       blocks: [
         HeroBlock,
         TrustPartnersBlock,
@@ -115,6 +119,9 @@ const Pages: CollectionConfig = {
         MissionVisionValuesBlock,
         TimelineBlock,
         SocialResponsibilityBlock,
+        KeyFactsBlock,
+        CoreTeamBlock,
+        PartnersGroupBlock,
       ],
     },
     {
