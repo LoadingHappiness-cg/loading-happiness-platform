@@ -1,6 +1,5 @@
 import type { ReactNode } from 'react';
 
-import './globals.css';
 import '@payloadcms/next/css';
 import { RootLayout, handleServerFunctions } from '@payloadcms/next/layouts';
 import { importMap } from './(payload)/admin/importMap.js';

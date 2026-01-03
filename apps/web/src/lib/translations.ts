@@ -20,9 +20,21 @@ export type TranslationKey =
     | 'nav.services'
     | 'nav.news'
     | 'nav.impact'
-    | 'nav.about'
-    | 'nav.contact'
-    | 'nav.bookCall'
+| 'nav.about'
+| 'nav.contact'
+| 'nav.bookCall'
+| 'nav.about.ourStory'
+| 'nav.about.ourStoryDescription'
+| 'nav.about.whyLoadingHappiness'
+| 'nav.about.whyLoadingHappinessDescription'
+| 'nav.about.philosophy'
+| 'nav.about.philosophyDescription'
+| 'nav.about.values'
+| 'nav.about.valuesDescription'
+| 'nav.about.whatToExpect'
+| 'nav.about.whatToExpectDescription'
+| 'nav.about.team'
+| 'nav.about.teamDescription'
     | 'hero.fallback.heading'
     | 'hero.fallback.subheading'
     | 'hero.fallback.primaryCta'
@@ -33,12 +45,18 @@ export type TranslationKey =
     | 'home.ctaSubheading'
     | 'home.ctaPrimary'
     | 'home.ctaSecondary'
-    | 'services.managedIt.title'
-    | 'services.managedIt.description'
-    | 'services.cybersecurity.title'
-    | 'services.cybersecurity.description'
-    | 'services.cloud.title'
-    | 'services.cloud.description'
+| 'services.managedIt.title'
+| 'services.managedIt.description'
+| 'services.cybersecurity.title'
+| 'services.cybersecurity.description'
+| 'services.cloud.title'
+| 'services.cloud.description'
+| 'services.networking.title'
+| 'services.networking.description'
+| 'services.infrastructure.title'
+| 'services.infrastructure.description'
+| 'services.strategyRoadmaps.title'
+| 'services.strategyRoadmaps.description'
     | 'contact.form.name'
     | 'contact.form.company'
     | 'contact.form.companyOptional'
@@ -93,6 +111,18 @@ const translations: Record<Locale, Record<TranslationKey, string>> = {
         'nav.about': 'Sobre',
         'nav.contact': 'Contacto',
         'nav.bookCall': 'Marcar Chamada',
+        'nav.about.ourStory': 'A nossa história',
+        'nav.about.ourStoryDescription': 'De Sintra, com uma missão prática.',
+        'nav.about.whyLoadingHappiness': 'Porquê "Loading Happiness"',
+        'nav.about.whyLoadingHappinessDescription': 'Um nome que se tornou uma promessa.',
+        'nav.about.philosophy': 'A nossa filosofia',
+        'nav.about.philosophyDescription': 'Humana, clara e responsável.',
+        'nav.about.values': 'Valores',
+        'nav.about.valuesDescription': 'No que acreditamos.',
+        'nav.about.whatToExpect': 'O que esperar',
+        'nav.about.whatToExpectDescription': 'A segurança é a base.',
+        'nav.about.team': 'A Nossa Equipa',
+        'nav.about.teamDescription': 'Mentes séniores. Equipa pequena. Responsabilidade real.',
 
         // Hero fallback
         'hero.fallback.heading': 'Tecnologia com coração humano.',
@@ -115,6 +145,12 @@ const translations: Record<Locale, Record<TranslationKey, string>> = {
         'services.cybersecurity.description': 'Controlos de segurança práticos que protegem sem o atrasar.',
         'services.cloud.title': 'Estratégia Cloud',
         'services.cloud.description': 'Ambientes M365 e Azure governados e seguros, construídos para escalar.',
+        'services.networking.title': 'Networking e Conectividade',
+        'services.networking.description': 'Wi-Fi, segmentação, VPN e monitorização.',
+        'services.infrastructure.title': 'Infraestrutura e Virtualização',
+        'services.infrastructure.description': 'Armazenamento, backups e testes de recuperação.',
+        'services.strategyRoadmaps.title': 'Estratégia e Roadmaps',
+        'services.strategyRoadmaps.description': 'Plano prático de 12–24 meses.',
 
         // Contact form
         'contact.form.name': 'Nome',
@@ -174,6 +210,18 @@ const translations: Record<Locale, Record<TranslationKey, string>> = {
         'nav.about': 'About',
         'nav.contact': 'Contact',
         'nav.bookCall': 'Book a Call',
+        'nav.about.ourStory': 'Our story',
+        'nav.about.ourStoryDescription': 'Founded in Sintra, built for real businesses.',
+        'nav.about.whyLoadingHappiness': 'Why Loading Happiness',
+        'nav.about.whyLoadingHappinessDescription': 'A name that became a promise.',
+        'nav.about.philosophy': 'Our philosophy',
+        'nav.about.philosophyDescription': 'Human, clear, responsible.',
+        'nav.about.values': 'Values',
+        'nav.about.valuesDescription': 'How we show up in the work.',
+        'nav.about.whatToExpect': 'What to expect',
+        'nav.about.whatToExpectDescription': 'Clarity, pragmatism, security by default.',
+        'nav.about.team': 'Our team',
+        'nav.about.teamDescription': 'Senior, hands-on, close to the ground.',
 
         // Hero fallback
         'hero.fallback.heading': 'Technology with a human heart.',
@@ -196,6 +244,12 @@ const translations: Record<Locale, Record<TranslationKey, string>> = {
         'services.cybersecurity.description': 'Practical security controls that protect without slowing you down.',
         'services.cloud.title': 'Cloud Strategy',
         'services.cloud.description': 'Governed and secure M365 and Azure environments built for scale.',
+        'services.networking.title': 'Networking & Connectivity',
+        'services.networking.description': 'Wi-Fi, segmentation, VPN, and monitoring.',
+        'services.infrastructure.title': 'Infrastructure & Virtualization',
+        'services.infrastructure.description': 'Storage, backups, and recovery testing.',
+        'services.strategyRoadmaps.title': 'Strategy & Roadmaps',
+        'services.strategyRoadmaps.description': '12–24 month practical plan.',
 
         // Contact form
         'contact.form.name': 'Name',

@@ -1,6 +1,8 @@
 import { RootPage, generatePageMetadata } from '@payloadcms/next/views';
 import { importMap } from '../importMap.js';
 import config from '@/payload.config';
+import { LogoutRedirector } from '../components/LogoutRedirector';
+import { LoginPrompt } from '../components/LoginPrompt';
 
 type PageProps = {
   params: Promise<{
@@ -27,10 +29,16 @@ export default async function AdminPage({ params, searchParams }: PageProps) {
   const cleanedSearchParams = Object.fromEntries(
     Object.entries(resolvedSearchParams ?? {}).filter(([, value]) => value !== undefined),
   ) as Record<string, string | string[]>;
-  return RootPage({
-    config,
-    importMap,
-    params: Promise.resolve({ segments: resolvedParams?.segments ?? [] }),
-    searchParams: Promise.resolve(cleanedSearchParams),
-  });
+  return (
+    <>
+      <LogoutRedirector />
+      <LoginPrompt />
+      {RootPage({
+        config,
+        importMap,
+        params: Promise.resolve({ segments: resolvedParams?.segments ?? [] }),
+        searchParams: Promise.resolve(cleanedSearchParams),
+      })}
+    </>
+  );
 }

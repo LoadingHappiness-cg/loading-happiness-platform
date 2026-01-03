@@ -41,7 +41,7 @@ Serviço completo de IA (`src/lib/gemini.ts`) com as seguintes capacidades:
 
 Quatro endpoints REST para integração com o CMS:
 
-```
+```http
 POST /api/ai/generate-content
 POST /api/ai/generate-seo
 POST /api/ai/generate-alt-text
@@ -301,7 +301,7 @@ Pode-se criar um botão no Payload CMS que:
 
 ### Médio Prazo (1 mês)
 
-6. 🔲 Criar botão "Gerar com IA" no Payload CMS
+1. 🔲 Criar botão "Gerar com IA" no Payload CMS
 2. 🔲 Implementar sistema de comentários
 3. 🔲 Adicionar analytics de leitura
 4. 🔲 Criar newsletter automática
@@ -309,7 +309,7 @@ Pode-se criar um botão no Payload CMS que:
 
 ### Longo Prazo (2-3 meses)
 
-11. 🔲 A/B testing de títulos e meta descriptions
+1. 🔲 A/B testing de títulos e meta descriptions
 2. 🔲 Recomendações personalizadas por IA
 3. 🔲 Auto-tradução PT ↔ EN com IA
 4. 🔲 Chatbot para responder perguntas sobre posts

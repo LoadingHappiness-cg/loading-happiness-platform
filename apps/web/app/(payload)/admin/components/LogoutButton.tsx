@@ -8,6 +8,9 @@ export const LogoutButton = () => {
   const handleLogout = async () => {
     try {
       // Clean up local cookies/storage just in case
+      if (typeof window !== 'undefined') {
+        window.localStorage.setItem('payload-logout-signal', Date.now().toString());
+      }
       await fetch('/api/users/logout', { method: 'POST' });
       // Redirect to the standard logout route
       window.location.href = '/admin/logout';
@@ -27,5 +30,4 @@ export const LogoutButton = () => {
     </button>
   );
 };
-
 

@@ -305,9 +305,23 @@ export default function PageBlocks({ blocks, localePrefix }: { blocks: any[]; lo
                               { label: 'Ops roadmap', value: '12 months' },
                             ];
 
+                          const cardBackgroundStyle = block.cardBackground
+                            ? {
+                                backgroundImage: `linear-gradient(180deg, rgba(13, 14, 26, 0.3), rgba(13, 14, 26, 0.65)), url(${block.cardBackground})`,
+                                backgroundSize: 'cover',
+                                backgroundPosition: 'center',
+                              }
+                            : undefined;
+
                           return (
                             <div className="relative w-full h-full p-8 flex flex-col justify-end gap-5">
-                              <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(105,143,254,0.22),transparent_55%),radial-gradient(circle_at_bottom,rgba(26,179,202,0.18),transparent_55%)]" />
+                              {cardBackgroundStyle && (
+                                <div
+                                  className="absolute inset-0 opacity-95"
+                                  style={cardBackgroundStyle}
+                                />
+                              )}
+                              <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_top,rgba(105,143,254,0.18),transparent_75%),radial-gradient(circle_at_bottom,rgba(26,179,202,0.1),transparent_80%)]" />
                               {block.factsTitle && (
                                 <p className="relative z-10 text-sm font-bold text-brand-ocean tracking-wider uppercase mb-1">
                                   {block.factsTitle}
@@ -317,7 +331,7 @@ export default function PageBlocks({ blocks, localePrefix }: { blocks: any[]; lo
                                 {displayFacts.map((card: any, cardIndex: number) => (
                                   <div
                                     key={cardIndex}
-                                    className={`hero-card hero-card-${cardIndex + 1} rounded-3xl border border-white/80 bg-white/95 shadow-xl p-5 ${cardIndex === 0 ? 'ml-12' : cardIndex === 1 ? 'ml-6' : ''
+                                    className={`hero-card hero-card-${cardIndex + 1} rounded-3xl border border-white/60 bg-white/80 backdrop-blur-3xl shadow-xl p-5 ${cardIndex === 0 ? 'ml-12' : cardIndex === 1 ? 'ml-6' : ''
                                       } transition-transform hover:scale-[1.02]`}
                                   >
                                     <p className="text-[10px] uppercase tracking-[0.25em] text-brand-ocean font-bold mb-1">
@@ -598,12 +612,25 @@ export default function PageBlocks({ blocks, localePrefix }: { blocks: any[]; lo
             );
           case 'finalCTA':
             return (
-              <section key={index} {...sectionProps(block)} className={`py-20 bg-ink text-white ${animationClass}`}>
+              <section key={index} {...sectionProps(block)} className={`relative pt-20 pb-0 bg-ink text-white ${animationClass}`}>
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-10">
                   <div>
                     <h2 className="text-3xl lg:text-5xl font-extrabold mb-4 tracking-tighter">{block.title}</h2>
                     <p className="text-gray-300 text-lg max-w-2xl">{block.subtitle || block.content}</p>
                     {block.microcopy && <p className="text-xs text-gray-400 mt-3">{block.microcopy}</p>}
+                    {block.supportingLinks?.length > 0 && (
+                      <div className="mt-6 flex flex-wrap gap-4 text-sm">
+                        {block.supportingLinks.map((link: any, linkIndex: number) => (
+                          <Link
+                            key={linkIndex}
+                            href={localizeHref(link.href)}
+                            className="font-bold text-accent hover:text-primaryDark"
+                          >
+                            {link.label} →
+                          </Link>
+                        ))}
+                      </div>
+                    )}
                     {block.contactOptions?.length > 0 && (
                       <div className="mt-6 flex flex-wrap gap-4 text-sm text-gray-300">
                         {block.contactOptions.map((option: any, optionIndex: number) => (
@@ -625,6 +652,11 @@ export default function PageBlocks({ blocks, localePrefix }: { blocks: any[]; lo
                         {block.secondaryCTA.label}
                       </Link>
                     )}
+                  </div>
+                </div>
+                <div className="mt-12 w-full">
+                  <div className="h-[2px] w-full bg-gradient-to-r from-[#4081ff]/0 via-[#3ADA9A]/70 to-[#3ADA9A]/0 shadow-[0_0_25px_rgba(58,218,154,0.45)] relative">
+                    <div className="absolute inset-0 border-t border-white/20 opacity-50" />
                   </div>
                 </div>
               </section>
@@ -1208,17 +1240,27 @@ export default function PageBlocks({ blocks, localePrefix }: { blocks: any[]; lo
             return (
               <section key={index} {...sectionProps(block)} className={`py-20 ${animationClass}`}>
                 <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-                  <h2 className="text-3xl lg:text-5xl font-extrabold text-gray-900 mb-10 tracking-tighter">
+                  <h2 className="text-3xl lg:text-5xl font-extrabold text-gray-900 mb-4 tracking-tighter">
                     {block.title || 'FAQ'}
                   </h2>
+                  {block.intro && (
+                    <p className="text-lg text-gray-600 mb-8 leading-relaxed">
+                      {block.intro}
+                    </p>
+                  )}
                   <div className="space-y-4">
                     {block.items?.map((item: any, itemIndex: number) => (
                       <div key={itemIndex} className="p-6 rounded-2xl border border-gray-100 bg-gray-50/30">
                         <h3 className="text-lg font-bold text-gray-900 mb-2">{item.question}</h3>
-                        <p className="text-gray-600">{item.answer}</p>
+                        <p className="text-gray-600 leading-relaxed">{item.answer}</p>
                       </div>
                     ))}
                   </div>
+                  {block.disclaimer && (
+                    <p className="text-xs text-gray-500 mt-6">
+                      {block.disclaimer}
+                    </p>
+                  )}
                 </div>
               </section>
             );

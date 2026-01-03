@@ -137,11 +137,12 @@ const main = async () => {
             quote: 'We don’t sell complexity. We build confidence.',
             factsTitle: 'What you get',
             quickFacts: [
-                { label: 'Response time', value: '< 15 minutes' },
+                { label: 'Response focus', value: 'Plan-based priorities' },
                 { label: 'Operations', value: 'Proactive monitoring' },
                 { label: 'Alignment', value: 'Long-term partnership' },
             ],
-            factDisclaimer: '*Response times and roadmap details are subject to service level agreements.',
+            factDisclaimer: '*Response expectations are aligned with the SLA for your plan.',
+            cardBackground: 'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=900&q=80',
         },
         {
             blockType: 'keyFacts',
@@ -203,13 +204,13 @@ const main = async () => {
                     socialLink: 'https://linkedin.com/in/carlosgavela',
                     tags: [{ text: 'Infrastructure' }, { text: 'Security' }, { text: 'Strategy' }],
                 },
-                {
-                    title: 'Lumina',
-                    role: 'AI & Knowledge Partner',
-                    text: 'Our proactive AI agent, handling advanced logic, technical documentation, and real-time monitoring support.',
-                    image: heroImageId, // Use AI visualization
-                    tags: [{ text: 'Automation' }, { text: 'Analytics' }, { text: '24/7 Support' }],
-                },
+                    {
+                        title: 'Lumina',
+                        role: 'AI & Knowledge Partner',
+                        text: 'Our proactive AI agent, handling advanced logic, technical documentation, and real-time monitoring support.',
+                        image: heroImageId, // Use AI visualization
+                        tags: [{ text: 'Automation' }, { text: 'Analytics' }, { text: 'Monitoring' }],
+                    },
             ],
         },
         {
@@ -226,22 +227,62 @@ const main = async () => {
             blockType: 'faq',
             anchorId: 'faq',
             title: 'Common questions',
+            intro: 'Based in Sintra, supporting Portuguese SMEs (and remote).',
             items: [
-                { question: 'What is your typical response time?', answer: 'For critical issues, we respond in under 15 minutes. Our proactive systems often resolve problems before you notice them.' },
-                { question: 'Do you work with international clients?', answer: 'Yes. While based in Portugal, we support organizations with teams across the EU and North America.' },
-                { question: 'Is cybersecurity included?', answer: 'A robust security baseline is included in all our managed services plans. We don’t consider safety an "add-on".' },
-                { question: 'How do you handle GDPR?', answer: 'We are advocates for Privacy by Design. All our internal and client systems are audited for GDPR compliance.' },
-                { question: 'What software do you specialize in?', answer: 'We are experts in Microsoft 365, Azure, AWS, and modern business productivity tools like Odoo.' },
-                { question: 'Do you offer 24/7 support?', answer: 'Yes, we provide round-the-clock monitoring and emergency support for mission-critical infrastructure.' },
+                {
+                    question: 'What is your response time?',
+                    answer: 'We respond promptly but without magic. The timeline depends on the plan and the agreed business hours, and recurring support includes SLAs and priority levels for critical incidents.',
+                },
+                {
+                    question: 'Do you work with Portuguese SMEs?',
+                    answer: 'Yes - that is our focus. We help SMEs gain stability, security, and clarity even when they do not have an internal IT team.',
+                },
+                {
+                    question: 'What sets you apart from just another IT firm?',
+                    answer: 'Senior experience, pragmatism, and proximity. We speak plainly, choose what makes sense, and stay close to ensure solutions work daily.',
+                },
+                {
+                    question: 'Do you prefer cloud or on-premises?',
+                    answer: 'It depends. We take a hybrid, pragmatic approach: cloud when it adds value, on-prem when necessary, always with cost, security, and autonomy in mind.',
+                },
+                {
+                    question: 'Do you use open source software?',
+                    answer: 'Yes, when it is the right choice. Open source gives transparency and flexibility, often with better cost-efficiency - as long as it is well maintained, secure, and tailored to the business.',
+                },
+                {
+                    question: 'What technologies and platforms do you work with most?',
+                    answer: 'We work with whatever solves the problem, not with tool religion. In practice: Microsoft 365/Windows/networks, backups and virtualization, security and monitoring, and open source services for internal tools and automation.',
+                },
+                {
+                    question: 'How do you handle GDPR?',
+                    answer: 'We support the technical side: access controls, backups, encryption, retention, and reducing risk. When legal counsel is needed, we partner with specialists.',
+                },
+                {
+                    question: 'Do you offer 24/7 support?',
+                    answer: 'No - we prefer to be honest. We are a small senior team, so we do not promise 24/7. Our focus is prevention, monitoring, and best practices to reduce emergencies.',
+                },
+                {
+                    question: 'How does your service model work?',
+                    answer: 'Three formats: recurring support (monthly), fixed projects (migrations/improvements/security baseline), and one-off interventions when it makes sense.',
+                },
+                {
+                    question: 'Can you help reduce IT costs?',
+                    answer: 'Yes. Often the gain comes from simplifying: removing redundancies, improving processes, and avoiding unnecessary recurring costs.',
+                },
             ],
+            disclaimer: 'SLAs are defined transparently by contract (plan & business hours).',
         },
         {
             blockType: 'finalCTA',
             anchorId: 'cta',
-            title: 'Ready to upgrade your IT experience?',
-            content: 'No pressure, no jargon. Just a clear conversation about your goals.',
-            primaryCTA: { label: 'Talk to us →', link: '/contact' },
+            title: 'Still have questions?',
+            content: 'Share your context and priorities, and we will outline a realistic path.',
+            primaryCTA: { label: 'Still have questions? →', link: '/contact' },
             secondaryCTA: { label: 'View Impact →', link: '/impact' },
+            supportingLinks: [
+                { label: 'Service models', href: '/services' },
+                { label: 'Impact', href: '/impact' },
+            ],
         },
     ];
 
@@ -264,11 +305,12 @@ const main = async () => {
             quote: 'Não vendemos complexidade. Construímos confiança.',
             factsTitle: 'O que recebe',
             quickFacts: [
-                { label: 'Tempo de Resposta', value: '< 15 minutos' },
-                { label: 'Operações', value: 'Monitorização Proativa' },
-                { label: 'Alinhamento', value: 'Parceria a Longo Prazo' },
+                { label: 'Foco na resposta', value: 'Prioridades definidas em plano' },
+                { label: 'Operações', value: 'Monitorização proativa' },
+                { label: 'Alinhamento', value: 'Parceria contínua' },
             ],
-            factDisclaimer: '*Tempos de resposta sujeitos a acordos de nível de serviço (SLA).',
+            factDisclaimer: '*As expectativas de resposta constam do SLA do plano.',
+            cardBackground: 'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=900&q=80',
         },
         {
             blockType: 'keyFacts',
@@ -335,7 +377,7 @@ const main = async () => {
                     role: 'Parceira de IA e Conhecimento',
                     text: 'A nossa agente de IA, gerindo lógica avançada, documentação e suporte em tempo real.',
                     image: heroImageId,
-                    tags: [{ text: 'Automação' }, { text: 'Analítica' }, { text: 'Suporte 24/7' }],
+                    tags: [{ text: 'Automação' }, { text: 'Analítica' }, { text: 'Monitorização' }],
                 },
             ],
         },
@@ -353,22 +395,62 @@ const main = async () => {
             blockType: 'faq',
             anchorId: 'faq',
             title: 'Perguntas frequentes',
+            intro: 'Baseados em Sintra, a apoiar PMEs em Portugal (e remoto).',
             items: [
-                { question: 'Qual o vosso tempo de resposta?', answer: 'Para questões críticas, respondemos em menos de 15 minutos. Os nossos sistemas resolvem frequentemente problemas antes que os note.' },
-                { question: 'Trabalham com clientes internacionais?', answer: 'Sim. Sediados em Portugal, apoiamos equipas em toda a UE e América do Norte.' },
-                { question: 'A cibersegurança está incluída?', answer: 'Uma base de segurança robusta está incluída em todos os nossos planos. Não consideramos a segurança um "extra".' },
-                { question: 'Como lidam com o RGPD?', answer: 'Somos advogados do "Privacy by Design". Todos os nossos sistemas são auditados para conformidade.' },
-                { question: 'Em que software se especializam?', answer: 'Somos especialistas em Microsoft 365, Azure, AWS e ferramentas de produtividade como o Odoo.' },
-                { question: 'Oferecem suporte 24/7?', answer: 'Sim, fornecemos monitorização 24 horas por dia e suporte de emergência para infraestruturas críticas.' },
+                {
+                    question: 'Qual é o vosso tempo de resposta?',
+                    answer: 'Respondemos rápido, mas sem promessas mágicas. O tempo de resposta depende do plano e do horário acordado. Para suporte recorrente, definimos SLAs e prioridades para incidentes críticos.',
+                },
+                {
+                    question: 'Trabalham com PMEs portuguesas?',
+                    answer: 'Sim - é o nosso foco. Ajudamos PMEs a ganhar estabilidade, segurança e clareza, mesmo sem equipa interna dedicada.',
+                },
+                {
+                    question: 'O que vos diferencia de "mais uma empresa de informática"?',
+                    answer: 'Experiência sénior, pragmatismo e proximidade. Falamos claro, escolhemos o que faz sentido e ficamos por perto para garantir que funciona no dia-a-dia.',
+                },
+                {
+                    question: 'Preferem cloud ou on-premises?',
+                    answer: 'Depende do caso. Usamos uma abordagem híbrida e pragmática: cloud quando traz valor, on-prem quando é necessário - sempre com foco em custo total, segurança e autonomia.',
+                },
+                {
+                    question: 'Usam software open source?',
+                    answer: 'Sim, quando é a melhor escolha. Open source dá transparência e flexibilidade, muitas vezes com melhor custo-benefício - desde que seja bem mantido, seguro e adequado ao negócio.',
+                },
+                {
+                    question: 'Em que tecnologias e plataformas trabalham mais?',
+                    answer: 'Trabalhamos com o que resolve o problema, não com "religião tecnológica". Na prática: Microsoft 365/Windows/redes, backups e virtualização, segurança e monitorização, e soluções open source para serviços internos e automação.',
+                },
+                {
+                    question: 'Como lidam com RGPD?',
+                    answer: 'Ajudamos na componente técnica: acessos, backups, encriptação, retenção e redução de risco. Quando é preciso jurídico, trabalhamos com parceiros.',
+                },
+                {
+                    question: 'Oferecem suporte 24/7?',
+                    answer: 'Não - preferimos ser honestos. Somos uma equipa pequena e sénior, por isso não prometemos 24/7. O foco é prevenção, monitorização e boas práticas para reduzir emergências.',
+                },
+                {
+                    question: 'Como funciona o vosso modelo de serviço?',
+                    answer: 'Três formatos: apoio recorrente (mensal), projetos fechados (migrações/melhorias/security baseline), e intervenções pontuais quando faz sentido.',
+                },
+                {
+                    question: 'Conseguem ajudar a reduzir custos de IT?',
+                    answer: 'Sim. Muitas vezes o ganho vem de simplificar: remover redundâncias, melhorar processos e evitar custos recorrentes desnecessários.',
+                },
             ],
+            disclaimer: 'SLAs are defined transparently by contract (plan & business hours).',
         },
         {
             blockType: 'finalCTA',
             anchorId: 'cta',
-            title: 'Pronto para elevar o seu IT?',
-            content: 'Sem pressão, sem jargão. Apenas uma conversa clara sobre os seus objetivos.',
-            primaryCTA: { label: 'Fale connosco →', link: '/contact' },
-            secondaryCTA: { label: 'Ver Impacto →', link: '/impact' },
+            title: 'Ainda tens perguntas?',
+            content: 'Partilha o contexto e as prioridades, e alinhamos um caminho realista.',
+            primaryCTA: { label: 'Falar connosco →', link: '/contact' },
+            secondaryCTA: { label: 'Ver serviços →', link: '/services' },
+            supportingLinks: [
+                { label: 'Modelos de serviço', href: '/services' },
+                { label: 'Impact', href: '/impact' },
+            ],
         },
     ];
 

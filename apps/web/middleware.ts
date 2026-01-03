@@ -4,22 +4,31 @@ import { NextResponse } from 'next/server';
 const LOCALES = new Set(['pt', 'en']);
 const DEFAULT_LOCALE = 'pt';
 const LOCALE_COOKIE = 'lh_locale';
+const LOCALE_REWRITE_HEADER = 'x-locale-rewrite';
 
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const segments = pathname.split('/').filter(Boolean);
   const locale = segments[0];
+  const rewriteHeaderLocale = request.headers.get(LOCALE_REWRITE_HEADER);
 
   if (!locale || !LOCALES.has(locale)) {
     const cookieLocale = request.cookies.get(LOCALE_COOKIE)?.value;
-    if (cookieLocale && LOCALES.has(cookieLocale)) {
+    const shouldRedirectToCookieLocale =
+      cookieLocale &&
+      LOCALES.has(cookieLocale) &&
+      !rewriteHeaderLocale;
+    if (shouldRedirectToCookieLocale) {
       const redirectUrl = request.nextUrl.clone();
       redirectUrl.pathname = `/${cookieLocale}${pathname === '/' ? '' : pathname}`;
       return NextResponse.redirect(redirectUrl);
     }
 
     const requestHeaders = new Headers(request.headers);
-    requestHeaders.set('x-locale', DEFAULT_LOCALE);
+    const existingLocaleHeader = requestHeaders.get('x-locale');
+    if (!existingLocaleHeader || !LOCALES.has(existingLocaleHeader)) {
+      requestHeaders.set('x-locale', DEFAULT_LOCALE);
+    }
     return NextResponse.next({
       request: {
         headers: requestHeaders,
@@ -35,6 +44,7 @@ export function middleware(request: NextRequest) {
 
   const requestHeaders = new Headers(request.headers);
   requestHeaders.set('x-locale', locale);
+  requestHeaders.set(LOCALE_REWRITE_HEADER, locale);
 
   const response = NextResponse.rewrite(nextUrl, {
     request: {

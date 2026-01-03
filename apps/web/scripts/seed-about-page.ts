@@ -161,25 +161,65 @@ const seedAboutPage = async () => {
             {
                 blockType: 'faq',
                 enabled: true,
-                title: 'Perguntas Frequentes',
+                title: 'Perguntas frequentes',
+                intro: 'Baseados em Sintra, a apoiar PMEs em Portugal (e remoto).',
                 items: [
-                    { question: 'Trabalham só com empresas em Portugal?', answer: 'Focamos o nosso suporte presencial em Portugal, mas operamos remotamente para qualquer localização.' },
-                    { question: 'O que inclui TI gerida?', answer: 'Monitorização 24/7, gestão de backups, segurança, suporte ilimitado e consultoria estratégica.' },
+                    {
+                        question: 'Qual é o vosso tempo de resposta?',
+                        answer: 'Respondemos rápido, mas sem promessas mágicas. O tempo de resposta depende do plano e do horário acordado. Para suporte recorrente, definimos SLAs e prioridades para incidentes críticos.',
+                    },
+                    {
+                        question: 'Trabalham com PMEs portuguesas?',
+                        answer: 'Sim — é o nosso foco. Ajudamos PMEs a ganhar estabilidade, segurança e clareza, mesmo sem equipa interna dedicada.',
+                    },
+                    {
+                        question: 'O que vos diferencia de "mais uma empresa de informática"?',
+                        answer: 'Experiência sénior, pragmatismo e proximidade. Falamos claro, escolhemos o que faz sentido e ficamos por perto para garantir que funciona no dia-a-dia.',
+                    },
+                    {
+                        question: 'Preferem cloud ou on-premises?',
+                        answer: 'Depende do caso. Usamos uma abordagem híbrida e pragmática: cloud quando traz valor, on-prem quando é necessário — sempre com foco em custo total, segurança e autonomia.',
+                    },
+                    {
+                        question: 'Usam software open source?',
+                        answer: 'Sim, quando é a melhor escolha. Open source dá transparência e flexibilidade, muitas vezes com melhor custo-benefício — desde que seja bem mantido, seguro e adequado ao negócio.',
+                    },
+                    {
+                        question: 'Em que tecnologias e plataformas trabalham mais?',
+                        answer: 'Trabalhamos com o que resolve o problema, não com "religião tecnológica". Na prática: Microsoft 365/Windows/redes, backups e virtualização, segurança e monitorização, e soluções open source para serviços internos e automação.',
+                    },
+                    {
+                        question: 'Como lidam com RGPD?',
+                        answer: 'Ajudamos na componente técnica: acessos, backups, encriptação, retenção e redução de risco. Quando é preciso jurídico, trabalhamos com parceiros.',
+                    },
+                    {
+                        question: 'Oferecem suporte 24/7?',
+                        answer: 'Não — preferimos ser honestos. Somos uma equipa pequena e sénior, por isso não prometemos 24/7. O foco é prevenção, monitorização e boas práticas para reduzir emergências.',
+                    },
+                    {
+                        question: 'Como funciona o vosso modelo de serviço?',
+                        answer: 'Três formatos: apoio recorrente (mensal), projetos fechados (migrações/melhorias/security baseline), e intervenções pontuais quando faz sentido.',
+                    },
+                    {
+                        question: 'Conseguem ajudar a reduzir custos de IT?',
+                        answer: 'Sim. Muitas vezes o ganho vem de simplificar: remover redundâncias, melhorar processos e evitar custos recorrentes desnecessários.',
+                    },
                 ],
+                disclaimer: 'SLAs are defined transparently by contract (plan & business hours).',
             },
             {
-                blockType: 'final-cta',
+                blockType: 'finalCTA',
                 enabled: true,
-                title: 'Se queres uma TI mais estável e segura, falamos.',
-                content: 'Conta-nos o teu contexto e prioridades. Respondemos com um plano claro.',
+                title: 'Still have questions?',
+                subtitle: 'Partilha o contexto e as prioridades, e alinhamos um caminho realista.',
                 primaryCTA: {
-                    label: 'Contactar →',
+                    label: 'Still have questions? →',
                     link: '/contact',
                 },
-                secondaryCTA: {
-                    label: 'Ver serviços',
-                    link: '/services',
-                },
+                supportingLinks: [
+                    { label: 'Modelos de serviço', href: '/services' },
+                    { label: 'Impact', href: '/impact' },
+                ],
             }
         ],
     };

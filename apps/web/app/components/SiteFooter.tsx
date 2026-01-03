@@ -50,8 +50,8 @@ export default async function SiteFooter() {
   const contactUsHeading = await t('footer.contactUs');
   const copyrightText = footer.bottomText || await t('footer.copyright', { year: new Date().getFullYear() });
   return (
-    <footer className="mt-20">
-      <div className="bg-gradient-to-b from-[#40506b] via-[#36455d] to-[#2b374c] text-white">
+    <footer className="mt-0">
+      <div className="bg-gradient-to-b from-[#1d2b55] via-[#2e4880] to-[#1b2d56] text-white">
         <div className="mx-auto max-w-6xl px-4 py-12">
           <div className="grid gap-10 md:grid-cols-3">
             <div>

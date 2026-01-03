@@ -23,13 +23,11 @@ if [[ -z "$NETWORK_NAME" ]]; then
   exit 1
 fi
 
-docker run --rm --network "$NETWORK_NAME" minio/mc \
-  alias set local http://minio:9000 "$MINIO_ROOT_USER" "$MINIO_ROOT_PASSWORD"
-
-docker run --rm --network "$NETWORK_NAME" minio/mc \
-  mb --ignore-existing local/public-media
-
-docker run --rm --network "$NETWORK_NAME" minio/mc \
-  anonymous set download local/public-media
+docker run --rm \
+  --network "$NETWORK_NAME" \
+  --entrypoint sh \
+  minio/mc -c "mc alias set local http://minio:9000 \"$MINIO_ROOT_USER\" \"$MINIO_ROOT_PASSWORD\" && \
+             mc mb --ignore-existing local/public-media && \
+             mc anonymous set download local/public-media"
 
 echo "MinIO bucket public-media ready (public read)."
