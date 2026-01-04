@@ -66,6 +66,20 @@ const templateFromLink = (link?: string) => {
   return undefined;
 };
 
+const socialIcons: Record<string, string> = {
+  linkedin: 'in',
+  email: '✉',
+  github: 'GH',
+  website: '🌐',
+};
+
+const socialLinkDefinitions = [
+  { field: 'linkedinUrl', label: 'LinkedIn', key: 'linkedin' },
+  { field: 'email', label: 'Email', key: 'email' },
+  { field: 'githubUrl', label: 'GitHub', key: 'github' },
+  { field: 'websiteUrl', label: 'Website', key: 'website' },
+];
+
 const isPlaceholderMedia = (alt?: string) => {
   if (!alt) return false;
   const value = alt.toLowerCase();
@@ -1418,31 +1432,28 @@ export default function PageBlocks({ blocks, localePrefix }: { blocks: any[]; lo
                             )}
 
                             {/* Social Buttons */}
-                            <div className="flex flex-wrap gap-4 pt-6 border-t border-gray-100">
-                              {member.links?.linkedinUrl && (
-                                <a href={member.links.linkedinUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm font-bold text-gray-500 hover:text-brand-ocean transition-colors">
-                                  <span>LinkedIn</span>
-                                  <span className="text-xs">↗</span>
-                                </a>
-                              )}
-                              {member.links?.email && (
-                                <a href={`mailto:${member.links.email}`} className="flex items-center gap-2 text-sm font-bold text-gray-500 hover:text-brand-ocean transition-colors">
-                                  <span>Email</span>
-                                  <span className="text-xs">✉</span>
-                                </a>
-                              )}
-                              {member.links?.githubUrl && (
-                                <a href={member.links.githubUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm font-bold text-gray-500 hover:text-brand-ocean transition-colors">
-                                  <span>GitHub</span>
-                                  <span className="text-xs">↗</span>
-                                </a>
-                              )}
-                              {member.links?.websiteUrl && (
-                                <a href={member.links.websiteUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm font-bold text-gray-500 hover:text-brand-ocean transition-colors">
-                                  <span>Website</span>
-                                  <span className="text-xs">↗</span>
-                                </a>
-                              )}
+                            <div className="flex flex-wrap gap-3 pt-6 border-t border-gray-100">
+                              {socialLinkDefinitions.map((linkDef) => {
+                                const value = member.links?.[linkDef.field];
+                                if (!value) return null;
+                                const isEmail = linkDef.field === 'email';
+                                const href = isEmail ? `mailto:${value}` : value;
+                                return (
+                                  <a
+                                    key={`${member.name}-${linkDef.field}`}
+                                    href={href}
+                                    title={linkDef.label}
+                                    target={isEmail ? undefined : '_blank'}
+                                    rel={isEmail ? undefined : 'noopener noreferrer'}
+                                    className="flex items-center gap-3 rounded-full border border-gray-200 bg-white px-4 py-2 text-[10px] font-bold uppercase tracking-[0.3em] text-gray-500 transition-colors hover:border-brand-ocean hover:text-brand-ocean"
+                                  >
+                                    <span className="flex h-6 w-6 items-center justify-center rounded-full border border-gray-200 text-xs" aria-hidden="true">
+                                      {socialIcons[linkDef.key]}
+                                    </span>
+                                    <span>{linkDef.label}</span>
+                                  </a>
+                                );
+                              })}
                             </div>
                           </div>
                         </div>
