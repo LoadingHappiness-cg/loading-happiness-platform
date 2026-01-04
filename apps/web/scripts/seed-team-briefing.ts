@@ -6,6 +6,13 @@ import { getPayload } from 'payload';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+const placeholderPng = Buffer.from(
+    'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGMAAQAABQABDQottAAAAABJRU5ErkJggg==',
+    'base64'
+);
+
+const BASE_URL = process.env.NEXT_PUBLIC_SERVER_URL || 'https://loadinghappiness.pt';
+
 const loadEnvFile = async () => {
     const envPath = path.resolve(__dirname, '../.env.local');
     try {
@@ -32,7 +39,24 @@ const ensureMedia = async (payload: any, alt: string, fileName: string) => {
         limit: 1,
     });
     if (existing.docs?.[0]) return existing.docs[0].id;
-    return null; // For simplicity in this script, assume media exists or use null
+
+    const tmpDir = path.join(__dirname, 'tmp');
+    await fs.mkdir(tmpDir, { recursive: true });
+    const filePath = path.join(tmpDir, fileName);
+    await fs.writeFile(filePath, placeholderPng);
+    const fileData = await fs.readFile(filePath);
+
+    const created = await payload.create({
+        collection: 'media',
+        data: { alt },
+        file: {
+            data: fileData,
+            name: fileName,
+            mimetype: 'image/png',
+            size: fileData.length,
+        },
+    });
+    return created.id;
 };
 
 const upsertCollectionItem = async (payload: any, collection: string, whereField: string, whereValue: string, data: any) => {
@@ -96,28 +120,134 @@ const upsertPage = async (payload: any, slug: string, dataEn: any, dataPt: any) 
     return id;
 };
 
+type MemberSchema = {
+    name: string;
+    jobTitle: string;
+    image: string;
+    description?: string;
+    sameAs?: string[];
+};
+
+type PartnerSchema = {
+    name: string;
+    url: string;
+    logo: string;
+    description?: string;
+    sameAs?: string[];
+    since?: string;
+};
+
+const buildSchemaOrg = ({
+    pageTitle,
+    pageUrl,
+    locale,
+    members,
+    partners,
+}: {
+    pageTitle: string;
+    pageUrl: string;
+    locale: string;
+    members: MemberSchema[];
+    partners: PartnerSchema[];
+}) => {
+    const graph: any[] = [
+        {
+            '@type': 'WebPage',
+            '@id': `${pageUrl}#webpage`,
+            name: pageTitle,
+            url: pageUrl,
+            inLanguage: locale,
+            isPartOf: {
+                '@type': 'Organization',
+                name: 'Loading Happiness',
+                url: BASE_URL,
+            },
+        },
+        {
+            '@type': 'Organization',
+            '@id': `${BASE_URL}#organization`,
+            name: 'Loading Happiness',
+            url: BASE_URL,
+            logo: `${BASE_URL}/logo_simples_small.png`,
+            sameAs: ['https://linkedin.com/company/loadinghappiness'],
+            description: 'Senior IT partner for Portuguese SMEs focused on clarity, security, and human accountability.',
+        },
+    ];
+
+    members.forEach((member) => {
+        const personEntry: any = {
+            '@type': 'Person',
+            name: member.name,
+            jobTitle: member.jobTitle,
+            image: member.image,
+            description: member.description,
+        };
+        if (member.sameAs?.length) {
+            personEntry.sameAs = member.sameAs;
+        }
+        graph.push(personEntry);
+    });
+
+    partners.forEach((partner) => {
+        const partnerEntry: any = {
+            '@type': 'Organization',
+            name: partner.name,
+            url: partner.url,
+            logo: partner.logo,
+            description: partner.description,
+        };
+        if (partner.sameAs?.length) {
+            partnerEntry.sameAs = partner.sameAs;
+        }
+        if (partner.since) {
+            partnerEntry.founded = partner.since;
+        }
+        graph.push(partnerEntry);
+    });
+
+    return JSON.stringify(
+        {
+            '@context': 'https://schema.org',
+            '@graph': graph,
+        },
+        null,
+        2,
+    );
+};
+
 const main = async () => {
     await loadEnvFile();
     const config = (await import('../payload.config.ts')).default;
     const payload = await getPayload({ config });
 
     // 1. Get Media IDs
-    const carlosPhotoId = await ensureMedia(payload, 'About Story - Sintra Tech', 'about_story_sintra_tech_1767458550738.png');
-    const luminaPhotoId = await ensureMedia(payload, 'About Hero - Technology with a human heart', 'about_hero_tech_human_heart_1767458537105.png');
+    const carlosPhotoId = await ensureMedia(
+        payload,
+        'Carlos Gavela, Founder and Senior IT Specialist at Loading Happiness',
+        'carlos-gavela-loadinghappiness.jpg',
+    );
+    const luminaPhotoId = await ensureMedia(
+        payload,
+        'Lumina, AI Research & Knowledge Partner at Loading Happiness',
+        'lumina-ai-knowledge-loadinghappiness.jpg',
+    );
+    const amLogoId = await ensureMedia(payload, 'AM & Associados logo', 'am-associados-logo.png');
+    const mgamLogoId = await ensureMedia(payload, 'MGAM Legal logo', 'mgam-legal-logo.png');
 
     // 2. Upsert Team Members
     const carlos = await upsertCollectionItem(payload, 'team-members', 'name', 'Carlos Gavela', {
         name: 'Carlos Gavela',
         roleTitle: 'Founder & Senior IT Specialist',
         oneLiner: 'Technology should be an invisible engine for growth, not a source of stress.',
-        bio: 'With over 25 years of experience in system architecture and IT operations, Carlos founded Loading Happiness to bring enterprise-grade maturity to small and medium businesses. He believes in clear communication and direct accountability.',
+        bio: 'With over 25 years of experience guiding infrastructure, security, and operations, Carlos founded Loading Happiness to give Portuguese SMEs predictable, senior-led IT. He keeps the focus on accountability, documentation, and calm delivery.',
         photo: carlosPhotoId,
         avatarType: 'photo',
         tags: [{ text: 'Infrastructure' }, { text: 'Security' }, { text: 'Strategy' }],
         links: {
             linkedinUrl: 'https://linkedin.com/in/carlosgavela',
             email: 'carlos@loadinghappiness.com',
-            websiteUrl: 'https://loadinghappiness.com'
+            websiteUrl: 'https://loadinghappiness.com',
+            githubUrl: 'https://github.com/loadinghappiness',
         }
     });
 
@@ -125,7 +255,7 @@ const main = async () => {
         name: 'Lumina',
         roleTitle: 'AI Research & Knowledge Partner',
         oneLiner: 'Accelerating complexity into clarity.',
-        bio: 'Lumina assists in deep research, technical documentation, and process acceleration. While Lumina handles the high-velocity data processing, final accountability and human touch always remain with our senior specialists.',
+        bio: 'Lumina assists research, documentation, and process acceleration. Final accountability remains human—senior specialists own every decision, while Lumina informs the signals.',
         photo: luminaPhotoId,
         avatarType: 'gradient',
         tags: [{ text: 'AI Operations' }, { text: 'Knowledge Management' }, { text: 'Automation' }],
@@ -140,6 +270,7 @@ const main = async () => {
         category: 'Accounting',
         specialtyLine: 'Specialized in fiscal strategy and corporate transparency for growing businesses.',
         trustedSince: '2016',
+        logo: amLogoId,
         links: {
             websiteUrl: 'https://amassociados.pt',
             email: 'info@amassociados.pt'
@@ -151,109 +282,152 @@ const main = async () => {
         category: 'Legal',
         specialtyLine: 'Expert counsel on digital contracts, GDPR compliance, and Portuguese corporate law.',
         trustedSince: '2018',
+        logo: mgamLogoId,
         links: {
             websiteUrl: 'https://mgamlegal.pt',
             linkedinUrl: 'https://linkedin.com/company/mgamlegal'
         }
     });
 
+    const schemaMembers: MemberSchema[] = [
+        {
+            name: carlos.name,
+            jobTitle: carlos.roleTitle,
+            image: `${BASE_URL}/images/carlos-gavela-loadinghappiness.jpg`,
+            description: carlos.bio,
+            sameAs: [
+                carlos.links?.linkedinUrl,
+                carlos.links?.websiteUrl,
+                carlos.links?.githubUrl,
+            ].filter(Boolean) as string[],
+        },
+        {
+            name: lumina.name,
+            jobTitle: lumina.roleTitle,
+            image: `${BASE_URL}/images/lumina-ai-knowledge-loadinghappiness.jpg`,
+            description: lumina.bio,
+            sameAs: [lumina.links?.websiteUrl].filter(Boolean) as string[],
+        },
+    ];
+
+    const schemaPartners: PartnerSchema[] = [
+        {
+            name: amAssociados.companyName,
+            url: amAssociados.links?.websiteUrl || 'https://amassociados.pt',
+            logo: `${BASE_URL}/images/am-associados-logo.png`,
+            description: amAssociados.specialtyLine,
+            sameAs: [amAssociados.links?.websiteUrl].filter(Boolean) as string[],
+            since: amAssociados.trustedSince,
+        },
+        {
+            name: mgamLegal.companyName,
+            url: mgamLegal.links?.websiteUrl || 'https://mgamlegal.pt',
+            logo: `${BASE_URL}/images/mgam-legal-logo.png`,
+            description: mgamLegal.specialtyLine,
+            sameAs: [mgamLegal.links?.websiteUrl, mgamLegal.links?.linkedinUrl].filter(Boolean) as string[],
+            since: mgamLegal.trustedSince,
+        },
+    ];
+
     // 4. Upsert Team Page
+    const teamPageUrl = `${BASE_URL}/team`;
+    const schemaOrgEn = buildSchemaOrg({
+        pageTitle: 'Team - Loading Happiness',
+        pageUrl: teamPageUrl,
+        locale: 'en',
+        members: schemaMembers,
+        partners: schemaPartners,
+    });
+    const schemaOrgPt = buildSchemaOrg({
+        pageTitle: 'Equipa - Loading Happiness',
+        pageUrl: teamPageUrl,
+        locale: 'pt',
+        members: schemaMembers,
+        partners: schemaPartners,
+    });
+
+    const heroEn = {
+        blockType: 'hero',
+        variant: 'D',
+        theme: 'brandGradient',
+        eyebrow: 'SENIOR MINDS. SMALL TEAM.',
+        h1Title: 'Team',
+        heading: 'Team',
+        subheadline: 'Senior minds. Small team. Real accountability.',
+        subheading: 'Direct access to senior expertise — no ticket ping-pong. We stay close to delivery so decisions are fast, clear, and accountable.',
+        quote: 'Direct access to senior expertise — no ticket ping-pong.',
+        primaryCTA: { label: 'Work with us', link: '/contact' },
+        secondaryCTA: { label: 'View impact', link: '/impact' },
+        heroImage: carlosPhotoId,
+    };
+
     const teamContentEn = {
         title: 'Team',
         status: 'published' as const,
         layout: [
-            {
-                blockType: 'hero',
-                variant: 'D',
-                theme: 'brandGradient',
-                eyebrow: 'SENIOR MINDS. SMALL TEAM.',
-                h1Title: 'The people behind the accountability.',
-                heading: 'The people behind the accountability.',
-                subheadline: 'Direct access to senior expertise — no ticket ping-pong. We stay close to delivery so decisions are fast, clear, and accountable.',
-                subheading: 'Direct access to senior expertise — no ticket ping-pong. We stay close to delivery so decisions are fast, clear, and accountable.',
-                primaryCTA: { label: 'Talk to us', link: '/contact' },
-                secondaryCTA: { label: 'Explore Impact', link: '/impact' },
-                heroImage: carlosPhotoId,
-            },
+            heroEn,
             {
                 blockType: 'coreTeam',
                 anchorId: 'core-team',
                 title: 'Core Team',
-                intro: 'We stay close to the work to ensure every solution is grounded in reality and delivered with excellence.',
-                members: [carlos.id, lumina.id]
+                intro: 'We stay close to delivery so decisions stay fast, clear, and accountable.',
+                members: [carlos.id, lumina.id],
             },
             {
                 blockType: 'partnersGroup',
                 anchorId: 'partners',
                 title: 'Trusted Partners',
                 intro: 'Specialized support brought in when precision matters — finance and legal.',
-                partners: [amAssociados.id, mgamLegal.id]
-            }
+                partners: [amAssociados.id, mgamLegal.id],
+            },
         ],
         seo: {
             title: 'Our Team | Loading Happiness',
             description: 'Meet the experts behind Loading Happiness. Senior IT specialists and strategic partners dedicated to SME growth.',
-            schemaOrg: JSON.stringify({
-                "@context": "https://schema.org",
-                "@type": "WebPage",
-                "name": "Team - Loading Happiness",
-                "mainEntity": {
-                    "@type": "Organization",
-                    "name": "Loading Happiness",
-                    "employee": [
-                        {
-                            "@type": "Person",
-                            "name": "Carlos Gavela",
-                            "jobTitle": "Founder & Senior IT Specialist",
-                            "sameAs": ["https://linkedin.com/in/carlosgavela"]
-                        },
-                        {
-                            "@type": "Person",
-                            "name": "Lumina",
-                            "jobTitle": "AI & Knowledge Partner"
-                        }
-                    ]
-                }
-            }, null, 2)
-        }
+            schemaOrg: schemaOrgEn,
+        },
+    };
+
+    const heroPt = {
+        blockType: 'hero',
+        variant: 'D',
+        theme: 'brandGradient',
+        eyebrow: 'MENTES SÉNIORES. EQUIPA PEQUENA.',
+        h1Title: 'Equipa',
+        heading: 'Equipa',
+        subheadline: 'Mentes séniores. Equipa pequena. Responsabilidade real.',
+        subheading: 'Acesso direto a especialistas séniores — sem demoras. Mantemo-nos próximos da entrega para que as decisões sejam rápidas, claras e responsáveis.',
+        quote: 'Acesso direto a especialistas séniores — sem demoras.',
+        primaryCTA: { label: 'Trabalhe connosco', link: '/contact' },
+        secondaryCTA: { label: 'Ver impacto', link: '/impact' },
+        heroImage: carlosPhotoId,
     };
 
     const teamContentPt = {
         title: 'Equipa',
         status: 'published' as const,
         layout: [
-            {
-                blockType: 'hero',
-                variant: 'D',
-                theme: 'brandGradient',
-                eyebrow: 'MENTES SÉNIORES. EQUIPA PEQUENA.',
-                h1Title: 'As pessoas por trás da responsabilidade.',
-                heading: 'As pessoas por trás da responsabilidade.',
-                subheadline: 'Acesso direto a especialistas — sem demoras. Mantemo-nos próximos da entrega para que as decisões sejam rápidas e claras.',
-                subheading: 'Acesso direto a especialistas — sem demoras. Mantemo-nos próximos da entrega para que as decisões sejam rápidas e claras.',
-                primaryCTA: { label: 'Fale connosco', link: '/contact' },
-                secondaryCTA: { label: 'Ver Impacto', link: '/impact' },
-                heroImage: carlosPhotoId,
-            },
+            heroPt,
             {
                 blockType: 'coreTeam',
                 anchorId: 'equipa-principal',
                 title: 'Equipa Principal',
-                intro: 'Mantemo-nos próximos do trabalho para garantir que cada solução é fiável e entregue com excelência.',
-                members: [carlos.id, lumina.id]
+                intro: 'Mantemo-nos próximos da entrega para garantir que cada solução é fiável e entregue com excelência.',
+                members: [carlos.id, lumina.id],
             },
             {
                 blockType: 'partnersGroup',
                 anchorId: 'parceiros',
                 title: 'Parceiros de Confiança',
                 intro: 'Suporte especializado para quando a precisão é crítica — finanças e jurídico.',
-                partners: [amAssociados.id, mgamLegal.id]
-            }
+                partners: [amAssociados.id, mgamLegal.id],
+            },
         ],
         seo: {
             title: 'A Nossa Equipa | Loading Happiness',
             description: 'Conheça os especialistas por trás da Loading Happiness. Mentes séniores e parceiros estratégicos focados no seu negócio.',
-        }
+            schemaOrg: schemaOrgPt,
+        },
     };
 
     await upsertPage(payload, 'team', teamContentEn, teamContentPt);

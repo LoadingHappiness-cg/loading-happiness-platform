@@ -19,7 +19,8 @@
     "seed:site": "node --import tsx scripts/seed-site.ts",
     "seed:site-settings": "node --import tsx scripts/seed-site-settings.ts",
     "seed:site-settings-pt": "node --import tsx scripts/seed-site-settings-pt.ts",
-    "seed:about": "node --env-file=.env.local --import tsx scripts/seed-about-page.ts"
+    "seed:about": "node --env-file=.env.local --import tsx scripts/seed-about-page.ts",
+    "seed:team-briefing": "node --import tsx scripts/seed-team-briefing.ts"
   },
   "dependencies": {
     "@google/generative-ai": "^0.24.1",

@@ -1,8 +1,6 @@
 import { RootPage, generatePageMetadata } from '@payloadcms/next/views';
 import { importMap } from '../importMap.js';
 import config from '@/payload.config';
-import { ForceDashboard } from '../components/ForceDashboard';
-import { LogoutRedirector } from '../components/LogoutRedirector';
 
 type PageProps = {
   params: Promise<{
@@ -30,15 +28,11 @@ export default async function AdminPage({ params, searchParams }: PageProps) {
     Object.entries(resolvedSearchParams ?? {}).filter(([, value]) => value !== undefined),
   ) as Record<string, string | string[]>;
   return (
-    <>
-      <LogoutRedirector />
-      <ForceDashboard />
-      {RootPage({
-        config,
-        importMap,
-        params: Promise.resolve({ segments: resolvedParams?.segments ?? [] }),
-        searchParams: Promise.resolve(cleanedSearchParams),
-      })}
-    </>
+    RootPage({
+      config,
+      importMap,
+      params: Promise.resolve({ segments: resolvedParams?.segments ?? [] }),
+      searchParams: Promise.resolve(cleanedSearchParams),
+    })
   );
 }

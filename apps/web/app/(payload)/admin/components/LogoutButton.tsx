@@ -8,15 +8,22 @@ export const LogoutButton = () => {
   const handleLogout = async () => {
     try {
       if (typeof window !== 'undefined') {
+        // Notify other tabs about the logout event.
+        window.localStorage.setItem('payload-logout-active', '1');
         window.localStorage.setItem('payload-logout-signal', Date.now().toString());
-        ['payload-auth', 'payload-token'].forEach((cookie) => {
-          document.cookie = `${cookie}=; Max-Age=0; Path=/;`;
-        });
       }
-      window.location.href = '/admin/logout';
+
+      // Hit our custom logout route, which clears the HttpOnly auth cookies and
+      // proxies to Payload's auth logout.
+      await fetch('/auth/logout', { method: 'GET', credentials: 'include' }).catch((e) => {
+        console.warn('Custom logout request failed, falling back.', e);
+      });
+
+      // Final redirect to the login page. If the cookie is gone, you stay logged out.
+      window.location.replace('/admin/login');
     } catch (error) {
       console.error('Logout error:', error);
-      window.location.href = '/admin/logout';
+      window.location.href = '/auth/logout';
     }
   };
 

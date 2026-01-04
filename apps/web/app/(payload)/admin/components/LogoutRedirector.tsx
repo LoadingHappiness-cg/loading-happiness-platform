@@ -3,6 +3,7 @@
 import { useEffect } from 'react';
 
 const SIGNAL_KEY = 'payload-logout-signal';
+const ACTIVE_KEY = 'payload-logout-active';
 
 export const LogoutRedirector = () => {
   useEffect(() => {
@@ -11,6 +12,7 @@ export const LogoutRedirector = () => {
     const handleLogoutSignal = () => {
       if (!window.localStorage.getItem(SIGNAL_KEY)) return;
       window.localStorage.removeItem(SIGNAL_KEY);
+      window.localStorage.removeItem(ACTIVE_KEY);
       window.location.replace('/admin/login');
     };
 

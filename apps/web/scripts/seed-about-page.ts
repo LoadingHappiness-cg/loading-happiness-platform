@@ -16,7 +16,49 @@ const seedAboutPage = async () => {
         },
     });
 
-    const aboutContent: any = {
+    const finalCtaPt = {
+        blockType: 'finalCTA',
+        enabled: true,
+        title: 'Ainda tem dúvidas?',
+        content: 'Partilha o contexto e as prioridades, e alinhamos um caminho realista.',
+        subtitle: 'SLAs definidos de forma transparente por contrato (plano e horário).',
+        primaryCTA: {
+            label: 'Ainda tem dúvidas? →',
+            link: '/contact',
+        },
+        supportingLinks: [
+            { label: 'Modelos de serviço', href: '/services' },
+            { label: 'Impact', href: '/impact' },
+        ],
+        secondaryCTA: {
+            label: 'Ver serviços',
+            link: '/services',
+        },
+        microcopy: 'SLAs são definidos de forma transparente por contrato (plano e horário).',
+    };
+
+    const finalCtaEn = {
+        blockType: 'finalCTA',
+        enabled: true,
+        title: 'Still have questions?',
+        content: 'Share your context and priorities, and we will outline a realistic path.',
+        subtitle: 'Transparent SLAs defined by plan and business hours.',
+        primaryCTA: {
+            label: 'Still have questions? →',
+            link: '/contact',
+        },
+        supportingLinks: [
+            { label: 'Service models', href: '/services' },
+            { label: 'Impact', href: '/impact' },
+        ],
+        secondaryCTA: {
+            label: 'View services',
+            link: '/services',
+        },
+        microcopy: 'SLAs are defined transparently by contract (plan & business hours).',
+    };
+
+    const aboutContentPt: any = {
         title: 'Sobre a Loading Happiness',
         slug: 'about',
         status: 'published' as const,
@@ -207,20 +249,193 @@ const seedAboutPage = async () => {
                 ],
                 disclaimer: 'SLAs are defined transparently by contract (plan & business hours).',
             },
+            finalCtaPt,
+        ],
+    };
+
+    const aboutContentEn: any = {
+        title: 'About Loading Happiness',
+        slug: 'about',
+        status: 'published' as const,
+        seo: {
+            title: 'About Loading Happiness | Human-centered IT in Portugal',
+            description: 'Meet Loading Happiness: team, values, and how we work with security and responsibility for SMEs.',
+            canonicalUrl: 'https://loadinghappiness.pt/about',
+            indexable: true,
+            openGraph: {
+                ogTitle: 'About Loading Happiness',
+                ogDescription: 'Technology with a human heart in Portugal.',
+            },
+        },
+        layout: [
             {
-                blockType: 'finalCTA',
+                blockType: 'hero',
                 enabled: true,
-                title: 'Still have questions?',
-                subtitle: 'Partilha o contexto e as prioridades, e alinhamos um caminho realista.',
+                anchorId: 'top',
+                h1Title: 'About Loading Happiness',
+                heading: 'About Loading Happiness',
+                subheadline: 'We are a senior IT team focused on continuity, security, and honest support — with clear communication and respect for your context.',
+                subheading: 'We are a senior IT team focused on continuity, security, and honest support — with clear communication and respect for your context.',
                 primaryCTA: {
-                    label: 'Still have questions? →',
+                    label: 'Talk to us →',
                     link: '/contact',
                 },
-                supportingLinks: [
-                    { label: 'Modelos de serviço', href: '/services' },
-                    { label: 'Impact', href: '/impact' },
+                secondaryCTA: {
+                    label: 'View services',
+                    link: '/services',
+                },
+                quickFacts: [
+                    { label: 'Base', value: 'Portugal' },
+                    { label: 'Focus', value: 'Managed IT + Security' },
+                    { label: 'Approach', value: 'Pragmatic, documented, human' },
                 ],
-            }
+                variant: 'A',
+                theme: 'light',
+            },
+            {
+                blockType: 'mission-vision-values',
+                enabled: true,
+                sectionTitle: 'Mission, vision, and values',
+                mission: 'Ensure company tech works, is secure, and serves people—without noise or drama.',
+                vision: 'Be a local reference in responsible IT: competent, close, and useful.',
+                values: [
+                    {
+                        title: 'Rigor',
+                        description: 'We do it well and leave documentation.',
+                        proofBehavior: 'Checklists and records per intervention.',
+                    },
+                    {
+                        title: 'Clarity',
+                        description: 'We explain technical decisions in business language.',
+                        proofBehavior: 'No jargon, no fluff selling.',
+                    },
+                    {
+                        title: 'Security',
+                        description: 'Essential controls first.',
+                        proofBehavior: 'MFA, tested backups, hardening.',
+                    },
+                    {
+                        title: 'Empathy',
+                        description: 'We respect teams and timelines.',
+                        proofBehavior: 'Simple, predictable communication.',
+                    },
+                ],
+            },
+            {
+                blockType: 'timeline',
+                enabled: true,
+                sectionTitle: 'Our story',
+                intro: 'Born to solve the essentials: keep companies running with stable IT and competent support.',
+                items: [
+                    {
+                        yearOrPeriod: 'Start',
+                        title: 'Focus on support and proximity',
+                        description: 'Direct work with clients and real problems.',
+                    },
+                    {
+                        yearOrPeriod: 'Evolution',
+                        title: 'More security and process',
+                        description: 'Monitoring, standards, documentation, and prevention.',
+                    },
+                    {
+                        yearOrPeriod: 'Today',
+                        title: 'Operations + projects',
+                        description: 'Managed IT, security, and structured projects.',
+                        highlightQuote: 'Technology with a human heart.',
+                    },
+                ],
+            },
+            {
+                blockType: 'pillars',
+                enabled: true,
+                title: 'What we believe',
+                items: [
+                    { title: 'Prevention first', description: 'The base of stability.', content: 'The base of stability.', icon: '🛡️' },
+                    { title: 'Simplicity wins', description: 'Less complexity, more focus.', content: 'Less complexity, more focus.', icon: '✨' },
+                    { title: 'Document to respect the future', description: 'Continuity guaranteed.', content: 'Continuity guaranteed.', icon: '📝' },
+                    { title: 'People first, always', description: 'Tech serves business.', content: 'Tech serves business.', icon: '🤝' },
+                ],
+            },
+            {
+                blockType: 'team-intro',
+                enabled: true,
+                title: 'Our team',
+                roleTitle: 'Founder • IT Consultant',
+                bio: 'Decades in IT focused on ops, infrastructure, and security. Style: solve, document, improve.',
+            },
+            {
+                blockType: 'social-responsibility',
+                enabled: true,
+                sectionTitle: 'Social responsibility',
+                intro: 'We believe companies should be positive references in their community — with actions, not slogans.',
+                initiatives: [
+                    {
+                        title: 'Digital literacy',
+                        description: 'Support for small orgs / basic training',
+                        status: 'planned',
+                    },
+                    {
+                        title: 'Local support',
+                        description: 'Partnerships with community initiatives',
+                        status: 'planned',
+                    },
+                ],
+            },
+            {
+                blockType: 'trust-partners',
+                enabled: true,
+                title: 'Trust is built with consistency',
+            },
+            {
+                blockType: 'faq',
+                enabled: true,
+                title: 'Frequently asked questions',
+                intro: 'Based in Sintra, supporting SMEs in Portugal (and remote).',
+                items: [
+                    {
+                        question: 'What is your response time?',
+                        answer: 'We respond quickly, but without magic promises. Response time depends on the plan and agreed hours. For recurring support, we define SLAs and priorities for critical incidents.',
+                    },
+                    {
+                        question: 'Do you work with Portuguese SMEs?',
+                        answer: 'Yes — that is our focus. We help SMEs gain stability, security, and clarity, even without an internal dedicated team.',
+                    },
+                    {
+                        question: 'What sets you apart from “just another IT company”?',
+                        answer: 'Senior experience, pragmatism, and proximity. We speak clearly, choose what makes sense, and stay close to ensure it works day-to-day.',
+                    },
+                    {
+                        question: 'Do you prefer cloud or on-premises?',
+                        answer: 'Depends. We use a hybrid, pragmatic approach: cloud when it brings value, on-prem when necessary — always focused on total cost, security, and autonomy.',
+                    },
+                    {
+                        question: 'Do you use open source software?',
+                        answer: 'Yes, when it is the best choice. Open source gives transparency and flexibility, often with better cost-benefit — as long as it is well maintained, secure, and fit for business.',
+                    },
+                    {
+                        question: 'What technologies and platforms do you work with most?',
+                        answer: 'We work with what solves the problem, not “tech religion.” In practice: Microsoft 365/Windows/networks, backups and virtualization, security and monitoring, and open source solutions for internal services and automation.',
+                    },
+                    {
+                        question: 'How do you handle GDPR?',
+                        answer: 'We help on the technical side: access, backups, encryption, retention, and risk reduction. When legal expertise is needed, we work with partners.',
+                    },
+                    {
+                        question: 'Do you offer 24/7 support?',
+                        answer: 'No — we prefer to be honest. We are a small, senior team and do not promise 24/7. The focus is prevention, monitoring, and good practices to reduce emergencies.',
+                    },
+                    {
+                        question: 'How does your service model work?',
+                        answer: 'Three formats: recurring support (monthly), fixed projects (migrations/improvements/security baseline), and ad-hoc interventions when it makes sense.',
+                    },
+                    {
+                        question: 'Can you help reduce IT costs?',
+                        answer: 'Yes. Often the gain comes from simplifying: removing redundancies, improving processes, and avoiding unnecessary recurring costs.',
+                    },
+                ],
+                disclaimer: 'SLAs are defined transparently by contract (plan & business hours).',
+            },
+            finalCtaEn,
         ],
     };
 
@@ -229,13 +444,27 @@ const seedAboutPage = async () => {
         await payload.update({
             collection: 'pages',
             id: aboutPage.docs[0].id,
-            data: aboutContent,
+            locale: 'pt',
+            data: aboutContentPt,
+        });
+        await payload.update({
+            collection: 'pages',
+            id: aboutPage.docs[0].id,
+            locale: 'en',
+            data: aboutContentEn,
         });
     } else {
         console.log('✨ Creating new About page...');
-        await payload.create({
+        const created = await payload.create({
             collection: 'pages',
-            data: aboutContent,
+            locale: 'pt',
+            data: aboutContentPt,
+        });
+        await payload.update({
+            collection: 'pages',
+            id: created.id,
+            locale: 'en',
+            data: aboutContentEn,
         });
     }
 

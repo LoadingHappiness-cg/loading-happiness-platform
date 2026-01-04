@@ -465,7 +465,8 @@ const main = async () => {
   });
 
   const mergeLocalizedFields = (baseValue: any, localizedValue: any): any => {
-    if (typeof localizedValue === 'string') {
+    if (localizedValue === undefined || localizedValue === null) return baseValue;
+    if (typeof localizedValue === 'string' || typeof localizedValue === 'number' || typeof localizedValue === 'boolean') {
       return localizedValue;
     }
     if (Array.isArray(localizedValue)) {
@@ -478,7 +479,7 @@ const main = async () => {
     if (localizedValue && typeof localizedValue === 'object') {
       const baseObj = baseValue && typeof baseValue === 'object' ? { ...baseValue } : {};
       Object.entries(localizedValue).forEach(([key, value]) => {
-        if (typeof value === 'string') {
+        if (typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean') {
           baseObj[key] = value;
           return;
         }
@@ -491,9 +492,26 @@ const main = async () => {
     return baseValue;
   };
 
-  const baseLayout = basePage?.layout || [];
+  const stripIds = (block: any) => {
+    if (!block || typeof block !== 'object') return block;
+    const { id, blockName, ...rest } = block;
+    return Object.entries(rest).reduce((acc: any, [key, value]) => {
+      if (Array.isArray(value)) {
+        acc[key] = value.map(stripIds);
+        return acc;
+      }
+      if (value && typeof value === 'object') {
+        acc[key] = stripIds(value);
+        return acc;
+      }
+      acc[key] = value;
+      return acc;
+    }, {});
+  };
+
+  const baseLayout = ((basePage?.layout as any[]) || layoutPt).map(stripIds);
   const layoutPtMerged = baseLayout.map((block: any, index: number) =>
-    mergeLocalizedFields(block, layoutPt[index])
+    mergeLocalizedFields(block, layoutPt[index] || {})
   );
 
   await payload.update({
