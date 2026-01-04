@@ -296,96 +296,99 @@ const main = async () => {
           sectionId: 'intro',
           variant: 'A',
           theme: 'brandGradient',
-          heading: 'About Loading Happiness',
-          subheading: 'We build reliable, secure IT environments — with clarity, accountability, and a human approach.',
-          primaryCTA: { label: 'Book a call', link: '/contact' },
-          secondaryCTA: { label: 'Explore services', link: '/services' },
+          heading: 'Tecnologia com coração humano.',
+          subheading:
+            'Criamos ambientes de TI fiáveis e seguros — com clareza, responsabilidade e um toque humano.',
+          primaryCTA: { label: 'Marcar chamada', link: '/contact' },
+          secondaryCTA: { label: 'Explorar serviços', link: '/services' },
           image: heroImage,
           badges: [
-            { text: 'Senior-led' },
-            { text: 'Security-first' },
-            { text: 'Documented decisions' },
-            { text: 'Built for SMEs' },
+            { text: 'Equipa sénior' },
+            { text: 'Segurança em primeiro lugar' },
+            { text: 'Decisões documentadas' },
+            { text: 'Feito para PMEs' },
           ],
         },
         {
           blockType: 'splitOverview',
           sectionId: 'company-overview',
-          title: 'Company overview',
+          title: 'Visão geral da empresa',
           content:
-            'Loading Happiness is an IT partner focused on stability, security, and long-term clarity. We help organizations reduce operational noise, strengthen their foundations, and modernize systems without disrupting day-to-day work.\n\nWe’re at our best when expectations are clear: what matters, what’s realistic, and what the next steps are.',
-          sideTitle: 'Quick facts',
+            'A Loading Happiness é uma parceira de TI focada em estabilidade, segurança e clareza de longo prazo. Ajudamos organizações a reduzir ruído operacional, fortalecer bases e modernizar sistemas sem interromper o dia a dia.\n\nEstamos no nosso melhor quando as expectativas são claras: o que importa, o que é realista e quais os próximos passos.',
+          sideTitle: 'Factos rápidos',
           sideItems: [
-            { text: 'Based in Portugal · Working with EU teams' },
-            { text: 'Focus: IT operations, cybersecurity, infrastructure, support' },
-            { text: 'Method: pragmatic delivery, documented decisions, measurable progress' },
+            { text: 'Base em Portugal · Equipas na UE' },
+            { text: 'Foco: operações de TI, cibersegurança, infraestruturas, suporte' },
+            { text: 'Método: entrega pragmática, decisões documentadas, progresso mensurável' },
           ],
         },
         {
           blockType: 'valueCards',
           sectionId: 'philosophy-values',
-          title: 'Philosophy and Values',
-          intro: 'We believe technology should serve people — not the other way around. Strong systems require both technical discipline and human clarity.',
+          title: 'Filosofia e valores',
+          intro:
+            'Acreditamos que a tecnologia deve servir pessoas — e não o contrário. Sistemas fortes exigem disciplina técnica e clareza humana.',
           cards: [
-            { title: 'Integrity', text: 'We say what’s true, even when it’s uncomfortable.', icon: '⚖️' },
-            { title: 'Empathy', text: 'Support is about people under pressure, not just tickets.', icon: '🤝' },
-            { title: 'Pragmatism', text: 'Secure and stable beats fancy and fragile.', icon: '🛠️' },
-            { title: 'Responsibility', text: 'Our work should leave a positive footprint.', icon: '🌍' },
+            { title: 'Integridade', text: 'Dizemos a verdade, mesmo quando é desconfortável.', icon: '⚖️' },
+            { title: 'Empatia', text: 'Suporte é sobre pessoas sob pressão, não apenas tickets.', icon: '🤝' },
+            { title: 'Pragmatismo', text: 'Seguro e estável vence o frágil e vistoso.', icon: '🛠️' },
+            { title: 'Responsabilidade', text: 'O nosso trabalho deve deixar um impacto positivo.', icon: '🌍' },
           ],
         },
         {
           blockType: 'twoColumnList',
           sectionId: 'partnership',
-          title: 'The Right Kind of Partnership',
-          intro: 'We’re not a “yes to everything” vendor. We work as a partner: we ask hard questions, document choices, and focus on outcomes. That’s how IT becomes predictable.',
-          leftTitle: 'What you get',
+          title: 'A parceria certa',
+          intro:
+            'Não somos um fornecedor de “sim a tudo”. Trabalhamos como parceiro: fazemos perguntas difíceis, documentamos escolhas e focamo-nos em resultados. É assim que a TI se torna previsível.',
+          leftTitle: 'O que recebe',
           leftItems: [
-            { text: 'Clear priorities and scope' },
-            { text: 'Ownership and accountability' },
-            { text: 'Documentation that survives change' },
-            { text: 'Security improvements without drama' },
+            { text: 'Prioridades e escopo claros' },
+            { text: 'Ownership e responsabilidade' },
+            { text: 'Documentação que resiste a mudanças' },
+            { text: 'Melhorias de segurança sem drama' },
           ],
-          rightTitle: 'What we need',
+          rightTitle: 'O que precisamos',
           rightItems: [
-            { text: 'A point of contact and alignment on priorities' },
-            { text: 'Realistic timelines' },
-            { text: 'Willingness to fix root causes' },
-            { text: 'Respect for people and process' },
+            { text: 'Ponto de contacto e alinhamento de prioridades' },
+            { text: 'Prazos realistas' },
+            { text: 'Vontade de atacar causas raiz' },
+            { text: 'Respeito por pessoas e processo' },
           ],
         },
         {
           blockType: 'process',
           sectionId: 'our-approach',
-          title: 'Our approach',
+          title: 'A nossa abordagem',
           steps: [
-            { title: 'Assess', content: 'We map risks, pain points, dependencies, and priorities.' },
-            { title: 'Stabilize', content: 'We fix what breaks daily flow and reduce incidents.' },
-            { title: 'Evolve', content: 'We improve, automate, and secure continuously.' },
+            { title: 'Avaliar', content: 'Mapeamos riscos, dores, dependências e prioridades.' },
+            { title: 'Estabilizar', content: 'Corrigimos o que quebra o fluxo diário e reduzimos incidentes.' },
+            { title: 'Evoluir', content: 'Melhoramos, automatizamos e reforçamos segurança continuamente.' },
           ],
-          note: 'No surprises. Decisions are documented. Progress is measurable.',
+          note: 'Sem surpresas. Decisões documentadas. Progresso mensurável.',
           image: processImage,
         },
         {
           blockType: 'bulletsWithProof',
           sectionId: 'why-choose-us',
-          title: 'Why choose us',
+          title: 'Por que nos escolher',
           bullets: [
-            { text: 'Senior-level expertise with practical decisions' },
-            { text: 'Security as a foundation, not a sales pitch' },
-            { text: 'Vendor-neutral recommendations' },
-            { text: 'Clear communication and documented choices' },
-            { text: 'Systems built for continuity and recovery' },
+            { text: 'Experiência sénior com decisões práticas' },
+            { text: 'Segurança como base, não como discurso' },
+            { text: 'Recomendações neutras a fornecedores' },
+            { text: 'Comunicação clara e escolhas documentadas' },
+            { text: 'Sistemas preparados para continuidade e recuperação' },
           ],
-          proofTitle: 'Mini-proof',
+          proofTitle: 'Prova rápida',
           proofText:
-            'If you want calm operations, you need more than tools — you need discipline, clarity, and follow-through.',
+            'Se quer operações calmas, precisa de mais do que ferramentas — precisa de disciplina, clareza e execução.',
         },
         {
           blockType: 'logoCloud',
           sectionId: 'partners',
-          title: 'Partners',
+          title: 'Parceiros',
           text:
-            'Partnerships are a tool — not a cage. We partner with vendors and specialists when it improves outcomes, support paths, and delivery speed. Our priority is always the right solution for your context.',
+            'Parcerias são uma ferramenta — não uma prisão. Trabalhamos com fornecedores e especialistas quando isso melhora resultados, suporte e velocidade de entrega. A prioridade é sempre a solução certa para o seu contexto.',
           logos: [
             { logo: testimonialLogo, alt: 'Partner logo' },
             { logo: testimonialLogo, alt: 'Partner logo' },
@@ -396,28 +399,28 @@ const main = async () => {
         {
           blockType: 'teamIntro',
           sectionId: 'our-team',
-          title: 'Our team',
+          title: 'A nossa equipa',
           text:
-            'Loading Happiness is led by senior IT professionals with decades of experience in operations, infrastructure, and security. For specialized needs, we work with a trusted network — so you get the right expertise without unnecessary overhead.',
+            'A Loading Happiness é liderada por profissionais séniores de TI com décadas de experiência em operações, infraestruturas e segurança. Para necessidades específicas, trabalhamos com uma rede de confiança — para que tenha a competência certa sem custos desnecessários.',
           cards: [
             {
-              title: 'Leadership & Delivery',
-              text: 'Operations, security, infrastructure.',
-              tags: [{ text: 'Operations' }, { text: 'Security' }, { text: 'Infrastructure' }],
+              title: 'Liderança & Entrega',
+              text: 'Operações, segurança, infraestruturas.',
+              tags: [{ text: 'Operações' }, { text: 'Segurança' }, { text: 'Infraestruturas' }],
             },
             {
-              title: 'Trusted network',
-              text: 'Cloud, development, specialized security, and vendor escalation paths.',
-              tags: [{ text: 'Cloud' }, { text: 'Security' }, { text: 'Vendor' }],
+              title: 'Rede de confiança',
+              text: 'Cloud, desenvolvimento, segurança especializada e escalamento de fornecedores.',
+              tags: [{ text: 'Cloud' }, { text: 'Segurança' }, { text: 'Fornecedor' }],
             },
           ],
-          ctaLabel: 'Book a call',
+          ctaLabel: 'Marcar chamada',
           ctaLink: '/contact',
         },
       ],
       seo: {
-        title: 'About Loading Happiness',
-        description: 'Reliable, secure IT environments with clarity and accountability.',
+        title: 'Sobre a Loading Happiness',
+        description: 'Ambientes de TI fiáveis e seguros com clareza e responsabilidade.',
       },
     },
     {
@@ -566,31 +569,32 @@ const main = async () => {
           sectionId: 'intro',
           variant: 'A',
           theme: 'brandGradient',
-          heading: 'IT services that reduce noise and risk.',
-          subheading: 'We stabilize operations, strengthen security, and modernize infrastructure — with clear communication and predictable execution.',
-          primaryCTA: { label: 'Book a call', link: '/contact' },
-          secondaryCTA: { label: 'Request an assessment', link: '/contact' },
+          heading: 'Serviços de TI que reduzem ruído e risco.',
+          subheading:
+            'Estabilizamos operações, reforçamos segurança e modernizamos infraestruturas — com comunicação clara e execução previsível.',
+          primaryCTA: { label: 'Marcar chamada', link: '/contact' },
+          secondaryCTA: { label: 'Pedir diagnóstico', link: '/contact' },
           image: servicesHero,
-          badges: [{ text: 'Senior-led' }, { text: 'Security-first' }, { text: 'Fast onboarding' }],
+          badges: [{ text: 'Equipa sénior' }, { text: 'Segurança em primeiro lugar' }, { text: 'Onboarding rápido' }],
         },
         {
           blockType: 'valueCards',
           sectionId: 'value',
-          title: 'What you get from working with us',
+          title: 'O que recebe ao trabalhar connosco',
           cards: [
             {
-              title: 'Clarity',
-              text: 'You’ll know what we’re doing, why we’re doing it, and what comes next.',
+              title: 'Clareza',
+              text: 'Sabe o que estamos a fazer, porquê, e o que vem a seguir.',
               icon: '🧭',
             },
             {
-              title: 'Calm operations',
-              text: 'Fewer incidents, faster recovery, less daily firefighting.',
+              title: 'Operações calmas',
+              text: 'Menos incidentes, recuperação mais rápida, menos firefighting diário.',
               icon: '🌊',
             },
             {
-              title: 'Continuity',
-              text: 'Systems and documentation that survive growth and staff changes.',
+              title: 'Continuidade',
+              text: 'Sistemas e documentação que resistem a crescimento e mudanças de equipa.',
               icon: '📘',
             },
           ],
@@ -598,49 +602,49 @@ const main = async () => {
         {
           blockType: 'servicesGrid',
           sectionId: 'services',
-          title: 'Services',
-          intro: 'Choose what you need today — we can scale the scope as your operations mature.',
+          title: 'Serviços',
+          intro: 'Escolha o que precisa hoje — ajustamos o escopo conforme a operação amadurece.',
           services: [
             {
               title: 'Managed IT & Helpdesk',
-              description: 'Fast response, proactive maintenance, clear ownership.',
+              description: 'Resposta rápida, manutenção proativa e ownership claro.',
               icon: '💻',
               tag: 'Managed IT',
               link: '/services/managed-it',
             },
             {
               title: 'Cybersecurity Baseline & Hardening',
-              description: 'Controls that reduce risk without slowing people down.',
+              description: 'Controlo de risco sem travar pessoas.',
               icon: '🛡️',
-              tag: 'Security',
+              tag: 'Segurança',
               link: '/services/cybersecurity',
             },
             {
               title: 'Microsoft 365 & Cloud',
-              description: 'Governance, identity, migrations, licensing sanity.',
+              description: 'Governança, identidade, migrações e licenciamento sob controlo.',
               icon: '☁️',
               tag: 'Cloud',
               link: '/services/m365-cloud',
             },
             {
               title: 'Networking & Connectivity',
-              description: 'Wi-Fi, segmentation, VPN, monitoring, performance.',
+              description: 'Wi-Fi, segmentação, VPN, monitorização, performance.',
               icon: '📡',
-              tag: 'Network',
+              tag: 'Rede',
               link: '/services/networking',
             },
             {
               title: 'Infrastructure & Virtualization',
-              description: 'Virtualization, storage, backups, recovery testing.',
+              description: 'Virtualização, storage, backups e testes de recuperação.',
               icon: '🧱',
-              tag: 'Infrastructure',
+              tag: 'Infraestrutura',
               link: '/services/infrastructure',
             },
             {
               title: 'Strategy & Roadmaps',
-              description: 'A realistic 12–24 month plan: what to fix now, what to invest in next.',
+              description: 'Plano realista de 12–24 meses: o que corrigir agora, o que investir depois.',
               icon: '🧭',
-              tag: 'Strategy',
+              tag: 'Estratégia',
               link: '/services/strategy-roadmaps',
             },
           ],
@@ -648,50 +652,50 @@ const main = async () => {
         {
           blockType: 'process',
           sectionId: 'engagement',
-          title: 'How we work',
+          title: 'Como trabalhamos',
           steps: [
-            { title: 'Assess', content: 'We map risks, pain points, and priorities.' },
-            { title: 'Stabilize', content: 'We fix what breaks your day-to-day flow.' },
-            { title: 'Evolve', content: 'We improve, automate, and secure continuously.' },
+            { title: 'Avaliar', content: 'Mapeamos riscos, dores e prioridades.' },
+            { title: 'Estabilizar', content: 'Corrigimos o que quebra o fluxo do dia a dia.' },
+            { title: 'Evoluir', content: 'Melhoramos, automatizamos e reforçamos segurança continuamente.' },
           ],
-          note: 'No surprises. Decisions are documented. Progress is measurable.',
+          note: 'Sem surpresas. Decisões documentadas. Progresso mensurável.',
           image: processImage,
         },
         {
           blockType: 'faq',
           sectionId: 'faq',
-          title: 'Frequently asked questions',
+          title: 'Perguntas frequentes',
           items: [
             {
-              question: 'Do you work with small teams?',
-              answer: 'Yes. We’re built for SMEs that need senior-level clarity without enterprise overhead.',
+              question: 'Trabalham com equipas pequenas?',
+              answer: 'Sim. Somos focados em PMEs que precisam de clareza sénior sem overhead corporativo.',
             },
             {
-              question: 'Do you replace internal IT?',
-              answer: 'Not necessarily. We can complement your team or fully manage operations.',
+              question: 'Substituem a TI interna?',
+              answer: 'Não necessariamente. Podemos complementar a equipa ou gerir tudo.',
             },
             {
-              question: 'Do you offer emergency support?',
-              answer: 'Yes, with clear boundaries and escalation paths.',
+              question: 'Oferecem suporte de emergência?',
+              answer: 'Sim, com limites claros e caminhos de escalonamento.',
             },
             {
-              question: 'Can we start small?',
-              answer: 'Yes. A baseline assessment is usually the fastest first step.',
+              question: 'Podemos começar pequeno?',
+              answer: 'Sim. Um diagnóstico de base é normalmente o primeiro passo mais rápido.',
             },
           ],
         },
         {
           blockType: 'finalCTA',
           sectionId: 'cta',
-          title: 'Ready for calmer IT operations?',
-          content: 'Tell us what’s breaking your flow. We’ll propose a practical plan — no fluff, no drama.',
-          primaryCTA: { label: 'Book a call', link: '/contact' },
-          secondaryCTA: { label: 'Send a message', link: '/contact' },
+          title: 'Pronto para operações mais calmas?',
+          content: 'Conta-nos o que está a travar o fluxo. Propomos um plano prático — sem ruído.',
+          primaryCTA: { label: 'Marcar chamada', link: '/contact' },
+          secondaryCTA: { label: 'Enviar mensagem', link: '/contact' },
         },
       ],
       seo: {
-        title: 'IT services | Loading Happiness',
-        description: 'Managed IT, security, cloud, and roadmaps with clear execution.',
+        title: 'Serviços de TI | Loading Happiness',
+        description: 'Managed IT, segurança, cloud e roadmaps com execução clara.',
       },
     },
     {
@@ -838,28 +842,56 @@ const main = async () => {
     {
       slug: 'services/managed-it',
       template: 'managed-it',
-      title: 'Managed IT & Helpdesk',
-      hero: 'Reliable support, proactive maintenance, and clear ownership — so small issues don’t become big outages.',
-      bullets: [
+      titlePt: 'Managed IT & Helpdesk',
+      titleEn: 'Managed IT & Helpdesk',
+      heroPt:
+        'Suporte fiável, manutenção proativa e ownership claro — para que pequenos problemas não virem grandes paragens.',
+      heroEn: 'Reliable support, proactive maintenance, and clear ownership — so small issues don’t become big outages.',
+      bulletsPt: [
+        'precisam de suporte previsível e resolução rápida',
+        'querem menos incidentes recorrentes',
+        'precisam de documentação e responsabilidade claras',
+        'não têm tempo para gerir fornecedores e ferramentas',
+      ],
+      bulletsEn: [
         'need predictable support and faster resolution',
         'want fewer recurring incidents',
         'need documentation and clear accountability',
         'don’t have time to manage vendors and tools',
       ],
-      deliverables: [
+      deliverablesPt: [
+        { title: 'Resposta a incidentes e escalonamento', text: 'Severidade clara e ownership responsável.' },
+        { title: 'Monitorização e manutenção proativa', text: 'Evitar repetições com alertas antecipados.' },
+        { title: 'Gestão de patches alinhada', text: 'Alinhada com horários e janelas de mudança.' },
+        { title: 'Baseline de ativos e acessos', text: 'Quem acede a quê, e porquê.' },
+        { title: 'Notas mensais de saúde', text: 'O que mudou, o que melhorou, o que vem a seguir.' },
+      ],
+      deliverablesEn: [
         { title: 'Incident response and escalation', text: 'Clear severity paths and accountable ownership.' },
         { title: 'Proactive monitoring and maintenance', text: 'Prevent repeats with early alerts.' },
         { title: 'Patch management approach', text: 'Aligned with business hours and change windows.' },
         { title: 'Asset and access baseline', text: 'Who has access to what, and why.' },
         { title: 'Monthly health notes', text: 'What changed, what improved, what’s next.' },
       ],
-      outcomes: [
+      outcomesPt: [
+        { title: 'Menos problemas repetidos', text: 'Atacamos causas raiz, não apenas sintomas.' },
+        { title: 'Recuperação mais rápida', text: 'Papéis claros e passos documentados.' },
+        { title: 'Visibilidade real', text: 'Sabe o que acontece e porquê.' },
+        { title: 'Operações mais calmas', text: 'Menos firefighting, mais foco.' },
+      ],
+      outcomesEn: [
         { title: 'Fewer repeated issues', text: 'Root causes addressed, not just symptoms.' },
         { title: 'Faster recovery', text: 'Clear roles and documented steps.' },
         { title: 'Better visibility', text: 'You know what’s happening and why.' },
         { title: 'Calmer operations', text: 'Less firefighting, more focus.' },
       ],
-      steps: [
+      stepsPt: [
+        { title: 'Chamada de descoberta rápida', text: 'Alinhar objetivos, escopo e urgência.' },
+        { title: 'Baseline de acessos + inventário', text: 'Mapear sistemas, utilizadores e riscos.' },
+        { title: 'Quick wins (primeiros 30 dias)', text: 'Remover fricção imediata.' },
+        { title: 'Ritmo operacional', text: 'Ticketing, reporting e revisões.' },
+      ],
+      stepsEn: [
         { title: 'Quick discovery call', text: 'Align goals, scope, and urgency.' },
         { title: 'Access + inventory baseline', text: 'Map systems, users, and risks.' },
         { title: 'Quick wins (first 30 days)', text: 'Remove immediate friction.' },
@@ -869,28 +901,55 @@ const main = async () => {
     {
       slug: 'services/cybersecurity',
       template: 'cybersecurity',
-      title: 'Cybersecurity Baseline & Hardening',
-      hero: 'Controls that reduce risk without slowing people down.',
-      bullets: [
+      titlePt: 'Cibersegurança Base & Hardening',
+      titleEn: 'Cybersecurity Baseline & Hardening',
+      heroPt: 'Controlo de risco sem travar pessoas.',
+      heroEn: 'Controls that reduce risk without slowing people down.',
+      bulletsPt: [
+        'precisam de clareza sobre a superfície real de risco',
+        'querem controlos práticos sem overhead corporativo',
+        'precisam de disciplina de identidade e acesso',
+        'precisam de estar preparados para auditorias com mínima fricção',
+      ],
+      bulletsEn: [
         'need clarity on your real risk surface',
         'want practical controls without enterprise overhead',
         'need stronger identity and access discipline',
         'must be audit-ready with minimal disruption',
       ],
-      deliverables: [
+      deliverablesPt: [
+        { title: 'Baseline e mapeamento de políticas', text: 'O que existe vs. o que falta.' },
+        { title: 'Hardening de identidade', text: 'MFA, acesso condicional, least privilege.' },
+        { title: 'Proteção de endpoint e email', text: 'Defaults sólidos e cobertura mensurável.' },
+        { title: 'Backups e validação de recuperação', text: 'Restores testados, não suposições.' },
+        { title: 'Enablement de segurança', text: 'Orientação curta e prática para equipas.' },
+      ],
+      deliverablesEn: [
         { title: 'Security baseline and policy mapping', text: 'What exists vs. what is needed.' },
         { title: 'Identity hardening', text: 'MFA, conditional access, least privilege.' },
         { title: 'Endpoint and email protection', text: 'Sane defaults, measurable coverage.' },
         { title: 'Backups and recovery validation', text: 'Tested restores, not assumptions.' },
         { title: 'Security awareness guidance', text: 'Short, practical enablement for teams.' },
       ],
-      outcomes: [
+      outcomesPt: [
+        { title: 'Menor exposição a incidentes', text: 'Fechamos primeiro os maiores riscos.' },
+        { title: 'Ownership claro', text: 'Acessos e responsabilidades explícitos.' },
+        { title: 'Evidência para auditorias', text: 'Políticas e controlos demonstráveis.' },
+        { title: 'Menos stress de resposta', text: 'Playbooks e escalamentos definidos.' },
+      ],
+      outcomesEn: [
         { title: 'Lower incident exposure', text: 'High-risk gaps closed first.' },
         { title: 'Clearer ownership', text: 'Access and responsibility are explicit.' },
         { title: 'Audit-ready evidence', text: 'Policies and controls you can show.' },
         { title: 'Reduced response stress', text: 'Playbooks and escalation paths.' },
       ],
-      steps: [
+      stepsPt: [
+        { title: 'Descoberta de risco', text: 'Encontrar os gaps críticos primeiro.' },
+        { title: 'Plano de hardening', text: 'Priorizar controlos por impacto.' },
+        { title: 'Implementação', text: 'Aplicar mudanças com mínima disrupção.' },
+        { title: 'Revisão contínua', text: 'Medir e melhorar trimestralmente.' },
+      ],
+      stepsEn: [
         { title: 'Risk discovery', text: 'Find high-risk gaps first.' },
         { title: 'Hardening plan', text: 'Prioritize controls by impact.' },
         { title: 'Implementation', text: 'Roll out changes with minimal disruption.' },
@@ -900,28 +959,55 @@ const main = async () => {
     {
       slug: 'services/m365-cloud',
       template: 'm365-cloud',
-      title: 'Microsoft 365 & Cloud',
-      hero: 'Governance, identity, migrations, licensing sanity.',
-      bullets: [
+      titlePt: 'Microsoft 365 & Cloud',
+      titleEn: 'Microsoft 365 & Cloud',
+      heroPt: 'Governança, identidade, migrações e licenciamento sob controlo.',
+      heroEn: 'Governance, identity, migrations, licensing sanity.',
+      bulletsPt: [
+        'precisam de clareza sobre licenças e uso de M365',
+        'querem governança e segurança no lugar',
+        'precisam de migrar com pouco downtime',
+        'querem menos tickets e confusão',
+      ],
+      bulletsEn: [
         'need clarity around M365 licensing and usage',
         'want governance and security in place',
         'must migrate with low downtime',
         'need fewer support tickets and confusion',
       ],
-      deliverables: [
+      deliverablesPt: [
+        { title: 'Governança de tenant e políticas', text: 'Ownership, retenção e defaults seguros.' },
+        { title: 'Standardização de identidade e acessos', text: 'Modelos consistentes de roles e acessos.' },
+        { title: 'Planeamento e execução de migrações', text: 'Timelines claros e mínimo downtime.' },
+        { title: 'Higiene de licenças e custos', text: 'Remover desperdício e alinhar com uso real.' },
+        { title: 'Documentação e enablement', text: 'Reduzir confusão e tickets.' },
+      ],
+      deliverablesEn: [
         { title: 'Tenant governance and policies', text: 'Ownership, retention, and safe defaults.' },
         { title: 'Identity and access standardization', text: 'Consistent roles and access models.' },
         { title: 'Migration planning and execution', text: 'Clear timelines, minimal downtime.' },
         { title: 'Licensing and cost hygiene', text: 'Remove waste, align to real use.' },
         { title: 'Documentation and enablement', text: 'Reduce confusion and tickets.' },
       ],
-      outcomes: [
+      outcomesPt: [
+        { title: 'Menos desperdício em licenças', text: 'Gasto alinhado com uso.' },
+        { title: 'Menos problemas de acesso', text: 'Modelos previsíveis de permissões.' },
+        { title: 'Ownership claro do tenant', text: 'Governança que resiste a mudanças.' },
+        { title: 'Migrações seguras', text: 'Sem surpresas no cutover.' },
+      ],
+      outcomesEn: [
         { title: 'Lower licensing waste', text: 'Spend aligns with usage.' },
         { title: 'Fewer access issues', text: 'Predictable permission models.' },
         { title: 'Clear tenant ownership', text: 'Governance survives staff changes.' },
         { title: 'Safer migrations', text: 'No surprises during cutover.' },
       ],
-      steps: [
+      stepsPt: [
+        { title: 'Descoberta', text: 'Avaliar saúde do tenant e gaps.' },
+        { title: 'Governança', text: 'Definir regras e ownership.' },
+        { title: 'Migração ou limpeza', text: 'Executar com milestones claros.' },
+        { title: 'Estabilização', text: 'Reduzir tickets e documentar.' },
+      ],
+      stepsEn: [
         { title: 'Discovery', text: 'Assess tenant health and gaps.' },
         { title: 'Governance setup', text: 'Define rules and ownership.' },
         { title: 'Migration or cleanup', text: 'Execute with clear milestones.' },
@@ -931,28 +1017,55 @@ const main = async () => {
     {
       slug: 'services/networking',
       template: 'networking',
-      title: 'Networking & Connectivity',
-      hero: 'Wi-Fi, segmentation, VPN, monitoring, performance.',
-      bullets: [
+      titlePt: 'Networking & Connectivity',
+      titleEn: 'Networking & Connectivity',
+      heroPt: 'Wi-Fi, segmentação, VPN, monitorização e performance.',
+      heroEn: 'Wi-Fi, segmentation, VPN, monitoring, performance.',
+      bulletsPt: [
+        'precisam de Wi-Fi fiável e segmentação segura',
+        'querem visibilidade sobre performance de rede',
+        'precisam de VPN estável para equipas remotas',
+        'querem reduzir outages entre localizações',
+      ],
+      bulletsEn: [
         'need reliable Wi-Fi and secure segmentation',
         'want visibility into network performance',
         'require stable VPN access for remote teams',
         'need to reduce outages across locations',
       ],
-      deliverables: [
+      deliverablesPt: [
+        { title: 'Avaliação e mapeamento de rede', text: 'Inventário, hotspots de risco, bottlenecks.' },
+        { title: 'Segmentação e regras de firewall', text: 'Reduzir movimento lateral e blast radius.' },
+        { title: 'Redesign e tuning de Wi-Fi', text: 'Cobertura, densidade e performance.' },
+        { title: 'Otimização de VPN e acesso remoto', text: 'Acesso fiável sem lentidão.' },
+        { title: 'Baseline de monitorização e alertas', text: 'Saber antes dos utilizadores.' },
+      ],
+      deliverablesEn: [
         { title: 'Network assessment and mapping', text: 'Inventory, risk hotspots, bottlenecks.' },
         { title: 'Segmentation and firewall rules', text: 'Reduce lateral movement and blast radius.' },
         { title: 'Wi-Fi redesign and tuning', text: 'Coverage, density, and performance fixes.' },
         { title: 'VPN and remote access optimization', text: 'Reliable access without slowdown.' },
         { title: 'Monitoring and alerting baselines', text: 'Know before users complain.' },
       ],
-      outcomes: [
+      outcomesPt: [
+        { title: 'Menos outages', text: 'Segmentação e monitorização melhores.' },
+        { title: 'Acesso remoto previsível', text: 'VPN estável para equipas.' },
+        { title: 'Mais visibilidade', text: 'Saúde de rede mensurável.' },
+        { title: 'Melhor performance', text: 'Afinado para padrões reais de uso.' },
+      ],
+      outcomesEn: [
         { title: 'Fewer outages', text: 'Better segmentation and monitoring.' },
         { title: 'Predictable remote access', text: 'Stable VPN experience for teams.' },
         { title: 'Clearer visibility', text: 'Network health is measurable.' },
         { title: 'Better performance', text: 'Tuned for real usage patterns.' },
       ],
-      steps: [
+      stepsPt: [
+        { title: 'Auditoria de rede', text: 'Mapear dispositivos, riscos e bottlenecks.' },
+        { title: 'Design de melhorias', text: 'Planear segmentação e upgrades.' },
+        { title: 'Implementação', text: 'Executar mudanças com mínimo downtime.' },
+        { title: 'Monitorização', text: 'Acompanhar estabilidade e performance.' },
+      ],
+      stepsEn: [
         { title: 'Network audit', text: 'Map devices, risks, and bottlenecks.' },
         { title: 'Design fixes', text: 'Plan segmentation and improvements.' },
         { title: 'Implementation', text: 'Deploy changes with minimal downtime.' },
@@ -962,28 +1075,55 @@ const main = async () => {
     {
       slug: 'services/infrastructure',
       template: 'infrastructure',
-      title: 'Infrastructure & Virtualization',
-      hero: 'Virtualization, storage, backups, recovery testing.',
-      bullets: [
+      titlePt: 'Infrastructure & Virtualization',
+      titleEn: 'Infrastructure & Virtualization',
+      heroPt: 'Virtualização, storage, backups e testes de recuperação.',
+      heroEn: 'Virtualization, storage, backups, recovery testing.',
+      bulletsPt: [
+        'operam com infraestruturas antigas ou ambientes mistos',
+        'precisam de confiança clara em backups e recovery',
+        'querem performance mais previsível',
+        'precisam de documentação que resista ao crescimento',
+      ],
+      bulletsEn: [
         'run on aging infrastructure or mixed environments',
         'need clear backup and recovery confidence',
         'want more predictable performance',
         'need documentation that survives growth',
       ],
-      deliverables: [
+      deliverablesPt: [
+        { title: 'Avaliação e dimensionamento', text: 'Right-sizing e mapeamento de risco.' },
+        { title: 'Tuning de virtualização e storage', text: 'Melhorias de performance e resiliência.' },
+        { title: 'Backups e testes de recuperação', text: 'Provar recuperação antes de precisar.' },
+        { title: 'Planeamento de ciclo de vida e patches', text: 'Reduzir outages surpresa.' },
+        { title: 'Documentação operacional', text: 'Runbooks e mapas de sistema.' },
+      ],
+      deliverablesEn: [
         { title: 'Infrastructure assessment and sizing', text: 'Right-sizing and risk mapping.' },
         { title: 'Virtualization and storage tuning', text: 'Performance and resilience improvements.' },
         { title: 'Backup and recovery testing', text: 'Prove recovery before it’s needed.' },
         { title: 'Lifecycle and patch planning', text: 'Plan upgrades, reduce surprise outages.' },
         { title: 'Operational documentation', text: 'Runbooks and system maps.' },
       ],
-      outcomes: [
+      outcomesPt: [
+        { title: 'Menos outages', text: 'Menos fragilidade nos sistemas core.' },
+        { title: 'Recuperação mais rápida', text: 'Restores testados.' },
+        { title: 'Clareza de capacidade', text: 'Saber o que escalar e quando.' },
+        { title: 'Baseline documentada', text: 'Conhecimento reutilizável.' },
+      ],
+      outcomesEn: [
         { title: 'Fewer outages', text: 'Less fragility in core systems.' },
         { title: 'Faster recovery', text: 'Tested restore paths.' },
         { title: 'Capacity clarity', text: 'Know what to scale and when.' },
         { title: 'Documented baseline', text: 'Knowledge is reusable.' },
       ],
-      steps: [
+      stepsPt: [
+        { title: 'Avaliar ambiente', text: 'Mapear hardware, risco e carga.' },
+        { title: 'Estabilizar', text: 'Resolver as fragilidades maiores.' },
+        { title: 'Otimizar', text: 'Ajustar performance e segurança.' },
+        { title: 'Documentar', text: 'Manter conhecimento fora da cabeça das pessoas.' },
+      ],
+      stepsEn: [
         { title: 'Assess environment', text: 'Map hardware, risk, and load.' },
         { title: 'Stabilize', text: 'Address the biggest fragilities.' },
         { title: 'Optimize', text: 'Tune for performance and safety.' },
@@ -993,28 +1133,55 @@ const main = async () => {
     {
       slug: 'services/strategy-roadmaps',
       template: 'strategy-roadmaps',
-      title: 'Strategy & Roadmaps',
-      hero: 'A realistic 12–24 month plan: what to fix now, what to invest in next.',
-      bullets: [
+      titlePt: 'Strategy & Roadmaps',
+      titleEn: 'Strategy & Roadmaps',
+      heroPt: 'Plano realista de 12–24 meses: o que corrigir agora, o que investir depois.',
+      heroEn: 'A realistic 12–24 month plan: what to fix now, what to invest in next.',
+      bulletsPt: [
+        'precisam de clareza sobre o que corrigir agora vs depois',
+        'querem um plano de investimento realista',
+        'precisam de alinhamento e visibilidade para stakeholders',
+        'querem parar o gasto reativo',
+      ],
+      bulletsEn: [
         'need clarity on what to fix now vs later',
         'want a realistic investment plan',
         'need stakeholder alignment and visibility',
         'want to stop reactive spending',
       ],
-      deliverables: [
+      deliverablesPt: [
+        { title: 'Baseline operacional e mapa de risco', text: 'Onde estão e o que é frágil.' },
+        { title: 'Roadmap prioritário (12–24 meses)', text: 'Sequenciar correções por impacto e custo.' },
+        { title: 'Orientação de budget e investimento', text: 'Gastar onde muda resultados.' },
+        { title: 'Quick wins mensuráveis', text: 'Melhorias de estabilidade que se vêem.' },
+        { title: 'Reporting para liderança', text: 'Traduzir operações em decisões.' },
+      ],
+      deliverablesEn: [
         { title: 'Operational baseline and risk map', text: 'Where you are and what’s fragile.' },
         { title: 'Priority roadmap (12–24 months)', text: 'Sequence fixes by impact and cost.' },
         { title: 'Budget and investment guidance', text: 'Spend where it changes outcomes.' },
         { title: 'Quick wins with measurable impact', text: 'Stability improvements you can show.' },
         { title: 'Leadership-ready reporting', text: 'Translate ops into decisions.' },
       ],
-      outcomes: [
+      outcomesPt: [
+        { title: 'Prioridades claras', text: 'Corrigir as coisas certas primeiro.' },
+        { title: 'Investimentos previsíveis', text: 'Sem despesas surpresa.' },
+        { title: 'Menos gasto reativo', text: 'Reduzir budgets de firefighting.' },
+        { title: 'Stakeholders alinhados', text: 'Toda a gente conhece o plano.' },
+      ],
+      outcomesEn: [
         { title: 'Clear priorities', text: 'Fix the right things first.' },
         { title: 'Predictable investments', text: 'No surprise spending.' },
         { title: 'Less reactive spend', text: 'Reduce firefighting budgets.' },
         { title: 'Aligned stakeholders', text: 'Everyone knows the plan.' },
       ],
-      steps: [
+      stepsPt: [
+        { title: 'Descoberta', text: 'Entender contexto e constrangimentos.' },
+        { title: 'Desenho do roadmap', text: 'Sequenciar correções e investimentos.' },
+        { title: 'Alinhamento', text: 'Acordar escopo e ownership.' },
+        { title: 'Apoio à execução', text: 'Manter ritmo com revisões.' },
+      ],
+      stepsEn: [
         { title: 'Discovery', text: 'Understand context and constraints.' },
         { title: 'Roadmap design', text: 'Sequence fixes and investments.' },
         { title: 'Alignment', text: 'Agree on scope and ownership.' },
@@ -1023,11 +1190,69 @@ const main = async () => {
     },
   ];
 
+  const allowedSlugs = new Set([
+    'home',
+    'about',
+    'services',
+    'impact',
+    'contact',
+    ...servicePages.map((service) => service.slug),
+  ]);
+
+  const existingPages = await payload.find({
+    collection: 'pages',
+    limit: 200,
+    locale: 'pt',
+  });
+
+  for (const page of existingPages.docs ?? []) {
+    const slug = typeof page.slug === 'string' ? page.slug : '';
+    if (page.status === 'draft' || (slug && !allowedSlugs.has(slug))) {
+      await payload.delete({
+        collection: 'pages',
+        id: page.id,
+      });
+    }
+  }
+
   for (const service of servicePages) {
-    const templateData: ServiceTemplateData = {
+    const templateDataPt: ServiceTemplateData = {
       hero: {
-        heading: service.title,
-        subheading: service.hero,
+        heading: service.titlePt,
+        subheading: service.heroPt,
+        primaryCTA: { label: 'Pedir diagnóstico', link: '/contact' },
+        secondaryCTA: { label: 'Descarregar escopo (PDF)', link: '/service-scope.pdf' },
+        badges: [{ text: 'Equipa sénior' }, { text: 'Segurança em primeiro lugar' }],
+        image: servicesHero,
+      },
+      whoItsFor: {
+        title: 'Ideal para equipas que…',
+        items: service.bulletsPt.map((text) => ({ text })),
+      },
+      deliverables: {
+        title: 'O que entregamos',
+        items: service.deliverablesPt,
+      },
+      outcomes: {
+        title: 'Resultados esperados',
+        items: service.outcomesPt,
+      },
+      steps: {
+        title: 'Como fazemos o onboarding',
+        items: service.stepsPt,
+      },
+      cta: {
+        title: 'Quer suporte previsível?',
+        content: 'Alinhamos o contexto e propomos um plano prático.',
+        primaryCTA: { label: 'Marcar chamada', link: '/contact' },
+        secondaryCTA: { label: 'Enviar mensagem', link: '/contact' },
+      },
+    };
+
+    const templateDataEn: ServiceTemplateData = {
+      hero: {
+        heading: service.titleEn,
+        subheading: service.heroEn,
         primaryCTA: { label: 'Request an assessment', link: '/contact' },
         secondaryCTA: { label: 'Download scope PDF', link: '/service-scope.pdf' },
         badges: [{ text: 'Senior-led' }, { text: 'Security-first' }],
@@ -1035,19 +1260,19 @@ const main = async () => {
       },
       whoItsFor: {
         title: 'Best for teams that…',
-        items: service.bullets.map((text) => ({ text })),
+        items: service.bulletsEn.map((text) => ({ text })),
       },
       deliverables: {
         title: 'What we deliver',
-        items: service.deliverables,
+        items: service.deliverablesEn,
       },
       outcomes: {
         title: 'Outcomes you can expect',
-        items: service.outcomes,
+        items: service.outcomesEn,
       },
       steps: {
         title: 'How we onboard',
-        items: service.steps,
+        items: service.stepsEn,
       },
       cta: {
         title: 'Want support that feels predictable?',
@@ -1058,7 +1283,16 @@ const main = async () => {
     };
 
     if (service.template === 'cybersecurity') {
-      templateData.checklist = {
+      templateDataPt.checklist = {
+        title: 'Checklist base de segurança',
+        items: [
+          { item: 'MFA ativo em contas privilegiadas' },
+          { item: 'Proteção de email e endpoint configurada' },
+          { item: 'Backups testados e recuperação validada' },
+          { item: 'Acesso condicional e least privilege' },
+        ],
+      };
+      templateDataEn.checklist = {
         title: 'Security baseline checklist',
         items: [
           { item: 'MFA enforced for all privileged accounts' },
@@ -1070,7 +1304,16 @@ const main = async () => {
     }
 
     if (service.template === 'm365-cloud') {
-      templateData.stats = {
+      templateDataPt.stats = {
+        title: 'Métricas de clareza cloud',
+        intro: 'Resultados de base que procuramos atingir.',
+        items: [
+          { label: 'Desperdício de licenças', value: '↓ 25%' },
+          { label: 'Problemas de acesso', value: '↓ 40%' },
+          { label: 'Cobertura de políticas', value: '100%' },
+        ],
+      };
+      templateDataEn.stats = {
         title: 'Cloud clarity metrics',
         intro: 'Baseline outcomes we aim to achieve.',
         items: [
@@ -1086,76 +1329,76 @@ const main = async () => {
       'pages',
       service.slug,
       {
-        title: service.title,
+        title: service.titlePt,
         slug: service.slug,
         status: 'published',
         serviceTemplate: service.template,
-        serviceTemplateData: templateData,
+        serviceTemplateData: templateDataPt,
         layout: [
           {
             blockType: 'hero',
             sectionId: 'intro',
             variant: 'C',
             theme: 'brandGradient',
-            heading: service.title,
-            subheading: service.hero,
-            primaryCTA: { label: 'Request an assessment', link: '/contact' },
-            secondaryCTA: { label: 'Download scope PDF', link: '/service-scope.pdf' },
+            heading: service.titlePt,
+            subheading: service.heroPt,
+            primaryCTA: { label: 'Pedir diagnóstico', link: '/contact' },
+            secondaryCTA: { label: 'Descarregar escopo (PDF)', link: '/service-scope.pdf' },
             image: servicesHero,
-            badges: [{ text: 'Senior-led' }, { text: 'Security-first' }],
+            badges: [{ text: 'Equipa sénior' }, { text: 'Segurança em primeiro lugar' }],
           },
           {
             blockType: 'bullets',
             sectionId: 'who-its-for',
-            title: 'Best for teams that…',
-            items: service.bullets.map((text) => ({ text })),
+            title: 'Ideal para equipas que…',
+            items: service.bulletsPt.map((text) => ({ text })),
           },
           {
             blockType: 'deliverables',
             sectionId: 'deliverables',
-            title: 'What we deliver',
-            items: service.deliverables,
+            title: 'O que entregamos',
+            items: service.deliverablesPt,
           },
           {
             blockType: 'outcomesCards',
             sectionId: 'outcomes',
-            title: 'Outcomes you can expect',
-            cards: service.outcomes,
+            title: 'Resultados esperados',
+            cards: service.outcomesPt,
           },
           {
             blockType: 'steps',
             sectionId: 'onboarding',
-            title: 'How we onboard',
-            steps: service.steps,
+            title: 'Como fazemos o onboarding',
+            steps: service.stepsPt,
           },
           {
             blockType: 'finalCTA',
             sectionId: 'cta',
-            title: 'Want support that feels predictable?',
-            content: 'We’ll align on your context and propose a practical plan.',
-            primaryCTA: { label: 'Book a call', link: '/contact' },
-            secondaryCTA: { label: 'Send a message', link: '/contact' },
+            title: 'Quer suporte previsível?',
+            content: 'Alinhamos o contexto e propomos um plano prático.',
+            primaryCTA: { label: 'Marcar chamada', link: '/contact' },
+            secondaryCTA: { label: 'Enviar mensagem', link: '/contact' },
           },
         ],
         seo: {
-          title: service.title,
-          description: service.hero,
+          title: service.titlePt,
+          description: service.heroPt,
         },
       },
       {
-        title: service.title,
+        title: service.titleEn,
         slug: service.slug,
         status: 'published',
         serviceTemplate: service.template,
-        serviceTemplateData: templateData,
+        serviceTemplateData: templateDataEn,
         layout: [
           {
             blockType: 'hero',
             sectionId: 'intro',
             variant: 'C',
             theme: 'brandGradient',
-            heading: service.title,
-            subheading: service.hero,
+            heading: service.titleEn,
+            subheading: service.heroEn,
             primaryCTA: { label: 'Request an assessment', link: '/contact' },
             secondaryCTA: { label: 'Download scope PDF', link: '/service-scope.pdf' },
             image: servicesHero,
@@ -1165,25 +1408,25 @@ const main = async () => {
             blockType: 'bullets',
             sectionId: 'who-its-for',
             title: 'Best for teams that…',
-            items: service.bullets.map((text) => ({ text })),
+            items: service.bulletsEn.map((text) => ({ text })),
           },
           {
             blockType: 'deliverables',
             sectionId: 'deliverables',
             title: 'What we deliver',
-            items: service.deliverables,
+            items: service.deliverablesEn,
           },
           {
             blockType: 'outcomesCards',
             sectionId: 'outcomes',
             title: 'Outcomes you can expect',
-            cards: service.outcomes,
+            cards: service.outcomesEn,
           },
           {
             blockType: 'steps',
             sectionId: 'onboarding',
             title: 'How we onboard',
-            steps: service.steps,
+            steps: service.stepsEn,
           },
           {
             blockType: 'finalCTA',
@@ -1195,8 +1438,8 @@ const main = async () => {
           },
         ],
         seo: {
-          title: service.title,
-          description: service.hero,
+          title: service.titleEn,
+          description: service.heroEn,
         },
       }
     );
@@ -1219,7 +1462,7 @@ const main = async () => {
           primaryCTA: { label: 'Marcar chamada', link: '/contact' },
           secondaryCTA: { label: 'Ver serviços', link: '/services' },
           image: impactHero,
-          badges: [{ text: 'Senior-led' }, { text: 'Security-first' }, { text: 'Fast onboarding' }],
+          badges: [{ text: 'Equipa sénior' }, { text: 'Segurança em primeiro lugar' }, { text: 'Onboarding rápido' }],
         },
         {
           blockType: 'stats',
@@ -1393,7 +1636,7 @@ const main = async () => {
           primaryCTA: { label: 'Enviar mensagem', link: '#form' },
           secondaryCTA: { label: 'Ver serviços', link: '/services' },
           image: contactHero,
-          badges: [{ text: 'Senior-led' }, { text: 'Security-first' }, { text: 'Fast onboarding' }],
+          badges: [{ text: 'Equipa sénior' }, { text: 'Segurança em primeiro lugar' }, { text: 'Onboarding rápido' }],
         },
         {
           blockType: 'contactForm',
