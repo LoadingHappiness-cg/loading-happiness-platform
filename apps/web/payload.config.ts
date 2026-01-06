@@ -44,8 +44,7 @@ export default buildConfig({
   admin: {
     user: 'users',
     components: {
-      // Temporarily disable custom dashboard to isolate admin runtime error.
-      // beforeDashboard: ['/app/(payload)/admin/components/CustomDashboard#default'],
+      beforeDashboard: ['/app/(payload)/admin/components/CustomDashboard#default'],
       beforeLogin: ['/app/(payload)/admin/components/EntraLogin#EntraLogin'],
       logout: {
         Button: '/app/(payload)/admin/components/LogoutButton#LogoutButton',
@@ -53,7 +52,7 @@ export default buildConfig({
     },
     importMap: {
       baseDir: path.resolve(process.cwd()),
-      autoGenerate: false,
+      autoGenerate: true,
     },
   },
   routes: {

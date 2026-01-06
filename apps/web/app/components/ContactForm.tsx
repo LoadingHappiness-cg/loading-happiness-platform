@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { t, type Locale } from '@/lib/translations';
 
 type ContactFormProps = {
@@ -12,6 +12,24 @@ type ContactFormProps = {
 export default function ContactForm({ submitLabel, topics, locale = 'pt' }: ContactFormProps) {
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [error, setError] = useState<string | null>(null);
+  const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
+  const [captchaReady, setCaptchaReady] = useState(!siteKey);
+
+  useEffect(() => {
+    if (!siteKey) return;
+    if ((window as any).grecaptcha) {
+      setCaptchaReady(true);
+      return;
+    }
+    const script = document.createElement('script');
+    script.src = `https://www.google.com/recaptcha/api.js?render=${siteKey}`;
+    script.async = true;
+    script.onload = () => setCaptchaReady(true);
+    document.head.appendChild(script);
+    return () => {
+      script.onload = null;
+    };
+  }, [siteKey]);
 
   const defaultTopics = [
     { label: t('contact.topics.managedIt', locale), value: 'managed-it' },
@@ -31,6 +49,30 @@ export default function ContactForm({ submitLabel, topics, locale = 'pt' }: Cont
     setError(null);
 
     const formData = new FormData(event.currentTarget);
+    const website = formData.get('website');
+
+    if (typeof website === 'string' && website.trim().length > 0) {
+      setStatus('success');
+      return;
+    }
+
+    let captchaToken: string | undefined;
+    if (siteKey) {
+      const grecaptcha = (window as any).grecaptcha;
+      if (!captchaReady || !grecaptcha?.execute) {
+        setError(t('contact.form.error', locale));
+        setStatus('error');
+        return;
+      }
+      try {
+        captchaToken = await grecaptcha.execute(siteKey, { action: 'contact' });
+      } catch {
+        setError(t('contact.form.error', locale));
+        setStatus('error');
+        return;
+      }
+    }
+
     const payload = {
       name: formData.get('name'),
       company: formData.get('company'),
@@ -38,10 +80,11 @@ export default function ContactForm({ submitLabel, topics, locale = 'pt' }: Cont
       topic: formData.get('topic'),
       urgency: formData.get('urgency'),
       message: formData.get('message'),
+      captchaToken,
     };
 
     try {
-      const response = await fetch('/api/contact-submissions', {
+      const response = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
@@ -65,6 +108,7 @@ export default function ContactForm({ submitLabel, topics, locale = 'pt' }: Cont
       className="bg-white p-10 lg:p-12 rounded-[3rem] border border-gray-100 shadow-2xl shadow-gray-200/50 space-y-5"
       onSubmit={handleSubmit}
     >
+      <input type="text" name="website" className="hidden" aria-hidden="true" tabIndex={-1} />
       <input
         required
         name="name"

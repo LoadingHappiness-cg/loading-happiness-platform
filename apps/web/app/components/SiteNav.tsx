@@ -9,24 +9,28 @@ type HeaderItemDefinition = {
   href: string;
   labelKey?: string;
   descriptionKey?: string;
+  icon?: string;
+  accentClass?: string;
 };
 
 const SERVICE_ITEM_DEFINITIONS: HeaderItemDefinition[] = [
-  { href: '/services/managed-it', labelKey: 'services.managedIt.title', descriptionKey: 'services.managedIt.description' },
-  { href: '/services/cybersecurity', labelKey: 'services.cybersecurity.title', descriptionKey: 'services.cybersecurity.description' },
-  { href: '/services/m365-cloud', labelKey: 'services.cloud.title', descriptionKey: 'services.cloud.description' },
-  { href: '/services/networking', labelKey: 'services.networking.title', descriptionKey: 'services.networking.description' },
-  { href: '/services/infrastructure', labelKey: 'services.infrastructure.title', descriptionKey: 'services.infrastructure.description' },
-  { href: '/services/strategy-roadmaps', labelKey: 'services.strategyRoadmaps.title', descriptionKey: 'services.strategyRoadmaps.description' },
+  { href: '/services/managed-it', labelKey: 'services.managedIt.title', descriptionKey: 'services.managedIt.description', icon: '🛠️', accentClass: 'text-primary' },
+  { href: '/services/cybersecurity', labelKey: 'services.cybersecurity.title', descriptionKey: 'services.cybersecurity.description', icon: '🛡️', accentClass: 'text-ink' },
+  { href: '/services/m365-cloud', labelKey: 'services.cloud.title', descriptionKey: 'services.cloud.description', icon: '☁️', accentClass: 'text-sky-500' },
+  { href: '/services/networking', labelKey: 'services.networking.title', descriptionKey: 'services.networking.description', icon: '📡', accentClass: 'text-indigo-500' },
+  { href: '/services/backup-continuity', labelKey: 'services.backupContinuity.title', descriptionKey: 'services.backupContinuity.description', icon: '💾', accentClass: 'text-emerald-500' },
+  { href: '/services/projects-procurement', labelKey: 'services.projectsProcurement.title', descriptionKey: 'services.projectsProcurement.description', icon: '📑', accentClass: 'text-orange-500' },
+  { href: '/services/compliance-gdpr', labelKey: 'services.complianceGdpr.title', descriptionKey: 'services.complianceGdpr.description', icon: '⚖️', accentClass: 'text-amber-500' },
+  { href: '/services/custom-software', labelKey: 'services.customSoftware.title', descriptionKey: 'services.customSoftware.description', icon: '🧩', accentClass: 'text-fuchsia-600' },
 ];
 
 const ABOUT_ITEM_DEFINITIONS: HeaderItemDefinition[] = [
-  { href: '/about#our-story', labelKey: 'nav.about.ourStory', descriptionKey: 'nav.about.ourStoryDescription' },
-  { href: '/about#why-name', labelKey: 'nav.about.whyLoadingHappiness', descriptionKey: 'nav.about.whyLoadingHappinessDescription' },
-  { href: '/about#philosophy', labelKey: 'nav.about.philosophy', descriptionKey: 'nav.about.philosophyDescription' },
-  { href: '/about#values', labelKey: 'nav.about.values', descriptionKey: 'nav.about.valuesDescription' },
-  { href: '/about#different', labelKey: 'nav.about.whatToExpect', descriptionKey: 'nav.about.whatToExpectDescription' },
-  { href: '/team', labelKey: 'nav.about.team', descriptionKey: 'nav.about.teamDescription' },
+  { href: '/about#our-story', labelKey: 'nav.about.ourStory', descriptionKey: 'nav.about.ourStoryDescription', icon: '📖', accentClass: 'text-primary' },
+  { href: '/about#why-name', labelKey: 'nav.about.whyLoadingHappiness', descriptionKey: 'nav.about.whyLoadingHappinessDescription', icon: '✨', accentClass: 'text-indigo-500' },
+  { href: '/about#philosophy', labelKey: 'nav.about.philosophy', descriptionKey: 'nav.about.philosophyDescription', icon: '🧭', accentClass: 'text-amber-600' },
+  { href: '/about#values', labelKey: 'nav.about.values', descriptionKey: 'nav.about.valuesDescription', icon: '🤝', accentClass: 'text-emerald-500' },
+  { href: '/about#different', labelKey: 'nav.about.whatToExpect', descriptionKey: 'nav.about.whatToExpectDescription', icon: '🧠', accentClass: 'text-ink' },
+  { href: '/team', labelKey: 'nav.about.team', descriptionKey: 'nav.about.teamDescription', icon: '👥', accentClass: 'text-sky-600' },
 ];
 
 const HEADER_LINK_LABEL_KEYS: Record<string, string> = {
@@ -44,6 +48,12 @@ const HEADER_ITEM_TRANSLATIONS: Record<string, HeaderItemDefinition> = [...SERVI
   },
   {} as Record<string, HeaderItemDefinition>,
 );
+
+const normalizeHref = (href: string) => {
+  if (!href) return href;
+  const withoutPrefix = href.replace(/^\/(pt|en)(?=\/|$)/, '') || '/';
+  return withoutPrefix.replace(/\/+$/, '') || '/';
+};
 
 const buildFallbackHeaderLinks = (translate: (key: string) => string) => [
   {
@@ -72,21 +82,51 @@ const buildFallbackHeaderLinks = (translate: (key: string) => string) => [
 ];
 
 const localizeHeaderItem = (item: any, translate: (key: string) => string) => {
-  const translation = HEADER_ITEM_TRANSLATIONS[item.href];
+  const normalizedHref = normalizeHref(item.href);
+  const translation = HEADER_ITEM_TRANSLATIONS[normalizedHref];
   return {
     ...item,
     label: translation?.labelKey ? translate(translation.labelKey) : item.label,
     description: translation?.descriptionKey ? translate(translation.descriptionKey) : item.description,
+    icon: translation?.icon || item.icon,
+    accentClass: translation?.accentClass || item.accentClass,
+    href: item.href,
   };
 };
 
 const localizeHeaderLink = (link: any, translate: (key: string) => string) => {
-  const labelKey = HEADER_LINK_LABEL_KEYS[link.href];
+  const normalizedHref = normalizeHref(link.href);
+  const labelKey = HEADER_LINK_LABEL_KEYS[normalizedHref];
   return {
     ...link,
     label: labelKey ? translate(labelKey) : link.label,
     items: (link.items || []).map((item: any) => localizeHeaderItem(item, translate)),
+    href: link.href,
   };
+};
+
+const mergeServiceDropdown = (links: any[], translate: (key: string) => string) => {
+  const serviceLinkIndex = links.findIndex((link) => normalizeHref(link.href) === '/services');
+  if (serviceLinkIndex === -1) return links;
+  const link = links[serviceLinkIndex];
+  const items = Array.isArray(link.items) ? [...link.items] : [];
+
+  const existingHrefs = new Set(items.map((item: any) => normalizeHref(item.href || '')));
+  SERVICE_ITEM_DEFINITIONS.forEach((definition) => {
+    const normalized = normalizeHref(definition.href);
+    if (existingHrefs.has(normalized)) return;
+    items.push({
+      href: definition.href,
+      label: definition.labelKey ? translate(definition.labelKey) : definition.href,
+      description: definition.descriptionKey ? translate(definition.descriptionKey) : undefined,
+      icon: definition.icon,
+      accentClass: definition.accentClass,
+    });
+  });
+
+  const merged = [...links];
+  merged[serviceLinkIndex] = { ...link, type: 'dropdown', items };
+  return merged;
 };
 
 const FALLBACK_CTA = { labelKey: 'nav.bookCall', href: '/contact' };
@@ -107,7 +147,7 @@ export default async function SiteNav() {
   }
   const header = settings?.header || {};
   const headerLinksRaw = header.links?.length ? header.links : buildFallbackHeaderLinks(translate);
-  const headerLinks = headerLinksRaw.map((link: any) => localizeHeaderLink(link, translate));
+  const headerLinks = mergeServiceDropdown(headerLinksRaw, translate).map((link: any) => localizeHeaderLink(link, translate));
   const headerCta = header.cta || {
     label: translate(FALLBACK_CTA.labelKey),
     href: FALLBACK_CTA.href,
@@ -140,7 +180,7 @@ export default async function SiteNav() {
               </>
             )}
           </LocalizedLink>
-          <div className="hidden md:flex items-center gap-6 text-sm font-medium text-gray-600">
+          <div className="hidden md:flex items-center gap-6 text-base font-medium text-gray-600">
             {headerLinks.map((link: any, linkIndex: number) => {
               if (link.type === 'dropdown' && link.items?.length) {
                 return (
@@ -161,8 +201,20 @@ export default async function SiteNav() {
                               href={item.href}
                               className="rounded-xl p-3 hover:bg-gray-50 transition-colors"
                             >
-                              <p className="text-sm font-semibold text-gray-900">{item.label}</p>
-                              {item.description && <p className="text-xs text-gray-500">{item.description}</p>}
+                              <div className="flex items-start gap-3">
+                                {item.icon && (
+                                  <span
+                                    aria-hidden="true"
+                                    className={`mt-0.5 text-xl ${item.accentClass || 'text-primary'}`}
+                                  >
+                                    {item.icon}
+                                  </span>
+                                )}
+                                <div>
+                                  <p className="text-base font-semibold text-gray-900">{item.label}</p>
+                                  {item.description && <p className="text-sm text-gray-500">{item.description}</p>}
+                                </div>
+                              </div>
                             </LocalizedLink>
                           ))}
                         </div>
