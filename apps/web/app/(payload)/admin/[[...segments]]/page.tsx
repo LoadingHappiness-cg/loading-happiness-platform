@@ -16,16 +16,17 @@ export async function generateMetadata({
   params: PageParams;
   searchParams: PageSearchParams;
 }) {
-  const [resolvedParams, resolvedSearch] = await Promise.all([params, searchParams]);
-  const cleanedParams = { segments: resolvedParams?.segments ?? [] };
-  const cleanedSearch = Object.fromEntries(
-    Object.entries(resolvedSearch || {}).filter(([, value]) => value !== undefined),
-  );
+  const cleanedSearchParams = searchParams.then(resolvedSearch => {
+    if (!resolvedSearch) return {};
+    return Object.fromEntries(
+      Object.entries(resolvedSearch).filter(([, value]) => value !== undefined),
+    );
+  });
 
   return generatePageMetadata({
     config,
-    params: cleanedParams,
-    searchParams: cleanedSearch,
+    params,
+    searchParams: cleanedSearchParams,
   });
 }
 
@@ -36,20 +37,23 @@ export default async function AdminPage({
   params: PageParams;
   searchParams: PageSearchParams;
 }) {
-  const [resolvedParams, resolvedSearch] = await Promise.all([params, searchParams]);
-  const cleanedParams = { segments: resolvedParams?.segments ?? [] };
-  const cleanedSearch = Object.fromEntries(
-    Object.entries(resolvedSearch || {}).filter(([, value]) => value !== undefined),
-  );
+  const resolvedParams = await params;
 
-  if (!cleanedParams.segments.length) {
+  if (!resolvedParams?.segments?.length) {
     redirect('/admin/collections/pages');
   }
+
+  const cleanedSearchParams = searchParams.then(resolvedSearch => {
+    if (!resolvedSearch) return {};
+    return Object.fromEntries(
+      Object.entries(resolvedSearch).filter(([, value]) => value !== undefined),
+    );
+  });
 
   return RootPage({
     config,
     importMap,
-    params: cleanedParams,
-    searchParams: cleanedSearch,
+    params,
+    searchParams: cleanedSearchParams,
   });
 }
