@@ -3,16 +3,7 @@
 import React from 'react';
 import clsx from 'clsx';
 import { useInView } from 'react-intersection-observer';
-
-// Helper to safely get media URL and Alt
-const getMediaMeta = (media: any) => {
-    if (!media) return { url: undefined, alt: undefined };
-    if (typeof media === 'string') return { url: media, alt: undefined };
-    return {
-        url: media.url || media?.sizes?.thumbnail?.url,
-        alt: media.alt,
-    };
-};
+import { PayloadImage, getMediaMeta } from './PayloadImage';
 
 interface SectionWrapperProps {
     block: any; // The whole block data
@@ -114,14 +105,17 @@ export const SectionWrapper: React.FC<SectionWrapperProps> = ({
         if (!media.url) return null;
 
         const animateZoom = bg.settings?.slightMotion ? 'animate-slow-zoom' : '';
-        const parallax = bg.settings?.parallax ? 'fixed inset-0' : 'absolute inset-0'; // Simple approximation
+        const positionClass = bg.settings?.parallax ? 'fixed inset-0' : 'absolute inset-0'; // Simple approximation
 
         return (
-            <div className="absolute inset-0 z-0">
-                <img
-                    src={media.url}
+            <div className={clsx(positionClass, 'z-0')}>
+                <PayloadImage
+                    media={media}
                     alt={media.alt || 'Background'}
-                    className={clsx('w-full h-full object-cover', animateZoom)}
+                    fill
+                    className={clsx('object-cover', animateZoom)}
+                    sizes="100vw"
+                    priority={bg.settings?.priority}
                 />
             </div>
         );

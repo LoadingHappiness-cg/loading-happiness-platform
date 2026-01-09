@@ -45,6 +45,12 @@ export type TranslationKey =
     | 'home.ctaSubheading'
     | 'home.ctaPrimary'
     | 'home.ctaSecondary'
+    | 'news.featuredPrimary'
+    | 'news.featuredSecondary'
+    | 'news.allArticles'
+    | 'news.searchPlaceholder'
+    | 'news.clearFilters'
+    | 'news.readMore'
 | 'services.managedIt.title'
 | 'services.managedIt.description'
 | 'services.cybersecurity.title'
@@ -514,27 +520,35 @@ const translations: Record<Locale, Record<TranslationKey, string>> = {
         'home.ctaPrimary': 'Marcar chamada',
         'home.ctaSecondary': 'Enviar mensagem',
 
+        // News
+        'news.featuredPrimary': 'Notícia principal',
+        'news.featuredSecondary': 'Destaques',
+        'news.allArticles': 'Todos os artigos',
+        'news.searchPlaceholder': 'Procurar artigos...',
+        'news.clearFilters': 'Limpar filtros',
+        'news.readMore': 'Ler artigo',
+
         // Services
-        'services.managedIt.title': 'Gestão e Suporte de TI',
-        'services.managedIt.description': 'Suporte contínuo, prevenção, e resposta rápida quando algo falha.',
-        'services.cybersecurity.title': 'Cibersegurança',
-        'services.cybersecurity.description': 'Hardening, MFA, backups testados e controlo de acessos.',
+        'services.managedIt.title': 'TI Gerida & Helpdesk',
+        'services.managedIt.description': 'Operação estável, monitorização e respostas claras.',
+        'services.cybersecurity.title': 'Cibersegurança pragmática',
+        'services.cybersecurity.description': 'Hardening, identidade forte e backups testados.',
         'services.cloud.title': 'Microsoft 365 & Cloud',
-        'services.cloud.description': 'Configuração, migrações, segurança e boas práticas.',
+        'services.cloud.description': 'Governança, migrações, identidade e licenciamento.',
         'services.networking.title': 'Redes & Wi-Fi',
-        'services.networking.description': 'Redes estáveis, segmentação, VLANs, cobertura a sério.',
+        'services.networking.description': 'Cobertura fiável, segmentação e VPNs que funcionam.',
         'services.infrastructure.title': 'Infraestrutura e Virtualização',
         'services.infrastructure.description': 'Armazenamento, backups e testes de recuperação.',
         'services.strategyRoadmaps.title': 'Estratégia e Roadmaps',
         'services.strategyRoadmaps.description': 'Plano prático de 12–24 meses.',
         'services.backupContinuity.title': 'Backups & Continuidade',
-        'services.backupContinuity.description': 'Backup 3-2-1, testes de restauro e planos simples.',
+        'services.backupContinuity.description': 'Backups 3-2-1, restauros testados e runbooks claros.',
         'services.projectsProcurement.title': 'Projetos & Procurement',
-        'services.projectsProcurement.description': 'Planeamento, execução e compras sem desperdício.',
+        'services.projectsProcurement.description': 'Planeamento, execução e compras com ROI.',
         'services.complianceGdpr.title': 'Compliance & GDPR',
-        'services.complianceGdpr.description': 'Boas práticas, minimização de risco, documentação útil.',
-        'services.customSoftware.title': 'Software à Medida',
-        'services.customSoftware.description': 'Soluções próprias e open-source: EnviaSAFT, GS1-128 e integrações.',
+        'services.complianceGdpr.description': 'Políticas, controlo técnico e evidências para clientes/auditorias.',
+        'services.customSoftware.title': 'Software à Medida & Integrações',
+        'services.customSoftware.description': 'Automação e integrações (ERP/SQL), EnviaSAFT, GS1-128.',
 
         // Services overview
         'services.overview.metaTitle': 'Serviços de TI para PME em Portugal | Loading Happiness',
@@ -1028,32 +1042,40 @@ const translations: Record<Locale, Record<TranslationKey, string>> = {
         'home.ctaPrimary': 'Book a call',
         'home.ctaSecondary': 'Send a message',
 
+        // News
+        'news.featuredPrimary': 'Top story',
+        'news.featuredSecondary': 'Highlights',
+        'news.allArticles': 'All articles',
+        'news.searchPlaceholder': 'Search articles...',
+        'news.clearFilters': 'Clear filters',
+        'news.readMore': 'Read article',
+
         // Services
-        'services.managedIt.title': 'Managed IT & Support',
-        'services.managedIt.description': 'Continuous support, prevention, and fast incident response.',
-        'services.cybersecurity.title': 'Cybersecurity',
-        'services.cybersecurity.description': 'Practical security controls that protect without slowing you down.',
+        'services.managedIt.title': 'Managed IT & Helpdesk',
+        'services.managedIt.description': 'Stable operations, monitoring, and clear response paths.',
+        'services.cybersecurity.title': 'Pragmatic Cybersecurity',
+        'services.cybersecurity.description': 'Hardening, strong identity, and tested backups.',
         'services.cloud.title': 'Microsoft 365 & Cloud',
-        'services.cloud.description': 'Setup, migrations, security, and governance.',
-        'services.networking.title': 'Networks & Wi-Fi',
-        'services.networking.description': 'Stable networks, segmentation, VLANs, real coverage.',
+        'services.cloud.description': 'Governance, migrations, identity, and licensing sanity.',
+        'services.networking.title': 'Networking & Wi-Fi',
+        'services.networking.description': 'Reliable coverage, segmentation, and VPNs that work.',
         'services.infrastructure.title': 'Infrastructure & Virtualization',
-        'services.infrastructure.description': 'Storage, backups, and recovery testing.',
+        'services.infrastructure.description': 'Performance tuning, tested backups, and planned upgrades.',
         'services.strategyRoadmaps.title': 'Strategy & Roadmaps',
-        'services.strategyRoadmaps.description': '12–24 month practical plan.',
+        'services.strategyRoadmaps.description': 'Realistic 12–24 month plan.',
         'services.backupContinuity.title': 'Backups & Continuity',
-        'services.backupContinuity.description': '3-2-1 backup, restore testing, simple continuity plans.',
+        'services.backupContinuity.description': '3-2-1 backups, tested restores, and clear runbooks.',
         'services.projectsProcurement.title': 'Projects & Procurement',
-        'services.projectsProcurement.description': 'Planning, delivery, and smart purchasing.',
+        'services.projectsProcurement.description': 'Planning, delivery, and purchasing with ROI.',
         'services.complianceGdpr.title': 'Compliance & GDPR',
-        'services.complianceGdpr.description': 'Practical documentation and risk reduction.',
-        'services.customSoftware.title': 'Custom Software',
-        'services.customSoftware.description': 'Purpose-built + open-source: EnviaSAFT, GS1-128, integrations.',
+        'services.complianceGdpr.description': 'Policies, technical controls, and evidence for clients/audits.',
+        'services.customSoftware.title': 'Custom Software & Integrations',
+        'services.customSoftware.description': 'Automation and integrations (ERP/SQL), EnviaSAFT, GS1-128.',
 
         // Services overview
-        'services.overview.metaTitle': 'IT Services for SMEs in Portugal | Loading Happiness',
+        'services.overview.metaTitle': 'IT Services for SMEs | Loading Happiness',
         'services.overview.metaDescription':
-            'Practical IT support for SMEs: security, networks, Microsoft 365, backups, and projects. Technology with a human heart — clear, reliable, and built for real-world operations.',
+            'Practical IT for SMEs: stability, pragmatic security, Microsoft 365, networks, backups, projects, and integrations. Clear, human, and predictable.',
         'services.overview.hero.title': 'IT services for SMEs — stable, secure, and human.',
         'services.overview.hero.subtitle':
             'We solve real problems, reduce risk, and make IT predictable — without jargon or fairy tales.',

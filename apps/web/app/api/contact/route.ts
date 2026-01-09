@@ -152,6 +152,11 @@ export async function POST(req: Request) {
     return NextResponse.json({ ok: false, error: 'Captcha failed.' }, { status: 400 });
   }
 
+  const allowedTopics = ['general', 'managed-it', 'cybersecurity', 'cloud', 'projects'] as const;
+  const sanitizedTopic = allowedTopics.includes((topic || '') as any) ? (topic as (typeof allowedTopics)[number]) : 'general';
+  const allowedUrgencies = ['normal', 'urgent'] as const;
+  const sanitizedUrgency = allowedUrgencies.includes((urgency || '') as any) ? (urgency as (typeof allowedUrgencies)[number]) : 'normal';
+
   try {
     const payloadClient = await getPayloadClient();
     await payloadClient.create({
@@ -160,8 +165,8 @@ export async function POST(req: Request) {
         name,
         company: company || undefined,
         email,
-        topic: topic || undefined,
-        urgency: urgency || undefined,
+        topic: sanitizedTopic,
+        urgency: sanitizedUrgency,
         message,
       },
     });
@@ -175,8 +180,8 @@ export async function POST(req: Request) {
       name,
       company: company || '',
       email,
-      topic: topic || '',
-      urgency: urgency || '',
+      topic: sanitizedTopic || '',
+      urgency: sanitizedUrgency || '',
       message,
     });
   } catch (error) {

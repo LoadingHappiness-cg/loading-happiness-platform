@@ -14,6 +14,16 @@ const nextConfig = {
         hostname: 'media.loadinghappiness.com',
         pathname: '/**',
       },
+      {
+        protocol: 'http',
+        hostname: 'localhost',
+        pathname: '/api/media/file/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'loadinghappiness.com',
+        pathname: '/api/media/file/**',
+      },
     ],
   },
 };

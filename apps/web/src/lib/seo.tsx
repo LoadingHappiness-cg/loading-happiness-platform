@@ -191,9 +191,11 @@ export function generateFAQSchema(params: {
     );
 }
 
-export default {
+const seoUtils = {
     generateBlogPostSEO,
     generateBlogPostSchema,
     generateBreadcrumbSchema,
     generateFAQSchema,
 };
+
+export default seoUtils;

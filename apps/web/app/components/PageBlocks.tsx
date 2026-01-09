@@ -5,21 +5,13 @@ import { useEffect, useRef } from 'react';
 import { withLocale } from '@/lib/locale-utils';
 import { SectionWrapper } from './SectionWrapper';
 import ContactForm from './ContactForm';
+import { PayloadImage, getMediaMeta } from './PayloadImage';
 
 const gridCols: Record<number, string> = {
   1: 'grid-cols-1',
   2: 'grid-cols-1 md:grid-cols-2',
   3: 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3',
   4: 'grid-cols-1 md:grid-cols-2 lg:grid-cols-4',
-};
-
-const getMediaMeta = (media: any) => {
-  if (!media) return { url: undefined, alt: undefined };
-  if (typeof media === 'string') return { url: media, alt: undefined };
-  return {
-    url: media.url || media?.sizes?.thumbnail?.url,
-    alt: media.alt,
-  };
 };
 
 const templateStyles: Record<string, { label: string; accentText: string; accentBg: string }> = {
@@ -80,7 +72,7 @@ const socialLinkDefinitions = [
   { field: 'websiteUrl', label: 'Website', key: 'website' },
 ];
 
-const isPlaceholderMedia = (alt?: string) => {
+const isPlaceholderMedia = (alt?: string | null) => {
   if (!alt) return false;
   const value = alt.toLowerCase();
   return [
@@ -292,10 +284,12 @@ export default function PageBlocks({ blocks, localePrefix }: { blocks: any[]; lo
                           if (!hideMedia && media.url && !isPlaceholderMedia(media.alt)) {
                             return (
                               <div className="relative w-full h-full">
-                                <img
-                                  src={media.url}
+                                <PayloadImage
+                                  media={media}
                                   alt={media.alt || ''}
-                                  className="relative w-full h-full object-cover"
+                                  fill
+                                  className="object-cover"
+                                  sizes="(min-width: 1024px) 40vw, 100vw"
                                 />
                                 {variant === 'E' && prefersMedia && (
                                   <button
@@ -389,17 +383,23 @@ export default function PageBlocks({ blocks, localePrefix }: { blocks: any[]; lo
                       <div key={logoIndex} className="flex justify-center">
                         {getMediaMeta(logo.logo).url && (logo.url ? (
                           <a href={logo.url} className="inline-flex">
-                            <img
-                              src={getMediaMeta(logo.logo).url}
+                            <PayloadImage
+                              media={logo.logo}
                               alt={logo.alt || logo.name || ''}
-                              className="h-8 object-contain"
+                              className="h-8 w-auto object-contain"
+                              sizes="120px"
+                              fallbackWidth={160}
+                              fallbackHeight={64}
                             />
                           </a>
                         ) : (
-                          <img
-                            src={getMediaMeta(logo.logo).url}
+                          <PayloadImage
+                            media={logo.logo}
                             alt={logo.alt || logo.name || ''}
-                            className="h-8 object-contain"
+                            className="h-8 w-auto object-contain"
+                            sizes="120px"
+                            fallbackWidth={160}
+                            fallbackHeight={64}
                           />
                         ))}
                       </div>
@@ -553,7 +553,15 @@ export default function PageBlocks({ blocks, localePrefix }: { blocks: any[]; lo
                       {(() => {
                         const media = getMediaMeta(block.image);
                         if (media.url && !isPlaceholderMedia(media.alt)) {
-                          return <img src={media.url} alt={media.alt || ''} className="w-full h-full object-cover" />;
+                          return (
+                            <PayloadImage
+                              media={media}
+                              alt={media.alt || ''}
+                              fill
+                              className="object-cover"
+                              sizes="(min-width: 1024px) 40vw, 100vw"
+                            />
+                          );
                         }
                         return (
                           <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-brand-ocean/20 via-white to-brand-teal/10">
@@ -608,7 +616,15 @@ export default function PageBlocks({ blocks, localePrefix }: { blocks: any[]; lo
                       {(() => {
                         const media = getMediaMeta(block.image);
                         if (media.url && !isPlaceholderMedia(media.alt)) {
-                          return <img src={media.url} alt={media.alt || ''} className="w-full h-full object-cover" />;
+                          return (
+                            <PayloadImage
+                              media={media}
+                              alt={media.alt || ''}
+                              fill
+                              className="object-cover"
+                              sizes="(min-width: 1024px) 45vw, 100vw"
+                            />
+                          );
                         }
                         return (
                           <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-brand-mint/20 via-white to-brand-sky/15">
@@ -727,20 +743,30 @@ export default function PageBlocks({ blocks, localePrefix }: { blocks: any[]; lo
                   )}
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                     {block.images?.map((image: any, imageIndex: number) => (
-                      <div key={imageIndex} className="rounded-2xl overflow-hidden bg-gray-100">
-                        {(() => {
-                          const media = getMediaMeta(image.image);
-                          if (media.url && !isPlaceholderMedia(media.alt)) {
-                            return <img src={media.url} alt={image.alt || ''} className="w-full h-full object-cover" />;
-                          }
-                          return (
-                            <div className="w-full h-full min-h-[180px] flex items-center justify-center bg-gradient-to-br from-brand-sky/15 via-white to-brand-teal/10">
-                              <span className="text-xs uppercase tracking-[0.3em] text-brand-ocean font-bold">Gallery</span>
-                            </div>
-                          );
-                        })()}
+                      <div key={imageIndex}>
+                        <div className="relative rounded-2xl overflow-hidden bg-gray-100 aspect-[4/3]">
+                          {(() => {
+                            const media = getMediaMeta(image.image);
+                            if (media.url && !isPlaceholderMedia(media.alt)) {
+                              return (
+                                <PayloadImage
+                                  media={media}
+                                  alt={image.alt || ''}
+                                  fill
+                                  className="object-cover"
+                                  sizes="(min-width: 1024px) 30vw, 100vw"
+                                />
+                              );
+                            }
+                            return (
+                              <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-brand-sky/15 via-white to-brand-teal/10">
+                                <span className="text-xs uppercase tracking-[0.3em] text-brand-ocean font-bold">Gallery</span>
+                              </div>
+                            );
+                          })()}
+                        </div>
                         {(image.caption || image.alt) && (
-                          <div className="p-4 bg-white">
+                          <div className="p-4 bg-white rounded-b-2xl border border-gray-50 border-t-0">
                             {image.caption && <p className="text-sm text-gray-600">{image.caption}</p>}
                             {!image.caption && image.alt && <p className="text-xs text-gray-400">{image.alt}</p>}
                           </div>
@@ -802,7 +828,15 @@ export default function PageBlocks({ blocks, localePrefix }: { blocks: any[]; lo
                       {(() => {
                         const media = getMediaMeta(block.image);
                         if (media.url && !isPlaceholderMedia(media.alt)) {
-                          return <img src={media.url} alt={media.alt || ''} className="w-full h-full object-cover" />;
+                          return (
+                            <PayloadImage
+                              media={media}
+                              alt={media.alt || ''}
+                              fill
+                              className="object-cover"
+                              sizes="(min-width: 1024px) 40vw, 100vw"
+                            />
+                          );
                         }
                         return (
                           <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-brand-ocean/15 via-white to-brand-indigo/15">
@@ -1007,7 +1041,14 @@ export default function PageBlocks({ blocks, localePrefix }: { blocks: any[]; lo
                     {block.logos?.map((logo: any, logoIndex: number) => (
                       <div key={logoIndex} className="flex justify-center">
                         {getMediaMeta(logo.logo).url && (
-                          <img src={getMediaMeta(logo.logo).url} alt={logo.alt || ''} className="h-10 object-contain" />
+                          <PayloadImage
+                            media={logo.logo}
+                            alt={logo.alt || ''}
+                            className="h-10 w-auto object-contain"
+                            sizes="140px"
+                            fallbackWidth={180}
+                            fallbackHeight={72}
+                          />
                         )}
                       </div>
                     ))}
@@ -1029,8 +1070,16 @@ export default function PageBlocks({ blocks, localePrefix }: { blocks: any[]; lo
                     {block.cards?.map((card: any, cardIndex: number) => (
                       <div key={cardIndex} className="rounded-[2.5rem] border border-gray-100 bg-white p-8 shadow-sm hover:shadow-md transition-shadow flex flex-col md:flex-row gap-8 items-start">
                         {getMediaMeta(card.image).url && (
-                          <div className="w-24 h-24 rounded-2xl overflow-hidden flex-shrink-0 shadow-lg border-4 border-gray-50">
-                            <img src={getMediaMeta(card.image).url} alt={card.title || ''} className="w-full h-full object-cover" />
+                          <div className="relative w-24 h-24 rounded-2xl overflow-hidden flex-shrink-0 shadow-lg border-4 border-gray-50">
+                            <PayloadImage
+                              media={card.image}
+                              alt={card.title || ''}
+                              fill
+                              className="object-cover"
+                              sizes="96px"
+                              fallbackWidth={96}
+                              fallbackHeight={96}
+                            />
                           </div>
                         )}
                         <div className="flex-1">
@@ -1233,7 +1282,14 @@ export default function PageBlocks({ blocks, localePrefix }: { blocks: any[]; lo
                         <p className="text-gray-700 text-lg leading-relaxed">“{item.quote}”</p>
                         <div className="flex items-center gap-4">
                           {getMediaMeta(item.logo).url && (
-                            <img src={getMediaMeta(item.logo).url} alt="" className="h-8 object-contain" />
+                            <PayloadImage
+                              media={item.logo}
+                              alt=""
+                              className="h-8 w-auto object-contain"
+                              sizes="120px"
+                              fallbackWidth={160}
+                              fallbackHeight={64}
+                            />
                           )}
                           <div>
                             <p className="font-bold text-gray-900">{item.name}</p>
@@ -1400,10 +1456,18 @@ export default function PageBlocks({ blocks, localePrefix }: { blocks: any[]; lo
                       return (
                         <div key={memberIndex} className="rounded-[2.5rem] border border-gray-100 bg-gray-50/30 p-8 lg:p-12 hover:shadow-xl hover:bg-white transition-all flex flex-col lg:flex-row gap-10 items-start">
                           {/* Avatar */}
-                          <div className="flex-shrink-0">
-                            <div className={`w-24 h-24 lg:w-32 lg:h-32 rounded-[2rem] overflow-hidden shadow-2xl border-4 border-white ${member.avatarType === 'gradient' ? 'bg-gradient-to-br from-brand-ocean to-brand-teal' : 'bg-gray-100'}`}>
+                        <div className="flex-shrink-0">
+                            <div className={`relative w-24 h-24 lg:w-32 lg:h-32 rounded-[2rem] overflow-hidden shadow-2xl border-4 border-white ${member.avatarType === 'gradient' ? 'bg-gradient-to-br from-brand-ocean to-brand-teal' : 'bg-gray-100'}`}>
                               {photo.url ? (
-                                <img src={photo.url} alt={photo.alt || member.name} className="w-full h-full object-cover" />
+                                <PayloadImage
+                                  media={member.photo}
+                                  alt={photo.alt || member.name}
+                                  fill
+                                  className="object-cover"
+                                  sizes="(min-width: 1024px) 128px, 96px"
+                                  fallbackWidth={128}
+                                  fallbackHeight={128}
+                                />
                               ) : (
                                 <div className="w-full h-full flex items-center justify-center text-brand-ocean/30">
                                   <span className="text-4xl text-brand-ocean opacity-20">👤</span>
@@ -1486,8 +1550,16 @@ export default function PageBlocks({ blocks, localePrefix }: { blocks: any[]; lo
                           </div>
                           <div className="flex items-center gap-6">
                             {logo.url && (
-                              <div className="w-16 h-16 rounded-2xl overflow-hidden bg-gray-50 p-2 flex items-center justify-center border border-gray-100">
-                                <img src={logo.url} alt={logo.alt || partner.companyName} className="max-w-full max-h-full object-contain" />
+                              <div className="relative w-16 h-16 rounded-2xl overflow-hidden bg-gray-50 p-2 flex items-center justify-center border border-gray-100">
+                                <PayloadImage
+                                  media={partner.logo}
+                                  alt={logo.alt || partner.companyName}
+                                  fill
+                                  className="object-contain"
+                                  sizes="64px"
+                                  fallbackWidth={64}
+                                  fallbackHeight={64}
+                                />
                               </div>
                             )}
                             <h3 className="text-2xl font-black text-gray-900">{partner.companyName}</h3>

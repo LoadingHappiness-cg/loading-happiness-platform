@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { getLocale, getLocalePrefix, withLocale, t } from '@/lib/locale';
 import { getPayloadClient } from '@/lib/payload';
+import { PayloadImage } from './PayloadImage';
 
 export default async function SiteFooter() {
   const localePrefix = await getLocalePrefix();
@@ -57,10 +58,13 @@ export default async function SiteFooter() {
             <div>
               <div className="flex items-center gap-3">
                 {footer.logo && typeof footer.logo !== 'string' ? (
-                  <img
-                    src={footer.logo.url}
+                  <PayloadImage
+                    media={footer.logo}
                     alt={footer.logoAlt || 'Loading Happiness'}
-                    className="h-10 w-auto"
+                    className="h-10 w-auto object-contain"
+                    sizes="180px"
+                    fallbackWidth={180}
+                    fallbackHeight={48}
                   />
                 ) : (
                   <div className="text-2xl font-bold tracking-wide">LOADING HAPPINESS</div>
@@ -220,10 +224,13 @@ export default async function SiteFooter() {
                     {awards.map((award: any, index: number) => {
                       if (!award?.image || typeof award.image === 'string') return null;
                       const img = (
-                        <img
-                          src={award.image.url}
+                        <PayloadImage
+                          media={award.image}
                           alt={award.alt || 'Award'}
-                          className="h-16 w-auto rounded"
+                          className="h-16 w-auto rounded object-contain"
+                          sizes="150px"
+                          fallbackWidth={200}
+                          fallbackHeight={100}
                         />
                       );
                       return award.href ? (

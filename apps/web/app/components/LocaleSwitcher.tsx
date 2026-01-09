@@ -1,7 +1,6 @@
 "use client";
 
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useSearchParams } from 'next/navigation';
 
 const LOCALE_COOKIE = 'lh_locale';
 const LOCALES = ['pt', 'en'] as const;
@@ -24,25 +23,32 @@ const getPathWithoutLocale = (pathname: string) => {
 
 export default function LocaleSwitcher() {
   const pathname = usePathname() || '/';
+  const searchParams = useSearchParams();
   const currentLocaleMatch = pathname.match(/^\/(pt|en)(?=\/|$)/);
   const currentLocale = currentLocaleMatch?.[1] || getLocaleFromCookie() || 'pt';
   const pathWithoutLocale = getPathWithoutLocale(pathname);
-  const querySuffix = '';
+  const querySuffix = searchParams.toString() ? `?${searchParams.toString()}` : '';
+
+  const handleSwitch = (locale: (typeof LOCALES)[number]) => {
+    const href = `/${locale}${pathWithoutLocale === '/' ? '' : pathWithoutLocale}${querySuffix}`;
+    setLocaleCookie(locale);
+    // Hard navigation to ensure middleware runs and server data reloads in the new locale.
+    window.location.assign(href);
+  };
 
   return (
     <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest">
       {LOCALES.map((locale, index) => {
-        const href = `/${locale}${pathWithoutLocale === '/' ? '' : pathWithoutLocale}${querySuffix}`;
         const isActive = currentLocale === locale;
         return (
           <div key={locale} className="flex items-center gap-2">
-            <Link
-              href={href}
+            <button
+              type="button"
+              onClick={() => handleSwitch(locale)}
               className={isActive ? 'text-ink' : 'text-gray-400 hover:text-ink'}
-              onClick={() => setLocaleCookie(locale)}
             >
               {locale.toUpperCase()}
-            </Link>
+            </button>
             {index === 0 && <span className="text-gray-300">/</span>}
           </div>
         );

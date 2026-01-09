@@ -1,33 +1,16 @@
 import type { ReactNode } from 'react';
-
-import '@payloadcms/next/css';
-import { RootLayout, handleServerFunctions } from '@payloadcms/next/layouts';
-import { importMap } from './(payload)/admin/importMap.js';
-import config from '@/payload.config';
+import './globals.css';
 
 type LayoutProps = {
   children: ReactNode;
 };
 
-type ServerFunctionClientArgs = {
-  name: string;
-  args: Record<string, unknown>;
-};
+export const dynamic = 'force-dynamic';
 
-export default async function AppLayout({ children }: LayoutProps) {
-  async function serverFunction(args: ServerFunctionClientArgs) {
-    'use server';
-    return handleServerFunctions({
-      ...args,
-      config,
-      importMap,
-    });
-  }
-
-  return RootLayout({
-    children,
-    config,
-    importMap,
-    serverFunction,
-  });
+export default function RootAppLayout({ children }: LayoutProps) {
+  return (
+    <html lang="en">
+      <body>{children}</body>
+    </html>
+  );
 }

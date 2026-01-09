@@ -7,6 +7,7 @@
 
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 type DashboardStats = {
     totalPosts: number;
@@ -380,7 +381,14 @@ export default function CustomDashboard() {
                             </div>
                         ) : generatedImageUrl ? (
                             <div className="w-full p-4 space-y-4">
-                                <img src={generatedImageUrl} alt="Generated" className="w-full h-auto rounded-3xl shadow-2xl border-4 border-white" />
+                                <Image
+                                    src={generatedImageUrl}
+                                    alt="Generated"
+                                    width={1600}
+                                    height={900}
+                                    className="w-full h-auto rounded-3xl shadow-2xl border-4 border-white"
+                                    unoptimized
+                                />
                                 <div className="text-center">
                                     <p className="text-green-600 font-bold flex items-center justify-center gap-2 mb-2">
                                         <span>✅</span> Imagem guardada na Media Library!

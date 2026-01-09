@@ -6,6 +6,7 @@ import Link from 'next/link';
 import type { Author } from '@/payload-types';
 import { Content as ContentType } from '@/payload-types';
 import { withLocale } from '@/lib/locale';
+import { PayloadImage } from './PayloadImage';
 
 type BlogPostProps = {
     post: ContentType;
@@ -39,11 +40,12 @@ export default function BlogPost({
             <article className="group relative overflow-hidden rounded-3xl bg-gradient-to-br from-primary/10 to-accent/10 border border-gray-100">
                 <div className="grid md:grid-cols-2 gap-0">
                     {featuredImage && (
-                        <div className="aspect-[16/10] md:aspect-auto overflow-hidden">
-                            <img
-                                src={featuredImage.url || ''}
+                        <div className="overflow-hidden">
+                            <PayloadImage
+                                media={featuredImage}
                                 alt={featuredImage.alt || post.title}
                                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                sizes="(min-width: 1024px) 50vw, 100vw"
                             />
                         </div>
                     )}
@@ -80,10 +82,13 @@ export default function BlogPost({
                             {showAuthor && author && (
                                 <span className="flex items-center gap-2">
                                     {authorPhoto && typeof authorPhoto !== 'number' && (
-                                        <img
-                                            src={authorPhoto.url || ''}
+                                        <PayloadImage
+                                            media={authorPhoto}
                                             alt={author.name}
-                                            className="w-6 h-6 rounded-full"
+                                            className="w-6 h-6 rounded-full object-cover"
+                                            sizes="32px"
+                                            fallbackWidth={48}
+                                            fallbackHeight={48}
                                         />
                                     )}
                                     <span>{author.name}</span>
@@ -110,11 +115,15 @@ export default function BlogPost({
             <article className="group flex gap-6 pb-6 border-b border-gray-100">
                 {featuredImage && (
                     <Link href={withLocale(`/news/${post.slug}`, localePrefix)} className="flex-shrink-0">
-                        <div className="w-32 h-32 rounded-xl overflow-hidden">
-                            <img
-                                src={featuredImage.url || ''}
+                        <div className="relative w-32 h-32 rounded-xl overflow-hidden">
+                            <PayloadImage
+                                media={featuredImage}
                                 alt={featuredImage.alt || post.title}
-                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                                fill
+                                className="object-cover group-hover:scale-105 transition-transform duration-300"
+                                sizes="128px"
+                                fallbackWidth={128}
+                                fallbackHeight={128}
                             />
                         </div>
                     </Link>
@@ -154,11 +163,13 @@ export default function BlogPost({
         <article className="group rounded-3xl border border-gray-100 bg-white overflow-hidden shadow-sm hover:shadow-xl transition-all">
             {featuredImage && (
                 <Link href={withLocale(`/news/${post.slug}`, localePrefix)}>
-                    <div className="aspect-[16/9] overflow-hidden bg-gray-100">
-                        <img
-                            src={featuredImage.url || ''}
+                    <div className="relative aspect-[16/9] overflow-hidden bg-gray-100">
+                        <PayloadImage
+                            media={featuredImage}
                             alt={featuredImage.alt || post.title}
-                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                            fill
+                            className="object-cover group-hover:scale-105 transition-transform duration-500"
+                            sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
                         />
                     </div>
                 </Link>
@@ -187,10 +198,13 @@ export default function BlogPost({
                         {showAuthor && author && (
                             <div className="flex items-center gap-2">
                                 {authorPhoto && typeof authorPhoto !== 'number' && (
-                                    <img
-                                        src={authorPhoto.url || ''}
+                                    <PayloadImage
+                                        media={authorPhoto}
                                         alt={author.name}
-                                        className="w-6 h-6 rounded-full"
+                                        className="w-6 h-6 rounded-full object-cover"
+                                        sizes="32px"
+                                        fallbackWidth={48}
+                                        fallbackHeight={48}
                                     />
                                 )}
                                 <span>{author.name}</span>

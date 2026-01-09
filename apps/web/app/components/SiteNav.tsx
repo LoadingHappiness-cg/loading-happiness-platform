@@ -4,6 +4,7 @@ import TopBar from './TopBar';
 import { HeaderBg } from './HeaderBg';
 import LocaleSwitcher from './LocaleSwitcher';
 import LocalizedLink from './LocalizedLink';
+import { PayloadImage } from './PayloadImage';
 
 type HeaderItemDefinition = {
   href: string;
@@ -129,7 +130,7 @@ const mergeServiceDropdown = (links: any[], translate: (key: string) => string) 
   return merged;
 };
 
-const FALLBACK_CTA = { labelKey: 'nav.bookCall', href: '/contact' };
+const FALLBACK_CTA = { labelKey: 'nav.bookCall', href: '/contact' } as const;
 
 export default async function SiteNav() {
   const locale = await getLocale();
@@ -146,8 +147,9 @@ export default async function SiteNav() {
     settings = null;
   }
   const header = settings?.header || {};
-  const headerLinksRaw = header.links?.length ? header.links : buildFallbackHeaderLinks(translate);
-  const headerLinks = mergeServiceDropdown(headerLinksRaw, translate).map((link: any) => localizeHeaderLink(link, translate));
+  const translateAny = translate as unknown as (key: string) => string;
+  const headerLinksRaw = header.links?.length ? header.links : buildFallbackHeaderLinks(translateAny);
+  const headerLinks = mergeServiceDropdown(headerLinksRaw, translateAny).map((link: any) => localizeHeaderLink(link, translateAny));
   const headerCta = header.cta || {
     label: translate(FALLBACK_CTA.labelKey),
     href: FALLBACK_CTA.href,
@@ -166,10 +168,13 @@ export default async function SiteNav() {
         <div className="flex items-center justify-between h-20">
           <LocalizedLink href="/" className="site-logo flex items-center gap-2 text-ink">
             {header.logo && typeof header.logo !== 'string' ? (
-              <img
-                src={header.logo.url}
+              <PayloadImage
+                media={header.logo}
                 alt={header.logoAlt || 'Loading Happiness'}
-                className="site-logo-img h-10 w-auto"
+                className="site-logo-img h-10 w-auto object-contain"
+                sizes="180px"
+                fallbackWidth={180}
+                fallbackHeight={48}
               />
             ) : (
               <>

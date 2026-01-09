@@ -414,7 +414,7 @@ export async function generateImage(params: {
     throw new Error('Image generation (Imagen 3) requires Vertex AI configuration. Please ensure GOOGLE_APPLICATION_CREDENTIALS is set.');
 }
 
-export default {
+const geminiApi = {
     generateBlogContent,
     generateMetaDescription,
     generateSEOKeywords,
@@ -426,3 +426,5 @@ export default {
     suggestImagePrompt,
     generateImage,
 };
+
+export default geminiApi;

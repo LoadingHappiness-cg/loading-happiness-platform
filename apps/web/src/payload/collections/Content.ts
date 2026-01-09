@@ -262,6 +262,30 @@ const Content: CollectionConfig = {
         description: 'Show this post in featured sections',
       },
     },
+    {
+      name: 'highlightLevel',
+      type: 'select',
+      label: 'Highlight level',
+      defaultValue: 'none',
+      options: [
+        { label: 'None', value: 'none' },
+        { label: 'Primary', value: 'primary' },
+        { label: 'Secondary', value: 'secondary' },
+      ],
+      admin: {
+        position: 'sidebar',
+        description: 'Control placement on /news. One primary, up to two secondary recommended.',
+      },
+    },
+    {
+      name: 'highlightOrder',
+      type: 'number',
+      label: 'Highlight priority',
+      admin: {
+        position: 'sidebar',
+        description: 'Higher = shown first among the same highlight level.',
+      },
+    },
   ],
   hooks: {
     beforeChange: [

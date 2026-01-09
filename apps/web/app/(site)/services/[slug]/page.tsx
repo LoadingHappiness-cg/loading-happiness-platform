@@ -1,18 +1,53 @@
+import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { getPayloadClient } from '@/lib/payload';
 import PageBlocks from '../../../components/PageBlocks';
 import { getLocale } from '@/lib/locale';
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 interface PageProps {
   params: Promise<{ slug: string }>;
 }
 
-export default async function ServiceDetailPage({ params }: PageProps) {
-  const { slug } = await params;
-  const payload = await getPayloadClient();
-  const locale = await getLocale();
-  const localePrefix = `/${locale}`;
-  const pageResult = await payload.find({
+const buildMetadata = (page: any, locale: string, slug: string): Metadata => {
+  const baseUrl = process.env.NEXT_PUBLIC_SERVER_URL || 'https://loadinghappiness.com';
+  const canonical = page?.seo?.canonicalUrl || `${baseUrl}/${locale}/services/${slug}`;
+  const ogImageField = page?.seo?.openGraph?.ogImage;
+  const ogImage =
+    typeof ogImageField === 'string'
+      ? undefined
+      : ogImageField?.sizes?.thumbnail?.url || ogImageField?.url;
+
+  const title = page?.seo?.openGraph?.ogTitle || page?.seo?.title || page?.title;
+  const description = page?.seo?.openGraph?.ogDescription || page?.seo?.description;
+
+  return {
+    title,
+    description,
+    alternates: { canonical },
+    openGraph: {
+      title,
+      description,
+      url: canonical,
+      locale,
+      type: 'website',
+      images: ogImage ? [ogImage] : undefined,
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: ogImage ? [ogImage] : undefined,
+    },
+    robots: page?.seo?.indexable === false ? { index: false, follow: false } : undefined,
+  };
+};
+
+const loadPage = async (slug: string, locale: string, payload?: any) => {
+  const client = payload || (await getPayloadClient());
+  const result = await client.find({
     collection: 'pages',
     where: {
       and: [
@@ -22,16 +57,36 @@ export default async function ServiceDetailPage({ params }: PageProps) {
     },
     limit: 1,
     locale,
+    fallbackLocale: 'en',
+    depth: 2,
   });
+  return result.docs[0] as any;
+};
 
-  const page = pageResult.docs[0];
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const locale = await getLocale();
+  const page = await loadPage(slug, locale);
+  if (!page) return {};
+  return buildMetadata(page, locale, slug);
+}
+
+export default async function ServiceDetailPage({ params }: PageProps) {
+  const { slug } = await params;
+  const payload = await getPayloadClient();
+  const locale = await getLocale();
+  const localePrefix = `/${locale}`;
+  const page = await loadPage(slug, locale, payload);
   if (!page) {
     notFound();
   }
 
-  const blocks = page.serviceTemplate
-    ? buildTemplateBlocks(page, page.layout ?? [])
-    : page.layout ?? [];
+  const hasCustomLayout = Array.isArray(page.layout) && page.layout.length > 0;
+  const blocks = hasCustomLayout
+    ? page.layout ?? []
+    : page.serviceTemplate
+      ? buildTemplateBlocks(page, page.layout ?? [])
+      : page.layout ?? [];
 
   return <PageBlocks blocks={blocks} localePrefix={localePrefix} />;
 }

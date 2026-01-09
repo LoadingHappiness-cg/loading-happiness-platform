@@ -5,15 +5,24 @@ const SUPPORTED = new Set(['pt', 'en']);
 const LOCALE_COOKIE = 'lh_locale';
 
 export const getLocale = async (): Promise<Locale> => {
-  const headerList = await headers();
-  const headerLocale = headerList.get('x-locale');
-  if (headerLocale && SUPPORTED.has(headerLocale)) {
-    return headerLocale as Locale;
+  try {
+    const headerList = await headers();
+    const headerLocale = headerList.get('x-locale');
+    if (headerLocale && SUPPORTED.has(headerLocale)) {
+      return headerLocale as Locale;
+    }
+  } catch {
+    // No request context; fall back to cookie/default.
   }
-  const cookieStore = await cookies();
-  const cookieLocale = cookieStore.get(LOCALE_COOKIE)?.value;
-  if (cookieLocale && SUPPORTED.has(cookieLocale)) {
-    return cookieLocale as Locale;
+
+  try {
+    const cookieStore = await cookies();
+    const cookieLocale = cookieStore.get(LOCALE_COOKIE)?.value;
+    if (cookieLocale && SUPPORTED.has(cookieLocale)) {
+      return cookieLocale as Locale;
+    }
+  } catch {
+    // No request context; fall back to default.
   }
   return 'pt';
 };

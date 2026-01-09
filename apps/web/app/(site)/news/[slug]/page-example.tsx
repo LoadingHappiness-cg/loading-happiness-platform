@@ -12,6 +12,7 @@ import { generateBlogPostSEO, generateBlogPostSchema, generateBreadcrumbSchema }
 import SocialShare from '@/app/components/SocialShare';
 import BlogPost from '@/app/components/BlogPost';
 import PageBlocks from '@/app/components/PageBlocks';
+import { PayloadImage } from '@/app/components/PayloadImage';
 import type { Author } from '@/payload-types';
 
 type Props = {
@@ -175,11 +176,17 @@ export default async function BlogPostPage({ params }: Props) {
                             {author && (
                                 <div className="flex items-center gap-3">
                                     {authorPhoto && typeof authorPhoto !== 'number' && (
-                                        <img
-                                            src={authorPhoto.url || ''}
-                                            alt={author.name}
-                                            className="w-12 h-12 rounded-full"
-                                        />
+                                        <div className="relative w-12 h-12">
+                                            <PayloadImage
+                                                media={authorPhoto || undefined}
+                                                alt={author.name}
+                                                fill
+                                                className="rounded-full object-cover"
+                                                sizes="48px"
+                                                fallbackWidth={64}
+                                                fallbackHeight={64}
+                                            />
+                                        </div>
                                     )}
                                     <div>
                                         <p className="font-semibold text-gray-900">{author.name}</p>
@@ -215,11 +222,13 @@ export default async function BlogPostPage({ params }: Props) {
                 {/* Featured Image */}
                 {featuredImage && (
                     <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
-                        <div className="aspect-[16/9] rounded-3xl overflow-hidden shadow-2xl">
-                            <img
-                                src={featuredImage.url || ''}
+                        <div className="relative aspect-[16/9] rounded-3xl overflow-hidden shadow-2xl">
+                            <PayloadImage
+                                media={featuredImage}
                                 alt={featuredImage.alt || post.title}
-                                className="w-full h-full object-cover"
+                                fill
+                                className="object-cover"
+                                sizes="(min-width: 1024px) 60vw, 100vw"
                             />
                         </div>
                     </div>

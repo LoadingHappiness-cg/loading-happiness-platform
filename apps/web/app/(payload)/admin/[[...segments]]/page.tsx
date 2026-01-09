@@ -20,12 +20,12 @@ export async function generateMetadata({
   const cleanedParams = { segments: resolvedParams?.segments ?? [] };
   const cleanedSearch = Object.fromEntries(
     Object.entries(resolvedSearch || {}).filter(([, value]) => value !== undefined),
-  );
+  ) as Record<string, string | string[]>;
 
   return generatePageMetadata({
     config,
-    params: cleanedParams,
-    searchParams: cleanedSearch,
+    params: Promise.resolve(cleanedParams),
+    searchParams: Promise.resolve(cleanedSearch),
   });
 }
 
@@ -40,7 +40,7 @@ export default async function AdminPage({
   const cleanedParams = { segments: resolvedParams?.segments ?? [] };
   const cleanedSearch = Object.fromEntries(
     Object.entries(resolvedSearch || {}).filter(([, value]) => value !== undefined),
-  );
+  ) as Record<string, string | string[]>;
 
   if (!cleanedParams.segments.length) {
     redirect('/admin/collections/pages');
@@ -49,7 +49,7 @@ export default async function AdminPage({
   return RootPage({
     config,
     importMap,
-    params: cleanedParams,
-    searchParams: cleanedSearch,
+    params: Promise.resolve(cleanedParams),
+    searchParams: Promise.resolve(cleanedSearch),
   });
 }

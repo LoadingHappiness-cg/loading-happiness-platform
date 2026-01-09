@@ -62,7 +62,33 @@ export async function generateMetadata() {
 }
 
 export default async function SiteLayout({ children }: LayoutProps) {
-  const localePrefix = await getLocalePrefix();
+  if (process.env.NEXT_PHASE === 'phase-production-build') {
+    return (
+      <div
+        className={`site-root ${bodyFont.variable} ${displayFont.variable} min-h-screen bg-white text-gray-900 antialiased`}
+      >
+        <main className="flex-1">{children}</main>
+      </div>
+    );
+  }
+
+  let localePrefix = '/en';
+  let canRenderFullLayout = true;
+  try {
+    localePrefix = await getLocalePrefix();
+  } catch {
+    canRenderFullLayout = false;
+  }
+
+  if (!canRenderFullLayout) {
+    return (
+      <div
+        className={`site-root ${bodyFont.variable} ${displayFont.variable} min-h-screen bg-white text-gray-900 antialiased`}
+      >
+        <main className="flex-1">{children}</main>
+      </div>
+    );
+  }
   return (
     <div
       className={`site-root ${bodyFont.variable} ${displayFont.variable} min-h-screen bg-white text-gray-900 antialiased`}

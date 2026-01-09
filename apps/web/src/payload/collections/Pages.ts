@@ -129,16 +129,50 @@ const Pages: CollectionConfig = {
       type: 'select',
       options: [
         { label: 'Managed IT & Helpdesk', value: 'managed-it' },
-        { label: 'Cybersecurity Baseline', value: 'cybersecurity' },
+        { label: 'Cybersecurity', value: 'cybersecurity' },
         { label: 'Microsoft 365 & Cloud', value: 'm365-cloud' },
         { label: 'Networking & Connectivity', value: 'networking' },
         { label: 'Infrastructure & Virtualization', value: 'infrastructure' },
         { label: 'Strategy & Roadmaps', value: 'strategy-roadmaps' },
+        { label: 'Backups & Continuity', value: 'backup-continuity' },
+        { label: 'Projects & Procurement', value: 'projects-procurement' },
+        { label: 'Compliance & GDPR', value: 'compliance-gdpr' },
+        { label: 'Custom Software & Integrations', value: 'custom-software' },
       ],
       admin: {
         position: 'sidebar',
         description: 'Optional: selects a service template for /services/* detail pages.',
       },
+    },
+    {
+      name: 'newsHighlights',
+      type: 'group',
+      admin: {
+        description: 'Overrides para destaques da página /news. Se vazio, usa destaque por highlightLevel.',
+        condition: (data) => {
+          const slugVal =
+            typeof data?.slug === 'string'
+              ? data.slug
+              : (data?.slug && (data.slug.pt || data.slug.en)) || data?.slug;
+          return slugVal === 'news';
+        },
+      },
+      fields: [
+        {
+          name: 'primary',
+          type: 'relationship',
+          relationTo: 'content',
+          label: 'Notícia principal (override)',
+        },
+        {
+          name: 'secondary',
+          type: 'relationship',
+          relationTo: 'content',
+          hasMany: true,
+          label: 'Destaques secundários (override)',
+          maxRows: 2,
+        },
+      ],
     },
     {
       name: 'serviceTemplateData',
